@@ -13,12 +13,6 @@ from generator import MapGenerator # Import logic module
 # --- CONFIG ---
 COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "INSANE": (255, 50, 50) }
 
-# --- DEBUG: Audio Segment Playback ---
-# When True, plays a segment of audio around each note instead of pre-sliced audio
-# Useful for debugging note generation quality with actual audio context
-DEBUG_AUDIO_SEGMENT = True
-DEBUG_SEGMENT_DURATION = 0.15  # Duration in seconds (centered on note time)
-
 class Visualizer:
     def __init__(self, audio_path, folder_path):
         # Initialize Mixer with high buffer to prevent skipping
@@ -75,7 +69,7 @@ class Visualizer:
         # 2c. AUDIO: Load both full audio and rhythm stem
         pygame.mixer.music.load(audio_path)
         self.full_audio_path = audio_path
-        self.rhythm_path = rhythm_path
+        self.rhythm_path = rhythm_path  # Not used anymore since we keep full audio playing
         
         # 3. STATE
         self.mode = "synth"  # Start with synth mode
@@ -102,37 +96,106 @@ class Visualizer:
         return pygame.sndarray.make_sound(np.stack([wave, wave], axis=1))
 
     def _slice_keysounds(self, diff, notes):
-        """Pre-slice and convert audio notes to pygame Sound objects for keysounding mode"""
+        """Resynthesize audio notes using spectral analysis for keysounding mode"""
+        print(f"[VIS] Resynthesizing SFX for {diff} (Spectral Analysis)...")
         self.keysounds[diff] = []
         
         for i, n in enumerate(notes):
-            # Select Source Buffer
+            # 1. EXTRACT RAW AUDIO SLICE
             src = self.raw_voc if n["source"] == "vocal" else self.raw_oth
-            
-            # Calculate sample indices
             start_sample = int(n["time"] * 44100)
-            dur_samples = int(n["dur"] * 44100) if n["dur"] > 0 else int(0.1 * 44100)  # Min 100ms
+            # Use a short, punchy duration for analysis window (150ms is enough to catch the tone)
+            analyze_dur = int(0.15 * 44100) 
             
-            # Slicing (shape is (2, N) for stereo. Pygame needs (N, 2))
-            slice_data = src[:, start_sample : start_sample + dur_samples]
+            if start_sample >= src.shape[1]:
+                self.keysounds[diff].append(None)
+                continue
+                
+            raw_slice = src[:, start_sample : start_sample + analyze_dur]
             
-            # Apply tiny fade out to prevent clicks
-            fade_len = min(500, slice_data.shape[1])
-            if fade_len > 0:
-                fade = np.linspace(1, 0, fade_len)
-                slice_data[:, -fade_len:] *= fade
+            # Handle Stereo -> Mono for FFT analysis
+            mono_slice = np.mean(raw_slice, axis=0)
             
-            # Transpose and Normalize to Int16
-            slice_data = slice_data.T
-            slice_data = (slice_data * 32767).astype(np.int16)
+            # 2. RESYNTHESIZE
+            # We pass the mono slice to get the "Spectral DNA"
+            synth_wave = self._resynthesize_audio(mono_slice)
             
-            # Create Sound Object
+            # 3. CREATE PYGAME SOUND
+            # Convert back to stereo for the game engine
+            stereo_wave = np.stack([synth_wave, synth_wave], axis=1)
+            stereo_wave = (stereo_wave * 32767).astype(np.int16)
+            
             try:
-                sound = pygame.sndarray.make_sound(np.ascontiguousarray(slice_data))
+                sound = pygame.sndarray.make_sound(np.ascontiguousarray(stereo_wave))
                 self.keysounds[diff].append(sound)
             except Exception as e:
-                print(f"[VIS] Warning: Could not slice note {i}: {e}")
+                print(f"[VIS] Warning: Could not resynthesize note {i}: {e}")
                 self.keysounds[diff].append(None)
+
+    def _resynthesize_audio(self, raw_audio):
+        """
+        Takes a raw audio buffer, finds the dominant frequencies (Fundamental + Harmonics),
+        and rebuilds the sound using pure Sine waves with a percussion envelope.
+        Filters out high-freq artifacts and zapping peaks for smooth, clean playback.
+        """
+        N = len(raw_audio)
+        if N == 0: return np.zeros(100)
+
+        # --- STEP A: FFT ANALYSIS ---
+        # Windowing reduces spectral leakage
+        windowed = raw_audio * np.hanning(N)
+        spectrum = np.fft.rfft(windowed)
+        frequencies = np.fft.rfftfreq(N, 1/44100)
+        magnitudes = np.abs(spectrum)
+
+        # --- STEP B: FILTERING ---
+        # 1. Remove Low End Rumble (< 80Hz) and High End Hiss (> 9kHz for cleaner but brighter sound)
+        mask = (frequencies > 80) & (frequencies < 9000)
+        magnitudes = magnitudes * mask
+        
+        # 2. Light spectral smoothing to reduce artifacts but preserve tone
+        from scipy.ndimage import gaussian_filter1d
+        magnitudes = gaussian_filter1d(magnitudes, sigma=1)  # Reduced from sigma=2 for less muddiness
+        
+        # 3. Find Top K Strongest Frequencies (The "Chord" or "Timbre")
+        # We take the top 7 peaks for a richer tone
+        num_peaks = 7  # Increased from 6 to capture more character
+        # Get indices of top peaks
+        peak_indices = np.argpartition(magnitudes, -num_peaks)[-num_peaks:]
+        
+        top_freqs = frequencies[peak_indices]
+        top_mags = magnitudes[peak_indices]
+        
+        # Normalize magnitudes so the sound isn't too quiet or loud
+        if np.max(top_mags) > 0:
+            top_mags /= np.max(top_mags)
+            # Apply soft limiting to prevent zapping peaks
+            top_mags = np.minimum(top_mags, 1.0)
+
+        # --- STEP C: ADDITIVE SYNTHESIS ---
+        # Generate a new 200ms buffer for the game SFX
+        out_dur = 0.2
+        t = np.linspace(0, out_dur, int(44100 * out_dur), False)
+        new_wave = np.zeros_like(t)
+        
+        for f, m in zip(top_freqs, top_mags):
+            if f == 0: continue
+            # Add a sine wave for this frequency with better amplitude balance
+            new_wave += 0.3 * m * np.sin(2 * np.pi * f * t)  # Increased from 0.25 for brightness
+
+        # --- STEP D: ENVELOPE SHAPING (The "Game Feel") ---
+        # Apply a sharp "Pluck" envelope: Instant Attack, Exponential Decay.
+        # This makes it sound like a key being hit, not a continuous drone.
+        envelope = np.exp(-10 * t)  # Adjusted decay for better sustain
+        new_wave *= envelope
+        
+        # --- STEP E: SOFT LIMITING ---
+        # Prevent clipping and harshness
+        max_val = np.max(np.abs(new_wave))
+        if max_val > 0:
+            new_wave = 0.95 * new_wave / max_val  # Normalize to 95% of max for more presence
+        
+        return new_wave
 
     def run(self):
         clock = pygame.time.Clock()
@@ -161,19 +224,11 @@ class Visualizer:
                                     chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
                                     chan.play(s)
                         elif self.mode == "keysound":
-                            # KEYSOUND MODE: Play audio segment around note time
-                            if DEBUG_AUDIO_SEGMENT:
-                                # Play a segment of raw audio centered on the note time
-                                sound = self._get_audio_segment(n["time"], n["source"])
-                                if sound:
-                                    sound.set_volume(self.sfx_vol)
-                                    sound.play()
-                            else:
-                                # Play pre-sliced audio (original behavior)
-                                sounds = self.keysounds[target_diff]
-                                if idx < len(sounds) and sounds[idx]:
-                                    sounds[idx].set_volume(self.sfx_vol)
-                                    sounds[idx].play()
+                            # KEYSOUND MODE: Play resynthesized audio
+                            sounds = self.keysounds[target_diff]
+                            if idx < len(sounds) and sounds[idx]:
+                                sounds[idx].set_volume(self.sfx_vol)
+                                sounds[idx].play()
                         
                         self.played_indices[target_diff] += 1
                         idx += 1
@@ -280,69 +335,18 @@ class Visualizer:
         status_txt = self.font.render(status, True, status_col)
         self.screen.blit(status_txt, (self.width - 150, panel_y + 15))
 
-    def _get_audio_segment(self, note_time, source_type):
-        """Extract and convert an audio segment around note_time to pygame Sound object"""
-        src = self.raw_voc if source_type == "vocal" else self.raw_oth
-        
-        # Calculate sample range centered on note_time
-        center_sample = int(note_time * 44100)
-        half_duration_samples = int(DEBUG_SEGMENT_DURATION * 44100 / 2)
-        start_sample = max(0, center_sample - half_duration_samples)
-        end_sample = min(src.shape[1], center_sample + half_duration_samples)
-        
-        # Extract segment
-        segment = src[:, start_sample:end_sample]
-        
-        # Apply fade in/out to prevent clicks
-        fade_len = min(500, segment.shape[1] // 4)
-        if fade_len > 0:
-            fade_in = np.linspace(0, 1, fade_len)
-            fade_out = np.linspace(1, 0, fade_len)
-            segment[:, :fade_len] *= fade_in
-            segment[:, -fade_len:] *= fade_out
-        
-        # Convert to int16 and create Sound
-        segment = segment.T
-        segment = (segment * 32767).astype(np.int16)
-        
-        try:
-            return pygame.sndarray.make_sound(np.ascontiguousarray(segment))
-        except Exception as e:
-            print(f"[VIS] Warning: Could not create audio segment: {e}")
-            return None
-
     def _toggle_mode(self):
-        """Toggle between synth and keysound modes"""
-        was_playing = self.playing
-        curr_time = time.time() - self.start_time if was_playing else self.pause_time
-        
-        pygame.mixer.stop()  # Stop all channels
-        
+        """Toggle between synth and keysound modes without stopping music"""
+        # Simply toggle the mode - music continues uninterrupted
         if self.mode == "synth":
-            # Switch to keysound: load rhythm stem
             print("[VIS] Switching to KEYSOUND mode...")
             self.mode = "keysound"
-            pygame.mixer.music.load(self.rhythm_path)
-            self.music_vol = 0.5
         else:
-            # Switch to synth: load full audio
             print("[VIS] Switching to SYNTH mode...")
             self.mode = "synth"
-            pygame.mixer.music.load(self.full_audio_path)
-            self.music_vol = 0.2
         
-        pygame.mixer.music.set_volume(self.music_vol)
-        
-        # Restore playback state (must play before setting position)
-        if was_playing:
-            pygame.mixer.music.play()  # Start playing first
-            pygame.mixer.music.set_pos(curr_time)  # Then set position
-            self.start_time = time.time() - curr_time
-        else:
-            pygame.mixer.music.play()  # Play to enable set_pos
-            pygame.mixer.music.set_pos(curr_time)
-            pygame.mixer.music.pause()  # Pause immediately to stay paused
-            self.pause_time = curr_time
+        # Stop all SFX channels (but not music)
+        pygame.mixer.stop()
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
