@@ -255,17 +255,18 @@ class NoteGenerator:
 COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "INSANE": (255, 50, 50) }
 
 class Visualizer:
-    def __init__(self, audio_path, mode):
-        pygame.mixer.pre_init(44100, -16, 2, 512)
+    def __init__(self, audio_path):
+        pygame.mixer.pre_init(44100, -16, 2, 1024)
         pygame.init()
         pygame.mixer.set_num_channels(64) 
         
         self.width, self.height = 1600, 900
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption(f"Rhythm Sculptor V36 (Hard Gate & Directional Flow) - {mode}")
+        pygame.display.set_caption(f"Rhythm Sculptor V36 - Press M to toggle Synth/Keysound")
         self.font = pygame.font.SysFont("Consolas", 14)
         self.big_font = pygame.font.SysFont("Consolas", 24)
-        self.mode = mode
+        self.playback_mode = "synth"  # synth or keysound
+        self.keysounds = {}
         
         print(f"Loading {audio_path}...")
         self.y, self.sr = librosa.load(audio_path, sr=None) 
@@ -278,11 +279,25 @@ class Visualizer:
         self.sfx_vol = DEFAULT_SFX_VOL
         self.beatmaps = {}
         self.metadata = {}
+        self.played_indices = {}
+        self.scroll_speed = 600
+        self.hit_line_y = self.height - 100
         
+        # Interactive state
+        self.diff = "INSANE"  # Current selected difficulty
+        self.playing = True
+        self.start_time = time.time()
+        self.pause_time = 0
+        
+        # Pre-synthesize tones for synth mode
         print("Synthesizing SFX Bank...")
         self.synth_sounds = {}
         for midi in range(24, 108):
             self.synth_sounds[midi] = self._gen_tone(midi)
+        
+        # Pre-slice keysounds for keysound mode
+        print("Preparing Keysound Bank...")
+        self.keysounds = {}
 
         self.regenerate(restart=False)
         
@@ -312,6 +327,10 @@ class Visualizer:
             self.beatmaps[diff] = notes
             nps = len(notes) / self.analyzer.data["duration"]
             self.metadata[diff] = {"count": len(notes), "lanes": lanes, "nps": nps}
+            
+            # Pre-synthesize keysounds for this difficulty
+            if self.playback_mode == "keysound":
+                self._synthesize_keysounds(diff, notes)
         
         if restart and self.playing:
             pygame.mixer.music.play()
@@ -327,7 +346,7 @@ class Visualizer:
             
             if self.playing:
                 curr = time.time() - self.start_time
-                target_diff = SFX_TARGET_DIFFICULTY
+                target_diff = self.diff
                 if target_diff not in self.beatmaps: target_diff = "INSANE"
                 
                 notes = self.beatmaps[target_diff]
@@ -336,14 +355,24 @@ class Visualizer:
                 while idx < len(notes):
                     n = notes[idx]
                     if n["time"] <= curr:
-                        s = self.synth_sounds.get(n["midi"])
-                        if s: 
-                            chan = pygame.mixer.find_channel()
-                            if chan:
-                                v = n.get("vol", 1.0) * self.sfx_vol
-                                l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
-                                chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
-                                chan.play(s)
+                        if self.playback_mode == "synth":
+                            s = self.synth_sounds.get(n["midi"])
+                            if s: 
+                                chan = pygame.mixer.find_channel()
+                                if chan:
+                                    v = n.get("vol", 1.0) * self.sfx_vol
+                                    l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
+                                    chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
+                                    chan.play(s)
+                        else:  # keysound mode
+                            key_id = (target_diff, idx)
+                            if key_id in self.keysounds:
+                                chan = pygame.mixer.find_channel()
+                                if chan:
+                                    v = n.get("vol", 1.0) * self.sfx_vol
+                                    l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
+                                    chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
+                                    chan.play(self.keysounds[key_id])
                         self.played_indices[target_diff] += 1
                         idx += 1
                     else: break
@@ -353,6 +382,13 @@ class Visualizer:
             for e in pygame.event.get():
                 if e.type == pygame.QUIT: return
                 if e.type == pygame.KEYDOWN:
+                    # Difficulty picker
+                    if e.key == pygame.K_1: self.diff = "EASY"
+                    if e.key == pygame.K_2: self.diff = "NORMAL"
+                    if e.key == pygame.K_3: self.diff = "HARD"
+                    if e.key == pygame.K_4: self.diff = "INSANE"
+                    
+                    # Pause/Play
                     if e.key == pygame.K_SPACE:
                         if self.playing:
                             pygame.mixer.music.pause()
@@ -362,6 +398,14 @@ class Visualizer:
                             pygame.mixer.music.unpause()
                             self.start_time = time.time() - self.pause_time
                             self.playing = True
+                    
+                    # Restart
+                    if e.key == pygame.K_r:
+                        pygame.mixer.music.rewind()
+                        pygame.mixer.music.play()
+                        self.start_time = time.time()
+                        self.played_indices = {d: 0 for d in self.beatmaps}
+                        self.playing = True
                     
                     changed = False
                     if e.key == pygame.K_UP: self.dens_mod += 0.05; changed = True 
@@ -376,6 +420,16 @@ class Visualizer:
                         pygame.mixer.music.set_volume(self.music_vol)
                     if e.key == pygame.K_MINUS: self.sfx_vol = max(0, self.sfx_vol - 0.1)
                     if e.key == pygame.K_EQUALS: self.sfx_vol = min(1, self.sfx_vol + 0.1)
+                    
+                    if e.key == pygame.K_m:
+                        if self.playback_mode == "synth":
+                            self.playback_mode = "keysound"
+                            # Synthesize keysounds for current target difficulty
+                            if self.diff not in self.keysounds:
+                                self._synthesize_keysounds(self.diff, self.beatmaps[self.diff])
+                        else:
+                            self.playback_mode = "synth"
+                        print(f"Playback mode: {self.playback_mode.upper()}")
 
             self.draw(curr)
             pygame.display.flip()
@@ -390,9 +444,10 @@ class Visualizer:
             col = COLORS.get(diff, (255,255,255))
             notes = self.beatmaps[diff]
             meta = self.metadata[diff]
+            is_selected = (diff == self.diff)
             lanes = meta["lanes"]
             
-            pygame.draw.rect(self.screen, (30,30,35), (x_off, 0, col_w, self.height), 1)
+            pygame.draw.rect(self.screen, col if is_selected else (60,60,65), (x_off, 0, col_w, self.height), 2 if is_selected else 1)
             if i > 0: pygame.draw.rect(self.screen, (0,0,0), (x_off-2, 0, 4, self.height))
             
             lane_w = col_w / lanes
@@ -400,7 +455,7 @@ class Visualizer:
                 lx = x_off + l * lane_w
                 pygame.draw.line(self.screen, (35,35,45), (lx, 0), (lx, self.height))
                 
-            title = self.big_font.render(f"{diff}", True, col)
+            title = self.big_font.render(f"{diff}", True, col if is_selected else (col[0]//2, col[1]//2, col[2]//2))
             self.screen.blit(title, (x_off + 10, 20))
             stats = self.font.render(f"Notes: {meta['count']} | NPS: {meta['nps']:.1f}", True, (200,200,200))
             self.screen.blit(stats, (x_off + 10, 50))
@@ -408,6 +463,13 @@ class Visualizer:
             if i == 0:
                 tune = self.font.render(f"Density: {self.dens_mod:+.2f} | DB Floor: {DB_FLOOR}", True, (100,200,255))
                 self.screen.blit(tune, (x_off + 10, self.height - 40))
+                mode_text = "[SYNTH]" if self.playback_mode == "synth" else "[KEYSOUND]"
+                mode_display = self.font.render(f"Mode: {mode_text} (M)", True, (100,200,255))
+                self.screen.blit(mode_display, (x_off + 10, self.height - 70))                
+                controls = self.font.render("1-4: Diff | SPACE: Pause | R: Restart | [/]: Music Vol | -/+: SFX Vol", True, (150,150,150))
+                self.screen.blit(controls, (x_off + 10, self.height - 100))                
+                controls = self.font.render("1-4: Diff | SPACE: Pause | R: Restart | [/]: Music Vol | -/+: SFX Vol", True, (150,150,150))
+                self.screen.blit(controls, (x_off + 10, self.height - 100))
 
             pygame.draw.line(self.screen, (100, 255, 100), (x_off, self.hit_line_y), (x_off + col_w, self.hit_line_y), 2)
             
@@ -418,23 +480,107 @@ class Visualizer:
                 y = self.hit_line_y - (n["time"] - curr) * self.scroll_speed
                 x = x_off + n["lane"] * lane_w
                 
-                base_c = col
+                base_c = col if is_selected else (col[0]//2, col[1]//2, col[2]//2)
                 if n["vol"] < 0.7: base_c = tuple(max(20, c-80) for c in base_c)
                 
                 if n["type"] == "hold":
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
                 
-                if self.mode == "OSU":
-                    pygame.draw.circle(self.screen, base_c, (int(x + lane_w/2), int(y)), int(min(lane_w, 40)/2 - 4))
-                else:
-                    pygame.draw.rect(self.screen, base_c, (x+2, y-10, lane_w-4, 20))
+                pygame.draw.rect(self.screen, base_c, (x+2, y-10, lane_w-4, 20))
+    
+    def _resynthesize_audio(self, raw_audio):
+        """Spectral resynthesis V41: FFT -> harmonic extraction -> additive synthesis with random phase"""
+        N = len(raw_audio)
+        if N == 0: return np.zeros(100)
+        
+        # FFT Analysis
+        windowed = raw_audio * np.hanning(N)
+        spectrum = np.fft.rfft(windowed)
+        frequencies = np.fft.rfftfreq(N, 1/self.sr)
+        magnitudes = np.abs(spectrum)
+        
+        # Filtering
+        mask = (frequencies > 80) & (frequencies < 9000)
+        magnitudes = magnitudes * mask
+        
+        # Peak picking (top 7 frequencies)
+        num_peaks = 7
+        peak_indices = np.argpartition(magnitudes, -num_peaks)[-num_peaks:]
+        top_freqs = frequencies[peak_indices]
+        top_mags = magnitudes[peak_indices]
+        
+        if np.max(top_mags) > 0:
+            top_mags /= np.max(top_mags)
+            top_mags = np.minimum(top_mags, 1.0)
+
+        # Additive synthesis with random phase (V41 upgrade)
+        out_dur = 0.2
+        t = np.linspace(0, out_dur, int(self.sr * out_dur), False)
+        new_wave = np.zeros_like(t)
+        
+        for f, m in zip(top_freqs, top_mags):
+            if f == 0: continue
+            
+            # Random phase prevents "laser zap" attacks
+            phase_offset = np.random.uniform(0, 2 * np.pi)
+            new_wave += 0.3 * m * np.sin(2 * np.pi * f * t + phase_offset)
+
+        # Envelope with slower attack (0.01s fade-in) + exponential decay
+        attack_len = int(0.01 * self.sr)
+        envelope = np.exp(-12 * t)
+        
+        if attack_len < len(envelope):
+            envelope[:attack_len] *= np.linspace(0, 1, attack_len)
+            
+        new_wave *= envelope
+        
+        # Soft limiting
+        max_val = np.max(np.abs(new_wave))
+        if max_val > 0:
+            new_wave = 0.95 * new_wave / max_val
+        
+        return new_wave.astype(np.float32)
+    
+    def _synthesize_keysounds(self, diff, notes):
+        """Extract and resynthesize audio for each note"""
+        try:
+            synth_count = 0
+            for idx, n in enumerate(notes):
+                key_id = (diff, idx)
+                if key_id in self.keysounds:
+                    continue
+                
+                # Extract raw audio segment
+                st = int(n["time"] * self.sr)
+                et = int((n["time"] + max(0.1, n.get("dur", 0.15))) * self.sr)
+                st = max(0, st - int(0.1 * self.sr))
+                et = min(len(self.y), et + int(0.2 * self.sr))
+                raw_seg = self.y[st:et]
+                
+                if len(raw_seg) < 100:
+                    continue
+                
+                # Resynthesize
+                resynth = self._resynthesize_audio(raw_seg)
+                
+                # Convert to pygame sound (stereo format)
+                resynth_int16 = np.clip(resynth * 32767, -32768, 32767).astype(np.int16)
+                # Stack mono to stereo for pygame mixer
+                stereo_sound = np.stack([resynth_int16, resynth_int16], axis=1)
+                sound = pygame.sndarray.make_sound(stereo_sound)
+                self.keysounds[key_id] = sound
+                synth_count += 1
+            
+            if synth_count > 0:
+                print(f"[DSP] Synthesized {synth_count} keysounds for {diff}")
+        except Exception as e:
+            print(f"[DSP] Keysound synthesis error: {e}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("audio_file")
-    parser.add_argument("--mode", choices=["OSU", "PIANO"], default="OSU")
     args = parser.parse_args()
 
-    app = Visualizer(args.audio_file, args.mode)
+    app = Visualizer(args.audio_file)
     app.run()

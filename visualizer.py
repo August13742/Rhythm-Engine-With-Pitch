@@ -96,32 +96,44 @@ class Visualizer:
         return pygame.sndarray.make_sound(np.stack([wave, wave], axis=1))
 
     def _slice_keysounds(self, diff, notes):
-        """Resynthesize audio notes using spectral analysis for keysounding mode"""
         print(f"[VIS] Resynthesizing SFX for {diff} (Spectral Analysis)...")
         self.keysounds[diff] = []
         
+        # Track last valid pitch for Legato Fallback
+        last_valid_midi = 60 
+        
         for i, n in enumerate(notes):
-            # 1. EXTRACT RAW AUDIO SLICE
             src = self.raw_voc if n["source"] == "vocal" else self.raw_oth
             start_sample = int(n["time"] * 44100)
-            # Use a short, punchy duration for analysis window (150ms is enough to catch the tone)
             analyze_dur = int(0.15 * 44100) 
             
             if start_sample >= src.shape[1]:
                 self.keysounds[diff].append(None)
                 continue
-                
-            raw_slice = src[:, start_sample : start_sample + analyze_dur]
             
-            # Handle Stereo -> Mono for FFT analysis
+            # --- V53: PITCH CORRECTION ---
+            midi = n["midi"]
+            
+            # 1. Legato Fallback: If pitch is 0/Unknown, use last valid pitch
+            if midi == 0 or midi == 36: # 36 is Rhythm dummy
+                midi = last_valid_midi
+            else:
+                last_valid_midi = midi
+                
+            # 2. Golden Range (Octave Folding)
+            # Force notes into C4(60) - C6(84) range for consistent listening
+            while midi < 60: midi += 12
+            while midi > 84: midi -= 12
+            
+            # Calculate Target Frequency for Synthesis
+            target_freq = 440.0 * (2.0**((midi-69)/12.0))
+
+            raw_slice = src[:, start_sample : start_sample + analyze_dur]
             mono_slice = np.mean(raw_slice, axis=0)
             
-            # 2. RESYNTHESIZE
-            # We pass the mono slice to get the "Spectral DNA"
-            synth_wave = self._resynthesize_audio(mono_slice)
+            # Pass target_freq to resynthesizer to bias the result
+            synth_wave = self._resynthesize_audio(mono_slice, target_freq)
             
-            # 3. CREATE PYGAME SOUND
-            # Convert back to stereo for the game engine
             stereo_wave = np.stack([synth_wave, synth_wave], axis=1)
             stereo_wave = (stereo_wave * 32767).astype(np.int16)
             
@@ -129,71 +141,59 @@ class Visualizer:
                 sound = pygame.sndarray.make_sound(np.ascontiguousarray(stereo_wave))
                 self.keysounds[diff].append(sound)
             except Exception as e:
-                print(f"[VIS] Warning: Could not resynthesize note {i}: {e}")
                 self.keysounds[diff].append(None)
 
-    def _resynthesize_audio(self, raw_audio):
-        """
-        Takes a raw audio buffer, finds the dominant frequencies (Fundamental + Harmonics),
-        and rebuilds the sound using pure Sine waves with a percussion envelope.
-        Filters out high-freq artifacts and zapping peaks for smooth, clean playback.
-        """
+    def _resynthesize_audio(self, raw_audio, target_freq):
         N = len(raw_audio)
         if N == 0: return np.zeros(100)
 
-        # --- STEP A: FFT ANALYSIS ---
-        # Windowing reduces spectral leakage
+        # FFT
         windowed = raw_audio * np.hanning(N)
         spectrum = np.fft.rfft(windowed)
         frequencies = np.fft.rfftfreq(N, 1/44100)
         magnitudes = np.abs(spectrum)
 
-        # --- STEP B: FILTERING ---
-        # 1. Remove Low End Rumble (< 80Hz) and High End Hiss (> 9kHz for cleaner but brighter sound)
+        # Filter
         mask = (frequencies > 80) & (frequencies < 9000)
         magnitudes = magnitudes * mask
         
-        # 2. Light spectral smoothing to reduce artifacts but preserve tone
-        from scipy.ndimage import gaussian_filter1d
-        magnitudes = gaussian_filter1d(magnitudes, sigma=1)  # Reduced from sigma=2 for less muddiness
-        
-        # 3. Find Top K Strongest Frequencies (The "Chord" or "Timbre")
-        # We take the top 7 peaks for a richer tone
-        num_peaks = 7  # Increased from 6 to capture more character
-        # Get indices of top peaks
+        # Peak Picking
+        num_peaks = 7
         peak_indices = np.argpartition(magnitudes, -num_peaks)[-num_peaks:]
-        
         top_freqs = frequencies[peak_indices]
         top_mags = magnitudes[peak_indices]
         
-        # Normalize magnitudes so the sound isn't too quiet or loud
         if np.max(top_mags) > 0:
             top_mags /= np.max(top_mags)
-            # Apply soft limiting to prevent zapping peaks
-            top_mags = np.minimum(top_mags, 1.0)
 
-        # --- STEP C: ADDITIVE SYNTHESIS ---
-        # Generate a new 200ms buffer for the game SFX
+        # Additive Synthesis
         out_dur = 0.2
         t = np.linspace(0, out_dur, int(44100 * out_dur), False)
         new_wave = np.zeros_like(t)
         
+        # V53: PITCH LOCK
+        # We ensure at least one sine wave matches our grid-snapped target pitch.
+        # This makes the game sound "in tune" even if the FFT was noisy.
+        new_wave += 0.4 * np.sin(2 * np.pi * target_freq * t)
+        
+        # Add the original color (harmonics) on top, but quieter
         for f, m in zip(top_freqs, top_mags):
             if f == 0: continue
-            # Add a sine wave for this frequency with better amplitude balance
-            new_wave += 0.3 * m * np.sin(2 * np.pi * f * t)  # Increased from 0.25 for brightness
+            phase_offset = np.random.uniform(0, 2 * np.pi)
+            new_wave += 0.15 * m * np.sin(2 * np.pi * f * t + phase_offset)
 
-        # --- STEP D: ENVELOPE SHAPING (The "Game Feel") ---
-        # Apply a sharp "Pluck" envelope: Instant Attack, Exponential Decay.
-        # This makes it sound like a key being hit, not a continuous drone.
-        envelope = np.exp(-10 * t)  # Adjusted decay for better sustain
+        # Envelope
+        envelope = np.exp(-12 * t)
+        attack_len = int(0.01 * 44100)
+        if attack_len < len(envelope):
+            envelope[:attack_len] *= np.linspace(0, 1, attack_len)
+            
         new_wave *= envelope
         
-        # --- STEP E: SOFT LIMITING ---
-        # Prevent clipping and harshness
+        # Soft Limit
         max_val = np.max(np.abs(new_wave))
         if max_val > 0:
-            new_wave = 0.95 * new_wave / max_val  # Normalize to 95% of max for more presence
+            new_wave = 0.95 * new_wave / max_val
         
         return new_wave
 
