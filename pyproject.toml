@@ -1,0 +1,27 @@
+[project]
+name = "rhythm-engine"
+version = "0.1.0"
+requires-python = "==3.13.*"
+dependencies = [
+    "demucs>=4.0.1",
+    "librosa>=0.11.0",
+    "numpy<2.1",
+    "pygame>=2.6.1",
+    "soundfile>=0.13.1",
+    "scipy>=1.13.0",
+    "numba>=0.59.0",
+    "torch",
+    "torchaudio",
+    "torchvision", # Often required for shared kernels
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/nightly/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchaudio = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+
