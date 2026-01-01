@@ -27,8 +27,7 @@ def main():
     required_stems = [
         os.path.join(folder_path, f"{base_name}_vocals.wav"),
         os.path.join(folder_path, f"{base_name}_other.wav"),
-        os.path.join(folder_path, f"{base_name}_bass.wav"),
-        os.path.join(folder_path, f"{base_name}_drums.wav")
+        os.path.join(folder_path, f"{base_name}_rhythm.wav")
     ]
     
     stems_exist = all(os.path.exists(stem) for stem in required_stems)

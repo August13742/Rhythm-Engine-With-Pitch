@@ -22,22 +22,19 @@ class Visualizer:
         pygame.mixer.set_num_channels(64)
         self.width, self.height = 1600, 900
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("Rhythm Engine V60 - 4-Stem")
+        pygame.display.set_caption("Rhythm Engine - Press M to toggle Synth/Keysound")
         self.font = pygame.font.SysFont("Consolas", 14)
         self.big_font = pygame.font.SysFont("Consolas", 24)
         
         # Get stem paths from folder
         base_name = os.path.splitext(os.path.basename(audio_path))[0]
-        self.stems = {
-            "vocals": os.path.join(folder_path, f"{base_name}_vocals.wav"),
-            "other":  os.path.join(folder_path, f"{base_name}_other.wav"),
-            "bass":   os.path.join(folder_path, f"{base_name}_bass.wav"),
-            "drums":  os.path.join(folder_path, f"{base_name}_drums.wav")
-        }
+        vocals_path = os.path.join(folder_path, f"{base_name}_vocals.wav")
+        other_path = os.path.join(folder_path, f"{base_name}_other.wav")
+        rhythm_path = os.path.join(folder_path, f"{base_name}_rhythm.wav")
         
         # 1. GENERATE MAP
         print("[VIS] Running Generator...")
-        self.gen = MapGenerator(self.stems, is_instrumental=False)
+        self.gen = MapGenerator(vocals_path, other_path, rhythm_path)
         self.beatmaps = {}
         self.metadata = {}
         
@@ -45,10 +42,8 @@ class Visualizer:
             self.beatmaps[d] = self.gen.generate(d)
             duration = self.gen.data["duration"]
             nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
-            # Get lanes from generator's DIFF_CONFIGS
-            from generator import DIFF_CONFIGS
-            lanes = DIFF_CONFIGS[d]["lanes"]
-            self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
+            lanes_map = {"EASY": 4, "NORMAL": 4, "HARD": 5, "INSANE": 6}
+            self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes_map[d], "nps": nps}
         
         # 2a. SYNTH MODE: Pre-synthesize tones
         print("[VIS] Synthesizing SFX Bank...")
@@ -58,11 +53,12 @@ class Visualizer:
         
         # 2b. KEYSOUND MODE: Load raw audio for slicing
         print("[VIS] Loading Raw Audio for Keysounding...")
-        self.raw_data = {}
-        for k, path in self.stems.items():
-            wav, _ = librosa.load(path, sr=44100, mono=False)
-            if len(wav.shape) == 1: wav = np.stack([wav, wav])
-            self.raw_data[k] = wav
+        self.raw_voc, _ = librosa.load(vocals_path, sr=44100, mono=False)
+        self.raw_oth, _ = librosa.load(other_path, sr=44100, mono=False)
+        
+        # Handle Mono/Stereo
+        if len(self.raw_voc.shape) == 1: self.raw_voc = np.stack([self.raw_voc, self.raw_voc])
+        if len(self.raw_oth.shape) == 1: self.raw_oth = np.stack([self.raw_oth, self.raw_oth])
         
         # Pre-slice keysounds for each difficulty
         self.keysounds = {}
@@ -70,9 +66,10 @@ class Visualizer:
             print(f"[VIS] Slicing Keysounds for {d}...")
             self._slice_keysounds(d, self.beatmaps[d])
         
-        # 2c. AUDIO: Load full audio
+        # 2c. AUDIO: Load both full audio and rhythm stem
         pygame.mixer.music.load(audio_path)
         self.full_audio_path = audio_path
+        self.rhythm_path = rhythm_path  # Not used anymore since we keep full audio playing
         
         # 3. STATE
         self.mode = "synth"  # Start with synth mode
@@ -106,8 +103,7 @@ class Visualizer:
         last_valid_midi = 60 
         
         for i, n in enumerate(notes):
-            # 1. Select Source Buffer
-            src = self.raw_data.get(n["source"], self.raw_data["other"])
+            src = self.raw_voc if n["source"] == "vocal" else self.raw_oth
             start_sample = int(n["time"] * 44100)
             analyze_dur = int(0.15 * 44100) 
             
@@ -285,7 +281,7 @@ class Visualizer:
             col = COLORS.get(diff, (255,255,255))
             notes = self.beatmaps[diff]
             meta = self.metadata[diff]
-            lanes = self.metadata[diff]["lanes"]
+            lanes = meta["lanes"]
             is_selected = (diff == self.diff)
             
             pygame.draw.rect(self.screen, col if is_selected else (60,60,65), (x_off, 0, col_w, self.height), 2 if is_selected else 1)
@@ -316,13 +312,11 @@ class Visualizer:
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
                 
-                # Color coding based on source
+                # Color coding based on source (V37 Debug Feature)
                 if n.get("source") == "vocal":
                     note_color = (255, 100, 255) # Pink for Vocals
-                elif n.get("source") == "drums":
+                elif n.get("source") == "rhythm":
                     note_color = (100, 255, 255) # Cyan for Drums
-                elif n.get("source") == "bass":
-                    note_color = (150, 100, 50)  # Brown/Orange for Bass
                 else:
                     note_color = base_c # Default difficulty color
 
