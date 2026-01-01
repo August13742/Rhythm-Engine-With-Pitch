@@ -13,6 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description="Full pipeline: separate audio stems and visualize beatmap")
     parser.add_argument("audio_file", help="Path to audio file")
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
+    parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -43,7 +44,26 @@ def main():
     else:
         folder_path = separate_audio(args.audio_file)
     
-    # Step 2: Visualize with stems
+    # Step 2: Check for generated beatmaps (unless rebake flag is set)
+    if not args.rebake:
+        beatmap_files = [
+            os.path.join(folder_path, f"{base_name}_EASY.json"),
+            os.path.join(folder_path, f"{base_name}_NORMAL.json"),
+            os.path.join(folder_path, f"{base_name}_HARD.json"),
+            os.path.join(folder_path, f"{base_name}_INSANE.json")
+        ]
+        
+        if all(os.path.exists(bm) for bm in beatmap_files):
+            print("[VIS] Generated beatmaps found, skipping generation...")
+            print("[VIS] Launching visualizer...")
+            visualizer = Visualizer(args.audio_file, folder_path, skip_generation=True)
+            visualizer.run()
+            return
+    
+    if args.rebake:
+        print("[VIS] Rebake flag set, forcing beatmap regeneration...")
+    
+    # Step 3: Visualize with stems (will generate beatmaps)
     print("\n[VIS] Launching visualizer...")
     visualizer = Visualizer(args.audio_file, folder_path)
     visualizer.run()

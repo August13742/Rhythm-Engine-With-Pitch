@@ -8,25 +8,25 @@ import json
 import pygame
 import numpy as np
 import librosa
-from generator import MapGenerator # Import logic module
+from generator import MapGenerator
 
 # --- CONFIG ---
 COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "INSANE": (255, 50, 50) }
 
 class Visualizer:
-    def __init__(self, audio_path, folder_path):
-        # Initialize Mixer with high buffer to prevent skipping
+    def __init__(self, audio_path, folder_path, skip_generation=False):
+        # Initialize Mixer
         pygame.mixer.pre_init(44100, -16, 2, 1024)
         pygame.init()
-        # Allocate enough channels for keysounding (polyphony)
         pygame.mixer.set_num_channels(64)
+        
         self.width, self.height = 1600, 900
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("Rhythm Engine V60 - 4-Stem")
+        pygame.display.set_caption("Rhythm Engine V84 - 3-Mode Audio")
         self.font = pygame.font.SysFont("Consolas", 14)
         self.big_font = pygame.font.SysFont("Consolas", 24)
         
-        # Get stem paths from folder
+        # Audio Setup
         base_name = os.path.splitext(os.path.basename(audio_path))[0]
         self.stems = {
             "vocals": os.path.join(folder_path, f"{base_name}_vocals.wav"),
@@ -35,52 +35,55 @@ class Visualizer:
             "drums":  os.path.join(folder_path, f"{base_name}_drums.wav")
         }
         
-        # 1. GENERATE MAP
-        print("[VIS] Running Generator...")
-        self.gen = MapGenerator(self.stems, is_instrumental=False)
         self.beatmaps = {}
         self.metadata = {}
         
-        for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
-            self.beatmaps[d] = self.gen.generate(d)
-            duration = self.gen.data["duration"]
-            nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
-            # Get lanes from generator's DIFF_CONFIGS
-            from generator import DIFF_CONFIGS
-            lanes = DIFF_CONFIGS[d]["lanes"]
-            self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
+        # 1. LOAD OR GENERATE MAPS
+        if skip_generation:
+            print("[VIS] Loading pre-generated beatmaps...")
+            for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
+                beatmap_file = os.path.join(folder_path, f"{base_name}_{d}.json")
+                with open(beatmap_file, 'r') as f:
+                    self.beatmaps[d] = json.load(f)
+                
+                duration = librosa.get_duration(filename=os.path.join(folder_path, f"{base_name}_drums.wav"))
+                nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
+                from generator import DIFF_CONFIGS
+                lanes = DIFF_CONFIGS[d]["lanes"]
+                self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
+                print(f"[VIS] Loaded {d}: {len(self.beatmaps[d])} notes")
+        else:
+            # 1. GENERATE MAP (Uses V83 pYIN Baking)
+            print("[VIS] Running Generator (this includes pYIN baking)...")
+            self.gen = MapGenerator(self.stems, is_instrumental=False)
+            
+            for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
+                print(f"[VIS] Generating {d}...")
+                self.beatmaps[d] = self.gen.generate(d)
+                duration = self.gen.data["duration"]
+                nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
+                from generator import DIFF_CONFIGS
+                lanes = DIFF_CONFIGS[d]["lanes"]
+                self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
         
-        # 2a. SYNTH MODE: Pre-synthesize tones
-        print("[VIS] Synthesizing SFX Bank...")
-        self.synth_sounds = {}
+        # 2. SYNTHESIZE BANKS
+        print("[VIS] Synthesizing Sound Banks...")
+        self.sfx_bank = {}    # Classic Square
+        self.vocal_bank = {}  # Choir
+        self.soft_bank = {}   # Soft Sine (Harmonic)
+        
         for midi in range(24, 108):
-            self.synth_sounds[midi] = self._gen_tone(midi)
+            self.sfx_bank[midi] = self._gen_square_tone(midi)
+            self.vocal_bank[midi] = self._gen_vocal_tone(midi)
+            self.soft_bank[midi] = self._gen_soft_tone(midi)
         
-        # 2b. KEYSOUND MODE: Load raw audio for slicing
-        print("[VIS] Loading Raw Audio for Keysounding...")
-        self.raw_data = {}
-        for k, path in self.stems.items():
-            wav, _ = librosa.load(path, sr=44100, mono=False)
-            if len(wav.shape) == 1: wav = np.stack([wav, wav])
-            self.raw_data[k] = wav
-        
-        # Pre-slice keysounds for each difficulty
-        self.keysounds = {}
-        for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
-            print(f"[VIS] Slicing Keysounds for {d}...")
-            self._slice_keysounds(d, self.beatmaps[d])
-        
-        # 2c. AUDIO: Load full audio
+        # 3. SETUP
         pygame.mixer.music.load(audio_path)
-        self.full_audio_path = audio_path
-        
-        # 3. STATE
-        self.mode = "synth"  # Start with synth mode
+        self.mode = "harmonic" # Default to the nice mix
         self.music_vol = 0.2
-        self.sfx_vol = 0.9
+        self.sfx_vol = 0.8
         pygame.mixer.music.set_volume(self.music_vol)
         
-        # 3. STATE
         self.diff = "INSANE"
         self.playing = True
         self.start_time = time.time()
@@ -90,116 +93,57 @@ class Visualizer:
         self.played_indices = {}
         pygame.mixer.music.play()
 
-    def _gen_tone(self, midi):
+    # --- SYNTHESIS ENGINES ---
+
+    def _gen_square_tone(self, midi):
+        """Classic 8-bit Punch"""
         freq = 440.0 * (2.0**((midi-69)/12.0))
-        t = np.linspace(0, 0.2, int(44100*0.2), False)
+        t = np.linspace(0, 0.15, int(44100*0.15), False)
         wave = 0.5 * np.sign(np.sin(2*np.pi*freq*t))
         wave = np.convolve(wave, np.ones(5)/5, mode='same')
         wave = (wave * np.exp(-10*t) * 32767 * 0.5).astype(np.int16)
         return pygame.sndarray.make_sound(np.stack([wave, wave], axis=1))
 
-    def _slice_keysounds(self, diff, notes):
-        print(f"[VIS] Resynthesizing SFX for {diff} (Spectral Analysis)...")
-        self.keysounds[diff] = []
+    def _gen_soft_tone(self, midi):
+        """Soft Sine/Triangle (The 'Previous Beeps' you liked)"""
+        freq = 440.0 * (2.0**((midi-69)/12.0))
+        duration = 0.15
+        t = np.linspace(0, duration, int(44100*duration), False)
         
-        # Track last valid pitch for Legato Fallback
-        last_valid_midi = 60 
+        # Sine base
+        wave = 0.6 * np.sin(2*np.pi*freq*t)
+        # Add 3rd harmonic for 'Rhodes' feel
+        wave += 0.1 * np.sin(2*np.pi*freq*3*t)
         
-        for i, n in enumerate(notes):
-            # 1. Select Source Buffer
-            src = self.raw_data.get(n["source"], self.raw_data["other"])
-            start_sample = int(n["time"] * 44100)
-            analyze_dur = int(0.15 * 44100) 
-            
-            if start_sample >= src.shape[1]:
-                self.keysounds[diff].append(None)
-                continue
-            
-            # --- V53: PITCH CORRECTION ---
-            midi = n["midi"]
-            
-            # 1. Legato Fallback: If pitch is 0/Unknown, use last valid pitch
-            if midi == 0 or midi == 36: # 36 is Rhythm dummy
-                midi = last_valid_midi
-            else:
-                last_valid_midi = midi
-                
-            # 2. Golden Range (Octave Folding)
-            # Force notes into C4(60) - C6(84) range for consistent listening
-            while midi < 60: midi += 12
-            while midi > 84: midi -= 12
-            
-            # Calculate Target Frequency for Synthesis
-            target_freq = 440.0 * (2.0**((midi-69)/12.0))
+        # Softer envelope
+        envelope = np.exp(-8 * t)
+        wave = (wave * envelope * 32767 * 0.6).astype(np.int16)
+        return pygame.sndarray.make_sound(np.stack([wave, wave], axis=1))
 
-            raw_slice = src[:, start_sample : start_sample + analyze_dur]
-            mono_slice = np.mean(raw_slice, axis=0)
-            
-            # Pass target_freq to resynthesizer to bias the result
-            synth_wave = self._resynthesize_audio(mono_slice, target_freq)
-            
-            stereo_wave = np.stack([synth_wave, synth_wave], axis=1)
-            stereo_wave = (stereo_wave * 32767).astype(np.int16)
-            
-            try:
-                sound = pygame.sndarray.make_sound(np.ascontiguousarray(stereo_wave))
-                self.keysounds[diff].append(sound)
-            except Exception as e:
-                self.keysounds[diff].append(None)
-
-    def _resynthesize_audio(self, raw_audio, target_freq):
-        N = len(raw_audio)
-        if N == 0: return np.zeros(100)
-
-        # FFT
-        windowed = raw_audio * np.hanning(N)
-        spectrum = np.fft.rfft(windowed)
-        frequencies = np.fft.rfftfreq(N, 1/44100)
-        magnitudes = np.abs(spectrum)
-
-        # Filter
-        mask = (frequencies > 80) & (frequencies < 9000)
-        magnitudes = magnitudes * mask
+    def _gen_vocal_tone(self, midi):
+        """Vocal Choir (SuperSaw)"""
+        freq = 440.0 * (2.0**((midi-69)/12.0))
+        duration = 0.35 
+        sr = 44100
+        t = np.linspace(0, duration, int(sr*duration), False)
         
-        # Peak Picking
-        num_peaks = 7
-        peak_indices = np.argpartition(magnitudes, -num_peaks)[-num_peaks:]
-        top_freqs = frequencies[peak_indices]
-        top_mags = magnitudes[peak_indices]
+        detune = 1.005 
+        saw1 = 2 * (t * freq % 1) - 1
+        saw2 = 2 * (t * (freq * detune) % 1) - 1
         
-        if np.max(top_mags) > 0:
-            top_mags /= np.max(top_mags)
-
-        # Additive Synthesis
-        out_dur = 0.2
-        t = np.linspace(0, out_dur, int(44100 * out_dur), False)
-        new_wave = np.zeros_like(t)
+        raw_wave = 0.3 * saw1 + 0.3 * saw2
+        window_size = 20
+        wave = np.convolve(raw_wave, np.ones(window_size)/window_size, mode='same')
         
-        # V53: PITCH LOCK
-        # We ensure at least one sine wave matches our grid-snapped target pitch.
-        # This makes the game sound "in tune" even if the FFT was noisy.
-        new_wave += 0.4 * np.sin(2 * np.pi * target_freq * t)
+        # Slower attack for voice
+        attack_len = int(0.04 * sr)
+        envelope = np.ones_like(t)
+        envelope[:attack_len] = np.linspace(0, 1, attack_len)
+        decay_start = int(0.15 * sr)
+        envelope[decay_start:] = np.exp(-3 * t[:len(t)-decay_start])
         
-        # Add the original color (harmonics) on top, but quieter
-        for f, m in zip(top_freqs, top_mags):
-            if f == 0: continue
-            phase_offset = np.random.uniform(0, 2 * np.pi)
-            new_wave += 0.15 * m * np.sin(2 * np.pi * f * t + phase_offset)
-
-        # Envelope
-        envelope = np.exp(-12 * t)
-        attack_len = int(0.01 * 44100)
-        if attack_len < len(envelope):
-            envelope[:attack_len] *= np.linspace(0, 1, attack_len)
-            
-        new_wave *= envelope
-        
-        # Soft Limit
-        max_val = np.max(np.abs(new_wave))
-        if max_val > 0:
-            new_wave = 0.95 * new_wave / max_val
-        
-        return new_wave
+        wave = (wave * envelope * 32767 * 0.7).astype(np.int16)
+        return pygame.sndarray.make_sound(np.stack([wave, wave], axis=1))
 
     def run(self):
         clock = pygame.time.Clock()
@@ -217,22 +161,39 @@ class Visualizer:
                 while idx < len(notes):
                     n = notes[idx]
                     if n["time"] <= curr:
-                        if self.mode == "synth":
-                            # SYNTH MODE: Play synthesized tones
-                            s = self.synth_sounds.get(n["midi"])
-                            if s: 
-                                chan = pygame.mixer.find_channel()
-                                if chan:
-                                    v = n.get("vol", 1.0) * self.sfx_vol
-                                    l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
+                        sound = None
+                        
+                        # --- MODE SELECTOR ---
+                        if self.mode == "classic":
+                            # All Square
+                            sound = self.sfx_bank.get(n["midi"])
+                            
+                        elif self.mode == "vocal":
+                            # Vocals=Choir, Others=Square (High Contrast)
+                            if n["source"] == "vocal":
+                                sound = self.vocal_bank.get(n["midi"])
+                            else:
+                                sound = self.sfx_bank.get(n["midi"])
+                                
+                        elif self.mode == "harmonic":
+                            # Vocals=Choir, Others=Soft Sine (Pleasant Mix)
+                            if n["source"] == "vocal":
+                                sound = self.vocal_bank.get(n["midi"])
+                            else:
+                                sound = self.soft_bank.get(n["midi"])
+
+                        if sound: 
+                            chan = pygame.mixer.find_channel()
+                            if chan:
+                                v = n.get("vol", 1.0) * self.sfx_vol
+                                l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
+                                
+                                # Vocals centered in vocal modes
+                                if n["source"] == "vocal" and self.mode != "classic":
+                                    chan.set_volume(v, v)
+                                else:
                                     chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
-                                    chan.play(s)
-                        elif self.mode == "keysound":
-                            # KEYSOUND MODE: Play resynthesized audio
-                            sounds = self.keysounds[target_diff]
-                            if idx < len(sounds) and sounds[idx]:
-                                sounds[idx].set_volume(self.sfx_vol)
-                                sounds[idx].play()
+                                chan.play(sound)
                         
                         self.played_indices[target_diff] += 1
                         idx += 1
@@ -247,7 +208,7 @@ class Visualizer:
                     if e.key == pygame.K_2: self.diff = "NORMAL"
                     if e.key == pygame.K_3: self.diff = "HARD"
                     if e.key == pygame.K_4: self.diff = "INSANE"
-                    if e.key == pygame.K_m: self._toggle_mode()
+                    if e.key == pygame.K_m: self._cycle_mode()
                     if e.key == pygame.K_SPACE:
                         if self.playing:
                             pygame.mixer.music.pause()
@@ -274,6 +235,14 @@ class Visualizer:
 
             self.draw(curr)
             pygame.display.flip()
+
+    def _cycle_mode(self):
+        modes = ["classic", "vocal", "harmonic"]
+        curr_idx = modes.index(self.mode)
+        self.mode = modes[(curr_idx + 1) % len(modes)]
+        print(f"[VIS] Mode switched to: {self.mode.upper()}")
+        for i in range(pygame.mixer.get_num_channels()):
+            pygame.mixer.Channel(i).stop()
 
     def draw(self, curr):
         self.screen.fill(COLORS["bg"])
@@ -316,15 +285,15 @@ class Visualizer:
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
                 
-                # Color coding based on source
+                # Visuals
                 if n.get("source") == "vocal":
-                    note_color = (255, 100, 255) # Pink for Vocals
+                    note_color = (255, 100, 255) 
                 elif n.get("source") == "drums":
-                    note_color = (100, 255, 255) # Cyan for Drums
+                    note_color = (100, 255, 255) 
                 elif n.get("source") == "bass":
-                    note_color = (150, 100, 50)  # Brown/Orange for Bass
+                    note_color = (150, 100, 50) 
                 else:
-                    note_color = base_c # Default difficulty color
+                    note_color = base_c 
 
                 pygame.draw.rect(self.screen, note_color, (x+2, y-10, lane_w-4, 20))
         
@@ -332,27 +301,13 @@ class Visualizer:
         panel_y = self.height - 60
         pygame.draw.line(self.screen, (50, 50, 50), (0, panel_y), (self.width, panel_y))
         
-        mode_name = "[SYNTH]" if self.mode == "synth" else "[KEYSOUND]"
-        info = self.font.render(f"1-4: Diff | M: Toggle Mode {mode_name} | SPACE: Pause | R: Restart | [/]: Music Vol {self.music_vol:.1f} | -/+: SFX Vol {self.sfx_vol:.1f}", True, (150,150,150))
+        info = self.font.render(f"1-4: Diff | M: {self.mode.upper()} | SPACE: Pause | R: Restart | [/]: Music | -/+: SFX", True, (150,150,150))
         self.screen.blit(info, (10, panel_y + 15))
         
         status = "PAUSED" if not self.playing else f"Playing {self.diff}"
         status_col = (255,100,100) if not self.playing else (100,255,100)
         status_txt = self.font.render(status, True, status_col)
         self.screen.blit(status_txt, (self.width - 150, panel_y + 15))
-
-    def _toggle_mode(self):
-        """Toggle between synth and keysound modes without stopping music"""
-        # Simply toggle the mode - music continues uninterrupted
-        if self.mode == "synth":
-            print("[VIS] Switching to KEYSOUND mode...")
-            self.mode = "keysound"
-        else:
-            print("[VIS] Switching to SYNTH mode...")
-            self.mode = "synth"
-        
-        # Stop all SFX channels (but not music)
-        pygame.mixer.stop()
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -365,7 +320,6 @@ if __name__ == "__main__":
         print(f"[ERROR] Audio file not found: {audio_file}")
         sys.exit(1)
     
-    # Derive folder path from audio file
     base_name = os.path.splitext(os.path.basename(audio_file))[0]
     folder_path = base_name
     
