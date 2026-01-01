@@ -12,7 +12,15 @@ ANALYSIS_OCTAVES = 6  # Octave range for pitch detection (range: 4-7, higher = w
 MIN_VOLUME_THRESHOLD = 0.15  # Minimum volume to consider a note (range: 0.05-0.3, lower = more sensitive)
 
 # --- HARMONIC/PERCUSSIVE SEPARATION ---
-HPSS_MARGIN = 2.5  # Separation strength for harmonic extraction (range: 1.0-8.0, higher = cleaner harmonics)
+# Higher = Stricter separation. 
+# Stricter Harmonic = Removes more noise/drums, but might lose fast notes.
+# Stricter Percussive = Removes more tone, keeps only sharp clicks.
+HPSS_CONFIG = {
+    "vocal": 3.5,  # HIGH: Aggressively remove breath/sibilance to fix "jittery" pitch
+    "other": 3.0,  # MED-HIGH: Clean up synth/piano chords
+    "bass":  1.5,  # LOW: Bass needs body; too strict kills the fundamental freq
+    "drums": 3.0   # HIGH (Percussive): Used to isolate sharp hits from cymbal wash
+}
 VOCAL_SMOOTH_FACTOR = 5  # Median filter for vocal envelope smoothing (range: 3-9, odd numbers only, higher = smoother)
 
 # --- PITCH TRACKING THRESHOLDS ---
@@ -39,8 +47,8 @@ SCORE_GATES = {
 }
 
 # --- SOURCE SWITCHING BEHAVIOR ---
-COOLDOWN_BEATS = 0.75  # Beats to wait before switching sources (range: 0.5-2.0, higher = less switching)
-SWITCH_PENALTY = 0.8  # Score multiplier when switching sources (range: 0.5-0.9, lower = discourages switching)
+COOLDOWN_BEATS = 0.65  # Beats to wait before switching sources (range: 0.5-2.0, higher = less switching)
+SWITCH_PENALTY = 0.75  # Score multiplier when switching sources (range: 0.5-0.9, lower = discourages switching)
 HYSTERESIS_FINAL_GATE = 0.15  # Final score threshold after hysteresis (range: 0.05-0.3, higher = fewer notes)
 
 # --- CHORD DETECTION ---
@@ -70,19 +78,20 @@ VOCAL_HOLD_DURATION = 0.4  # Length of vocal holds in seconds (range: 0.2-0.6)
 HOLD_LANE_BUFFER = 0.05  # Extra time after hold before lane is free (range: 0.03-0.1 seconds)
 
 # --- ONSET DETECTION ---
-ONSET_PRE_MAX = 3  # Frames before peak for onset detection (range: 2-5)
+ONSET_PRE_MAX = 3   # Frames before peak for onset detection (range: 2-5)
 ONSET_POST_MAX = 3  # Frames after peak for onset detection (range: 2-5)
-ONSET_PRE_AVG = 3  # Frames before for averaging (range: 2-5)
+ONSET_PRE_AVG = 3   # Frames before for averaging (range: 2-5)
 ONSET_POST_AVG = 3  # Frames after for averaging (range: 2-5)
-DRUM_ONSET_DELTA = 0.1  # Drum-specific onset sensitivity (range: 0.05-0.2, lower = more sensitive)
-DRUM_ONSET_WAIT = 1  # Min frames between drum onsets (range: 1-3)
+DRUM_ONSET_DELTA = 0.2  # Drum-specific onset sensitivity (range: 0.05-0.2, lower = more sensitive)
+DRUM_ONSET_WAIT = 2      # Min frames between drum onsets (range: 1-3, must be Integer)
 
 # --- PITCH-TO-LANE MAPPING ---
-DRUM_HIGH_SCORE_THRESHOLD = 0.7  # Score to place drums at edges (range: 0.5-0.9)
-BASS_PITCH_MIN = 36  # MIDI note for bass range start (range: 28-40)
-BASS_PITCH_RANGE = 24  # MIDI semitones for bass spread (range: 12-36)
-MELODIC_PITCH_MIN = 48  # MIDI note floor for melody (range: 40-52)
-MELODIC_PITCH_MAX = 84  # MIDI note ceiling for melody (range: 80-96)
+# Replaced static edge threshold with flow-based intensity threshold
+DRUM_STRIKE_THRESHOLD = 0.7  # Score to force a "Jump" pattern vs a "Stream" pattern (range: 0.5-0.9)
+BASS_PITCH_MIN = 36      # MIDI note for bass range start (range: 28-40)
+BASS_PITCH_RANGE = 24    # MIDI semitones for bass spread (range: 12-36)
+MELODIC_PITCH_MIN = 48   # MIDI note floor for melody (range: 40-52)
+MELODIC_PITCH_MAX = 84   # MIDI note ceiling for melody (range: 80-96)
 
 # --- DIFFICULTY CONFIGS ---
 DIFF_CONFIGS = {
@@ -112,16 +121,28 @@ class MapGenerator:
         self.y_bass, _ = librosa.load(stems_path["bass"], sr=self.sr)
         self.y_drum, _ = librosa.load(stems_path["drums"], sr=self.sr)
         
-        # V63: Apply Median Filter to Vocals to fix "Shadow Singer" flutter
+        # --- PRE-PROCESSING ---
         self.env_voc = self._get_env(self.y_voc, smooth_factor=VOCAL_SMOOTH_FACTOR) 
         self.env_oth = self._get_env(self.y_oth)
         self.env_bass = self._get_env(self.y_bass)
-        self.env_drum = self._get_env(self.y_drum)
 
-        self.y_voc_harm, _ = librosa.effects.hpss(self.y_voc, margin=HPSS_MARGIN)
-        self.y_oth_harm, _ = librosa.effects.hpss(self.y_oth, margin=HPSS_MARGIN)
-        self.y_bass_harm, _ = librosa.effects.hpss(self.y_bass, margin=HPSS_MARGIN)
+        # --- SEPARATION ---
+        print("[GEN] Separating Harmonics...")
         
+        # Vocals: Strict harmonic separation to stabilize pitch
+        self.y_voc_harm, _ = librosa.effects.hpss(self.y_voc, margin=HPSS_CONFIG["vocal"])
+        
+        # Other: Standard separation
+        self.y_oth_harm, _ = librosa.effects.hpss(self.y_oth, margin=HPSS_CONFIG["other"])
+        
+        # Bass: Gentle separation to preserve low-end energy
+        self.y_bass_harm, _ = librosa.effects.hpss(self.y_bass, margin=HPSS_CONFIG["bass"])
+        
+        # Drums: We want the PERCUSSIVE part, not the harmonic part
+        # This removes cymbal 'hum' and reverb, leaving only sharp transients for the grid
+        _, self.y_drum_perc = librosa.effects.hpss(self.y_drum, margin=HPSS_CONFIG["drums"])
+        self.env_drum = self._get_env(self.y_drum_perc) # Update env to use clean percussion
+
         self.data = self._analyze()
 
     def _get_env(self, y, smooth_factor=0):
@@ -290,12 +311,15 @@ class MapGenerator:
         lane_jack_count = [0] * lanes 
         last_lane_used = -1
         
+        # Track general flow direction
+        last_lane_overall = lanes // 2
+        center_line = lanes / 2.0
+        
         melodic = [x["midi"] for x in notes if x["source"] not in ["drums", "bass"]]
         if not melodic: melodic = [60]
         p_min, p_max = np.percentile(melodic, 5), np.percentile(melodic, 95)
         spread = max(1, p_max - p_min)
-        last_lane_overall = lanes // 2
-        
+
         notes.sort(key=lambda x: x["time"])
 
         for n in notes:
@@ -319,9 +343,22 @@ class MapGenerator:
             if n["source"] == "bass" and n["raw_strength"] > BASS_HOLD_THRESHOLD: n["dur"] = BASS_HOLD_DURATION
             elif n["source"] == "vocal" and n["raw_strength"] > VOCAL_HOLD_THRESHOLD: n["dur"] = VOCAL_HOLD_DURATION
             
+            # --- START NEW LANE LOGIC ---
+            ideal_lane = 0
+            
             if n["source"] == "drums":
-                ideal_lane = lanes // 2
-                if n["score"] > DRUM_HIGH_SCORE_THRESHOLD: ideal_lane = 0 if last_lane_overall >= lanes//2 else lanes-1
+                # Check which side of the track we were last on
+                is_left_side = last_lane_overall < center_line
+                
+                if n["score"] > DRUM_STRIKE_THRESHOLD:
+                    # HARD STRIKE: Force a wide jump to the opposite outer edge
+                    # If we were Left, jump to Far Right. If Right, jump to Far Left.
+                    ideal_lane = (lanes - 1) if is_left_side else 0
+                else:
+                    # SOFT STRIKE: subtle alternation to the opposite inner lane
+                    # 4 Lanes: Left(0,1) -> 2. Right(2,3) -> 1.
+                    ideal_lane = int(center_line) if is_left_side else int(center_line) - 1
+            
             elif n["source"] == "bass":
                 pitch_norm = (n["midi"] - BASS_PITCH_MIN) / BASS_PITCH_RANGE
                 ideal_lane = int(max(0, min(1, pitch_norm)) * (lanes - 1))
@@ -331,6 +368,7 @@ class MapGenerator:
                 while midi > MELODIC_PITCH_MAX: midi -= 12
                 pitch_norm = (midi - p_min) / spread
                 ideal_lane = int(max(0, min(1, pitch_norm)) * (lanes - 1))
+            # --- END NEW LANE LOGIC ---
 
             final_lane = -1
             search_offsets = [0, 1, -1, 2, -2]
@@ -357,7 +395,9 @@ class MapGenerator:
                 lane_jack_count[final_lane] = 1
             
             last_lane_used = final_lane
+            # Update overall flow tracker
             last_lane_overall = final_lane
+            
             lane_free_time[final_lane] = n["time"] + n["dur"] + HOLD_LANE_BUFFER
             if n["time"] != last_note_time: 
                 current_budget += 1.0
