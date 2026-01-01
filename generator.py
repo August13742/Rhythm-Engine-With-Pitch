@@ -3,7 +3,7 @@ import librosa
 import scipy.signal
 
 # ==========================================
-#       V56: CONFIGURATION & TUNING
+#       V58: CONFIGURATION & TUNING
 # ==========================================
 
 # --- 1. AUDIO ANALYSIS ---
@@ -11,56 +11,57 @@ ANALYSIS_FMIN = librosa.note_to_hz('C2')
 ANALYSIS_OCTAVES = 6
 
 # --- 2. GLOBAL GATING ---
-# Notes below this normalized volume (0.0-1.0) are ignored.
-MIN_VOLUME_THRESHOLD = 0.10 
+MIN_VOLUME_THRESHOLD = 0.15 
 
-# --- 3. CHANNEL WEIGHTS (The Hierarchy) ---
-WEIGHTS = { 
-    "vocal":  1.15,  # Melody is King
-    "other":  1.00,  # Instruments are the Foundation
-    "rhythm": 0.85   # Drums are the Accent
+# --- 3. DYNAMIC MIXING (New in V58) ---
+# Weights now vary by difficulty.
+# Lower diffs = Crush the drums, boost the melody.
+# Higher diffs = Let the drums punch through for density.
+DIFF_WEIGHTS = {
+    "EASY":   { "vocal": 1.30, "other": 1.20, "rhythm": 0.50 }, # Anti-Bass Mode
+    "NORMAL": { "vocal": 1.20, "other": 1.10, "rhythm": 0.60 },
+    "HARD":   { "vocal": 1.10, "other": 1.00, "rhythm": 0.70 },
+    "INSANE": { "vocal": 1.05, "other": 1.00, "rhythm": 0.75 }  # Full Spectrum
 }
 
-# --- 4. HYSTERESIS (Sticky Focus) ---
-# Prevents jittery switching. 
-COOLDOWN_BEATS = 0.75   
+# --- 4. HYSTERESIS ---
+COOLDOWN_BEATS = 1.0   
 SWITCH_PENALTY = 0.60   
 
 # --- 5. GRID GRAVITY ---
-# Penalizes snapping to complex grids to preserve musicality.
 GRID_PENALTIES = {
     4: 1.0, 8: 1.0, 12: 2.0, 
     16: 1.2, 24: 2.5, 32: 3.0
 }
 
-# --- 6. FINGER BUDGET (Stamina System) ---
-# soft_limit: How many fingers "comfortable" play requires.
-# max_limit: The absolute maximum fingers allowed during a "Breakthrough" (climax).
-# regen: How fast finger budget recovers per second. 
-#        Higher = Sustained fast streams allowed. Lower = Bursts only.
+# --- 6. ERGONOMICS ---
+MAX_CONSECUTIVE_JACKS = 3  
+JACK_MIN_DELAY = 0.5      
+
+# --- 7. DIFFICULTY SPECS ---
 DIFF_CONFIGS = {
     "EASY":   { 
-        "lanes": 4, "grids": [4], "chords": False,
+        "lanes": 4, "grids": [4], "chords": False, "min_dist": 0.40,
         "soft_fingers": 1.5, "max_fingers": 2.0, "finger_regen": 2.0 
     },
     "NORMAL": { 
-        "lanes": 4, "grids": [4, 8], "chords": False,
+        "lanes": 4, "grids": [4, 8], "chords": False, "min_dist": 0.25,
         "soft_fingers": 2.0, "max_fingers": 2.5, "finger_regen": 3.0 
     },
     "HARD":   { 
-        "lanes": 5, "grids": [4, 8, 12, 16], "chords": True,
+        "lanes": 5, "grids": [4, 8, 12, 16], "chords": True, "min_dist": 0.15,
         "soft_fingers": 2.0, "max_fingers": 3.0, "finger_regen": 5.0 
     },
     "INSANE": { 
-        "lanes": 6, "grids": [4, 8, 12, 16, 24, 32], "chords": True,
+        "lanes": 6, "grids": [4, 8, 12, 16, 24, 32], "chords": True, "min_dist": 0.10,
         "soft_fingers": 2.0, "max_fingers": 4.0, "finger_regen": 8.0 
     },
 }
 
-# --- 7. SENSITIVITY ---
+# --- 8. SENSITIVITY ---
 SENSITIVITY = {
     "EASY":   { "delta": 0.06, "wait": 4 }, 
-    "NORMAL": { "delta": 0.05, "wait": 2 },
+    "NORMAL": { "delta": 0.05, "wait": 3 },
     "HARD":   { "delta": 0.04, "wait": 2 },
     "INSANE": { "delta": 0.03, "wait": 1 },
 }
@@ -112,7 +113,8 @@ class MapGenerator:
             "duration": librosa.get_duration(y=self.y_rhy, sr=self.sr)
         }
 
-    def _get_candidates(self, env, pitch_grid, mag_grid, source_name, diff_name):
+    # UPDATE: Now accepts 'weights' dictionary
+    def _get_candidates(self, env, pitch_grid, mag_grid, source_name, diff_name, weights):
         sens = SENSITIVITY.get(diff_name, SENSITIVITY["NORMAL"])
         onset_frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sens["delta"], wait=sens["wait"])
         
@@ -138,7 +140,9 @@ class MapGenerator:
                 elif source_name == "vocal": continue 
                 elif source_name == "other": continue 
             
-            weight = WEIGHTS.get(source_name, 1.0)
+            # Use Dynamic Weight
+            weight = weights.get(source_name, 1.0)
+            
             candidates.append({
                 "time": librosa.frames_to_time(t, sr=self.sr),
                 "midi": int(round(midi)),
@@ -152,9 +156,12 @@ class MapGenerator:
         cfg = DIFF_CONFIGS[diff_name]
         d = self.data
         
-        # 1. EXTRACT
-        vocs = [] if self.is_instrumental else self._get_candidates(self.env_voc, d["pitch_voc"], d["mag_voc"], "vocal", diff_name)
-        oth = self._get_candidates(self.env_oth, d["pitch_oth"], d["mag_oth"], "other", diff_name)
+        # 1. GET WEIGHTS FOR THIS DIFFICULTY
+        current_weights = DIFF_WEIGHTS.get(diff_name, DIFF_WEIGHTS["NORMAL"])
+        
+        # 2. EXTRACT (Pass weights down)
+        vocs = [] if self.is_instrumental else self._get_candidates(self.env_voc, d["pitch_voc"], d["mag_voc"], "vocal", diff_name, current_weights)
+        oth = self._get_candidates(self.env_oth, d["pitch_oth"], d["mag_oth"], "other", diff_name, current_weights)
         
         rhy_env = librosa.util.peak_pick(self.env_rhy, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=0.1, wait=2)
         rhy = []
@@ -162,11 +169,11 @@ class MapGenerator:
             if self.env_rhy[t] >= MIN_VOLUME_THRESHOLD:
                 rhy.append({ 
                     "time": librosa.frames_to_time(t, sr=self.sr), "midi": 36, 
-                    "score": self.env_rhy[t] * WEIGHTS["rhythm"], 
+                    "score": self.env_rhy[t] * current_weights["rhythm"], 
                     "source": "rhythm", "raw_strength": self.env_rhy[t] 
                 })
 
-        # 2. MERGE & BUFFER CHORDS
+        # 3. MERGE & BUFFER CHORDS
         all_notes = vocs + oth + rhy
         all_notes.sort(key=lambda x: x["time"])
         
@@ -184,10 +191,10 @@ class MapGenerator:
                     curr = next_n
             self._process_chord_buffer(merged, chord_buffer, cfg["chords"])
 
-        # 3. HYSTERESIS
+        # 4. HYSTERESIS
         stable_notes = self._apply_hysteresis(merged, d["beat_times"])
 
-        # 4. GAMEPLAY DIRECTOR (Physical Rules)
+        # 5. GAMEPLAY DIRECTOR
         final_notes = self._apply_gameplay_rules(stable_notes, d, cfg)
             
         return final_notes
@@ -210,7 +217,9 @@ class MapGenerator:
         last_switch_time = notes[0]["time"]
         
         avg_beat = 0.5
-        if len(beat_times) > 1: avg_beat = np.mean(np.diff(beat_times[:10]))
+        if len(beat_times) > 1:
+            avg_beat = np.mean(np.diff(beat_times[:10]))
+            
         cooldown_dur = avg_beat * COOLDOWN_BEATS
         
         for n in notes:
@@ -218,6 +227,7 @@ class MapGenerator:
                 time_since_switch = n["time"] - last_switch_time
                 if time_since_switch < cooldown_dur:
                     n["score"] *= SWITCH_PENALTY
+                
                 last_switch_time = n["time"]
                 last_source = n["source"]
             
@@ -229,106 +239,94 @@ class MapGenerator:
         final_notes = []
         lanes = cfg["lanes"]
         
-        # --- STATE TRACKING ---
-        lane_free_time = [0.0] * lanes # When does this lane become playable? (Hold blocking)
-        current_budget = 0.0 # How many "fingers" are tired?
+        # State
+        lane_free_time = [0.0] * lanes 
+        current_budget = 0.0 
         last_note_time = -999
+        lane_jack_count = [0] * lanes 
+        last_lane_used = -1
         
-        # Budget parameters
-        SOFT_LIMIT = cfg["soft_fingers"]
-        MAX_LIMIT = cfg["max_fingers"]
-        REGEN_RATE = cfg["finger_regen"]
-        
-        # Pitch mapping setup
+        # Mapping
         melodic = [x["midi"] for x in notes if x["source"] != "rhythm"]
         if not melodic: melodic = [60]
         p_min, p_max = np.percentile(melodic, 5), np.percentile(melodic, 95)
         spread = max(1, p_max - p_min)
+        last_lane_overall = lanes // 2
         
-        last_lane = lanes // 2
-        
+        notes.sort(key=lambda x: x["time"])
+
         for n in notes:
-            # 1. TIME SNAP
             snapped_t = self._weighted_smart_snap(n["time"], d["beat_times"], cfg["grids"])
             n["time"] = (snapped_t * 0.95) + (n["time"] * 0.05)
             
-            # 2. FINGER BUDGET UPDATE
+            # Density Check
             dt = n["time"] - last_note_time
-            if dt > 0:
-                current_budget = max(0.0, current_budget - (dt * REGEN_RATE))
+            if dt > 0: current_budget = max(0.0, current_budget - (dt * cfg["finger_regen"]))
             
-            # 3. BUDGET CHECK (The Gate)
-            # Cost of a note = 1.0. 
-            cost = 1.0
-            
-            # Can we afford this?
-            # If we are under soft limit, yes.
-            # If over soft limit, we need High Score to Break Through.
-            is_breakthrough = False
-            if current_budget + cost > SOFT_LIMIT:
-                if current_budget + cost > MAX_LIMIT:
-                    continue # Hard cap hit. Drop note.
+            if n["time"] != last_note_time:
+                if dt < cfg["min_dist"]:
+                    if final_notes and n["score"] > final_notes[-1]["score"] * 1.5: final_notes.pop()
+                    else: continue
                 
-                # Soft Cap Check: Only loud notes pass
-                if n["score"] > 0.6: # High Score threshold
-                    is_breakthrough = True
-                else:
-                    continue # Note too weak for current density
+                cost = 1.0
+                if current_budget + cost > cfg["soft_fingers"]:
+                    if current_budget + cost > cfg["max_fingers"]: continue
+                    if n["score"] < 0.6: continue
             
-            # 4. DETERMINE DURATION (Holds)
+            # Holds
             n["dur"] = 0.0
             if n["raw_strength"] > 0.85 and n["source"] != "rhythm":
-                n["dur"] = 0.4 # Long press for strong melody
+                n["dur"] = 0.4
             
-            # 5. LANE MAPPING & PHYSICS
+            # Mapping
             if n["source"] == "rhythm":
-                target_lane = lanes // 2
-                if n["score"] > 0.7: target_lane = 0 if last_lane >= lanes//2 else lanes-1
+                ideal_lane = lanes // 2
+                if n["score"] > 0.7: ideal_lane = 0 if last_lane_overall >= lanes//2 else lanes-1
             else:
                 midi = n["midi"]
                 while midi < 48: midi += 12
                 while midi > 84: midi -= 12
                 pitch_norm = (midi - p_min) / spread
                 ideal_lane = int(max(0, min(1, pitch_norm)) * (lanes - 1))
-                target_lane = ideal_lane
 
-            # 6. COLLISION & HOLD AVOIDANCE (Physics)
-            # Try to place note in target_lane. If blocked by Hold, look nearby.
+            # Physics
             final_lane = -1
-            
-            # Search order: Target -> Target+1 -> Target-1 -> ...
             search_offsets = [0, 1, -1, 2, -2]
-            
             for offset in search_offsets:
-                candidate = target_lane + offset
+                candidate = ideal_lane + offset
                 if 0 <= candidate < lanes:
-                    # Check 1: Is lane free? (Hold Blocking)
-                    # Check 2: Is lane adjacent to a chord note at this EXACT time? (Visibility)
-                    
-                    is_blocked = n["time"] < lane_free_time[candidate]
+                    if n["time"] < lane_free_time[candidate]: continue
                     
                     is_crowded = False
-                    # Check concurrent notes (Chords)
                     if final_notes and abs(final_notes[-1]["time"] - n["time"]) < 0.01:
                         prev_lane = final_notes[-1]["lane"]
-                        if abs(candidate - prev_lane) <= 1: # Adjacent or same
-                            is_crowded = True
-                            
-                    if not is_blocked and not is_crowded:
-                        final_lane = candidate
-                        break
+                        if abs(candidate - prev_lane) <= 1: is_crowded = True
+                    if is_crowded: continue
+
+                    is_jack = (candidate == last_lane_used) and (n["time"] - last_note_time < JACK_MIN_DELAY)
+                    if is_jack and lane_jack_count[candidate] >= MAX_CONSECUTIVE_JACKS:
+                        continue 
+                    
+                    final_lane = candidate
+                    break
             
-            if final_lane == -1:
-                continue # Nowhere to place note (Physically impossible)
+            if final_lane == -1: continue
             
-            # 7. COMMIT NOTE
             n["lane"] = final_lane
             
-            # Update State
-            lane_free_time[final_lane] = n["time"] + n["dur"] + 0.05 # Add tiny buffer
-            current_budget += cost
-            last_note_time = n["time"]
-            last_lane = final_lane
+            if final_lane == last_lane_used and (n["time"] - last_note_time < JACK_MIN_DELAY):
+                lane_jack_count[final_lane] += 1
+            else:
+                lane_jack_count = [0] * lanes
+                lane_jack_count[final_lane] = 1
+                
+            last_lane_used = final_lane
+            last_lane_overall = final_lane
+            lane_free_time[final_lane] = n["time"] + n["dur"] + 0.05 
+            
+            if n["time"] != last_note_time: 
+                current_budget += 1.0
+                last_note_time = n["time"]
             
             final_notes.append(n)
             
