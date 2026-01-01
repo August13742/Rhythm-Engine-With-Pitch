@@ -16,10 +16,10 @@ MIN_VOLUME_THRESHOLD = 0.15  # Minimum volume to consider a note (range: 0.05-0.
 # Stricter Harmonic = Removes more noise/drums, but might lose fast notes.
 # Stricter Percussive = Removes more tone, keeps only sharp clicks.
 HPSS_CONFIG = {
-    "vocal": 3.5,  # HIGH: Aggressively remove breath/sibilance to fix "jittery" pitch
-    "other": 3.0,  # MED-HIGH: Clean up synth/piano chords
+    "vocal": 4,  # HIGH: Aggressively remove breath/sibilance to fix "jittery" pitch
+    "other": 2.5,  # MED-HIGH: Clean up synth/piano chords
     "bass":  1.5,  # LOW: Bass needs body; too strict kills the fundamental freq
-    "drums": 3.0   # HIGH (Percussive): Used to isolate sharp hits from cymbal wash
+    "drums": 3.5   # HIGH (Percussive): Used to isolate sharp hits from cymbal wash
 }
 VOCAL_SMOOTH_FACTOR = 5  # Median filter for vocal envelope smoothing (range: 3-9, odd numbers only, higher = smoother)
 
@@ -48,12 +48,12 @@ SCORE_GATES = {
 
 # --- SOURCE SWITCHING BEHAVIOR ---
 COOLDOWN_BEATS = 0.65  # Beats to wait before switching sources (range: 0.5-2.0, higher = less switching)
-SWITCH_PENALTY = 0.75  # Score multiplier when switching sources (range: 0.5-0.9, lower = discourages switching)
+SWITCH_PENALTY = 0.7  # Score multiplier when switching sources (range: 0.5-0.9, lower = discourages switching)
 HYSTERESIS_FINAL_GATE = 0.15  # Final score threshold after hysteresis (range: 0.05-0.3, higher = fewer notes)
 
 # --- CHORD DETECTION ---
-CHORD_TIME_WINDOW = 0.06  # Max time difference to group notes as chord (range: 0.03-0.1 seconds)
-CHORD_SCORE_RATIO = 0.7  # Min score ratio for second note in chord (range: 0.5-0.9, higher = stricter chords)
+CHORD_TIME_WINDOW = 0.05  # Max time difference to group notes as chord (range: 0.03-0.1 seconds)
+CHORD_SCORE_RATIO = 0.75  # Min score ratio for second note in chord (range: 0.5-0.9, higher = stricter chords)
 
 # --- RHYTHM QUANTIZATION ---
 GRID_PENALTIES = { 4: 1.0, 8: 1.0, 12: 2.0, 16: 1.2, 24: 2.5, 32: 3.0 }  # Snap preference (higher = less likely)
@@ -75,6 +75,9 @@ BASS_HOLD_THRESHOLD = 0.6  # Min strength for bass hold notes (range: 0.4-0.8, h
 BASS_HOLD_DURATION = 0.5  # Length of bass holds in seconds (range: 0.3-0.8)
 VOCAL_HOLD_THRESHOLD = 0.8  # Min strength for vocal hold notes (range: 0.6-0.9, higher = fewer holds)
 VOCAL_HOLD_DURATION = 0.4  # Length of vocal holds in seconds (range: 0.2-0.6)
+OTHER_HOLD_THRESHOLD = 0.7  # Min strength for melody holds (range: 0.5-0.9)
+OTHER_HOLD_DURATION = 0.5   # Length of melody holds (range: 0.3-0.8)
+
 HOLD_LANE_BUFFER = 0.05  # Extra time after hold before lane is free (range: 0.03-0.1 seconds)
 
 # --- ONSET DETECTION ---
@@ -178,16 +181,27 @@ class MapGenerator:
             "duration": librosa.get_duration(y=self.y_drum, sr=self.sr)
         }
 
-    def _get_candidates(self, env, pitch_grid, mag_grid, source_name, diff_name, weights, gates):
+    def _get_candidates(self, env, pitch_grid, mag_grid, source_name, diff_name, weights, gates, debounce_time=0.0):
         sens = SENSITIVITY.get(diff_name, SENSITIVITY["NORMAL"])
         onset_frames = librosa.util.peak_pick(env, pre_max=ONSET_PRE_MAX, post_max=ONSET_POST_MAX, 
-                                               pre_avg=ONSET_PRE_AVG, post_avg=ONSET_POST_AVG, 
-                                               delta=sens["delta"], wait=sens["wait"])
+                                              pre_avg=ONSET_PRE_AVG, post_avg=ONSET_POST_AVG, 
+                                              delta=sens["delta"], wait=sens["wait"])
         
         candidates = []
         n_frames = mag_grid.shape[1] if mag_grid is not None else 0
+        
+        # Debounce tracking
+        last_accepted_time = -999.0
 
         for t in onset_frames:
+            current_time = librosa.frames_to_time(t, sr=self.sr)
+            
+            # --- DEBOUNCE CHECK ---
+            # If this note is too close to the previous note FROM THIS SAME SOURCE, ignore it.
+            # This kills the "double-trigger" caused by jagged HPSS envelopes.
+            if current_time - last_accepted_time < debounce_time:
+                continue
+
             # V63: Use Difficulty-Specific Gating
             score_gate = gates.get(source_name, 0.15)
             
@@ -195,7 +209,6 @@ class MapGenerator:
             weight = weights.get(source_name, 1.0)
             score = env[t] * weight
             
-            # Gate Check
             if score < score_gate: continue
 
             midi = 0
@@ -215,12 +228,16 @@ class MapGenerator:
                 else: continue 
             
             candidates.append({
-                "time": librosa.frames_to_time(t, sr=self.sr),
+                "time": current_time,
                 "midi": int(round(midi)),
                 "score": score,
                 "source": source_name,
                 "raw_strength": env[t]
             })
+            
+            # Update debounce timer only on successful add
+            last_accepted_time = current_time
+            
         return candidates
 
     def generate(self, diff_name):
@@ -230,9 +247,20 @@ class MapGenerator:
         gates = SCORE_GATES.get(diff_name, SCORE_GATES["NORMAL"])
         
         # 1. EXTRACT
-        vocs = [] if self.is_instrumental else self._get_candidates(self.env_voc, d["pitch_voc"], d["mag_voc"], "vocal", diff_name, weights, gates)
-        oth = self._get_candidates(self.env_oth, d["pitch_oth"], d["mag_oth"], "other", diff_name, weights, gates)
-        bass = self._get_candidates(self.env_bass, d["pitch_bass"], d["mag_bass"], "bass", diff_name, weights, gates)
+        # Add debounce_time=0.10 (100ms) to vocals to prevent "shredding" artifacts
+        vocs = [] if self.is_instrumental else self._get_candidates(
+            self.env_voc, d["pitch_voc"], d["mag_voc"], "vocal", diff_name, weights, gates, debounce_time=0.10
+        )
+        
+        # "Other" (Piano) might have fast arpeggios, so we keep debounce low/zero
+        oth = self._get_candidates(
+            self.env_oth, d["pitch_oth"], d["mag_oth"], "other", diff_name, weights, gates, debounce_time=0.05
+        )
+        
+        # Bass is usually monophonic, give it a safety buffer
+        bass = self._get_candidates(
+            self.env_bass, d["pitch_bass"], d["mag_bass"], "bass", diff_name, weights, gates, debounce_time=0.10
+        )
         
         drum_env = librosa.util.peak_pick(self.env_drum, pre_max=ONSET_PRE_MAX, post_max=ONSET_POST_MAX, 
                                           pre_avg=ONSET_PRE_AVG, post_avg=ONSET_POST_AVG, 
@@ -340,8 +368,17 @@ class MapGenerator:
                     if not is_melodic and n["score"] < NON_MELODIC_BUDGET_THRESHOLD: continue 
             
             n["dur"] = 0.0
-            if n["source"] == "bass" and n["raw_strength"] > BASS_HOLD_THRESHOLD: n["dur"] = BASS_HOLD_DURATION
-            elif n["source"] == "vocal" and n["raw_strength"] > VOCAL_HOLD_THRESHOLD: n["dur"] = VOCAL_HOLD_DURATION
+            # Bass: Loud thumps become holds
+            if n["source"] == "bass" and n["raw_strength"] > BASS_HOLD_THRESHOLD: 
+                n["dur"] = BASS_HOLD_DURATION
+            
+            # Vocals: Powerful belts become holds
+            elif n["source"] == "vocal" and n["raw_strength"] > VOCAL_HOLD_THRESHOLD: 
+                n["dur"] = VOCAL_HOLD_DURATION
+            
+            # NEW: Synths: Loud chords/leads become holds
+            elif n["source"] == "other" and n["raw_strength"] > OTHER_HOLD_THRESHOLD: 
+                n["dur"] = OTHER_HOLD_DURATION
             
             # --- START NEW LANE LOGIC ---
             ideal_lane = 0
