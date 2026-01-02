@@ -1,4 +1,7 @@
-'''separator.py'''
+"""
+separator.py
+Splits audio into 6 stems: Drums, Bass, Other, Vocals, Guitar, Piano.
+"""
 
 import argparse
 import os
@@ -12,7 +15,10 @@ from demucs.pretrained import get_model
 def separate_audio(audio_path):
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print(f"[AI] Initializing Demucs on {device}...")
-    model = get_model(name='htdemucs')
+    
+    # LOAD 6-STEM MODEL
+    # 'htdemucs_6s' adds 'guitar' and 'piano' to the standard split.
+    model = get_model(name='htdemucs_6s')
     model.to(device)
 
     print(f"[AI] Loading {audio_path}...")
@@ -25,33 +31,30 @@ def separate_audio(audio_path):
     wav = (wav - ref_mean) / (ref_std + 1e-8)
     wav_t = torch.tensor(wav).float().to(device)
 
-    print("[AI] Separating Stems...")
+    print(f"[AI] Separating into {model.sources}...")
     with torch.no_grad():
-        sources = apply_model(model, wav_t[None], shifts=1, split=True, overlap=0.25, progress=True)[0]
+        # shifts=1 is fast, shifts=2 or 4 is better quality but slower
+        sources = apply_model(model, wav_t[None], shifts=4, split=True, overlap=0.25, progress=True)[0]
     
     sources = sources.cpu().numpy()
     sources = (sources * ref_std) + ref_mean
     
-    # Demucs: 0=Drums, 1=Bass, 2=Other, 3=Vocals
-    print("[AI] Exporting 4-Way Split...")
-    
+    # Export Dynamic Stems
     base_name = os.path.splitext(os.path.basename(audio_path))[0]
-    folder_path = base_name
+    folder_path = os.path.join("stems", base_name) # Cleaner folder structure
     os.makedirs(folder_path, exist_ok=True)
     
-    paths = {
-        "drums":  os.path.join(folder_path, f"{base_name}_drums.wav"),
-        "bass":   os.path.join(folder_path, f"{base_name}_bass.wav"),
-        "other":  os.path.join(folder_path, f"{base_name}_other.wav"),
-        "vocals": os.path.join(folder_path, f"{base_name}_vocals.wav")
-    }
+    print(f"[AI] Exporting Splits to '{folder_path}'...")
     
-    sf.write(paths["drums"],  sources[0].T, sr)
-    sf.write(paths["bass"],   sources[1].T, sr)
-    sf.write(paths["other"],  sources[2].T, sr)
-    sf.write(paths["vocals"], sources[3].T, sr)
-    
-    print(f"[SUCCESS] Splits ready in '{folder_path}/' folder.")
+    # Dynamic loop using model.sources (No more hardcoded indices)
+    # htdemucs_6s order: ["drums", "bass", "other", "vocals", "guitar", "piano"]
+    for i, source_name in enumerate(model.sources):
+        filename = f"{source_name}.wav" # simpler names: vocals.wav, drums.wav
+        path = os.path.join(folder_path, filename)
+        sf.write(path, sources[i].T, sr)
+        print(f"    > Saved {filename}")
+        
+    print(f"[SUCCESS] Processing complete.")
     return folder_path
 
 if __name__ == "__main__":

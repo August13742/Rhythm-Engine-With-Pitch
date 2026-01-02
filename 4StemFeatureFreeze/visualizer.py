@@ -23,19 +23,17 @@ class Visualizer:
         
         self.width, self.height = 1600, 900
         self.screen = pygame.display.set_mode((self.width, self.height))
-        pygame.display.set_caption("Rhythm Engine V84 - 6-Stem Audio")
+        pygame.display.set_caption("Rhythm Engine V84 - 3-Mode Audio")
         self.font = pygame.font.SysFont("Consolas", 14)
         self.big_font = pygame.font.SysFont("Consolas", 24)
         
         # Audio Setup
         base_name = os.path.splitext(os.path.basename(audio_path))[0]
         self.stems = {
-            "vocals": os.path.join(folder_path, "vocals.wav"),
-            "other":  os.path.join(folder_path, "other.wav"),
-            "bass":   os.path.join(folder_path, "bass.wav"),
-            "drums":  os.path.join(folder_path, "drums.wav"),
-            "piano":  os.path.join(folder_path, "piano.wav"),
-            "guitar": os.path.join(folder_path, "guitar.wav")
+            "vocals": os.path.join(folder_path, f"{base_name}_vocals.wav"),
+            "other":  os.path.join(folder_path, f"{base_name}_other.wav"),
+            "bass":   os.path.join(folder_path, f"{base_name}_bass.wav"),
+            "drums":  os.path.join(folder_path, f"{base_name}_drums.wav")
         }
         
         self.beatmaps = {}

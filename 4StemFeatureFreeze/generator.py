@@ -9,20 +9,12 @@ from numba import jit
 from functools import lru_cache
 
 # ==========================================
-#        V100: "THE SEXTET" CONFIG
+#        V99: "THE CLEANUP" CONFIG
 # ==========================================
 
-# HPSS Margins (Separation Strictness)
-# Piano/Guitar need balance to keep attack (Perc) vs pitch (Harm)
-HPSS_CONFIG = { 
-    "vocal": 2.0, 
-    "other": 3.0, 
-    "bass": 1.5, 
-    "drums": 3.5,
-    "piano": 2.0, 
-    "guitar": 2.5 
-}
+# ==========================================
 
+HPSS_CONFIG = { "vocal": 2.0, "other": 3.0, "bass": 1.5, "drums": 3.5 }
 VOCAL_SMOOTH_FACTOR = 1
 
 GLOBAL_DENSITY_CAP = {
@@ -32,43 +24,30 @@ GLOBAL_DENSITY_CAP = {
     "INSANE": 7.5 
 }
 
-# THE HIERARCHY (Who wins the spotlight?)
 STEM_PRIORITIES = {
-    "vocal":  1.25, # Absolute Lead
-    "piano":  1.2,  # Instrumental Lead
-    "guitar": 1.15, # Rhythmic Lead
-    "other":  0.9,  # Background Support (Demoted)
-    "drums":  1.0,  # Anchor
-    "bass":   0.8   # Groove
+    "vocal": 1.25, 
+    "other": 1.1, 
+    "bass":  0.8, 
+    "drums": 1.0   
 }
 
-# Prevention of "Flamming" (Overlapping notes)
 CROSS_STEM_DEBOUNCE = 0.06 
 
-# Audio Mixing Levels (SFX Generation)
 STEM_VOLUMES = {
-    "vocal":  1.0,
-    "piano":  0.9,
-    "guitar": 0.85,
-    "other":  0.6,
-    "bass":   0.8,
-    "drums":  0.7 
+    "vocal": 1.0,
+    "other": 0.75,
+    "bass":  0.8,
+    "drums": 0.7 
 }
 
 # --- PITCH & VISUAL ---
-# Analysis Ranges (Min/Max MIDI to accept)
-RANGE_VOCAL  = (45, 84) 
-RANGE_PIANO  = (21, 108) # Full 88 keys
-RANGE_GUITAR = (40, 88)  # Standard tuning E2 -> E6+
-RANGE_OTHER  = (48, 96) 
-RANGE_BASS   = (36, 60)
+RANGE_VOCAL = (45, 84) 
+RANGE_OTHER = (48, 96) 
+RANGE_BASS  = (36, 60)
 
-# Visual Mapping Ranges (For Lane Distribution)
-VISUAL_RANGE_VOCAL  = (48, 84)
-VISUAL_RANGE_PIANO  = (36, 96) # Center focus
-VISUAL_RANGE_GUITAR = (40, 80)
-VISUAL_RANGE_OTHER  = (48, 84)
-VISUAL_RANGE_BASS   = (36, 60) 
+VISUAL_RANGE_VOCAL = (48, 84)
+VISUAL_RANGE_OTHER = (48, 84)
+VISUAL_RANGE_BASS  = (36, 60) 
 
 DIFF_CONFIGS = {
     "EASY":   { "lanes": 4, "grids": [4], "chords": False, "snap_threshold": 0.10 },
@@ -84,51 +63,44 @@ ONSET_POST_MAX = 3
 ONSET_PRE_AVG = 3
 ONSET_POST_AVG = 3
 DRUM_ONSET_DELTA = 0.2
+
+# NEW: Consolidation Thresholds (in seconds)
+# If a note is within this window of a previous note (same lane), merge them.
 HOLD_MERGE_WINDOW = 0.25 
 
 # ==========================================
 
 class MapGenerator:
     def __init__(self, stems_path, use_holds=True):
-        print(f"[GEN] Loading 6-Stem Set (Holds: {use_holds})...")
+        print(f"[GEN] Loading stems (Holds: {use_holds})...")
         self.sr = 44100
         self.stems_path = stems_path
-        self.use_holds = use_holds
+        self.use_holds = use_holds # Store user preference
         
-        # 1. LOAD AUDIO
-        # We use a helper to load safely (in case 4-stem model was used)
-        self.y_voc = self._safe_load(stems_path.get("vocals"))
-        self.y_oth = self._safe_load(stems_path.get("other"))
-        self.y_bass = self._safe_load(stems_path.get("bass"))
-        self.y_drum = self._safe_load(stems_path.get("drums"))
-        self.y_piano = self._safe_load(stems_path.get("piano"))
-        self.y_guitar = self._safe_load(stems_path.get("guitar"))
+        self.y_voc, _ = librosa.load(stems_path["vocals"], sr=self.sr)
+        self.y_oth, _ = librosa.load(stems_path["other"], sr=self.sr)
+        self.y_bass, _ = librosa.load(stems_path["bass"], sr=self.sr)
+        self.y_drum, _ = librosa.load(stems_path["drums"], sr=self.sr)
             
-        # 2. BLEED REMOVAL (Vocal Only)
-        # We only really care about backing leaking into vocals.
-        # Piano/Guitar leakage is usually acceptable as "texture".
+        # FIX 1: VOCAL BLEED REMOVAL
+        # Kill "Ghost Vocals" before we even process harmonics
         print("[GEN] Cleaning Vocal Bleed...")
-        backing_mix = self.y_oth + self.y_bass + self.y_drum + self.y_piano + self.y_guitar
-        self.y_voc = self._clean_vocal_bleed(self.y_voc, backing_mix)
+        self.y_voc = self._clean_vocal_bleed(self.y_voc, self.y_oth + self.y_bass + self.y_drum)
 
-        # 3. HPSS SEPARATION
         print("[GEN] Separating Harmonics...")
         self.y_voc_harm, _ = librosa.effects.hpss(self.y_voc, margin=HPSS_CONFIG["vocal"])
         self.y_bass_harm, _ = librosa.effects.hpss(self.y_bass, margin=HPSS_CONFIG["bass"])
         _, self.y_drum_perc = librosa.effects.hpss(self.y_drum, margin=HPSS_CONFIG["drums"])
+        self.y_oth_harm, self.y_oth_perc = librosa.effects.hpss(self.y_oth, margin=HPSS_CONFIG["other"])
         
-        # New Stems
-        self.y_piano_harm, _ = librosa.effects.hpss(self.y_piano, margin=HPSS_CONFIG["piano"])
-        self.y_guitar_harm, _ = librosa.effects.hpss(self.y_guitar, margin=HPSS_CONFIG["guitar"])
-        self.y_oth_harm, _ = librosa.effects.hpss(self.y_oth, margin=HPSS_CONFIG["other"])
-        
-        # 4. ENVELOPE GENERATION
         self.env_drum = self._get_env(self.y_drum_perc) 
         self.env_voc = self._get_env(self.y_voc_harm, smooth_factor=VOCAL_SMOOTH_FACTOR) 
         self.env_bass = self._get_env(self.y_bass_harm)
-        self.env_piano = self._get_env(self.y_piano_harm)
-        self.env_guitar = self._get_env(self.y_guitar_harm)
-        self.env_oth = self._get_env(self.y_oth_harm) # Use harmonic env for pads now
+        
+        S_oth = librosa.stft(self.y_oth_harm)
+        env_oth_flux = librosa.onset.onset_strength(S=librosa.amplitude_to_db(np.abs(S_oth), ref=np.max), sr=self.sr)
+        if env_oth_flux.max() > 0: env_oth_flux /= env_oth_flux.max()
+        self.env_oth = env_oth_flux
 
         self.data = self._analyze_rhythm_composite()
         
@@ -136,31 +108,39 @@ class MapGenerator:
         self.master_pool = self._score_with_priority(raw_pool, self.data["beat_times"])
         print(f"[GEN] Master Pool Ready: {len(self.master_pool)} notes")
 
-    def _safe_load(self, path):
-        if path and os.path.exists(path):
-            y, _ = librosa.load(path, sr=self.sr)
-            return y
-        return np.zeros(1) # Return silence if missing
-
     def _clean_vocal_bleed(self, y_voc, y_backing):
-        # ... (Same logic as V99) ...
+        """
+        Demucs Hallucination Killer.
+        If Vocal RMS is low AND Backing RMS is high -> Silence the Vocal.
+        """
         frame_len = 2048
         hop_len = 512
-        if len(y_voc) < frame_len: return y_voc
-
+        
         rms_voc = librosa.feature.rms(y=y_voc, frame_length=frame_len, hop_length=hop_len)[0]
         rms_back = librosa.feature.rms(y=y_backing, frame_length=frame_len, hop_length=hop_len)[0]
         
+        # Soft Gate Logic
+        # If vocal is 10x quieter than backing, and absolutely quiet (<0.01), kill it.
         mask = np.ones_like(rms_voc)
+        
+        # Vectorized condition
+        # 1. Backing is loud enough to cause bleed (> 0.05)
+        # 2. Vocal is suspiciously quiet relative to backing (< 10%)
         bleed_indices = (rms_back > 0.05) & (rms_voc < (rms_back * 0.15))
+        
+        # Also kill absolute silence floor to reduce noise
         silence_indices = (rms_voc < 0.005)
         
         mask[bleed_indices] = 0.0
         mask[silence_indices] = 0.0
         
+        # Smooth the mask to prevent clicking
         mask = scipy.signal.medfilt(mask, kernel_size=5)
+        
+        # Interpolate mask back to sample rate
         mask_upsampled = scipy.ndimage.zoom(mask, len(y_voc) / len(mask), order=1)
         
+        # Ensure lengths match exactly
         if len(mask_upsampled) < len(y_voc):
             mask_upsampled = np.pad(mask_upsampled, (0, len(y_voc) - len(mask_upsampled)))
         elif len(mask_upsampled) > len(y_voc):
@@ -168,12 +148,12 @@ class MapGenerator:
             
         return y_voc * mask_upsampled
 
+    # ... (Rest of init and harvest methods same as V98) ...
     @lru_cache(maxsize=32)
     def _get_env_cached(self, y_hash, smooth_factor=0):
         return self._get_env_impl(y_hash, smooth_factor)
     
     def _get_env(self, y, smooth_factor=0):
-        if len(y) == 1: return np.zeros(1) # Handle empty stems
         try:
             y_hash = hash(y.tobytes())
             return self._get_env_cached(y_hash, smooth_factor)
@@ -189,8 +169,7 @@ class MapGenerator:
 
     def _analyze_rhythm_composite(self):
         print("[GEN] Analyzing Composite Rhythm...")
-        # Include Piano/Guitar in rhythm detection for tighter sync
-        y_composite = self.y_drum + self.y_bass + (self.y_piano * 0.8) + (self.y_guitar * 0.8)
+        y_composite = self.y_drum + self.y_bass + (self.y_oth * 0.5)
         onset_env = librosa.onset.onset_strength(y=y_composite, sr=self.sr)
         tempo, beat_frames = librosa.beat.beat_track(onset_envelope=onset_env, sr=self.sr)
         beat_times = librosa.frames_to_time(beat_frames, sr=self.sr)
@@ -202,13 +181,10 @@ class MapGenerator:
 
     def _harvest_all(self):
         pool = []
-        # Harvest 6 Stems
-        if len(self.y_voc) > 1: pool.extend(self._harvest_stem_pyin(self.env_voc, self.y_voc, "vocal"))
-        if len(self.y_piano) > 1: pool.extend(self._harvest_stem_pyin(self.env_piano, self.y_piano, "piano"))
-        if len(self.y_guitar) > 1: pool.extend(self._harvest_stem_pyin(self.env_guitar, self.y_guitar, "guitar"))
-        if len(self.y_oth) > 1: pool.extend(self._harvest_stem_pyin(self.env_oth, self.y_oth, "other"))
-        if len(self.y_bass) > 1: pool.extend(self._harvest_stem_pyin(self.env_bass, self.y_bass, "bass"))
-        if len(self.y_drum) > 1: pool.extend(self._harvest_stem_pyin(self.env_drum, None, "drums"))
+        pool.extend(self._harvest_stem_pyin(self.env_voc, self.y_voc, "vocal"))
+        pool.extend(self._harvest_stem_pyin(self.env_oth, self.y_oth, "other"))
+        pool.extend(self._harvest_stem_pyin(self.env_bass, self.y_bass, "bass"))
+        pool.extend(self._harvest_stem_pyin(self.env_drum, None, "drums"))
         pool.sort(key=lambda x: x["time"])
         return pool
 
@@ -219,14 +195,11 @@ class MapGenerator:
         for n in pool:
             src = n["source"]
             n["score"] *= STEM_PRIORITIES.get(src, 1.0)
-            
-            # Contour Bonus (Melody movement)
-            if src not in ["drums", "other"]: # Don't contour boost background noise
+            if src != "drums":
                 last = last_midi_by_src.get(src, -1)
                 if last != -1 and abs(n["midi"] - last) > 0:
                     n["score"] *= 1.2 
                 last_midi_by_src[src] = n["midi"]
-            
             idx = (np.abs(beat_set - n["time"])).argmin()
             nearest = beat_set[idx]
             if abs(n["time"] - nearest) < 0.05:
@@ -234,42 +207,30 @@ class MapGenerator:
         return pool
 
     def _harvest_stem_pyin(self, env, y_audio, source_name):
-        if len(env) <= 1: return []
-
+        # Calculate BPM from beat times if not already available
         beat_times = self.data["beat_times"]
         bpm = 120
         if len(beat_times) > 1:
             bpm = 60.0 / np.mean(np.diff(beat_times))
         
+        # Debounce: Stricter for vocals to prevent flutter
         sixteenth_dur = 60.0 / bpm / 4.0
         wait_frames = int(sixteenth_dur * self.sr / 512)
-        
-        # Unique Debounce per Source
         if source_name == "vocal": wait_frames = max(wait_frames, 5)
-        elif source_name == "piano": wait_frames = max(wait_frames, 3) # Fast runs allowed
-        elif source_name == "guitar": wait_frames = max(wait_frames, 3)
         else: wait_frames = max(wait_frames, 2)
-        
         delta = 0.04
         if source_name == "drums": 
             delta = DRUM_ONSET_DELTA
             wait_frames = 2
-            
         onset_frames = librosa.util.peak_pick(env, pre_max=ONSET_PRE_MAX, post_max=ONSET_POST_MAX, 
                                               pre_avg=ONSET_PRE_AVG, post_avg=ONSET_POST_AVG, 
                                               delta=delta, wait=wait_frames)
-        
-        # Source Specific Thresholds
         min_score = 0.1
         if source_name == "other": min_score = 0.25 
-        if source_name == "piano": min_score = 0.15 
-        if source_name == "guitar": min_score = 0.15
-
         candidates = []
         for t in onset_frames:
             score = env[t]
             if score < min_score: continue 
-            
             midi = 0
             if source_name == "drums": midi = 36
             else:
@@ -279,16 +240,11 @@ class MapGenerator:
                 if start_samp < len(y_audio):
                     slice_y = y_audio[start_samp:end_samp]
                     if len(slice_y) >= 1024:
-                        # Instrument Specific Ranges
                         fmin, fmax = 60, 1000 
                         if source_name == "bass": fmin, fmax = 40, 400
-                        elif source_name == "piano": fmin, fmax = 27, 4000 # A0 to C8
-                        elif source_name == "guitar": fmin, fmax = 80, 1200
-                        
                         f0, _, _ = librosa.pyin(slice_y, fmin=fmin, fmax=fmax, sr=self.sr, frame_length=PYIN_FRAME_LENGTH)
                         f0 = f0[~np.isnan(f0)]
                         if len(f0) > 0: midi = int(round(librosa.hz_to_midi(np.median(f0))))
-            
             if midi == 0: continue
             candidates.append({ "time": librosa.frames_to_time(t, sr=self.sr), "midi": midi, "score": score, "source": source_name, "dur": 0.0 })
         return candidates
@@ -297,36 +253,73 @@ class MapGenerator:
         print(f"[GEN] Generating {diff_name}...")
         cfg = DIFF_CONFIGS[diff_name]
         target_density = GLOBAL_DENSITY_CAP[diff_name]
+        
+        # 1. SIEVE
         filtered_pool = self._integrated_sieve(self.master_pool.copy(), target_density)
+
+        # 2. QUANTIZE
         quantized_pool = self._quantize_strict(filtered_pool, self.data["beat_times"], cfg)
+        
+        # 3. LANE ALLOCATION
         poly_notes = self._allocate_lanes_poly(quantized_pool, cfg)
+        
+        # FIX 2: CONSOLIDATE & HOLDS
+        # This happens AFTER lanes are assigned so we know which notes are truly "connected"
         final_notes = self._consolidate_holds(poly_notes)
+        
         self._save_beatmap(final_notes, diff_name)
         return final_notes
 
     def _consolidate_holds(self, notes):
-        # ... (Same as V99) ...
+        """
+        Merges rapid-fire notes in the same lane/source.
+        If self.use_holds is True, creates Hold Notes.
+        If False, just deletes the spam (De-Jitter).
+        """
         if not notes: return []
+        
+        # Sort by time first
         notes.sort(key=lambda x: x["time"])
+        
         consolidated = []
-        active_stack = {} 
+        active_stack = {} # Key: (lane, source), Value: index in consolidated list
+        
         for n in notes:
             key = (n["lane"], n["source"])
+            
+            # Check if we can merge with the previous note in this lane
             if key in active_stack:
                 prev_idx = active_stack[key]
                 prev_note = consolidated[prev_idx]
+                
                 dt = n["time"] - prev_note["time"]
+                
+                # MERGE CONDITION:
+                # 1. Within window (0.25s)
+                # 2. Pitch is identical (OR logic allows for slight drift if you wanted)
                 if dt < HOLD_MERGE_WINDOW and prev_note["midi"] == n["midi"]:
+                    
+                    # Extension Logic
                     if self.use_holds:
+                        # Extend duration of previous note to reach this one
                         new_dur = (n["time"] - prev_note["time"]) + n.get("dur", 0)
                         prev_note["dur"] = max(prev_note["dur"], new_dur)
-                    continue 
+                    
+                    # If NOT using holds, we do nothing to prev_note duration.
+                    # BUT we effectively "absorb" the current note by NOT appending it to 'consolidated'.
+                    # This acts as the "Spam Filter".
+                    
+                    continue # Skip adding this note (it's merged)
+            
+            # If no merge, register this as the new active note for this lane
             consolidated.append(n)
             active_stack[key] = len(consolidated) - 1
+            
         return consolidated
 
+    # ... (Sieve, Quantize, and Lane Alloc same as V98) ...
+
     def _integrated_sieve(self, pool, target_nps):
-        # ... (Same as V99) ...
         duration = self.data["duration"]
         filtered = []
         window_size = 2.0
@@ -354,7 +347,6 @@ class MapGenerator:
         return filtered
 
     def _quantize_strict(self, pool, beat_times, cfg):
-        # ... (Same as V99) ...
         quantized = []
         allowed_grids = cfg["grids"]
         threshold = cfg.get("snap_threshold", 0.1)
@@ -374,7 +366,6 @@ class MapGenerator:
             if k not in groups: groups[k] = []
             groups[k].append(n)
         last_lane_center = lanes // 2
-        
         for t in sorted(groups.keys()):
             stack = groups[t]
             max_poly = 1 if not cfg["chords"] else 4
@@ -384,23 +375,15 @@ class MapGenerator:
             stack.sort(key=lambda x: x["midi"])
             count = len(stack)
             assigned_lanes = []
-            
-            # LANE MAPPING LOGIC (Updated for 6 stems)
             if count == 1:
                 n = stack[0]
                 ideal = 0
                 if n["source"] == "drums": 
                     ideal = int(lanes/2) if n["score"]>0.6 else 0
                 else: 
-                    # Default Range
                     r_min, r_max = VISUAL_RANGE_OTHER
-                    
-                    # Specific Ranges
                     if n["source"] == "vocal": r_min, r_max = VISUAL_RANGE_VOCAL
                     elif n["source"] == "bass": r_min, r_max = VISUAL_RANGE_BASS
-                    elif n["source"] == "piano": r_min, r_max = VISUAL_RANGE_PIANO
-                    elif n["source"] == "guitar": r_min, r_max = VISUAL_RANGE_GUITAR
-                    
                     norm = (n["midi"] - r_min) / (r_max - r_min)
                     norm = max(0.0, min(1.0, norm)) 
                     ideal = int(norm * (lanes-1))
@@ -419,7 +402,6 @@ class MapGenerator:
         return final_notes
 
     def _weighted_smart_snap(self, t, beats, allowed_grids, max_error_sec):
-        # ... (Same as V99) ...
         if len(beats) < 2: return t, True
         idx = (np.abs(beats - t)).argmin()
         closest_beat = beats[idx]
@@ -465,14 +447,11 @@ if __name__ == "__main__":
     parser.add_argument("--holds", action="store_true", help="Enable hold notes")
     args = parser.parse_args()
 
-    # Updated to look for 6 stems
     stems = {
         "vocals": os.path.join(args.folder, "vocals.wav"),
         "other":  os.path.join(args.folder, "other.wav"),
         "bass":   os.path.join(args.folder, "bass.wav"),
         "drums":  os.path.join(args.folder, "drums.wav"),
-        "piano":  os.path.join(args.folder, "piano.wav"),
-        "guitar": os.path.join(args.folder, "guitar.wav"),
     }
     
     gen = MapGenerator(stems, use_holds=args.holds)

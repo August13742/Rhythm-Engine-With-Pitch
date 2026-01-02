@@ -22,16 +22,14 @@ def main():
     
     # Step 1: Separate audio into stems (unless skipped or already exists)
     base_name = os.path.splitext(os.path.basename(args.audio_file))[0]
-    folder_path = os.path.join("stems", base_name)
+    folder_path = base_name
     
     # Check if stem files already exist
     required_stems = [
-        os.path.join(folder_path, "vocals.wav"),
-        os.path.join(folder_path, "other.wav"),
-        os.path.join(folder_path, "bass.wav"),
-        os.path.join(folder_path, "drums.wav"),
-        os.path.join(folder_path, "piano.wav"),
-        os.path.join(folder_path, "guitar.wav")
+        os.path.join(folder_path, f"{base_name}_vocals.wav"),
+        os.path.join(folder_path, f"{base_name}_other.wav"),
+        os.path.join(folder_path, f"{base_name}_bass.wav"),
+        os.path.join(folder_path, f"{base_name}_drums.wav")
     ]
     
     stems_exist = all(os.path.exists(stem) for stem in required_stems)
