@@ -13,6 +13,9 @@ dependencies = [
     "torch",
     "torchaudio",
     "torchvision", # Often required for shared kernels
+    "audio-separator>=0.40.0",
+    "onnxruntime-gpu>=1.23.2",
+    "huggingface-hub>=1.2.3",
 ]
 
 [[tool.uv.index]]

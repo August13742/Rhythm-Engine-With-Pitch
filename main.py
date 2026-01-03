@@ -14,6 +14,7 @@ def main():
     parser.add_argument("audio_file", help="Path to audio file")
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
+    parser.add_argument("--mode", choices=["high", "medium", "low"], default="high", help="Separation quality: high (3-pass SOTA), medium (2-pass), low (legacy)")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -42,9 +43,9 @@ def main():
             sys.exit(1)
         print("[VIS] Using existing stems...")
     elif stems_exist:
-        print("[VIS] Stems already exist, skipping Demucs...")
+        print("[VIS] Stems already exist, skipping separation...")
     else:
-        folder_path = separate_audio(args.audio_file)
+        folder_path = separate_audio(args.audio_file, mode=args.mode)
     
     # Step 2: Check for generated beatmaps (unless rebake flag is set)
     if not args.rebake:
