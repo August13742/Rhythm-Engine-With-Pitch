@@ -10,7 +10,7 @@ import argparse
 # ==========================================
 
 # HOLD CONFIGURATION
-MIN_HOLD_DURATION_SEC = 0.20   
+MIN_HOLD_DURATION_SEC = 0.15   
 MAX_HOLD_DURATION_SEC = 1.50   
 HOLD_ENERGY_DECAY     = 0.50   
 HOLD_GAP_BUFFER       = 0.10   # 100ms visual gap between Hold End and Next Note
@@ -196,17 +196,17 @@ class MapGenerator:
         if exists("bass"):
             pool.extend(self._harvest_melodic("bass", (40, 400), 0.2, can_hold=False))
         if exists("piano"):
-            pool.extend(self._harvest_melodic("piano", (27, 4000), 0.15, can_hold=False))
+            pool.extend(self._harvest_melodic("piano", (27, 4000), 0.1, can_hold=False))
         if exists("guitar"):
-            pool.extend(self._harvest_melodic("guitar", (80, 1200), 0.15, can_hold=False))
+            pool.extend(self._harvest_melodic("guitar", (80, 1200), 0.1, can_hold=False))
         if exists("vocals"):
-            pool.extend(self._harvest_melodic("vocals", (50, 1000), 0.08, can_hold=True))
+            pool.extend(self._harvest_melodic("vocals", (50, 1000), 0.06, can_hold=True))
         if exists("other"):
             # FIX: Melodic harvesting for Sax/Synth
             # Range (100, 1500) covers Tenor Sax low notes up to High Trumpet/Synth
             # Sensitivity 0.15 matches Piano/Guitar
             # can_hold=True because Saxophones sustain notes!
-            pool.extend(self._harvest_melodic("other", (100, 1500), 0.15, can_hold=True))
+            pool.extend(self._harvest_melodic("other", (100, 1500), 0.12, can_hold=True))
 
         return pool
 

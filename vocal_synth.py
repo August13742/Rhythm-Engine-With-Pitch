@@ -101,9 +101,13 @@ class VocalSynth:
         return 1.0 / np.sqrt(denom)
 
     @staticmethod
-    def gen_tone(midi_note, vowel='A', duration=0.15, sr=44100, profile_name="PURE_MIKU"):
+    def gen_tone(midi_note, vowel='A', duration=0.15, sr=44100, profile_name="POWER_RIN"):
+        # --- FIX 1: Enforce Minimum Duration ---
+        # Ensure the vocal is at least 0.45s (Tap length) so it sings clearly
+        duration = max(duration, 0.45)
+
         presets = VocalSynth.get_presets()
-        profile = presets.get(profile_name, presets["PURE_MIKU"])
+        profile = presets.get(profile_name, presets["POWER_RIN"])
         
         # 1. Setup
         f0 = 440.0 * (2.0 ** ((midi_note - 69) / 12.0))
@@ -146,7 +150,7 @@ class VocalSynth:
             breath_mod = 0.5 + 0.5 * np.cos(phase)
             wave += noise * breath_mod * profile.breathiness
 
-        # 5. Envelope (Duration Aware)
+        # 5. Envelope (Duration Aware & Robust)
         env = np.ones_like(t)
         atk = int(0.01 * sr)
         rel = int(0.05 * sr)
@@ -155,8 +159,8 @@ class VocalSynth:
         atk_len = min(atk, len(t))
         env[:atk_len] = np.linspace(0, 1, atk_len)
         
-        # Safe Release
-        # If the note is shorter than the release time, fade the whole thing out
+        # --- FIX 2: Safe Release ---
+        # Even if duration is very short, this prevents crashing/clicking
         if len(t) < rel:
             env[:] *= np.linspace(1, 0, len(t))
         else:
