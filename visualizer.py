@@ -73,7 +73,7 @@ class Visualizer:
             for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
                 print(f"[VIS] Generating {d}...")
                 self.beatmaps[d] = self.gen.generate(d)
-                duration = self.gen.data["duration"]
+                duration = self.gen.rhythm_data["duration"]
                 nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
                 from generator import DIFF_CONFIGS
                 lanes = DIFF_CONFIGS[d]["lanes"]
@@ -85,6 +85,35 @@ class Visualizer:
         self.vocal_bank = {}   # VOCALOID choir
         self.synth_banks = {}  # Stem-specific synths
         
+        # Use smart banks for vocals and other (only bake what's used)
+        vocal_bank_raw = SynthBank.gen_smart_vocal_bank(self.beatmaps)
+        other_bank_raw = SynthBank.gen_smart_other_bank(self.beatmaps)
+        
+        print(f"[VIS] Vocal bank has {len(vocal_bank_raw)} combinations")
+        if vocal_bank_raw:
+            for key in list(vocal_bank_raw.keys())[:3]:
+                print(f"[VIS]   Example: {key}, shape={vocal_bank_raw[key].shape}")
+        
+        print(f"[VIS] Other bank has {len(other_bank_raw)} combinations")
+        if other_bank_raw:
+            for key in list(other_bank_raw.keys())[:3]:
+                print(f"[VIS]   Example: {key}, shape={other_bank_raw[key].shape}")
+        
+        # Convert raw audio to pygame Sound objects
+        self.synth_banks["vocals"] = {}
+        for (midi, bucket), audio in vocal_bank_raw.items():
+            self.synth_banks["vocals"][(midi, bucket)] = pygame.sndarray.make_sound(
+                np.ascontiguousarray(audio)
+            )
+        self.vocal_bank = self.synth_banks["vocals"]
+        
+        self.synth_banks["other"] = {}
+        for (midi, bucket), audio in other_bank_raw.items():
+            self.synth_banks["other"][(midi, bucket)] = pygame.sndarray.make_sound(
+                np.stack([audio, audio], axis=1)
+            )
+        
+        # For other stems (drums, bass, piano, guitar), still generate all MIDI values with default duration
         for midi in range(24, 108):
             # Square wave (8-bit)
             square_audio = SynthBank.gen_square_tone(midi)
@@ -92,39 +121,29 @@ class Visualizer:
                 np.stack([square_audio, square_audio], axis=1)
             )
             
-            # Vocal (VOCALOID)
-            vocal_audio = SynthBank.gen_vocaloid_tone(midi)
-            self.vocal_bank[midi] = pygame.sndarray.make_sound(
-                np.stack([vocal_audio, vocal_audio], axis=1)
-            )
-            
-            # Stem-specific synths
-            self.synth_banks["vocals"] = self.synth_banks.get("vocals", {})
-            self.synth_banks["vocals"][midi] = self.vocal_bank[midi]
-            
+            # Stem-specific synths (drums, bass, piano, guitar with default durations)
             self.synth_banks["drums"] = self.synth_banks.get("drums", {})
+            drums_audio = SynthBank.gen_drums_tone_midi(midi)
             self.synth_banks["drums"][midi] = pygame.sndarray.make_sound(
-                np.stack([SynthBank.gen_drums_tone_midi(midi), SynthBank.gen_drums_tone_midi(midi)], axis=1)
+                np.stack([drums_audio, drums_audio], axis=1)
             )
             
             self.synth_banks["bass"] = self.synth_banks.get("bass", {})
+            bass_audio = SynthBank.gen_bass_tone(midi)
             self.synth_banks["bass"][midi] = pygame.sndarray.make_sound(
-                np.stack([SynthBank.gen_bass_tone(midi), SynthBank.gen_bass_tone(midi)], axis=1)
+                np.stack([bass_audio, bass_audio], axis=1)
             )
             
             self.synth_banks["piano"] = self.synth_banks.get("piano", {})
+            piano_audio = SynthBank.gen_piano_tone(midi)
             self.synth_banks["piano"][midi] = pygame.sndarray.make_sound(
-                np.stack([SynthBank.gen_piano_tone(midi), SynthBank.gen_piano_tone(midi)], axis=1)
+                np.stack([piano_audio, piano_audio], axis=1)
             )
             
             self.synth_banks["guitar"] = self.synth_banks.get("guitar", {})
+            guitar_audio = SynthBank.gen_guitar_tone(midi)
             self.synth_banks["guitar"][midi] = pygame.sndarray.make_sound(
-                np.stack([SynthBank.gen_guitar_tone(midi), SynthBank.gen_guitar_tone(midi)], axis=1)
-            )
-            
-            self.synth_banks["other"] = self.synth_banks.get("other", {})
-            self.synth_banks["other"][midi] = pygame.sndarray.make_sound(
-                np.stack([SynthBank.gen_other_tone(midi), SynthBank.gen_other_tone(midi)], axis=1)
+                np.stack([guitar_audio, guitar_audio], axis=1)
             )
         
         # 3. SETUP
@@ -161,25 +180,33 @@ class Visualizer:
                     if n["time"] <= curr:
                         sound = None
                         source = n.get("source", "other")
+                        midi = n["midi"]
+                        dur = n.get("dur", 0)
+                        bucket = SynthBank.get_bucket(dur)
                         
                         # --- SYNTH MODES ---
                         if self.mode == "classic":
                             # All square wave (pure 8-bit)
-                            sound = self.square_bank.get(n["midi"])
+                            sound = self.square_bank.get(midi)
                             
                         elif self.mode == "vocal":
-                            # VOCALOID vocals + square-wave 8-bit for others
+                            # VOCALOID vocals + default other synth for non-vocals (both with duration)
                             if source == "vocals":
-                                sound = self.vocal_bank.get(n["midi"])
+                                sound = self.synth_banks["vocals"].get((midi, bucket))
+                            elif source == "other":
+                                sound = self.synth_banks["other"].get((midi, bucket))
                             else:
-                                sound = self.square_bank.get(n["midi"])
+                                # Fallback to square wave if source is unknown
+                                sound = self.square_bank.get(midi)
                                 
                         elif self.mode == "experimental":
-                            # VOCALOID vocals + new stem-specific synths
+                            # VOCALOID vocals + stem-specific synths (vocals and other use smart banks with duration)
                             if source == "vocals":
-                                sound = self.vocal_bank.get(n["midi"])
+                                sound = self.synth_banks["vocals"].get((midi, bucket))
+                            elif source == "other":
+                                sound = self.synth_banks["other"].get((midi, bucket))
                             else:
-                                sound = self.synth_banks.get(source, {}).get(n["midi"])
+                                sound = self.synth_banks.get(source, {}).get(midi)
 
                         if sound: 
                             chan = pygame.mixer.find_channel()
@@ -193,6 +220,15 @@ class Visualizer:
                                 else:
                                     chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
                                 chan.play(sound)
+                        elif self.played_indices[target_diff] < 1:
+                            # Debug: show why sound wasn't found
+                            key = (midi, bucket)
+                            if source == "other":
+                                print(f"[VIS] No sound found for other: key={key} in bank={list(self.synth_banks['other'].keys())[:3]}")
+                            elif source == "vocals":
+                                print(f"[VIS] No sound found for vocals: key={key} in bank={list(self.synth_banks['vocals'].keys())[:3]}")
+                            else:
+                                print(f"[VIS] No sound found for {source}: midi={midi}")
                         
                         self.played_indices[target_diff] += 1
                         idx += 1

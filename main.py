@@ -15,6 +15,7 @@ def main():
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
     parser.add_argument("--mode", choices=["high", "medium", "low"], default="high", help="Separation quality: high (3-pass SOTA), medium (2-pass), low (legacy)")
+    parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -58,6 +59,9 @@ def main():
         
         if all(os.path.exists(bm) for bm in beatmap_files):
             print("[VIS] Generated beatmaps found, skipping generation...")
+            if args.generate_only:
+                print("[VIS] Generate-only mode, exiting...")
+                return
             print("[VIS] Launching visualizer...")
             visualizer = Visualizer(args.audio_file, folder_path, skip_generation=True)
             visualizer.run()
@@ -67,6 +71,13 @@ def main():
         print("[VIS] Rebake flag set, forcing beatmap regeneration...")
     
     # Step 3: Visualize with stems (will generate beatmaps)
+    if args.generate_only:
+        print("\n[VIS] Generate-only mode: generating beatmaps...")
+        visualizer = Visualizer(args.audio_file, folder_path)
+        visualizer.run()
+        print("[VIS] Beatmaps generated successfully!")
+        return
+    
     print("\n[VIS] Launching visualizer...")
     visualizer = Visualizer(args.audio_file, folder_path)
     visualizer.run()

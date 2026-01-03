@@ -1,11 +1,9 @@
 import numpy as np
 import librosa
-import scipy.signal
 import scipy.ndimage
 import json
 import os
 import argparse
-from functools import lru_cache
 
 # ==========================================
 #        V105: "THE UNCHAINED SYMPHONY"
@@ -31,7 +29,7 @@ BASE_PRIORITIES = {
 }
 
 STEM_VOLUMES = {
-    "vocals": 1.0,
+    "vocals": 1.25,
     "drums":  0.9,
     "bass":   0.85,
     "piano":  0.9,
@@ -44,7 +42,7 @@ VISUAL_RANGES = {
     "piano":  (48, 88),
     "guitar": (40, 76),
     "bass":   (36, 60),
-    "other":  (0, 127)
+    "other":  (48, 88)
 }
 
 # REFINED DIFFICULTY
@@ -75,7 +73,6 @@ class MapGenerator:
         self._preprocess_audio()
 
         self.rhythm_data = self._analyze_rhythm_composite()
-        self.data = self.rhythm_data 
         
         raw_pool = self._harvest_all()
         self.master_pool = self._score_and_sort(raw_pool, self.rhythm_data["beat_times"])
@@ -151,8 +148,12 @@ class MapGenerator:
                 y_h, y_p = librosa.effects.hpss(y)
                 self.envs[name] = librosa.onset.onset_strength(y=y_p, sr=SR)
             elif name == "other":
-                env = librosa.onset.onset_strength(y=y, sr=SR)
-                self.envs[name] = scipy.ndimage.gaussian_filter1d(env, sigma=2)
+                # WAS: self.envs[name] = scipy.ndimage.gaussian_filter1d(env, sigma=2)
+                # FIX: Treat it like a lead instrument (sharp attacks)
+                self.envs[name] = librosa.onset.onset_strength(y=y, sr=SR)
+                # Normalize
+                if self.envs[name].max() > 0:
+                     self.envs[name] /= self.envs[name].max()
             else:
                 self.envs[name] = librosa.onset.onset_strength(y=y, sr=SR)
             
@@ -199,9 +200,13 @@ class MapGenerator:
         if exists("guitar"):
             pool.extend(self._harvest_melodic("guitar", (80, 1200), 0.15, can_hold=False))
         if exists("vocals"):
-            pool.extend(self._harvest_melodic("vocals", (60, 1000), 0.25, can_hold=True))
+            pool.extend(self._harvest_melodic("vocals", (50, 1000), 0.08, can_hold=True))
         if exists("other"):
-            pool.extend(self._harvest_onsets("other", 60, can_hold=False, sensitivity=0.3))
+            # FIX: Melodic harvesting for Sax/Synth
+            # Range (100, 1500) covers Tenor Sax low notes up to High Trumpet/Synth
+            # Sensitivity 0.15 matches Piano/Guitar
+            # can_hold=True because Saxophones sustain notes!
+            pool.extend(self._harvest_melodic("other", (100, 1500), 0.15, can_hold=True))
 
         return pool
 
@@ -219,31 +224,126 @@ class MapGenerator:
             notes.append({ "time": t, "midi": forced_midi, "dur": dur, "source": source, "score": env[f] })
         return notes
 
+    # def _harvest_melodic(self, source, freq_range, sensitivity, can_hold=False):
+    #     if source not in self.envs: return []
+    #     env = self.envs[source]
+    #     y = self.audio_data[source]
+        
+    #     frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sensitivity, wait=5)
+        
+    #     notes = []
+    #     for f in frames:
+    #         t = librosa.frames_to_time(f, sr=SR)
+    #         if env[f] < sensitivity: continue
+
+    #         start_samp = int(f * HOP_LENGTH)
+    #         end_samp = start_samp + PYIN_FRAME_LENGTH
+    #         if end_samp > len(y): break
+            
+    #         chunk = y[start_samp:end_samp]
+    #         f0, _, _ = librosa.pyin(chunk, fmin=freq_range[0], fmax=freq_range[1], sr=SR, frame_length=PYIN_FRAME_LENGTH)
+    #         f0 = f0[~np.isnan(f0)]
+            
+    #         midi = 0
+    #         if len(f0) > 0:
+    #             midi = int(round(librosa.hz_to_midi(np.median(f0))))
+    #         else:
+    #             continue
+
+    #         dur = 0.0
+    #         if can_hold and self.use_holds:
+    #             dur = self._measure_signal_duration(source, f)
+
+    #         notes.append({
+    #             "time": t, "midi": midi, "dur": dur, "source": source,
+    #             "score": env[f] * (1.2 if can_hold else 1.0)
+    #         })
+    #     return notes
     def _harvest_melodic(self, source, freq_range, sensitivity, can_hold=False):
         if source not in self.envs: return []
         env = self.envs[source]
         y = self.audio_data[source]
         
+        is_vocal = (source == "vocals")
+        
+        # 1. RANGE CONFIGURATION
+        # Widen vocal range significantly (E1 to D6) to allow dynamics
+        if is_vocal:
+            safe_fmin = 40   # Deep Bass (E1)
+            safe_fmax = 1200 # Soprano High (D6)
+        else:
+            safe_fmin = freq_range[0]
+            safe_fmax = freq_range[1]
+
         frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sensitivity, wait=5)
         
         notes = []
+        last_midi = None
+        last_time = -999.0
+        
+        # 2. PHRASE THRESHOLD
+        # If notes are closer than this, we assume they are connected
+        PHRASE_THRESHOLD = 0.5 
+
         for f in frames:
             t = librosa.frames_to_time(f, sr=SR)
             if env[f] < sensitivity: continue
 
-            start_samp = int(f * HOP_LENGTH)
+            # === TRANSIENT OFFSET ===
+            # Vocals still get the 30ms offset to skip consonants.
+            # Instruments (Piano/Bass) keep 0ms for tight rhythmic accuracy.
+            offset_samples = int(0.030 * SR) if is_vocal else 0
+            
+            start_samp = int(f * HOP_LENGTH) + offset_samples
             end_samp = start_samp + PYIN_FRAME_LENGTH
             if end_samp > len(y): break
             
             chunk = y[start_samp:end_samp]
-            f0, _, _ = librosa.pyin(chunk, fmin=freq_range[0], fmax=freq_range[1], sr=SR, frame_length=PYIN_FRAME_LENGTH)
-            f0 = f0[~np.isnan(f0)]
             
-            midi = 0
-            if len(f0) > 0:
-                midi = int(round(librosa.hz_to_midi(np.median(f0))))
-            else:
-                continue
+            # === PITCH DETECTION ===
+            f0, voiced_flag, voiced_prob = librosa.pyin(
+                chunk, 
+                fmin=safe_fmin, 
+                fmax=safe_fmax, 
+                sr=SR, 
+                frame_length=PYIN_FRAME_LENGTH,
+                fill_na=np.nan
+            )
+            
+            # === GATING (Refined) ===
+            # Vocals: Strict (0.45) to remove breath/noise.
+            # Insts:  Mild (0.20) to filter faint harmonics but keep the notes.
+            gate = 0.45 if is_vocal else 0.20
+            valid_f0 = f0[voiced_prob > gate]
+            
+            valid_f0 = valid_f0[~np.isnan(valid_f0)]
+            if len(valid_f0) == 0: continue
+
+            hz = np.median(valid_f0)
+            midi = int(round(librosa.hz_to_midi(hz)))
+
+            # === UNIVERSAL TEMPORAL BIAS ===
+            # Applies to ALL instruments now, but with a safer threshold.
+            if last_midi is not None:
+                dt = t - last_time
+                if dt < PHRASE_THRESHOLD:
+                    dist_raw = abs(midi - last_midi)
+                    
+                    # TRIGGER CONDITION: > 13 Semitones
+                    # Old code was > 7, which flattened 1-octave jumps (12).
+                    # Now we allow 1-octave jumps. We only correct massive 
+                    # errors like +19 (Octave+5th) or +24.
+                    if dist_raw > 12: 
+                        lower_oct = midi - 12
+                        upper_oct = midi + 12
+                        dist_lower = abs(lower_oct - last_midi)
+                        dist_upper = abs(upper_oct - last_midi)
+                        
+                        # Only shift if it brings us MUCH closer (smooth step)
+                        if dist_lower < 7 and dist_lower < dist_raw:
+                            midi = lower_oct
+                        elif dist_upper < 7 and dist_upper < dist_raw:
+                            midi = upper_oct
 
             dur = 0.0
             if can_hold and self.use_holds:
@@ -253,6 +353,10 @@ class MapGenerator:
                 "time": t, "midi": midi, "dur": dur, "source": source,
                 "score": env[f] * (1.2 if can_hold else 1.0)
             })
+            
+            last_midi = midi
+            last_time = t
+            
         return notes
 
     def _measure_signal_duration(self, source, start_frame):
@@ -333,19 +437,28 @@ class MapGenerator:
 
     def _quantize(self, pool, beats, grids):
         quantized = []
+        # SOFT SNAP STRENGTH: 0.0 = Raw Audio, 1.0 = Robotic Grid, 0.5 = Natural Correction
+        SNAP_STRENGTH = 0.5 
+
         for n in pool:
             t = n["time"]
             if len(beats) < 2: 
                 quantized.append(n)
                 continue
+            
+            # Find nearest beat window
             idx = (np.abs(beats - t)).argmin()
             beat_t = beats[idx]
+            
+            # Calculate beat duration (tempo) at this specific moment
             if idx < len(beats) - 1: beat_dur = beats[idx+1] - beat_t
             elif idx > 0: beat_dur = beat_t - beats[idx-1]
             else: beat_dur = 0.5
             
             best_t = t
             min_err = 100.0
+            
+            # Find best grid slot
             for div in grids:
                 step = beat_dur / (div / 4)
                 offset = t - beat_t
@@ -356,16 +469,20 @@ class MapGenerator:
                     min_err = err
                     best_t = candidate
             
-            # Strict Snap: If it's close, move it. If far, discard (or keep raw)
-            # Keeping raw can cause off-beat clutter, so we enforce grid discipline for gameplay
+            # LOGIC CHANGE: Magnetic Snap
+            # Only snap if we are fairly close (<60ms), but don't snap 100%
             if min_err < 0.06:
-                n["time"] = best_t
+                # Interpolate between Raw Time (t) and Grid Time (best_t)
+                new_time = t + (best_t - t) * SNAP_STRENGTH
+                n["time"] = new_time
+                
+                # Quantize duration to look clean, but keep start time semi-loose
                 if n["dur"] > 0:
                     eighth = beat_dur / 2
                     n["dur"] = round(n["dur"] / eighth) * eighth
-                quantized.append(n)
+            
+            quantized.append(n)
         
-        # Re-sort after quantization (timestamps changed)
         quantized.sort(key=lambda x: x["time"])
         return quantized
 
@@ -495,7 +612,7 @@ class MapGenerator:
                 lane = assigned[i] if i < len(assigned) else i % lanes
                 
                 base_vol = STEM_VOLUMES.get(n["source"], 0.8)
-                vol = base_vol * (0.7 + (n["score"] * 0.3))
+                vol = np.clip(base_vol * (0.7 + (n["score"] * 0.3)), 0.0, 1.0)
                 
                 final_notes.append({
                     "time": n["time"],
