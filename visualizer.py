@@ -14,6 +14,16 @@ from synthbank import SynthBank
 # --- CONFIG ---
 COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "INSANE": (255, 50, 50) }
 
+# Stem Colors (for different note sources)
+STEM_COLORS = {
+    "vocals": (255, 100, 255),      # Magenta - VOCALOID
+    "drums": (100, 255, 255),       # Cyan
+    "bass": (150, 100, 50),         # Brown/Gold
+    "piano": (100, 200, 255),       # Light Blue
+    "guitar": (150, 255, 100),      # Light Green
+    "other": (200, 200, 200)        # Light Gray
+}
+
 class Visualizer:
     def __init__(self, audio_path, folder_path, skip_generation=False):
         # Initialize Mixer
@@ -49,7 +59,7 @@ class Visualizer:
                 with open(beatmap_file, 'r') as f:
                     self.beatmaps[d] = json.load(f)
                 
-                duration = librosa.get_duration(filename=os.path.join(folder_path, f"{base_name}_drums.wav"))
+                duration = librosa.get_duration(path=os.path.join(folder_path, "drums.wav"))
                 nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
                 from generator import DIFF_CONFIGS
                 lanes = DIFF_CONFIGS[d]["lanes"]
@@ -71,19 +81,55 @@ class Visualizer:
         
         # 2. SYNTHESIZE BANKS
         print("[VIS] Synthesizing Sound Banks...")
-        self.sfx_bank = {}    # Classic Square
-        self.vocal_bank = {}  # Choir
+        self.square_bank = {}  # 8-bit square wave
+        self.vocal_bank = {}   # VOCALOID choir
+        self.synth_banks = {}  # Stem-specific synths
         
         for midi in range(24, 108):
-            sfx_audio = SynthBank.gen_square_tone(midi)
-            self.sfx_bank[midi] = pygame.sndarray.make_sound(np.stack([sfx_audio, sfx_audio], axis=1))
+            # Square wave (8-bit)
+            square_audio = SynthBank.gen_square_tone(midi)
+            self.square_bank[midi] = pygame.sndarray.make_sound(
+                np.stack([square_audio, square_audio], axis=1)
+            )
             
-            vocal_audio = SynthBank.gen_vocal_tone(midi)
-            self.vocal_bank[midi] = pygame.sndarray.make_sound(np.stack([vocal_audio, vocal_audio], axis=1))
+            # Vocal (VOCALOID)
+            vocal_audio = SynthBank.gen_vocaloid_tone(midi)
+            self.vocal_bank[midi] = pygame.sndarray.make_sound(
+                np.stack([vocal_audio, vocal_audio], axis=1)
+            )
+            
+            # Stem-specific synths
+            self.synth_banks["vocals"] = self.synth_banks.get("vocals", {})
+            self.synth_banks["vocals"][midi] = self.vocal_bank[midi]
+            
+            self.synth_banks["drums"] = self.synth_banks.get("drums", {})
+            self.synth_banks["drums"][midi] = pygame.sndarray.make_sound(
+                np.stack([SynthBank.gen_drums_tone_midi(midi), SynthBank.gen_drums_tone_midi(midi)], axis=1)
+            )
+            
+            self.synth_banks["bass"] = self.synth_banks.get("bass", {})
+            self.synth_banks["bass"][midi] = pygame.sndarray.make_sound(
+                np.stack([SynthBank.gen_bass_tone(midi), SynthBank.gen_bass_tone(midi)], axis=1)
+            )
+            
+            self.synth_banks["piano"] = self.synth_banks.get("piano", {})
+            self.synth_banks["piano"][midi] = pygame.sndarray.make_sound(
+                np.stack([SynthBank.gen_piano_tone(midi), SynthBank.gen_piano_tone(midi)], axis=1)
+            )
+            
+            self.synth_banks["guitar"] = self.synth_banks.get("guitar", {})
+            self.synth_banks["guitar"][midi] = pygame.sndarray.make_sound(
+                np.stack([SynthBank.gen_guitar_tone(midi), SynthBank.gen_guitar_tone(midi)], axis=1)
+            )
+            
+            self.synth_banks["other"] = self.synth_banks.get("other", {})
+            self.synth_banks["other"][midi] = pygame.sndarray.make_sound(
+                np.stack([SynthBank.gen_other_tone(midi), SynthBank.gen_other_tone(midi)], axis=1)
+            )
         
         # 3. SETUP
         pygame.mixer.music.load(audio_path)
-        self.mode = "harmonic" # Default to the nice mix
+        self.mode = "vocal"  # Default to vocal mode
         self.music_vol = 0.2
         self.sfx_vol = 0.8
         pygame.mixer.music.set_volume(self.music_vol)
@@ -114,25 +160,26 @@ class Visualizer:
                     n = notes[idx]
                     if n["time"] <= curr:
                         sound = None
+                        source = n.get("source", "other")
                         
-                        # --- MODE SELECTOR ---
+                        # --- SYNTH MODES ---
                         if self.mode == "classic":
-                            # All Square
-                            sound = self.sfx_bank.get(n["midi"])
+                            # All square wave (pure 8-bit)
+                            sound = self.square_bank.get(n["midi"])
                             
                         elif self.mode == "vocal":
-                            # Vocals=Choir, Others=Square (High Contrast)
-                            if n["source"] == "vocal":
+                            # VOCALOID vocals + square-wave 8-bit for others
+                            if source == "vocals":
                                 sound = self.vocal_bank.get(n["midi"])
                             else:
-                                sound = self.sfx_bank.get(n["midi"])
+                                sound = self.square_bank.get(n["midi"])
                                 
-                        elif self.mode == "harmonic":
-                            # Vocals=Choir, Others=Soft Sine (Pleasant Mix)
-                            if n["source"] == "vocal":
+                        elif self.mode == "experimental":
+                            # VOCALOID vocals + new stem-specific synths
+                            if source == "vocals":
                                 sound = self.vocal_bank.get(n["midi"])
                             else:
-                                sound = self.sfx_bank.get(n["midi"])
+                                sound = self.synth_banks.get(source, {}).get(n["midi"])
 
                         if sound: 
                             chan = pygame.mixer.find_channel()
@@ -140,8 +187,8 @@ class Visualizer:
                                 v = n.get("vol", 1.0) * self.sfx_vol
                                 l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
                                 
-                                # Vocals centered in vocal modes
-                                if n["source"] == "vocal" and self.mode != "classic":
+                                # Vocals centered
+                                if source == "vocals" and self.mode != "classic":
                                     chan.set_volume(v, v)
                                 else:
                                     chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)
@@ -189,7 +236,7 @@ class Visualizer:
             pygame.display.flip()
 
     def _cycle_mode(self):
-        modes = ["classic", "vocal", "harmonic"]
+        modes = ["classic", "vocal", "experimental"]
         curr_idx = modes.index(self.mode)
         self.mode = modes[(curr_idx + 1) % len(modes)]
         print(f"[VIS] Mode switched to: {self.mode.upper()}")
@@ -237,15 +284,13 @@ class Visualizer:
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
                 
-                # Visuals
-                if n.get("source") == "vocal":
-                    note_color = (255, 100, 255) 
-                elif n.get("source") == "drums":
-                    note_color = (100, 255, 255) 
-                elif n.get("source") == "bass":
-                    note_color = (150, 100, 50) 
-                else:
-                    note_color = base_c 
+                # Get stem-specific color
+                source = n.get("source", "other")
+                note_color = STEM_COLORS.get(source, (200, 200, 200))
+                
+                # Dim if not selected
+                if not is_selected:
+                    note_color = (note_color[0]//2, note_color[1]//2, note_color[2]//2)
 
                 pygame.draw.rect(self.screen, note_color, (x+2, y-10, lane_w-4, 20))
         

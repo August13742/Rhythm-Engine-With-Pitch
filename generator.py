@@ -5,558 +5,568 @@ import scipy.ndimage
 import json
 import os
 import argparse
-from numba import jit
 from functools import lru_cache
 
 # ==========================================
-#        V102: "THE ADAPTIVE CONDUCTOR"
+#        V105: "THE UNCHAINED SYMPHONY"
 # ==========================================
 
-HPSS_CONFIG = { 
-    "vocal": 2.0, 
-    "other": 3.0, 
-    "bass": 1.5, 
-    "drums": 3.5,
-    "piano": 2.0, 
-    "guitar": 2.5 
-}
+# HOLD CONFIGURATION
+MIN_HOLD_DURATION_SEC = 0.20   
+MAX_HOLD_DURATION_SEC = 1.50   
+HOLD_ENERGY_DECAY     = 0.50   
+HOLD_GAP_BUFFER       = 0.10   # 100ms visual gap between Hold End and Next Note
 
-VOCAL_SMOOTH_FACTOR = 1
+# MIXING
+VOCAL_MASKING_STRENGTH = 0.7 
+VOCAL_SOLO_BOOST       = 1.3 
 
-GLOBAL_DENSITY_CAP = {
-    "EASY":   1.5,
-    "NORMAL": 3.5,
-    "HARD":   6.0, 
-    "INSANE": 8.0 
-}
-
-# BASE PRIORITIES
-# These are defaults. If Vocals are missing, these get promoted.
-DEFAULT_PRIORITIES = {
-    "vocal":  1.3,
+BASE_PRIORITIES = {
+    "vocals": 1.4,  
+    "drums":  1.2,
+    "bass":   1.1,
     "piano":  1.1,
     "guitar": 1.1,
-    "drums":  1.0,
-    "bass":   0.8,
     "other":  0.6
 }
 
-CROSS_STEM_DEBOUNCE = 0.04 
-
-# DYNAMIC MIXING
-VOCAL_MASKING_STRENGTH = 0.7
-VOCAL_SOLO_BOOST = 1.3
-
 STEM_VOLUMES = {
-    "vocal":  1.0,
+    "vocals": 1.0,
+    "drums":  0.9,
+    "bass":   0.85,
     "piano":  0.9,
     "guitar": 0.85,
-    "other":  0.6,
-    "bass":   0.8,
-    "drums":  0.7 
+    "other":  0.6
 }
 
-# VISUAL MAPPING
-VISUAL_RANGE_VOCAL  = (48, 84) 
-VISUAL_RANGE_PIANO  = (48, 96) 
-VISUAL_RANGE_GUITAR = (40, 76) 
-VISUAL_RANGE_OTHER  = (48, 84)
-VISUAL_RANGE_BASS   = (36, 60) 
+VISUAL_RANGES = {
+    "vocals": (48, 84),
+    "piano":  (48, 88),
+    "guitar": (40, 76),
+    "bass":   (36, 60),
+    "other":  (0, 127)
+}
 
+# REFINED DIFFICULTY
+# Polyphony = How many notes can happen at once (Chords)
 DIFF_CONFIGS = {
-    "EASY":   { "lanes": 4, "grids": [4], "chords": False, "snap_threshold": 0.10 },
-    "NORMAL": { "lanes": 4, "grids": [4, 8], "chords": True, "snap_threshold": 0.08 },
-    "HARD":   { "lanes": 4, "grids": [4, 8, 12, 16], "chords": True, "snap_threshold": 0.05 },
-    "INSANE": { "lanes": 4, "grids": [4, 8, 12, 16, 24], "chords": True, "snap_threshold": 1.0 },
+    "EASY":   { "lanes": 4, "grids": [4],       "poly": 1, "density_cap": 2.0 },
+    "NORMAL": { "lanes": 4, "grids": [4, 8],    "poly": 2, "density_cap": 4.0 },
+    "HARD":   { "lanes": 4, "grids": [4, 8, 16],"poly": 3, "density_cap": 7.0 },
+    "INSANE": { "lanes": 4, "grids": [4, 8, 12, 16, 24], "poly": 4, "density_cap": 14.0 },
 }
 
-# Constants
+SR = 44100
 PYIN_FRAME_LENGTH = 4096 
-ONSET_PRE_MAX = 3
-ONSET_POST_MAX = 3
-ONSET_PRE_AVG = 3
-ONSET_POST_AVG = 3
-DRUM_ONSET_DELTA = 0.2
-HOLD_MERGE_WINDOW = 0.25 
+HOP_LENGTH = 512
 
 class MapGenerator:
     def __init__(self, stems_path, use_holds=True):
-        print(f"[GEN] V102 Initializing (Holds: {use_holds})...")
-        self.sr = 44100
+        print(f"[GEN] V105 Initializing (Strict Holds: {use_holds})...")
         self.stems_path = stems_path
         self.use_holds = use_holds
         
-        # 1. LOAD MANIFEST & AUDIO
-        # We need to load strictly to handle the 1s dummy files correctly
         self.manifest = self._load_manifest(stems_path)
         self.audio_data = self._smart_load_stems(stems_path)
+        self.priorities = self._calculate_dynamic_priorities()
         
-        # Assign to convenient handles
-        self.y_voc = self.audio_data["vocals"]
-        self.y_oth = self.audio_data["other"]
-        self.y_bass = self.audio_data["bass"]
-        self.y_drum = self.audio_data["drums"]
-        self.y_piano = self.audio_data["piano"]
-        self.y_guitar = self.audio_data["guitar"]
-
-        # 2. ADAPTIVE HIERARCHY
-        # If Vocals are silent, promote instruments to Protagonist status
-        self.priorities = DEFAULT_PRIORITIES.copy()
-        if not self.manifest.get("vocals", {}).get("exists", False):
-            print("[GEN] Instrumental Track Detected! Promoting Piano & Guitar.")
-            self.priorities["piano"] = 1.3
-            self.priorities["guitar"] = 1.3
-            # Disable masking (since there is no vocal to mask against)
-            global VOCAL_MASKING_STRENGTH
-            VOCAL_MASKING_STRENGTH = 1.0 
-
-        # 3. ANALYZE VOCAL PRESENCE
-        # Only if vocals actually exist
-        if self.manifest.get("vocals", {}).get("exists", False):
-            print("[GEN] Analyzing Vocal Presence...")
-            self.vocal_rms = self._calculate_rms(self.y_voc)
-            
-            # BLEED REMOVAL
-            print("[GEN] Cleaning Vocal Bleed...")
-            backing_mix = self.y_oth + self.y_bass + self.y_drum + self.y_piano + self.y_guitar
-            self.y_voc = self._clean_vocal_bleed(self.y_voc, backing_mix)
-        else:
-            self.vocal_rms = np.zeros(1)
-
-        # 4. HPSS & ENVELOPE (Selective Processing)
-        # We only process stems that are marked as existing in the manifest
         self.envs = {}
-        self.hpss_stems = {}
-        
-        print("[GEN] Processing Active Stems...")
-        for stem_name in ["vocals", "bass", "drums", "piano", "guitar", "other"]:
-            if self.manifest.get(stem_name, {}).get("exists", False):
-                self._process_stem(stem_name)
-            else:
-                # Assign dummy envelopes for logic safety
-                self.envs[stem_name] = np.zeros(1)
+        self.rms_curves = {} 
+        self._preprocess_audio()
 
-        # 5. RHYTHM & HARVEST
-        self.data = self._analyze_rhythm_composite()
+        self.rhythm_data = self._analyze_rhythm_composite()
+        self.data = self.rhythm_data 
+        
         raw_pool = self._harvest_all()
-        self.master_pool = self._score_with_priority(raw_pool, self.data["beat_times"])
+        self.master_pool = self._score_and_sort(raw_pool, self.rhythm_data["beat_times"])
         print(f"[GEN] Master Pool Ready: {len(self.master_pool)} notes")
 
     def _load_manifest(self, stems_path):
-        # Try to find manifest in the same folder as vocals
         folder = os.path.dirname(stems_path["vocals"])
         manifest_path = os.path.join(folder, "stems_manifest.json")
         if os.path.exists(manifest_path):
             with open(manifest_path, 'r') as f:
                 return json.load(f)
-        # Fallback if no manifest (assume everything exists)
-        return {k: {"exists": True, "is_silent": False} for k in stems_path.keys()}
+        return {k: {"exists": True, "is_silent": False, "peak_energy": 1.0} for k in stems_path.keys()}
 
     def _smart_load_stems(self, paths):
-        """
-        Loads all stems, determines the Max Duration, and pads everyone to match.
-        This prevents numpy errors when adding a 1s silent file to a 3m song.
-        """
         loaded = {}
         max_len = 0
-        
-        # Pass 1: Load and find max length
         print("[GEN] Loading Audio into Memory...")
+        
         for name, path in paths.items():
-            if os.path.exists(path):
-                # We check manifest to see if we should treat it as real audio
-                info = self.manifest.get(name, {"is_silent": False})
-                
-                if info["is_silent"]:
-                    # It's a dummy file. Don't load it yet, we will generate zeros later.
-                    loaded[name] = None
-                else:
-                    y, _ = librosa.load(path, sr=self.sr)
-                    loaded[name] = y
-                    if len(y) > max_len: max_len = len(y)
+            info = self.manifest.get(name, {"is_silent": False})
+            if os.path.exists(path) and not info.get("is_silent", False):
+                y, _ = librosa.load(path, sr=SR, mono=True)
+                loaded[name] = y
+                if len(y) > max_len: max_len = len(y)
             else:
                 loaded[name] = None
+        
+        if max_len == 0: raise ValueError("Error: No valid audio found in stems.")
 
-        if max_len == 0: raise ValueError("No valid audio stems found!")
-
-        # Pass 2: Pad/Generate
         final_audio = {}
-        for name, data in loaded.items():
+        for name in paths.keys():
+            data = loaded.get(name)
             if data is None:
                 final_audio[name] = np.zeros(max_len, dtype=np.float32)
+            elif len(data) < max_len:
+                padded = np.zeros(max_len, dtype=np.float32)
+                padded[:len(data)] = data
+                final_audio[name] = padded
             else:
-                # Pad if slightly shorter (e.g. mp3/wav conversion drift)
-                if len(data) < max_len:
-                    padded = np.zeros(max_len, dtype=np.float32)
-                    padded[:len(data)] = data
-                    final_audio[name] = padded
-                else:
-                    final_audio[name] = data
-        
+                final_audio[name] = data
         return final_audio
 
-    def _process_stem(self, name):
-        # HPSS Separation
-        y = self.audio_data[name]
-        margin = HPSS_CONFIG.get(name, 2.0)
+    def _calculate_dynamic_priorities(self):
+        p = BASE_PRIORITIES.copy()
+        m = self.manifest
+
+        vocal_weak = not m["vocals"].get("exists", False) or m["vocals"].get("peak_energy", 0) < 0.1
+        drums_weak = not m["drums"].get("exists", False) or m["drums"].get("peak_energy", 0) < 0.1
         
-        if name == "drums":
-            # Drums: Percussive focus
-            _, y_processed = librosa.effects.hpss(y, margin=margin)
-            self.hpss_stems[name] = y_processed
-            self.envs[name] = self._get_env(y_processed)
-        else:
-            # Melodic: Harmonic focus
-            y_processed, _ = librosa.effects.hpss(y, margin=margin)
-            self.hpss_stems[name] = y_processed
-            smooth = VOCAL_SMOOTH_FACTOR if name == "vocals" else 0
-            self.envs[name] = self._get_env(y_processed, smooth_factor=smooth)
+        if vocal_weak:
+            p["piano"]  = 1.3
+            p["guitar"] = 1.3
+            p["bass"]   = 1.2 
+        if drums_weak:
+            p["bass"]  = 1.3
+            p["piano"] = 1.2
+        return p
+
+    def _preprocess_audio(self):
+        for name, y in self.audio_data.items():
+            if not self.manifest.get(name, {}).get("exists", False):
+                self.envs[name] = np.zeros(1)
+                self.rms_curves[name] = np.zeros(1)
+                continue
+
+            rms = librosa.feature.rms(y=y, frame_length=1024, hop_length=HOP_LENGTH)[0]
+            if rms.max() > 0: rms /= rms.max()
+            self.rms_curves[name] = rms
+
+            if name in ["piano", "guitar"]:
+                self.envs[name] = librosa.onset.onset_strength(y=y, sr=SR)
+            elif name == "drums":
+                y_h, y_p = librosa.effects.hpss(y)
+                self.envs[name] = librosa.onset.onset_strength(y=y_p, sr=SR)
+            elif name == "other":
+                env = librosa.onset.onset_strength(y=y, sr=SR)
+                self.envs[name] = scipy.ndimage.gaussian_filter1d(env, sigma=2)
+            else:
+                self.envs[name] = librosa.onset.onset_strength(y=y, sr=SR)
+            
+            if self.envs[name].max() > 0:
+                self.envs[name] /= self.envs[name].max()
 
     def _analyze_rhythm_composite(self):
-        print("[GEN] Analyzing Composite Rhythm...")
-        # Add tracks only if they have energy
-        y_composite = self.y_drum.copy()
+        m = self.manifest
+        ref_track = self.audio_data["drums"] if len(self.audio_data["drums"]) > 0 else self.audio_data["vocals"]
+        y_comp = np.zeros_like(ref_track)
         
-        if self.manifest["bass"]["exists"]: y_composite += self.y_bass
-        if self.manifest["piano"]["exists"]: y_composite += (self.y_piano * 0.8)
-        if self.manifest["guitar"]["exists"]: y_composite += (self.y_guitar * 0.8)
+        def add_layer(name, weight):
+            if m[name]["exists"] and m[name]["peak_energy"] > 0.05:
+                y_comp[:] += self.audio_data[name] * weight
+
+        add_layer("drums", 1.0)
+        add_layer("bass", 0.9)
         
-        onset_env = librosa.onset.onset_strength(y=y_composite, sr=self.sr)
-        tempo, beat_frames = librosa.beat.beat_track(onset_envelope=onset_env, sr=self.sr)
-        beat_times = librosa.frames_to_time(beat_frames, sr=self.sr)
+        if m["drums"].get("peak_energy", 0) < 0.2:
+            add_layer("piano", 1.2)
+            add_layer("guitar", 1.2)
+        else:
+            add_layer("piano", 0.5)
+            add_layer("guitar", 0.5)
+
+        onset_env = librosa.onset.onset_strength(y=y_comp, sr=SR)
+        tempo, beat_frames = librosa.beat.beat_track(onset_envelope=onset_env, sr=SR)
+        beat_times = librosa.frames_to_time(beat_frames, sr=SR)
         
-        bpm = 120
-        if len(beat_times) > 1:
-            bpm = 60.0 / np.mean(np.diff(beat_times))
-        print(f"[GEN] Detected BPM (Composite): {bpm:.1f}")
-        return { "beat_times": beat_times, "duration": librosa.get_duration(y=self.y_drum, sr=self.sr) }
+        duration = librosa.get_duration(y=ref_track, sr=SR)
+        return { "beat_times": beat_times, "duration": duration }
 
     def _harvest_all(self):
         pool = []
-        # Only harvest active stems
-        if self.manifest["vocals"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["vocals"], self.y_voc, "vocal"))
-        if self.manifest["piano"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["piano"], self.audio_data["piano"], "piano")) # Use raw audio for pYIN pitch
-        if self.manifest["guitar"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["guitar"], self.audio_data["guitar"], "guitar"))
-        if self.manifest["other"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["other"], self.audio_data["other"], "other"))
-        if self.manifest["bass"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["bass"], self.audio_data["bass"], "bass"))
-        if self.manifest["drums"]["exists"]: 
-            pool.extend(self._harvest_stem_pyin(self.envs["drums"], None, "drums"))
-        
-        pool.sort(key=lambda x: x["time"])
+        m = self.manifest
+        def exists(key): return m.get(key, {}).get("exists", False) and not m.get(key, {}).get("is_silent", False)
+
+        if exists("drums"):
+            pool.extend(self._harvest_onsets("drums", 36, can_hold=False, sensitivity=0.25))
+        if exists("bass"):
+            pool.extend(self._harvest_melodic("bass", (40, 400), 0.2, can_hold=False))
+        if exists("piano"):
+            pool.extend(self._harvest_melodic("piano", (27, 4000), 0.15, can_hold=False))
+        if exists("guitar"):
+            pool.extend(self._harvest_melodic("guitar", (80, 1200), 0.15, can_hold=False))
+        if exists("vocals"):
+            pool.extend(self._harvest_melodic("vocals", (60, 1000), 0.25, can_hold=True))
+        if exists("other"):
+            pool.extend(self._harvest_onsets("other", 60, can_hold=False, sensitivity=0.3))
+
         return pool
 
-    def _score_with_priority(self, pool, beat_times):
+    def _harvest_onsets(self, source, forced_midi, can_hold, sensitivity):
+        if source not in self.envs: return []
+        env = self.envs[source]
+        frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sensitivity, wait=4)
+        
+        notes = []
+        for f in frames:
+            t = librosa.frames_to_time(f, sr=SR)
+            dur = 0.0
+            if can_hold and self.use_holds:
+                dur = self._measure_signal_duration(source, f)
+            notes.append({ "time": t, "midi": forced_midi, "dur": dur, "source": source, "score": env[f] })
+        return notes
+
+    def _harvest_melodic(self, source, freq_range, sensitivity, can_hold=False):
+        if source not in self.envs: return []
+        env = self.envs[source]
+        y = self.audio_data[source]
+        
+        frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sensitivity, wait=5)
+        
+        notes = []
+        for f in frames:
+            t = librosa.frames_to_time(f, sr=SR)
+            if env[f] < sensitivity: continue
+
+            start_samp = int(f * HOP_LENGTH)
+            end_samp = start_samp + PYIN_FRAME_LENGTH
+            if end_samp > len(y): break
+            
+            chunk = y[start_samp:end_samp]
+            f0, _, _ = librosa.pyin(chunk, fmin=freq_range[0], fmax=freq_range[1], sr=SR, frame_length=PYIN_FRAME_LENGTH)
+            f0 = f0[~np.isnan(f0)]
+            
+            midi = 0
+            if len(f0) > 0:
+                midi = int(round(librosa.hz_to_midi(np.median(f0))))
+            else:
+                continue
+
+            dur = 0.0
+            if can_hold and self.use_holds:
+                dur = self._measure_signal_duration(source, f)
+
+            notes.append({
+                "time": t, "midi": midi, "dur": dur, "source": source,
+                "score": env[f] * (1.2 if can_hold else 1.0)
+            })
+        return notes
+
+    def _measure_signal_duration(self, source, start_frame):
+        if source not in self.rms_curves: return 0.0
+        rms = self.rms_curves[source]
+        if start_frame >= len(rms): return 0.0
+        
+        peak_energy = rms[start_frame]
+        threshold = peak_energy * HOLD_ENERGY_DECAY
+        
+        current_frame = start_frame + 1
+        max_dist = int(MAX_HOLD_DURATION_SEC * SR / HOP_LENGTH)
+        max_frame = min(len(rms), start_frame + max_dist)
+        
+        while current_frame < max_frame:
+            if rms[current_frame] < threshold:
+                break
+            current_frame += 1
+            
+        dur_frames = current_frame - start_frame
+        dur_sec = librosa.frames_to_time(dur_frames, sr=SR)
+        if dur_sec < MIN_HOLD_DURATION_SEC: return 0.0
+        return dur_sec
+
+    def _get_vocal_energy(self, t):
+        if "vocals" not in self.rms_curves: return 0.0
+        frame = int(t * SR / HOP_LENGTH)
+        rms = self.rms_curves["vocals"]
+        if frame < len(rms): return rms[frame]
+        return 0.0
+
+    def _score_and_sort(self, pool, beat_times):
         if not pool: return []
-        beat_set = np.array(beat_times)
-        last_midi_by_src = {}
+        beat_arr = np.array(beat_times)
         
         for n in pool:
-            src = n["source"]
-            t = n["time"]
+            n["score"] *= self.priorities.get(n["source"], 1.0)
             
-            # 1. Base Priority (Using Adaptive Priorities)
-            n["score"] *= self.priorities.get(src, 1.0)
+            if self.manifest["vocals"]["exists"]:
+                voc_energy = self._get_vocal_energy(n["time"])
+                if n["source"] in ["piano", "guitar", "other"]:
+                    if voc_energy > 0.2:
+                        n["score"] *= VOCAL_MASKING_STRENGTH
+                    else:
+                        n["score"] *= VOCAL_SOLO_BOOST
+
+            if len(beat_arr) > 0:
+                idx = (np.abs(beat_arr - n["time"])).argmin()
+                nearest = beat_arr[idx]
+                dist = abs(n["time"] - nearest)
+                if dist < 0.05: n["score"] *= 1.3
+                elif dist < 0.10: n["score"] *= 1.1
             
-            # 2. THE CONDUCTOR
-            voc_energy = self._get_vocal_presence_at_time(t)
-            
-            if src in ["piano", "guitar"]:
-                if voc_energy > 0.2: 
-                    n["score"] *= VOCAL_MASKING_STRENGTH
-                else:
-                    n["score"] *= VOCAL_SOLO_BOOST
-            
-            if src == "other" and voc_energy > 0.1:
-                n["score"] *= 0.5
-            
-            # 3. Contour Bonus
-            if src not in ["drums", "other"]:
-                last = last_midi_by_src.get(src, -1)
-                if last != -1 and abs(n["midi"] - last) > 0:
-                    n["score"] *= 1.2 
-                last_midi_by_src[src] = n["midi"]
-            
-            # 4. Grid Gravity
-            idx = (np.abs(beat_set - t)).argmin()
-            nearest = beat_set[idx]
-            if abs(t - nearest) < 0.05:
-                n["score"] *= 1.15 
-                
+            if n["dur"] > 0: n["score"] *= 1.1
+
+        pool.sort(key=lambda x: x["time"])
         return pool
-
-    # ... (Rest of the methods: _clean_vocal_bleed, _get_env, _harvest_stem_pyin, generate, etc. remain unchanged from V101)
-    
-    def _get_vocal_presence_at_time(self, t):
-        if len(self.vocal_rms) <= 1: return 0.0
-        hop_len = 512
-        frame = int(t * self.sr / hop_len)
-        if 0 <= frame < len(self.vocal_rms):
-            return self.vocal_rms[frame]
-        return 0.0
-    
-    def _clean_vocal_bleed(self, y_voc, y_backing):
-        frame_len = 2048
-        hop_len = 512
-        if len(y_voc) < frame_len: return y_voc
-        rms_voc = librosa.feature.rms(y=y_voc, frame_length=frame_len, hop_length=hop_len)[0]
-        rms_back = librosa.feature.rms(y=y_backing, frame_length=frame_len, hop_length=hop_len)[0]
-        mask = np.ones_like(rms_voc)
-        bleed_indices = (rms_back > 0.05) & (rms_voc < (rms_back * 0.15))
-        silence_indices = (rms_voc < 0.005)
-        mask[bleed_indices] = 0.0
-        mask[silence_indices] = 0.0
-        mask = scipy.signal.medfilt(mask, kernel_size=5)
-        mask_upsampled = scipy.ndimage.zoom(mask, len(y_voc) / len(mask), order=1)
-        if len(mask_upsampled) < len(y_voc):
-            mask_upsampled = np.pad(mask_upsampled, (0, len(y_voc) - len(mask_upsampled)))
-        elif len(mask_upsampled) > len(y_voc):
-            mask_upsampled = mask_upsampled[:len(y_voc)]
-        return y_voc * mask_upsampled
-
-    @lru_cache(maxsize=32)
-    def _get_env_cached(self, y_hash, smooth_factor=0):
-        return self._get_env_impl(y_hash, smooth_factor)
-    
-    def _get_env(self, y, smooth_factor=0):
-        if len(y) <= 1: return np.zeros(1)
-        try:
-            y_hash = hash(y.tobytes())
-            return self._get_env_cached(y_hash, smooth_factor)
-        except:
-            return self._get_env_impl(y, smooth_factor)
-    
-    def _get_env_impl(self, y, smooth_factor=0):
-        env = librosa.onset.onset_strength(y=y, sr=self.sr)
-        if env.max() > 0: env /= env.max()
-        if smooth_factor > 0:
-            env = scipy.signal.medfilt(env, kernel_size=smooth_factor)
-        return env
-
-    def _harvest_stem_pyin(self, env, y_audio, source_name):
-        if len(env) <= 1: return []
-        beat_times = self.data["beat_times"]
-        bpm = 120
-        if len(beat_times) > 1:
-            bpm = 60.0 / np.mean(np.diff(beat_times))
-        
-        sixteenth_dur = 60.0 / bpm / 4.0
-        wait_frames = int(sixteenth_dur * self.sr / 512)
-        
-        if source_name == "vocal": wait_frames = max(wait_frames, 5)
-        elif source_name == "piano": wait_frames = max(wait_frames, 3)
-        elif source_name == "guitar": wait_frames = max(wait_frames, 3)
-        else: wait_frames = max(wait_frames, 2)
-        
-        delta = 0.04
-        if source_name == "drums": 
-            delta = DRUM_ONSET_DELTA
-            wait_frames = 2
-            
-        onset_frames = librosa.util.peak_pick(env, pre_max=ONSET_PRE_MAX, post_max=ONSET_POST_MAX, 
-                                              pre_avg=ONSET_PRE_AVG, post_avg=ONSET_POST_AVG, 
-                                              delta=delta, wait=wait_frames)
-        
-        min_score = 0.1
-        if source_name == "other": min_score = 0.3 
-        if source_name == "piano": min_score = 0.15 
-        if source_name == "guitar": min_score = 0.15
-
-        candidates = []
-        for t in onset_frames:
-            score = env[t]
-            if score < min_score: continue 
-            midi = 0
-            if source_name == "drums": midi = 36
-            else:
-                time_sec = librosa.frames_to_time(t, sr=self.sr)
-                start_samp = int((time_sec + 0.02) * self.sr)
-                end_samp = start_samp + PYIN_FRAME_LENGTH 
-                if start_samp < len(y_audio):
-                    slice_y = y_audio[start_samp:end_samp]
-                    if len(slice_y) >= 1024:
-                        fmin, fmax = 60, 1000 
-                        if source_name == "bass": fmin, fmax = 40, 400
-                        elif source_name == "piano": fmin, fmax = 27, 4000
-                        elif source_name == "guitar": fmin, fmax = 80, 1200
-                        f0, _, _ = librosa.pyin(slice_y, fmin=fmin, fmax=fmax, sr=self.sr, frame_length=PYIN_FRAME_LENGTH)
-                        f0 = f0[~np.isnan(f0)]
-                        if len(f0) > 0: midi = int(round(librosa.hz_to_midi(np.median(f0))))
-            if midi == 0: continue
-            candidates.append({ "time": librosa.frames_to_time(t, sr=self.sr), "midi": midi, "score": score, "source": source_name, "dur": 0.0 })
-        return candidates
 
     def generate(self, diff_name):
         print(f"[GEN] Generating {diff_name}...")
         cfg = DIFF_CONFIGS[diff_name]
-        target_density = GLOBAL_DENSITY_CAP[diff_name]
-        filtered_pool = self._integrated_sieve(self.master_pool.copy(), target_density)
-        quantized_pool = self._quantize_strict(filtered_pool, self.data["beat_times"], cfg)
-        poly_notes = self._allocate_lanes_poly(quantized_pool, cfg)
-        final_notes = self._consolidate_holds(poly_notes)
-        self._save_beatmap(final_notes, diff_name)
-        return final_notes
+        
+        # 1. Quantize FIRST (Align chords)
+        quantized = self._quantize(self.master_pool, self.rhythm_data["beat_times"], cfg["grids"])
+        
+        # 2. Cluster Sieve (Handle Chords & Density)
+        filtered = self._apply_cluster_sieve(quantized, cfg)
+        
+        # 3. Map Lanes
+        mapped = self._allocate_lanes(filtered, cfg)
+        
+        # 4. Resolve Overlaps (Hold Truncation)
+        cleaned = self._resolve_overlaps(mapped)
+        
+        # 5. Save
+        self._save_beatmap(cleaned, diff_name)
+        return cleaned
 
-    def _consolidate_holds(self, notes):
-        if not notes: return []
-        notes.sort(key=lambda x: x["time"])
-        consolidated = []
-        active_stack = {} 
-        for n in notes:
-            key = (n["lane"], n["source"])
-            if key in active_stack:
-                prev_idx = active_stack[key]
-                prev_note = consolidated[prev_idx]
-                dt = n["time"] - prev_note["time"]
-                if dt < HOLD_MERGE_WINDOW and prev_note["midi"] == n["midi"]:
-                    if self.use_holds:
-                        new_dur = (n["time"] - prev_note["time"]) + n.get("dur", 0)
-                        prev_note["dur"] = max(prev_note["dur"], new_dur)
-                    continue 
-            consolidated.append(n)
-            active_stack[key] = len(consolidated) - 1
-        return consolidated
-
-    def _integrated_sieve(self, pool, target_nps):
-        duration = self.data["duration"]
-        filtered = []
-        window_size = 2.0
-        cursor = 0.0
-        while cursor < duration:
-            window_notes = [n for n in pool if cursor <= n["time"] < cursor + window_size]
-            if not window_notes:
-                cursor += window_size
-                continue
-            window_notes.sort(key=lambda x: x["score"], reverse=True)
-            budget = int(target_nps * window_size)
-            accepted_in_window = []
-            for note in window_notes:
-                if len(accepted_in_window) >= budget: break
-                is_clashing = False
-                for acc in accepted_in_window:
-                    dt = abs(note["time"] - acc["time"])
-                    if dt < CROSS_STEM_DEBOUNCE:
-                        is_clashing = True
-                        break
-                if not is_clashing: accepted_in_window.append(note)
-            filtered.extend(accepted_in_window)
-            cursor += window_size
-        filtered.sort(key=lambda x: x["time"])
-        return filtered
-
-    def _quantize_strict(self, pool, beat_times, cfg):
+    def _quantize(self, pool, beats, grids):
         quantized = []
-        allowed_grids = cfg["grids"]
-        threshold = cfg.get("snap_threshold", 0.1)
         for n in pool:
-            snapped_t, success = self._weighted_smart_snap(n["time"], beat_times, allowed_grids, threshold)
-            if success:
-                n["time"] = snapped_t
+            t = n["time"]
+            if len(beats) < 2: 
                 quantized.append(n)
+                continue
+            idx = (np.abs(beats - t)).argmin()
+            beat_t = beats[idx]
+            if idx < len(beats) - 1: beat_dur = beats[idx+1] - beat_t
+            elif idx > 0: beat_dur = beat_t - beats[idx-1]
+            else: beat_dur = 0.5
+            
+            best_t = t
+            min_err = 100.0
+            for div in grids:
+                step = beat_dur / (div / 4)
+                offset = t - beat_t
+                snapped_offset = round(offset / step) * step
+                candidate = beat_t + snapped_offset
+                err = abs(candidate - t)
+                if err < min_err:
+                    min_err = err
+                    best_t = candidate
+            
+            # Strict Snap: If it's close, move it. If far, discard (or keep raw)
+            # Keeping raw can cause off-beat clutter, so we enforce grid discipline for gameplay
+            if min_err < 0.06:
+                n["time"] = best_t
+                if n["dur"] > 0:
+                    eighth = beat_dur / 2
+                    n["dur"] = round(n["dur"] / eighth) * eighth
+                quantized.append(n)
+        
+        # Re-sort after quantization (timestamps changed)
+        quantized.sort(key=lambda x: x["time"])
         return quantized
 
-    def _allocate_lanes_poly(self, notes, cfg):
+    def _apply_cluster_sieve(self, pool, cfg):
+        # Groups simultaneous notes into chords and enforces caps
+        final = []
+        duration = self.rhythm_data["duration"]
+        max_poly = cfg["poly"]
+        density_cap = cfg["density_cap"]
+        
+        # Group by Time (Quantized)
+        clusters = {}
+        for n in pool:
+            t = n["time"]
+            if t not in clusters: clusters[t] = []
+            clusters[t].append(n)
+            
+        sorted_times = sorted(clusters.keys())
+        
+        # Sliding Window for Density Cap
+        window = 1.0
+        accepted_clusters = []
+        
+        # We assume clusters are points in time. 
+        # We simple-sieve the clusters based on the highest score in that cluster.
+        
+        # 1. Prune Clusters (Polyphony Limit)
+        pruned_clusters = []
+        for t in sorted_times:
+            stack = clusters[t]
+            stack.sort(key=lambda x: x["score"], reverse=True)
+            # Take top N notes for this chord
+            stack = stack[:max_poly]
+            # Average score of the chord
+            avg_score = sum(n["score"] for n in stack) / len(stack)
+            pruned_clusters.append({ "time": t, "notes": stack, "score": avg_score })
+            
+        # 2. Density Sieve on Clusters
+        # We select which *beats* happen, not just individual notes.
+        cursor = 0.0
+        idx = 0
+        while cursor < duration:
+            candidates = []
+            while idx < len(pruned_clusters) and pruned_clusters[idx]["time"] < cursor + window:
+                if pruned_clusters[idx]["time"] >= cursor:
+                    candidates.append(pruned_clusters[idx])
+                idx += 1
+                
+            if candidates:
+                # How many beats allowed in this second?
+                # Use density_cap. If cap is 5, we allow 5 clusters (roughly).
+                # (Actually, density_cap usually means NOTES per second. 
+                #  If we have chords, 5 notes might be just 2 chords.)
+                #  Let's stick to NOTES per second for the cap.
+                
+                candidates.sort(key=lambda x: x["score"], reverse=True)
+                
+                current_notes = 0
+                for cluster in candidates:
+                    count = len(cluster["notes"])
+                    if current_notes + count <= density_cap:
+                        accepted_clusters.append(cluster)
+                        current_notes += count
+                        
+            cursor += window
+            
+        # Unpack clusters back to flat list
+        final = []
+        for c in accepted_clusters:
+            final.extend(c["notes"])
+            
+        final.sort(key=lambda x: x["time"])
+        return final
+
+    def _allocate_lanes(self, notes, cfg):
         lanes = cfg["lanes"]
         final_notes = []
+        
+        # Regroup (since sieve output is flat)
         groups = {}
         for n in notes:
-            k = round(n["time"], 3)
-            if k not in groups: groups[k] = []
-            groups[k].append(n)
-        last_lane_center = lanes // 2
-        
-        for t in sorted(groups.keys()):
-            stack = groups[t]
-            max_poly = 1 if not cfg["chords"] else 4
-            if len(stack) > max_poly:
-                stack.sort(key=lambda x: x["score"], reverse=True)
-                stack = stack[:max_poly]
-            stack.sort(key=lambda x: x["midi"])
-            count = len(stack)
-            assigned_lanes = []
+            t = n["time"]
+            if t not in groups: groups[t] = []
+            groups[t].append(n)
             
-            if count == 1:
+        last_lane = 0
+        times = sorted(groups.keys())
+        
+        for t in times:
+            stack = groups[t]
+            # Polyphony already handled in sieve, but safety check
+            stack.sort(key=lambda x: x["midi"]) # Low pitch left, High right
+            
+            assigned = []
+            
+            # Smart Assignment
+            if len(stack) == 1:
+                # Single Note Logic
                 n = stack[0]
-                ideal = 0
-                if n["source"] == "drums": 
-                    ideal = int(lanes/2) if n["score"]>0.6 else 0
-                else: 
-                    r_min, r_max = VISUAL_RANGE_OTHER
-                    if n["source"] == "vocal": r_min, r_max = VISUAL_RANGE_VOCAL
-                    elif n["source"] == "bass": r_min, r_max = VISUAL_RANGE_BASS
-                    elif n["source"] == "piano": r_min, r_max = VISUAL_RANGE_PIANO
-                    elif n["source"] == "guitar": r_min, r_max = VISUAL_RANGE_GUITAR
-                    
+                src = n["source"]
+                if src == "drums":
+                    ideal = 1 if n["score"] > 0.8 else (0 if last_lane > 1 else 3)
+                elif src == "other":
+                    ideal = 0 if last_lane >= 2 else 3
+                else:
+                    r_min, r_max = VISUAL_RANGES.get(src, (48, 84))
                     norm = (n["midi"] - r_min) / (r_max - r_min)
-                    norm = max(0.0, min(1.0, norm)) 
-                    ideal = int(norm * (lanes-1))
-                if ideal == last_lane_center: ideal = (ideal + 1) % lanes
-                assigned_lanes.append(ideal)
+                    norm = max(0.0, min(1.0, norm))
+                    ideal = int(norm * (lanes - 1))
+                
+                if ideal == last_lane: # jitter to avoid straight lines
+                    ideal = (ideal + 1) % lanes
+                assigned.append(ideal)
+                
             else:
-                for i in range(count):
-                    l = int(i * (lanes-1) / (count-1))
-                    assigned_lanes.append(l)
+                # Chord Logic: Spread evenly
+                # e.g. 2 notes -> 0, 3 or 1, 2
+                count = len(stack)
+                if count == 2:
+                    assigned = [0, 3] if last_lane in [1, 2] else [1, 2]
+                elif count == 3:
+                    assigned = [0, 1, 3] if last_lane == 2 else [0, 2, 3]
+                else:
+                    assigned = [0, 1, 2, 3][:count]
+
             for i, n in enumerate(stack):
-                n["lane"] = assigned_lanes[i]
+                lane = assigned[i] if i < len(assigned) else i % lanes
+                
                 base_vol = STEM_VOLUMES.get(n["source"], 0.8)
-                n["vol"] = base_vol * (0.7 + (n["score"] * 0.3))
-                final_notes.append(n)
-            if assigned_lanes: last_lane_center = int(np.mean(assigned_lanes))
+                vol = base_vol * (0.7 + (n["score"] * 0.3))
+                
+                final_notes.append({
+                    "time": n["time"],
+                    "lane": lane,
+                    "dur": n["dur"],
+                    "type": "hold" if n["dur"] > 0 else "tap",
+                    "midi": n["midi"],
+                    "score": n["score"],
+                    "source": n["source"],
+                    "vol": vol
+                })
+                last_lane = int(np.mean(assigned))
         return final_notes
 
-    def _weighted_smart_snap(self, t, beats, allowed_grids, max_error_sec):
-        if len(beats) < 2: return t, True
-        idx = (np.abs(beats - t)).argmin()
-        closest_beat = beats[idx]
-        if idx < len(beats)-1: beat_dur = beats[idx+1] - beats[idx]
-        else: beat_dur = beats[idx] - beats[idx-1]
-        best_time = t
-        min_error = float('inf')
-        for div in allowed_grids:
-            step = beat_dur / (div / 4) 
-            ticks = round((t - closest_beat) / step)
-            candidate = closest_beat + (ticks * step)
-            error = abs(candidate - t)
-            penalty = 1.0 
-            if div >= 16: penalty = 1.2
-            if div >= 24: penalty = 1.5
-            weighted_error = error * penalty
-            if weighted_error < min_error:
-                min_error = weighted_error
-                best_time = candidate
-        if min_error > max_error_sec: return t, False
-        return best_time, True
+    def _resolve_overlaps(self, notes):
+        notes.sort(key=lambda x: x["time"])
+        lane_queues = {i: [] for i in range(4)}
+        for n in notes:
+            lane_queues[n["lane"]].append(n)
+            
+        cleaned = []
+        for lane, lane_notes in lane_queues.items():
+            if not lane_notes: continue
+            
+            for i in range(len(lane_notes)):
+                current = lane_notes[i]
+                
+                if current["type"] == "hold":
+                    if i + 1 < len(lane_notes):
+                        next_note = lane_notes[i+1]
+                        hold_end = current["time"] + current["dur"]
+                        
+                        # Check collision with buffer
+                        limit = next_note["time"] - HOLD_GAP_BUFFER
+                        
+                        if hold_end > limit:
+                            # Truncate
+                            new_dur = limit - current["time"]
+                            if new_dur < 0.1: # Too short, make tap
+                                current["dur"] = 0
+                                current["type"] = "tap"
+                            else:
+                                current["dur"] = new_dur
+                
+                cleaned.append(current)
+                
+        cleaned.sort(key=lambda x: x["time"])
+        return cleaned
 
     def _save_beatmap(self, notes, diff_name):
         vocals_path = self.stems_path["vocals"]
         base_dir = os.path.dirname(vocals_path)
         base_name = os.path.basename(base_dir)
         output_file = os.path.join(base_dir, f"{base_name}_{diff_name}.json")
-        serializable_notes = []
-        for note in notes:
-            new_note = note.copy()
-            for k, v in new_note.items():
-                if isinstance(v, (np.integer, np.int64, np.int32)): new_note[k] = int(v)
-                elif isinstance(v, (np.floating, np.float64, np.float32)): new_note[k] = float(v)
-                elif isinstance(v, (bool, np.bool_)): new_note[k] = bool(v)
-            serializable_notes.append(new_note)
+        
+        out = []
+        for n in notes:
+            out.append({
+                "time": float(f"{n['time']:.3f}"),
+                "lane": int(n["lane"]),
+                "dur": float(f"{n['dur']:.3f}"),
+                "type": n["type"],
+                "midi": int(n["midi"]),
+                "score": float(f"{n['score']:.3f}"),
+                "source": n["source"],
+                "vol": float(f"{n['vol']:.3f}")
+            })
+            
         with open(output_file, 'w') as f:
-            json.dump(serializable_notes, f, indent=2)
-        print(f"[GEN] Saved {diff_name} beatmap to {output_file}")
-    
-    def _calculate_rms(self, y):
-        # Calculate RMS for dynamic scoring lookups
-        frame_len = 2048
-        hop_len = 512
-        if len(y) < frame_len: return np.zeros(1)
-        rms = librosa.feature.rms(y=y, frame_length=frame_len, hop_length=hop_len)[0]
-        # Normalize roughly 0-1
-        if rms.max() > 0: rms /= rms.max()
-        return rms
+            json.dump(out, f, indent=2)
+        print(f"[GEN] Saved {len(out)} notes to {output_file}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -573,6 +583,11 @@ if __name__ == "__main__":
         "guitar": os.path.join(args.folder, "guitar.wav"),
     }
     
-    gen = MapGenerator(stems, use_holds=args.holds)
-    for diff in ["EASY", "NORMAL", "HARD", "INSANE"]:
-        gen.generate(diff)
+    try:
+        gen = MapGenerator(stems, use_holds=args.holds)
+        for diff in ["EASY", "NORMAL", "HARD", "INSANE"]:
+            gen.generate(diff)
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"[GEN] Critical Error: {e}")
