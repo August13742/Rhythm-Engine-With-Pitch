@@ -14,7 +14,6 @@ import argparse
 # ==========================================
 #        TUNING & CONFIGURATION
 # ==========================================
-GLOBAL_OFFSET = -0.015  # -15ms correction for Demucs/AI artifacts
 TUNING = {
     "audio": {
         "sr": 44100,
@@ -24,8 +23,8 @@ TUNING = {
         "pyin_fmax": 1200,  # Soprano D6
     },
     "holds": {
-        "min_dur": 0.75,
-        "max_dur": 1.50,
+        "min_dur": 0.25,
+        "max_dur": 5.00,
         "energy_decay": 0.50,
         "gap_buffer": 0.10,
     },
@@ -115,7 +114,6 @@ class MapGenerator:
         self.stems_path = stems_path
         self.use_holds = use_holds
         self.cfg = TUNING
-        self.global_offset = GLOBAL_OFFSET
         self.rms_curves = {} 
         
         self.manifest = self._load_manifest(stems_path)
@@ -441,8 +439,6 @@ class MapGenerator:
         notes = []
         for f in frames:
             t = librosa.frames_to_time(f, sr=sr)
-            t += self.global_offset 
-            if t < 0: t = 0.0
             dur = 0.0
             if can_hold and self.use_holds:
                 dur = self._measure_signal_duration(source, f)
@@ -450,162 +446,130 @@ class MapGenerator:
         return notes
 
     def _harvest_melodic(self, source, freq_range, sensitivity, can_hold=False):
-        import torch
-        import torchcrepe
-        
-        # --- 1. PRE-CHECK ---
         if source not in self.envs: return []
         env = self.envs[source]
+        y = self.audio_data[source]
+        sr = self.cfg["audio"]["sr"]
+        hop = self.cfg["audio"]["hop_length"]
+        pyin_len = self.cfg["audio"]["pyin_frame"]
         
-        # --- 2. PREPARE AUDIO FOR CREPE ---
-        # Resample entire track to 16k for Crepe
-        y_original = self.audio_data[source]
-        sr_original = self.cfg["audio"]["sr"]
-        
-        if sr_original != 16000:
-            y_16k = librosa.resample(y_original, orig_sr=sr_original, target_sr=16000)
-        else:
-            y_16k = y_original
-
-        device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        audio_tensor = torch.tensor(y_16k, device=device).unsqueeze(0)
-
-        # Standard Crepe Settings
-        HOP_LENGTH = 160  # 160 / 16000 = 0.010 seconds (10ms) resolution
-        fmin, fmax = freq_range
-        fmin = max(50, fmin)
-        fmax = min(2000, fmax)
-
-        print(f"[GEN] Precision Scan (TorchCrepe) on {source}...")
-
-        # Run Model
-        pitch, periodicity = torchcrepe.predict(
-            audio_tensor, 
-            sample_rate=16000, 
-            hop_length=HOP_LENGTH, 
-            fmin=fmin, 
-            fmax=fmax, 
-            model='full', 
-            batch_size=2048, 
-            device=device,
-            return_periodicity=True,
-            decoder=torchcrepe.decode.viterbi
-        )
-
-        pitch_np = pitch.squeeze(0).cpu().numpy()
-        conf_np = periodicity.squeeze(0).cpu().numpy()
-
-        # --- 3. ONSET DETECTION (Rhythm) ---
         is_vocal = (source == "vocals")
+        safe_fmin = 40 if is_vocal else freq_range[0]
+        safe_fmax = 1200 if is_vocal else freq_range[1]
+
         wait_time = 2 if is_vocal else 5
-        
-        # Peak Picking: Finds the "Hit" moments in the original envelope
         frames = librosa.util.peak_pick(env, pre_max=2, post_max=2, pre_avg=2, post_avg=2, delta=sensitivity, wait=wait_time)
         
         notes = []
         
-        # Diarization State
+        # [V121] VIRTUAL VOICE ANCHORS
         voices = [None, None] 
         last_times = [-999.0, -999.0]
         PHRASE_THRESHOLD = 0.25
 
-        # LOOKAHEAD WINDOW
-        # If peak_pick finds a "t" sound at 1.00s, the vowel might start at 1.03s.
-        # We search 50ms (5 frames) forward to find the pitch.
-        SEARCH_WINDOW = 5 
-
         for f in frames:
-            # Time of the onset (attack)
-            t = librosa.frames_to_time(f, sr=sr_original)
-            
-            # Remove Global Offset here (It was making things worse)
-            if t < 0: continue
+            t = librosa.frames_to_time(f, sr=sr)
             if env[f] < sensitivity: continue
 
-            # Convert Time -> Crepe Index
-            # t / 0.010 gives us the array index
-            start_idx = int(round(t / 0.010))
+            offset_samples = int(0.030 * sr) if is_vocal else 0
+            start_samp = int(f * hop) + offset_samples
+            end_samp = start_samp + pyin_len
+            if end_samp > len(y): break
+            chunk = y[start_samp:end_samp]
             
-            # --- LOOKAHEAD SEARCH ---
-            end_idx = min(start_idx + SEARCH_WINDOW, len(pitch_np))
-            if start_idx >= end_idx: continue
-
-            # Find BEST confidence in the next 50ms
-            window_conf = conf_np[start_idx:end_idx]
-            best_local_idx = np.argmax(window_conf)
-            crepe_idx = start_idx + best_local_idx # The actual index of the pitch
+            f0, _, voiced_prob = librosa.pyin(chunk, fmin=safe_fmin, fmax=safe_fmax, sr=sr, frame_length=pyin_len, fill_na=np.nan)
             
-            hz = pitch_np[crepe_idx]
-            conf = conf_np[crepe_idx]
-            
-            # --- GATE LOGIC ---
             standard_gate = self.cfg["harvest"]["vocal_gate"] if is_vocal else self.cfg["harvest"]["inst_gate"]
+            mask_std = voiced_prob > standard_gate
             
             if is_vocal:
                 current_rms = self.rms_curves[source][min(f, len(self.rms_curves[source])-1)]
-                mask_rescue = (conf > 0.15) & (current_rms > 0.35)
-                valid_mask = (conf > standard_gate) | mask_rescue
+                mask_rescue = (voiced_prob > 0.10) & (current_rms > 0.35)
+                valid_mask = mask_std | mask_rescue
             else:
-                valid_mask = conf > standard_gate
+                valid_mask = mask_std
 
-            if not valid_mask or np.isnan(hz): continue
-
+            all_valid_f0 = f0[valid_mask]
+            all_valid_f0 = all_valid_f0[~np.isnan(all_valid_f0)]
+            if len(all_valid_f0) == 0: continue
+            
+            hz = np.median(all_valid_f0)
             midi = int(round(librosa.hz_to_midi(hz)))
 
-            # =========================================================
-            # [V121] DIARIZATION (Voice Splitting Logic)
-            # =========================================================
+            # [V121] LOGIC: DIARIZATION WITH ACTIVE DEFENSE & PANIC PROOFING
             assigned_voice_idx = 0 
+            
             if is_vocal:
+                # 1. Active Defense: Dynamic Decay
                 silence_0 = t - last_times[0]
                 silence_1 = t - last_times[1]
+                
+                # If partner is singing (silence < 2s), hold door open for 10s (Duet Mode).
+                # If both silent, close door in 4s (Instrumental Reset).
                 limit_0 = 10.0 if (silence_1 < 2.0) else 4.0
                 limit_1 = 10.0 if (silence_0 < 2.0) else 4.0
+                
                 stale_0 = silence_0 > limit_0
                 stale_1 = silence_1 > limit_1
+                
+                # 2. Get Distances
                 dist_0 = abs(midi - voices[0]) if voices[0] is not None else 999
                 dist_1 = abs(midi - voices[1]) if voices[1] is not None else 999
                 
+                # 3. Decision Matrix (Panic-Proof)
                 if (voices[0] is None and voices[1] is None) or (stale_0 and stale_1):
                     assigned_voice_idx = 0 
+                
                 elif not stale_0 and (stale_1 or voices[1] is None):
+                    # Voice 0 Primary. Only switch if jump is BIG (>7) AND Target is closer/empty.
                     jump_is_big = dist_0 > 7
                     target_is_better = (voices[1] is None) or (dist_1 < dist_0)
-                    assigned_voice_idx = 1 if (jump_is_big and target_is_better) else 0
+                    if jump_is_big and target_is_better: assigned_voice_idx = 1
+                    else: assigned_voice_idx = 0
+                    
                 elif not stale_1 and (stale_0 or voices[0] is None):
+                    # Voice 1 Primary.
                     jump_is_big = dist_1 > 7
                     target_is_better = (voices[0] is None) or (dist_0 < dist_1)
-                    assigned_voice_idx = 0 if (jump_is_big and target_is_better) else 1
+                    if jump_is_big and target_is_better: assigned_voice_idx = 0
+                    else: assigned_voice_idx = 1
+                    
                 else:
+                    # Panic Fallback: If both jumps are huge (>12), stick to recent history (Inertia)
                     if dist_0 > 12 and dist_1 > 12:
                          assigned_voice_idx = 0 if last_times[0] > last_times[1] else 1
                     else:
                         assigned_voice_idx = 0 if dist_0 <= dist_1 else 1
 
+            # Retrieve context
             last_midi = voices[assigned_voice_idx]
             last_time_anchor = last_times[assigned_voice_idx]
 
-            # GUARDRAILS (Octave Correction)
+            # [V121] BULLETPROOF GUARDRAILS (Double Octave + Tight Tolerance)
             if last_midi is not None:
                 dt = t - last_time_anchor
                 if dt < PHRASE_THRESHOLD:
-                    if env[f] > 0.6: pass 
+                    if env[f] > 0.6: 
+                        pass # Attack Trust
                     else:
                         dist_raw = abs(midi - last_midi)
                         if dist_raw > 12: 
+                            # Strict Tolerance: < 2 (0 or 1 semitone error only)
+                            # Preserves 9ths (diff 2) and 10ths (diff 4)
                             if abs((midi - 12) - last_midi) < 2: midi -= 12
                             elif abs((midi + 12) - last_midi) < 2: midi += 12
+                            
+                            # Double Octave Check (common in bass/low-mid)
                             elif dist_raw > 24:
                                 if abs((midi - 24) - last_midi) < 2: midi -= 24
                                 elif abs((midi + 24) - last_midi) < 2: midi += 24
 
+            # Update Anchor
             voices[assigned_voice_idx] = midi
             last_times[assigned_voice_idx] = t
-            # =========================================================
 
             dur = 0.0
-            if can_hold and self.use_holds: 
-                dur = self._measure_signal_duration(source, f)
+            if can_hold and self.use_holds: dur = self._measure_signal_duration(source, f)
 
             notes.append({
                 "time": t, "midi": midi, "dur": dur, "source": source,
@@ -680,10 +644,6 @@ class MapGenerator:
         beat_arr = np.array(beat_times)
         mix_cfg = self.cfg["mixing"]
         
-        # [SALVAGED FROM V306]
-        # Snap Threshold: 50ms (If note is within 50ms of a grid line, boost it)
-        SNAP_THRESHOLD = 0.05 
-        SNAP_BONUS = 1.25
         for n in pool:
             n["score"] *= self.priorities.get(n["source"], 1.0)
             
@@ -696,14 +656,10 @@ class MapGenerator:
                         n["score"] *= mix_cfg["vocal_boost"]
 
             if len(beat_arr) > 0:
-                # Find distance to nearest beat
                 idx = (np.abs(beat_arr - n["time"])).argmin()
                 dist = abs(n["time"] - beat_arr[idx])
-                
-                # If it lands on the beat, it's likely musically important.
-                # Boost it so it survives the density sieve.
-                if dist < SNAP_THRESHOLD: 
-                    n["score"] *= SNAP_BONUS
+                if dist < 0.05: n["score"] *= 1.3
+                elif dist < 0.10: n["score"] *= 1.1
             
             if n["dur"] > 0: n["score"] *= 1.1
 
