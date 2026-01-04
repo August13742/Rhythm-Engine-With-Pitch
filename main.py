@@ -3,7 +3,7 @@ import argparse
 import os
 import sys
 import json
-from visualizer import Visualizer
+import numpy as np
 from generator import MapGenerator
 from separator import separate_audio, generate_speech_notes
 
@@ -24,11 +24,10 @@ def main():
         print(f"[ERROR] Audio file not found: {args.audio_file}")
         sys.exit(1)
     
-    # Step 1: Separate audio into stems (unless skipped or already exists)
+    # Step 1: Separate audio into stems
     base_name = os.path.splitext(os.path.basename(args.audio_file))[0]
     folder_path = os.path.join("stems", base_name)
     
-    # Check if stem files already exist
     required_stems = [
         os.path.join(folder_path, "vocals.wav"),
         os.path.join(folder_path, "other.wav"),
@@ -48,13 +47,13 @@ def main():
     elif stems_exist:
         print("[VIS] Stems already exist, skipping separation...")
     else:
+        
         folder_path = separate_audio(args.audio_file, mode=args.mode)
     
-    # Step 2: Check for generated speech notes (speech notes don't depend on parameters, so rebake doesn't affect them)
+    # Step 2: Speech Notes
     speech_notes_file = os.path.join(folder_path, f"{base_name}_speech_notes.json")
-    
-    # Load manifest to check if vocals are empty
     manifest_path = os.path.join(folder_path, "stems_manifest.json")
+    
     vocals_empty = False
     if os.path.exists(manifest_path):
         with open(manifest_path, 'r') as f:
@@ -69,55 +68,54 @@ def main():
         print("\n[VIS] Generating speech notes...")
         vocals_path = os.path.join(folder_path, "vocals.wav")
         if os.path.exists(vocals_path):
-            speech_notes = generate_speech_notes(vocals_path, use_holds=True)
-            with open(speech_notes_file, 'w') as f:
-                json.dump(speech_notes, f, indent=2)
+            speech_notes = generate_speech_notes(vocals_path, output_dir=folder_path, use_holds=True)
+            with open(speech_notes_file, 'w', encoding='utf-8') as f:
+                json.dump(speech_notes, f, indent=2, ensure_ascii=False)
             print(f"[VIS] Speech notes saved: {speech_notes_file}")
         else:
             print("[WARN] Vocals stem not found, skipping speech note generation")
     
-    # Step 3: Check for generated beatmaps (unless rebake flag is set)
-    if not args.rebake:
-        beatmap_files = [
-            os.path.join(folder_path, f"{base_name}_EASY.json"),
-            os.path.join(folder_path, f"{base_name}_NORMAL.json"),
-            os.path.join(folder_path, f"{base_name}_HARD.json"),
-            os.path.join(folder_path, f"{base_name}_INSANE.json")
-        ]
+    # Step 3: Check/Generate Beatmaps
+    beatmap_files = [
+        os.path.join(folder_path, f"{base_name}_EASY.json"),
+        os.path.join(folder_path, f"{base_name}_NORMAL.json"),
+        os.path.join(folder_path, f"{base_name}_HARD.json"),
+        os.path.join(folder_path, f"{base_name}_INSANE.json")
+    ]
+    
+    maps_exist = all(os.path.exists(bm) for bm in beatmap_files)
+    
+    if not args.rebake and maps_exist:
+        print("[VIS] Generated beatmaps found, skipping generation...")
+    else:
+        if args.rebake:
+            print("[VIS] Rebake flag set, forcing beatmap regeneration...")
         
-        if all(os.path.exists(bm) for bm in beatmap_files):
-            print("[VIS] Generated beatmaps found, skipping generation...")
-            if args.generate_only:
-                print("[VIS] Generate-only mode, exiting...")
-                return
-            print("[VIS] Launching visualizer...")
-            visualizer = Visualizer(args.audio_file, folder_path)
-            visualizer.run()
-            return
-    
-    if args.rebake:
-        print("[VIS] Rebake flag set, forcing beatmap regeneration (speech notes unaffected)...")
-    
-    # Step 4: Generate beatmaps
-    print("\n[VIS] Generating beatmaps...")
-    stems_dict = {
-        "vocals": os.path.join(folder_path, "vocals.wav"),
-        "other":  os.path.join(folder_path, "other.wav"),
-        "bass":   os.path.join(folder_path, "bass.wav"),
-        "drums":  os.path.join(folder_path, "drums.wav"),
-        "piano":  os.path.join(folder_path, "piano.wav"),
-        "guitar": os.path.join(folder_path, "guitar.wav")
-    }
-    
-    gen = MapGenerator(stems_dict, use_holds=True, speech_notes_path=speech_notes_file)
-    gen.generate_all()
-    print("[VIS] Beatmaps generated and saved!")
+        print("\n[VIS] Generating beatmaps...")
+        stems_dict = {
+            "vocals": os.path.join(folder_path, "vocals.wav"),
+            "other":  os.path.join(folder_path, "other.wav"),
+            "bass":   os.path.join(folder_path, "bass.wav"),
+            "drums":  os.path.join(folder_path, "drums.wav"),
+            "piano":  os.path.join(folder_path, "piano.wav"),
+            "guitar": os.path.join(folder_path, "guitar.wav")
+        }
+        
+        gen = MapGenerator(stems_dict, use_holds=True, speech_notes_path=speech_notes_file)
+        gen.generate_all()
+        print("[VIS] Beatmaps generated and saved!")
     
     if args.generate_only:
+        print("[VIS] Generate-only mode, exiting...")
         return
     
-    # Step 5: Launch visualizer (reads from generated files)
+    # Step 5: Launch visualizer
     print("\n[VIS] Launching visualizer...")
+    
+    # --- LAZY IMPORT HERE ---
+    # Only import Visualizer (and PyGame) AFTER all Whisper/Torch work is dead and buried.
+    from visualizer import Visualizer 
+    
     visualizer = Visualizer(args.audio_file, folder_path)
     visualizer.run()
 

@@ -23,7 +23,7 @@ TUNING = {
         "pyin_fmax": 1200,  # Soprano D6
     },
     "holds": {
-        "min_dur": 0.5,
+        "min_dur": 0.25,
         "max_dur": 5.00,
         "energy_decay": 0.50,
         "gap_buffer": 0.10,
@@ -41,7 +41,7 @@ TUNING = {
         }
     },
     # CRITICAL: HARVEST SENSITIVITY
-    # Lower = More notes (including noise). 
+    # Lower = More notes (including noise)
     # We harvest LOOSELY here, then filter strictly in Diff Configs.
     "harvest": {
         "drums_sens": 0.10,
@@ -51,7 +51,7 @@ TUNING = {
         "vocal_sens": 0.05,
         "other_sens": 0.08,
         "vocal_gate": 0.30,      # Standard gate
-        "vocal_min_gate": 0.10,  # [V109] Rescue gate for loud choruses
+        "vocal_min_gate": 0.10,  # Rescue gate for loud choruses
         "inst_gate": 0.15,
     },
     # PSYCHOACOUSTIC VOTING PARAMS
@@ -65,7 +65,15 @@ TUNING = {
     "quantization": {
         "snap_strength": 0.5,   # Slightly tighter snap
         "magnetic_radius": 0.07  # Wider grab radius (70ms)
-    }
+    },
+    "hierarchy": {
+        "ambient_drum_threshold": 0.15,
+        "rhythm_density_threshold": 0.4,
+        "melodic_density_ratio": 1.5,
+        "rhythm_dominance_ratio": 1.3,
+        "vocal_presence_threshold": 0.1,
+        "percentile_density": 85,
+    },
 }
 
 # ==========================================
@@ -106,18 +114,19 @@ class MapGenerator:
         self.stems_path = stems_path
         self.use_holds = use_holds
         self.cfg = TUNING
+        self.rms_curves = {} 
         
         self.manifest = self._load_manifest(stems_path)
         self.audio_data = self._smart_load_stems(stems_path)
+        
+        self.envs = {}
+        self.rms_curves = {} 
+        self._preprocess_audio()
         
         # 1. Standard Priorities (User Config)
         self.priorities = self._calculate_dynamic_priorities()
         # 2. Structural Weights (Who leads the rhythm?)
         self.vote_weights = self._calculate_dynamic_weights()
-        
-        self.envs = {}
-        self.rms_curves = {} 
-        self._preprocess_audio()
 
         self.rhythm_data = self._analyze_rhythm_composite()
         
@@ -135,43 +144,85 @@ class MapGenerator:
 
     def _calculate_dynamic_weights(self):
         """
-        Determines the 'Rhythmic Leader' based on stem existence.
-        Used for the Coincidence Voting system.
+        Dynamic Hierarchy V3: Relative Dominance
+        - Fixes "Everything is Drum Focused" by comparing Melodic Sum vs Rhythm Sum.
+        - Detects "Lead Instrument" (Sax in 'other', Solo in 'guitar') by finding the outlier.
         """
         m = self.manifest
-        # Base weights assuming standard rock/pop
-        weights = {
-            "drums":  0.0, "bass":   0.0,
-            "vocals": 0.0, "piano":  0.0,
-            "guitar": 0.0, "other":  0.0
-        }
+        weights = { "drums": 0.0, "bass": 0.0, "vocals": 0.0, "piano": 0.0, "guitar": 0.0, "other": 0.0 }
         
-        # 1. Establish Rhythm Section
-        if m["drums"]["exists"]: weights["drums"] = 1.0
-        if m["bass"]["exists"]:  weights["bass"]  = 0.8
+        # 1. Base Existence & RMS Calculation
+        if m.get("drums", {}).get("exists"): weights["drums"] = 1.0
+        if m.get("bass", {}).get("exists"):  weights["bass"]  = 0.9
         
-        # 2. Check for Acoustic/No-Drum scenarios
-        rhythm_sum = weights["drums"] + weights["bass"]
+        def get_density(stem):
+            if stem in self.rms_curves and len(self.rms_curves[stem]) > 0:
+                # Percentile captures "active playing" better than mean
+                percentile = TUNING["hierarchy"]["percentile_density"]
+                return float(np.percentile(self.rms_curves[stem], percentile)) 
+            return 0.0
+
+        d = { k: get_density(k) for k in ["drums", "bass", "piano", "guitar", "other", "vocals"] }
         
-        print("-" * 30)
-        print(f"[GEN] Analyzing Rhythmic Hierarchy (Rhythm Sum: {rhythm_sum:.2f})")
+        print("-" * 40)
+        print(f"[GEN] HIERARCHY V3 ANALYSIS:")
+        print(f"      > Densities: {json.dumps({k: round(v, 2) for k, v in d.items()})}")
+
+        # 2. Identify the Primary Lead (Melodic)
+        melodic_keys = ["piano", "guitar", "other"]
+        h_cfg = TUNING["hierarchy"]
+        # Filter out empty stems
+        active_melodics = {k: d[k] for k in melodic_keys if d[k] > 0.01}
         
-        if rhythm_sum < 0.5:
-            # Acoustic Mode: Melodic instruments become the grid
-            print("[GEN] >> MODE: ACOUSTIC (Melody Led)")
-            weights["guitar"] = 1.0
-            weights["piano"]  = 1.0
-            weights["vocals"] = 0.8 
+        lead_inst = "vocals"
+        max_mel_density = 0.0
+        
+        if active_melodics:
+            lead_inst = max(active_melodics, key=active_melodics.get)
+            max_mel_density = active_melodics[lead_inst]
+
+        # 3. Determine Context
+        # Compare Rhythm (Drums) vs The Loudest Melodic Instrument
+        
+        # Scenario A: AMBIENT / ACOUSTIC
+        # Drums are very quiet OR significantly quieter than the lead instrument
+        if d["drums"] < h_cfg["ambient_drum_threshold"] or (max_mel_density > d["drums"] * h_cfg["melodic_density_ratio"]):
+            print(f"[GEN] >> MODE: MELODIC DRIVER (Lead: {lead_inst.upper()})")
+            weights["drums"] = 0.8
+            weights["bass"] = 0.8
+            weights[lead_inst] = 1.2 # Boost the lead (e.g., Sax in 'other')
+            # Boost other melodics slightly less
+            for k in melodic_keys:
+                if k != lead_inst and k in active_melodics: weights[k] = 1.0
+                
+        # Scenario B: HEAVY RHYTHM / DANCE
+        # Drums are dominant and much louder than melody
+        elif d["drums"] > h_cfg["rhythm_density_threshold"] and d["drums"] > (max_mel_density * h_cfg["rhythm_dominance_ratio"]):
+             print(f"[GEN] >> MODE: RHYTHM DRIVER (Drums > All)")
+             weights["drums"] = 1.2
+             weights["bass"] = 1.1
+             # Suppress melody slightly to clean up beat
+             for k in melodic_keys: weights[k] = 0.8
+             
+        # Scenario C: ENSEMBLE / JAZZ / ROCK
+        # Drums are loud, but instruments are also loud (balanced)
         else:
-            # Band Mode: Melodic instruments are support
-            print("[GEN] >> MODE: BAND (Drum Led)")
-            weights["guitar"] = 0.4
-            weights["piano"]  = 0.4
-            weights["vocals"] = 0.5
-            weights["other"]  = 0.2
-        
-        print(f"[GEN] Voting Weights: {json.dumps(weights)}")
-        print("-" * 30)
+            print(f"[GEN] >> MODE: BALANCED ENSEMBLE")
+            weights["drums"] = 1.0
+            weights["bass"] = 1.0
+            # Everything gets fair play, but Lead gets a tiny edge
+            for k in melodic_keys: weights[k] = 0.9
+            if lead_inst in weights: weights[lead_inst] = 1.05
+
+        # 4. Vocal Handling
+        # If vocals are present, they usually sit on top, but not always 
+        if d["vocals"] > h_cfg["vocal_presence_threshold"]:
+            weights["vocals"] = 1.1
+        else:
+            weights["vocals"] = 0.8 # Instrumental section or quiet vox
+
+        print(f"      > Final Weights: {json.dumps(weights)}")
+        print("-" * 40)
         return weights
 
     def _apply_coincidence_voting(self, pool):
@@ -855,7 +906,7 @@ class MapGenerator:
 
     def _resolve_overlaps(self, notes):
         # ==========================================
-        # PHASE 1: THE FLAM DOCTOR (Fix Hidden Doubles)
+        # Fix Hidden Doubles
         # ==========================================
         # Detects notes on the same lane < 60ms apart.
         # Solution: Move lower-priority note to free lane (Make Chord).
@@ -927,7 +978,7 @@ class MapGenerator:
                     pass # Kill current (do nothing)
 
         # ==========================================
-        # PHASE 2: HOLD TRUNCATION (Standard Logic)
+        # HOLD TRUNCATION
         # ==========================================
         accepted.sort(key=lambda x: x["time"])
         lane_queues = {i: [] for i in range(4)}
