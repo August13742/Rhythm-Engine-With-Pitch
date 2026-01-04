@@ -8,7 +8,6 @@ import json
 import pygame
 import numpy as np
 import librosa
-from generator import MapGenerator
 from synthbank import SynthBank
 
 # --- CONFIG ---

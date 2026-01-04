@@ -53,14 +53,32 @@ class Visualizer:
         
         # LOAD BEATMAPS FROM FILES
         print("[VIS] Loading beatmaps from files...")
+        
+        # Load manifest to find a non-empty track for duration
+        manifest_path = os.path.join(folder_path, "stems_manifest.json")
+        manifest = {}
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r') as f:
+                manifest = json.load(f)
+        
+        # Find a non-empty track for duration calculation
+        duration_track = None
+        for stem_name in ["drums", "bass", "piano", "guitar", "vocals", "other"]:
+            if not manifest.get(stem_name, {}).get("is_silent", False):
+                duration_track = stem_name
+                break
+        
+        if duration_track is None:
+            duration_track = "drums"  # Fallback to drums
+        
+        duration = librosa.get_duration(path=os.path.join(folder_path, f"{duration_track}.wav"))
+        from generator import DIFF_CONFIGS
         for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
             beatmap_file = os.path.join(folder_path, f"{base_name}_{d}.json")
             with open(beatmap_file, 'r') as f:
                 self.beatmaps[d] = json.load(f)
             
-            duration = librosa.get_duration(path=os.path.join(folder_path, "drums.wav"))
             nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
-            from generator import DIFF_CONFIGS
             lanes = DIFF_CONFIGS[d]["lanes"]
             self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
             print(f"[VIS] Loaded {d}: {len(self.beatmaps[d])} notes")
