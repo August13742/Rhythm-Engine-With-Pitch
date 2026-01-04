@@ -16,6 +16,8 @@ dependencies = [
     "audio-separator>=0.40.0",
     "onnxruntime-gpu>=1.23.2",
     "huggingface-hub>=1.2.3",
+    "faster-whisper>=1.2.1",
+    "torchcrepe>=0.0.24",
 ]
 
 [[tool.uv.index]]
