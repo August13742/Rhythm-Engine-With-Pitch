@@ -1,0 +1,43 @@
+{
+  "vocals": {
+    "exists": true,
+    "peak_energy": 0.6763916015625,
+    "is_silent": false
+  },
+  "vocals_lead": {
+    "exists": true,
+    "peak_energy": 0.667449951171875,
+    "is_silent": false
+  },
+  "vocals_backing": {
+    "exists": true,
+    "peak_energy": 0.4385986328125,
+    "is_silent": false
+  },
+  "drums": {
+    "exists": true,
+    "peak_energy": 0.7451019287109375,
+    "is_silent": false
+  },
+  "bass": {
+    "exists": true,
+    "peak_energy": 0.3714599609375,
+    "is_silent": false
+  },
+  "guitar": {
+    "exists": true,
+    "peak_energy": 0.0,
+    "is_silent": true
+  },
+  "piano": {
+    "exists": true,
+    "peak_energy": 0.5445556640625,
+    "is_silent": false
+  },
+  "other": {
+    "exists": true,
+    "peak_energy": 0.5726776123046875,
+    "is_silent": false
+  },
+  "vocal_type": "polyphonic"
+}
