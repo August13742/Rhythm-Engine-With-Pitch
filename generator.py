@@ -88,7 +88,7 @@ CONSTANTS = {
             "piano": 0.90, "guitar": 0.85, "other": 0.60
         },
         "priorities": { # Used for Voting Weights
-            "vocals": 2.0, "vocals_lead": 2.0, "vocals_backing": 1.2,
+            "vocals": 2.5, "vocals_lead": 2.5, "vocals_backing": 1.2,
             "drums": 1.1, "bass": 0.9, 
             "piano": 1.1, "guitar": 1.1, "other": 1.0
         }
