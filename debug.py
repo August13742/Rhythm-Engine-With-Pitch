@@ -1,188 +1,70 @@
-import sys
 import os
-import gc
-import time
-import numpy as np
-import json
-import torch
-import librosa
+import shutil
+import logging
 import soundfile as sf
-import traceback
+import numpy as np
+from pathlib import Path
+from audio_separator.separator import Separator
 
-# Force unbuffered output so we see the log exactly when it happens
-sys.stdout.reconfigure(line_buffering=True)
+# --- CONFIG ---
+TARGET_FILE = "LionessPrideTwilight.mp3"
+MODEL_NAME = "model_bs_roformer_ep_317_sdr_12.9755.ckpt"
+DEBUG_DIR = Path("debug_output")
+MODEL_DIR = Path("models")
 
-def log(msg):
-    print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
+# --- SETUP ---
+if DEBUG_DIR.exists(): shutil.rmtree(DEBUG_DIR)
+DEBUG_DIR.mkdir(parents=True, exist_ok=True)
 
-def safe_transcription_test(audio_path):
-    log(f"--- START DEBUGGING: {audio_path} ---")
+logging.basicConfig(level=logging.INFO)
+print(f"--- DEBUG MODE: Processing {TARGET_FILE} ---")
+
+# 1. ANALYZE INPUT
+if not os.path.exists(TARGET_FILE):
+    print(f"[ERROR] {TARGET_FILE} not found.")
+    exit(1)
+
+data, sr = sf.read(TARGET_FILE)
+peak = np.max(np.abs(data))
+print(f"[INPUT] Sample Rate: {sr}, Channels: {data.shape[1] if len(data.shape) > 1 else 1}")
+print(f"[INPUT] Peak Amplitude: {peak:.4f}")
+
+if peak < 0.01:
+    print("[CRITICAL] Input file is effectively silent!")
+
+# 2. RUN SEPARATOR (RAW)
+print("\n[PROCESS] Initializing Separator (No Custom Logic)...")
+try:
+    sep = Separator(
+        output_dir=str(DEBUG_DIR),
+        model_file_dir=str(MODEL_DIR),
+        output_format="WAV",
+        log_level=logging.INFO 
+    )
+    sep.load_model(MODEL_NAME)
     
-    if not os.path.exists(audio_path):
-        log("ERROR: File not found.")
-        return
+    # Run separation
+    output_files = sep.separate(TARGET_FILE)
+    print(f"[PROCESS] Separation finished. Returned: {output_files}")
 
-    # --- STEP 1: LIBROSA LOAD ---
-    log("STEP 1: Loading Audio (Librosa)...")
-    try:
-        y, sr = librosa.load(audio_path, sr=16000)
-        log(f"  > Loaded audio: {y.shape} samples, SR={sr}")
-        del y # Free this copy
-        gc.collect()
-    except Exception:
-        log("FAIL: Librosa load crashed.")
-        traceback.print_exc()
-        return
+except Exception as e:
+    print(f"[ERROR] Separation crashed: {e}")
+    exit(1)
 
-    # --- STEP 2: WHISPER ---
-    log("STEP 2: Initializing Whisper...")
-    try:
-        from faster_whisper import WhisperModel
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        log(f"  > Device: {device}")
-        
-        model = WhisperModel("large-v3", device=device, compute_type="float16")
-        log("  > Model loaded. Starting transcription...")
-        
-        segments, _ = model.transcribe(
-            audio_path, 
-            word_timestamps=True, 
-            vad_filter=True, 
-            vad_parameters=dict(min_silence_duration_ms=500),
-            language="ja"
-        )
-        
-        # Aggressive extraction loop with logs
-        anchors = []
-        count = 0
-        log("  > Iterating segments...")
-        
-        for s in segments:
-            for w in s.words:
-                # Test accessing C++ properties explicitly
-                try:
-                    wd = {
-                        "word": str(w.word),
-                        "start": float(w.start),
-                        "end": float(w.end),
-                        "probability": float(w.probability)
-                    }
-                    if wd["probability"] > 0.25:
-                        anchors.append(wd)
-                    count += 1
-                except Exception as e:
-                    log(f"CRASH WARNING: Failed to read word object: {e}")
+# 3. VERIFY OUTPUTS IMMEDIATELY
+print("\n[VERIFY] Inspecting generated files...")
+files_found = list(DEBUG_DIR.glob("*.wav"))
 
-        log(f"  > Whisper complete. Processed {count} words. Kept {len(anchors)} anchors.")
-        
-        # EXPLICIT CLEANUP
-        log("  > Cleaning up Whisper model...")
-        del model
-        del segments
-        gc.collect()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-        log("  > Whisper memory freed.")
-        
-    except Exception:
-        log("FAIL: Whisper step crashed.")
-        traceback.print_exc()
-        return
+if not files_found:
+    print("[FAIL] No WAV files found in output directory!")
+else:
+    for f in files_found:
+        try:
+            y, r = sf.read(str(f))
+            file_peak = np.max(np.abs(y))
+            status = "OK" if file_peak > 0.01 else "SILENT"
+            print(f"File: {f.name:<30} | Peak: {file_peak:.4f} | Status: {status}")
+        except Exception as e:
+            print(f"File: {f.name:<30} | [READ ERROR] {e}")
 
-    # --- STEP 3: CREPE ---
-    log("STEP 3: Initializing CREPE...")
-    pitch_data = None
-    conf_data = None
-    times_data = None
-    
-    try:
-        import torchcrepe
-        
-        # Reload audio for Crepe
-        y, sr = librosa.load(audio_path, sr=16000)
-        audio_tensor = torch.tensor(y).unsqueeze(0).to(device)
-        hop_len = int(16000 / 100)
-        
-        log("  > Running Predict...")
-        pitch, periodicity = torchcrepe.predict(
-            audio_tensor, 16000, hop_len, 
-            fmin=50, fmax=1000, model='full', 
-            batch_size=2048, device=device, return_periodicity=True
-        )
-        
-        log("  > Moving to CPU...")
-        pitch_data = pitch.squeeze().cpu().numpy()
-        conf_data = periodicity.squeeze().cpu().numpy()
-        times_data = librosa.times_like(pitch_data, sr=16000, hop_length=hop_len)
-        
-        log(f"  > Crepe done. Pitch shape: {pitch_data.shape}")
-        
-        del audio_tensor
-        del pitch
-        del periodicity
-        gc.collect()
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-            
-    except Exception:
-        log("FAIL: Crepe step crashed.")
-        traceback.print_exc()
-        return
-
-    # --- STEP 4: NOTE CONSTRUCTION (The Suspect) ---
-    log("STEP 4: Entering Note Construction Logic...")
-    
-    try:
-        notes = []
-        log(f"  > Starting loop over {len(anchors)} anchors...")
-        
-        for i, w in enumerate(anchors):
-            # Log every 50 words to see where it dies
-            if i % 50 == 0:
-                log(f"    > Processing anchor {i}/{len(anchors)}")
-                
-            t_start = w['start']
-            t_end = w['end']
-            
-            # TEST: Search Sorted
-            idx_start = np.searchsorted(times_data, t_start)
-            idx_end = np.searchsorted(times_data, t_end)
-            
-            if idx_end <= idx_start:
-                continue
-                
-            # TEST: Slicing
-            seg_pitch = pitch_data[idx_start:idx_end]
-            seg_conf = conf_data[idx_start:idx_end]
-            
-            # TEST: Math
-            valid_mask = seg_conf > 0.4
-            if np.any(valid_mask):
-                hz = np.median(seg_pitch[valid_mask])
-                midi = librosa.hz_to_midi(hz)
-            else:
-                hz = np.median(seg_pitch)
-                midi = 60 # dummy
-            
-            # Construct dict
-            note = {
-                "time": t_start,
-                "word": w['word'],
-                "midi": midi
-            }
-            notes.append(note)
-            
-        log(f"  > Loop finished. Generated {len(notes)} notes.")
-        
-    except Exception:
-        log("FAIL: Note construction logic crashed.")
-        traceback.print_exc()
-        return
-
-    log("--- SUCCESS: Pipeline finished without hard crash. ---")
-
-if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python debug_pipeline.py <audio_file>")
-    else:
-        safe_transcription_test(sys.argv[1])
+print("\n--- DEBUG COMPLETE ---")
