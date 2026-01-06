@@ -18,6 +18,9 @@ dependencies = [
     "huggingface-hub>=1.2.3",
     "faster-whisper>=1.2.1",
     "torchcrepe>=0.0.24",
+    "torchfcpe>=0.0.4",
+    "pretty-midi>=0.2.11",
+    "matplotlib>=3.10.8",
 ]
 
 [[tool.uv.index]]

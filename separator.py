@@ -1,3 +1,10 @@
+"""
+SEPARATION ENGINE V2.1
+Updates:
+  - Stage 1: BS-Roformer (Stems)
+  - Stage 2: Mel-Roformer-Viperx (Lead vs Backing) - Replaces UVR-BVE
+  - Logic: Optimized for V208 Tri-Cameral Input
+"""
 import argparse
 import os
 import shutil
@@ -16,50 +23,63 @@ logging.getLogger('httpx').setLevel(logging.WARNING)
 
 def ensure_custom_models_exist(model_dir: str):
     os.makedirs(model_dir, exist_ok=True)
+    
+    # --- MODEL 1: BS-Roformer (Stems) ---
     rofo_files = {
         "BS-Rofo-SW-Fixed.ckpt": "model_bs_roformer_ep_317_sdr_12.9755.ckpt",
         "BS-Rofo-SW-Fixed.yaml": "model_bs_roformer_ep_317_sdr_12.9755.yaml"
     }
-    print(f"[INIT] Checking BS-Roformer Model...")
+    
+    # --- MODEL 2: Mel-Roformer-Viperx (Lead vs Backing) ---
+    # This model is SOTA for separating Main Vocals from "Accompaniment" (Backing)
+    viper_files = {
+        "model_mel_band_roformer_ep_3005_sdr_11.4360.ckpt": "model_mel_band_roformer_ep_3005_sdr_11.4360.ckpt",
+        "model_mel_band_roformer_ep_3005_sdr_11.4360.yaml": "model_mel_band_roformer_ep_3005_sdr_11.4360.yaml"
+    }
+
+    print(f"[INIT] Checking Models...")
+    
+    # Download BS-Roformer
     for remote, local in rofo_files.items():
         target = os.path.join(model_dir, local)
         if not os.path.exists(target):
             try:
+                print(f"  [DL] Downloading {remote}...")
                 hf_hub_download(repo_id="jarredou/BS-ROFO-SW-Fixed", filename=remote, local_dir=model_dir, local_dir_use_symlinks=False)
                 if remote != local and os.path.exists(os.path.join(model_dir, remote)):
                     os.rename(os.path.join(model_dir, remote), target)
-            except Exception: pass
+            except Exception as e: print(f"  [ERR] {e}")
 
-    bve_model = os.path.join(model_dir, "UVR-BVE-4B_SN-44100-1.pth")
-    if not os.path.exists(bve_model):
-        print(f"  [WARN] UVR-BVE missing. Stage 2 (Backing Vocals) will be skipped.")
+    # Download Viperx
+    for remote, local in viper_files.items():
+        target = os.path.join(model_dir, local)
+        if not os.path.exists(target):
+            try:
+                print(f"  [DL] Downloading {remote}...")
+                # Note: This is a common mirror for the Viperx model
+                hf_hub_download(repo_id="jarredou/Mel-Band-Roformer-Karaoke-Aufr33-Viperx", filename=remote, local_dir=model_dir, local_dir_use_symlinks=False)
+            except Exception as e: print(f"  [ERR] {e}")
 
 def _prepare_audio(input_path: str, temp_dir: Path) -> str:
     """
     Normalizes audio to -1.0 dB to ensure BS-Roformer activates correctly.
-    Handles 'quiet file' bug where models output silence for low-gain inputs.
     """
     clean_wav = temp_dir / "normalized_input.wav"
-    print(f"[PREP] analyzing gain levels for {Path(input_path).name}...")
+    print(f"[PREP] Analyzing gain levels for {Path(input_path).name}...")
     
     try:
-        # Load as Float32 (High precision)
         y, sr = librosa.load(input_path, sr=44100, mono=False)
         
-        # Ensure Stereo [2, N]
+        # Ensure Stereo
         if y.ndim == 1:
-            print("  [FIX] Converting Mono -> Stereo")
             y = np.stack([y, y])
             
-        # Check Peak
         peak = np.max(np.abs(y))
         target_peak = 0.9  # -1.0 dB approx
         
         if peak < 0.001:
-            print("  [ERROR] Input is silent.")
             return input_path 
 
-        # Normalize if too quiet OR too loud (clipping prevention)
         if peak < 0.8 or peak > 1.0:
             gain = target_peak / peak
             print(f"  [GAIN] Applying Gain: {gain:.2f}x (Peak {peak:.2f} -> {target_peak:.2f})")
@@ -67,7 +87,6 @@ def _prepare_audio(input_path: str, temp_dir: Path) -> str:
         else:
             print(f"  [GAIN] Levels OK (Peak: {peak:.2f}).")
 
-        # Write to Clean WAV (Float32 to keep dynamic range)
         sf.write(str(clean_wav), y.T, 44100, subtype='FLOAT')
         return str(clean_wav)
 
@@ -94,7 +113,7 @@ def separate_audio(audio_path: str, mode: str = "high"):
     # ---------------------------------------------------------
     # STAGE 1: 6-Stem Split (BS-Roformer)
     # ---------------------------------------------------------
-    print(f"\n[1/2] BS-Roformer (6-Stem)...")
+    print(f"\n[1/2] BS-Roformer (Stems)...")
     sep_s1 = Separator(output_dir=str(s1_dir), model_file_dir=str(model_dir), output_format="WAV", log_level=logging.ERROR)
     sep_s1.load_model('model_bs_roformer_ep_317_sdr_12.9755.ckpt')
     sep_s1.separate(processing_file)
@@ -110,19 +129,24 @@ def separate_audio(audio_path: str, mode: str = "high"):
                 if target == "vocals": vocal_active = _check_activity(dest)
 
     # ---------------------------------------------------------
-    # STAGE 2: Lead/Backing Split (UVR-BVE)
+    # STAGE 2: Lead/Backing Split (Mel-Roformer-Viperx)
     # ---------------------------------------------------------
+    # Viperx is a "Karaoke" model. 
+    # Input: Vocals (Lead + Backing)
+    # Output 1: "Vocals" -> This is the Lead
+    # Output 2: "Instrumental" -> This is the Backing
     if vocal_active:
-        print(f"\n[2/2] UVR-BVE (Lead/Backing)...")
+        print(f"\n[2/2] Mel-Roformer-Viperx (Lead/Backing)...")
         sep_s2 = Separator(output_dir=str(s2_dir), model_file_dir=str(model_dir), output_format="WAV", log_level=logging.ERROR)
-        sep_s2.load_model('UVR-BVE-4B_SN-44100-1.pth')
+        sep_s2.load_model('model_mel_band_roformer_ep_3005_sdr_11.4360.ckpt')
         sep_s2.separate(str(root_dir / "vocals.wav"))
         
         for f in s2_dir.glob("*.wav"):
+            # Viperx Output Mapping
             if "(Vocals)" in f.name:
-                shutil.move(str(f), str(root_dir / "vocals_backing.wav"))
-            elif "(Instrumental)" in f.name:
                 shutil.move(str(f), str(root_dir / "vocals_lead.wav"))
+            elif "(Instrumental)" in f.name:
+                shutil.move(str(f), str(root_dir / "vocals_backing.wav"))
     else:
         print(f"\n[SKIP] Stage 2 (No Vocals Detected)")
         _create_dummy(root_dir / "vocals_lead.wav")
@@ -144,26 +168,19 @@ def separate_audio(audio_path: str, mode: str = "high"):
 def _check_activity(path: Path, threshold: float = 0.015) -> bool:
     if not path.exists(): return False
     try:
-        # METHOD 1: Fast scan using soundfile (Reads metadata/blocks)
-        # We read the whole file to find max, but soundfile is much faster/lighter than librosa
         import soundfile as sf
         info = sf.info(str(path))
         if info.frames == 0: return False
         
-        # Read the middle 60 seconds if you want speed, or just read the whole thing.
-        # Given these are song stems, reading the whole file is usually safe and takes <1s.
-        y, _ = sf.read(str(path)) 
-        
-        # Handle multi-channel (Stereo)
-        if y.ndim > 1:
-            peak = np.max(np.abs(y))
-        else:
-            peak = np.max(np.abs(y))
+        # Read the first 60 seconds (optimization)
+        y, _ = sf.read(str(path), frames=44100*60) 
+        if y.ndim > 1: peak = np.max(np.abs(y))
+        else: peak = np.max(np.abs(y))
             
         return peak > threshold
     except Exception as e:
         print(f"  [WARN] Activity check failed for {path.name}: {e}")
-        return False # Fail safe
+        return False
 
 def _create_dummy(path: Path, sr: int = 44100):
     sf.write(str(path), np.zeros(1024), sr)
@@ -179,17 +196,14 @@ def _optimize_stems(root_dir: Path):
 
 def _match_stem_lengths(root_dir: Path):
     import soundfile as sf
-    
     stems = list(root_dir.glob("*.wav"))
     max_len = 0
     reference_sr = 44100
     active_stems = []
 
-    # 1. Scan for the "Master" length (ignoring dummies)
     for stem in stems:
         try:
             info = sf.info(str(stem))
-            # Treat files < 5 seconds as dummies/silent markers
             if info.duration > 5.0:
                 active_stems.append(stem)
                 if info.frames > max_len:
@@ -197,27 +211,20 @@ def _match_stem_lengths(root_dir: Path):
                     reference_sr = info.samplerate
         except Exception: pass
 
-    if max_len == 0: 
-        return # No real audio found, nothing to sync
+    if max_len == 0: return
 
-    # 2. Resize ONLY active stems to match the longest one
-    #    (Leaves the 1kb dummy files untouched)
     print(f"  [SYNC] Aligning {len(active_stems)} active stems to {max_len/reference_sr:.2f}s...")
     
     for stem in active_stems:
         try:
-            # Load at the reference sample rate to ensure sample-perfect alignment
             y, _ = librosa.load(str(stem), sr=reference_sr)
             current_len = len(y)
             
             if current_len != max_len:
                 if current_len < max_len:
-                    # Pad tail with silence
                     y = np.pad(y, (0, max_len - current_len))
                 elif current_len > max_len:
-                    # Truncate tail
                     y = y[:max_len]
-                
                 sf.write(str(stem), y, reference_sr)
         except Exception as e:
             print(f"  [WARN] Failed to sync {stem.name}: {e}")

@@ -6,23 +6,23 @@
   },
   "vocals_lead": {
     "exists": true,
-    "peak_energy": 0.68450927734375,
+    "peak_energy": 0.8461761474609375,
     "is_silent": false
   },
   "vocals_backing": {
     "exists": true,
-    "peak_energy": 0.5648193359375,
-    "is_silent": false
+    "peak_energy": 0.0,
+    "is_silent": true
   },
   "drums": {
     "exists": true,
-    "peak_energy": 0.0,
-    "is_silent": true
+    "peak_energy": 0.8802947998046875,
+    "is_silent": false
   },
   "bass": {
     "exists": true,
-    "peak_energy": 0.0,
-    "is_silent": true
+    "peak_energy": 0.7894439697265625,
+    "is_silent": false
   },
   "guitar": {
     "exists": true,
@@ -39,5 +39,5 @@
     "peak_energy": 0.6609954833984375,
     "is_silent": false
   },
-  "vocal_type": "polyphonic"
+  "vocal_type": "monophonic"
 }
