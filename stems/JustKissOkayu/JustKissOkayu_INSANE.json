@@ -1,5 +1,38 @@
 [
   {
+    "time": 0.865,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 66,
+    "score": 0.361,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 1.749,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.456,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 2.13,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 0.656,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 2.376,
     "lane": 1,
     "dur": 0.0,
@@ -11,12 +44,34 @@
     "vote": "majority"
   },
   {
-    "time": 3.871,
+    "time": 3.248,
     "lane": 1,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 66,
+    "score": 0.608,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 3.871,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
     "score": 0.931,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 4.065,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 0.573,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -38,25 +93,47 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.234,
+    "score": 0.296,
     "source": "drums",
-    "vol": 0.783,
+    "vol": 0.8,
     "vote": "raw"
   },
   {
-    "time": 6.199,
+    "time": 5.866,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 66,
+    "score": 0.524,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 6.14,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 66,
+    "score": 1.097,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 6.199,
+    "lane": 3,
+    "dur": 0.145,
+    "type": "hold",
     "midi": 62,
-    "score": 0.81,
+    "score": 0.892,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 6.779,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -66,41 +143,85 @@
     "vote": "majority"
   },
   {
-    "time": 8.759,
+    "time": 7.058,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 68,
-    "score": 0.619,
+    "midi": 63,
+    "score": 0.778,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 8.903,
+    "time": 8.219,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.233,
+    "source": "drums",
+    "vol": 0.783,
+    "vote": "raw"
+  },
+  {
+    "time": 8.323,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 68,
-    "score": 0.675,
+    "midi": 66,
+    "score": 0.91,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 10.065,
+    "time": 8.612,
     "lane": 1,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 68,
+    "score": 0.569,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 8.905,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 68,
-    "score": 0.916,
+    "score": 0.541,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 8.906,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 67,
+    "score": 0.555,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 9.772,
+    "lane": 1,
+    "dur": 2.032,
+    "type": "hold",
+    "midi": 66,
+    "score": 0.564,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 11.807,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -111,7 +232,7 @@
   },
   {
     "time": 11.998,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -133,7 +254,7 @@
   },
   {
     "time": 12.387,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -144,7 +265,7 @@
   },
   {
     "time": 12.582,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -188,7 +309,7 @@
   },
   {
     "time": 12.979,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -199,7 +320,7 @@
   },
   {
     "time": 13.27,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -210,14 +331,25 @@
   },
   {
     "time": 13.56,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.257,
+    "score": 0.341,
     "source": "drums",
-    "vol": 0.789,
+    "vol": 0.812,
     "vote": "raw"
+  },
+  {
+    "time": 13.56,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.817,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 13.756,
@@ -232,7 +364,7 @@
   },
   {
     "time": 13.856,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -258,25 +390,14 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.613,
+    "score": 0.427,
     "source": "drums",
-    "vol": 0.885,
+    "vol": 0.835,
     "vote": "raw"
   },
   {
-    "time": 14.152,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 1.353,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
     "time": 14.448,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -290,10 +411,21 @@
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 59,
+    "score": 0.764,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 14.744,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.789,
+    "score": 1.029,
     "source": "drums",
-    "vol": 0.933,
+    "vol": 0.998,
     "vote": "raw"
   },
   {
@@ -320,7 +452,7 @@
   },
   {
     "time": 15.185,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -331,18 +463,40 @@
   },
   {
     "time": 15.325,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.717,
+    "score": 1.131,
     "source": "drums",
-    "vol": 0.914,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 15.325,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 1.44,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 15.462,
+    "lane": 1,
+    "dur": 0.435,
+    "type": "hold",
+    "midi": 63,
+    "score": 0.619,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 15.615,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -357,10 +511,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.591,
+    "score": 0.763,
     "source": "drums",
-    "vol": 0.88,
+    "vol": 0.926,
     "vote": "raw"
+  },
+  {
+    "time": 15.906,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.946,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 16.1,
@@ -375,7 +540,7 @@
   },
   {
     "time": 16.202,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -386,7 +551,7 @@
   },
   {
     "time": 16.355,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -397,7 +562,7 @@
   },
   {
     "time": 16.497,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -408,7 +573,7 @@
   },
   {
     "time": 16.699,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -419,7 +584,7 @@
   },
   {
     "time": 16.798,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -430,18 +595,29 @@
   },
   {
     "time": 17.101,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.001,
+    "score": 1.294,
     "source": "drums",
-    "vol": 0.99,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 17.101,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.732,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 17.25,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -452,7 +628,7 @@
   },
   {
     "time": 17.39,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -463,7 +639,7 @@
   },
   {
     "time": 17.542,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -474,29 +650,29 @@
   },
   {
     "time": 17.681,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 1.473,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 17.681,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.743,
+    "score": 1.181,
     "source": "drums",
-    "vol": 0.921,
-    "vote": "raw"
-  },
-  {
-    "time": 17.875,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.209,
-    "source": "drums",
-    "vol": 0.776,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 17.972,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -507,18 +683,29 @@
   },
   {
     "time": 18.262,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.499,
+    "score": 0.659,
     "source": "drums",
-    "vol": 0.855,
+    "vol": 0.898,
     "vote": "raw"
   },
   {
+    "time": 18.263,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.018,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 18.459,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -529,7 +716,7 @@
   },
   {
     "time": 18.558,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -540,7 +727,7 @@
   },
   {
     "time": 18.712,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -551,7 +738,7 @@
   },
   {
     "time": 18.854,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -562,7 +749,7 @@
   },
   {
     "time": 19.052,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -573,7 +760,7 @@
   },
   {
     "time": 19.15,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -584,18 +771,29 @@
   },
   {
     "time": 19.446,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.89,
+    "score": 1.113,
     "source": "drums",
-    "vol": 0.96,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 19.446,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.906,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 19.595,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -606,7 +804,7 @@
   },
   {
     "time": 19.736,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -628,13 +826,24 @@
   },
   {
     "time": 20.027,
-    "lane": 1,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 1.388,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 20.027,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.642,
+    "score": 0.999,
     "source": "drums",
-    "vol": 0.893,
+    "vol": 0.99,
     "vote": "raw"
   },
   {
@@ -654,14 +863,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.652,
+    "score": 0.84,
     "source": "drums",
-    "vol": 0.896,
+    "vol": 0.947,
     "vote": "raw"
   },
   {
-    "time": 20.802,
+    "time": 20.608,
     "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.965,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 20.802,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -672,7 +892,7 @@
   },
   {
     "time": 20.904,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -683,7 +903,7 @@
   },
   {
     "time": 21.057,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -694,25 +914,14 @@
   },
   {
     "time": 21.199,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.059,
+    "score": 0.783,
     "source": "drums",
-    "vol": 1.0,
+    "vol": 0.931,
     "vote": "raw"
-  },
-  {
-    "time": 21.2,
-    "lane": 0,
-    "dur": 0.604,
-    "type": "hold",
-    "midi": 59,
-    "score": 1.382,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
   },
   {
     "time": 21.401,
@@ -727,7 +936,7 @@
   },
   {
     "time": 21.501,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -742,10 +951,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.83,
+    "score": 1.001,
     "source": "drums",
-    "vol": 0.944,
+    "vol": 0.99,
     "vote": "raw"
+  },
+  {
+    "time": 21.803,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.721,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 22.093,
@@ -760,7 +980,7 @@
   },
   {
     "time": 22.244,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -815,7 +1035,7 @@
   },
   {
     "time": 22.965,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
@@ -826,7 +1046,7 @@
   },
   {
     "time": 23.162,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -837,7 +1057,7 @@
   },
   {
     "time": 23.26,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -848,7 +1068,7 @@
   },
   {
     "time": 23.414,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -859,7 +1079,7 @@
   },
   {
     "time": 23.556,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -870,7 +1090,7 @@
   },
   {
     "time": 23.556,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
@@ -881,7 +1101,7 @@
   },
   {
     "time": 23.858,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -909,29 +1129,29 @@
     "midi": 28,
     "score": 0.417,
     "source": "piano",
-    "vol": 0.833,
+    "vol": 0.925,
     "vote": "raw"
   },
   {
     "time": 24.16,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.679,
-    "source": "drums",
-    "vol": 0.903,
-    "vote": "raw"
-  },
-  {
-    "time": 24.309,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 59,
+    "score": 0.693,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 24.16,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.331,
+    "score": 0.867,
     "source": "drums",
-    "vol": 0.809,
+    "vol": 0.954,
     "vote": "raw"
   },
   {
@@ -947,7 +1167,7 @@
   },
   {
     "time": 24.601,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -958,18 +1178,29 @@
   },
   {
     "time": 24.74,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 1.405,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 24.74,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.679,
+    "score": 1.06,
     "source": "drums",
-    "vol": 0.903,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 25.031,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -984,10 +1215,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.509,
+    "score": 0.656,
     "source": "drums",
-    "vol": 0.857,
+    "vol": 0.897,
     "vote": "raw"
+  },
+  {
+    "time": 25.321,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.911,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 25.516,
@@ -1028,10 +1270,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.678,
+    "score": 0.906,
     "source": "drums",
-    "vol": 0.903,
+    "vol": 0.965,
     "vote": "raw"
+  },
+  {
+    "time": 25.913,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 1.146,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 26.111,
@@ -1061,14 +1314,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.868,
+    "score": 1.044,
     "source": "drums",
-    "vol": 0.954,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 26.654,
+    "time": 26.505,
     "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.716,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 26.654,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1079,7 +1343,7 @@
   },
   {
     "time": 26.795,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1101,35 +1365,35 @@
   },
   {
     "time": 27.086,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.678,
+    "score": 1.038,
     "source": "drums",
-    "vol": 0.903,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 27.086,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 32,
-    "score": 0.211,
-    "source": "piano",
-    "vol": 0.777,
-    "vote": "raw"
+    "midi": 62,
+    "score": 1.723,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
   },
   {
-    "time": 27.281,
+    "time": 27.086,
     "lane": 2,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.222,
-    "source": "drums",
-    "vol": 0.78,
+    "midi": 32,
+    "score": 0.349,
+    "source": "piano",
+    "vol": 0.905,
     "vote": "raw"
   },
   {
@@ -1149,10 +1413,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.591,
+    "score": 0.782,
     "source": "drums",
-    "vol": 0.88,
+    "vol": 0.931,
     "vote": "raw"
+  },
+  {
+    "time": 27.667,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.06,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 27.864,
@@ -1167,7 +1442,7 @@
   },
   {
     "time": 27.962,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1178,7 +1453,7 @@
   },
   {
     "time": 28.116,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1189,7 +1464,7 @@
   },
   {
     "time": 28.258,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1200,7 +1475,7 @@
   },
   {
     "time": 28.462,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1211,7 +1486,7 @@
   },
   {
     "time": 28.56,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1222,25 +1497,36 @@
   },
   {
     "time": 28.862,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.019,
+    "score": 1.391,
     "source": "drums",
-    "vol": 0.995,
+    "vol": 1.0,
+    "vote": "raw"
+  },
+  {
+    "time": 28.862,
+    "lane": 1,
+    "dur": 0.58,
+    "type": "hold",
+    "midi": 39,
+    "score": 0.404,
+    "source": "other",
+    "vol": 0.553,
     "vote": "raw"
   },
   {
     "time": 28.862,
     "lane": 2,
-    "dur": 0.58,
-    "type": "hold",
-    "midi": 39,
-    "score": 0.35,
-    "source": "other",
-    "vol": 0.543,
-    "vote": "raw"
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.929,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 29.011,
@@ -1266,7 +1552,7 @@
   },
   {
     "time": 29.301,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1280,10 +1566,32 @@
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 62,
+    "score": 1.622,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 29.442,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.879,
+    "score": 1.449,
     "source": "drums",
-    "vol": 0.957,
+    "vol": 1.0,
+    "vote": "raw"
+  },
+  {
+    "time": 29.636,
+    "lane": 0,
+    "dur": 0.145,
+    "type": "hold",
+    "midi": 61,
+    "score": 0.204,
+    "source": "other",
+    "vol": 0.517,
     "vote": "raw"
   },
   {
@@ -1299,14 +1607,25 @@
   },
   {
     "time": 30.023,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.663,
+    "score": 0.867,
     "source": "drums",
-    "vol": 0.899,
+    "vol": 0.954,
     "vote": "raw"
+  },
+  {
+    "time": 30.023,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.035,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 30.218,
@@ -1328,17 +1647,6 @@
     "score": 0.627,
     "source": "drums",
     "vol": 0.889,
-    "vote": "raw"
-  },
-  {
-    "time": 30.319,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 0.241,
-    "source": "other",
-    "vol": 0.523,
     "vote": "raw"
   },
   {
@@ -1366,17 +1674,17 @@
   {
     "time": 30.615,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 59,
-    "score": 1.296,
+    "score": 1.425,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 30.812,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1387,7 +1695,7 @@
   },
   {
     "time": 31.207,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1398,7 +1706,7 @@
   },
   {
     "time": 31.503,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1442,7 +1750,7 @@
   },
   {
     "time": 32.403,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 66,
@@ -1476,28 +1784,39 @@
   {
     "time": 32.983,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.145,
+    "type": "hold",
     "midi": 64,
-    "score": 2.34,
+    "score": 2.574,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 33.273,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.202,
+    "score": 0.287,
     "source": "drums",
-    "vol": 0.774,
+    "vol": 0.797,
     "vote": "raw"
   },
   {
+    "time": 33.274,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 64,
+    "score": 0.844,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 33.564,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1530,7 +1849,7 @@
   },
   {
     "time": 34.156,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 66,
@@ -1563,7 +1882,7 @@
   },
   {
     "time": 34.456,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1584,14 +1903,25 @@
     "vote": "raw"
   },
   {
+    "time": 35.328,
+    "lane": 0,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 56,
+    "score": 1.283,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 35.329,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.936,
+    "score": 1.482,
     "source": "drums",
-    "vol": 0.973,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
@@ -1614,7 +1944,7 @@
     "score": 1.658,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 35.721,
@@ -1629,7 +1959,7 @@
   },
   {
     "time": 35.777,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1662,7 +1992,7 @@
   },
   {
     "time": 36.362,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1673,14 +2003,25 @@
   },
   {
     "time": 36.513,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.73,
+    "score": 1.028,
     "source": "drums",
-    "vol": 0.917,
+    "vol": 0.998,
     "vote": "raw"
+  },
+  {
+    "time": 36.513,
+    "lane": 0,
+    "dur": 0.296,
+    "type": "hold",
+    "midi": 56,
+    "score": 1.587,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 36.808,
@@ -1705,8 +2046,19 @@
     "vote": "raw"
   },
   {
+    "time": 37.538,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 0.353,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 37.685,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1718,10 +2070,10 @@
   {
     "time": 37.979,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 56,
-    "score": 0.951,
+    "score": 1.046,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -1740,7 +2092,7 @@
   {
     "time": 38.277,
     "lane": 0,
-    "dur": 2.032,
+    "dur": 0.871,
     "type": "hold",
     "midi": 59,
     "score": 2.052,
@@ -1805,14 +2157,25 @@
   },
   {
     "time": 39.751,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.353,
+    "score": 0.491,
     "source": "drums",
-    "vol": 0.815,
+    "vol": 0.853,
     "vote": "raw"
+  },
+  {
+    "time": 39.751,
+    "lane": 1,
+    "dur": 0.145,
+    "type": "hold",
+    "midi": 61,
+    "score": 1.069,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 40.042,
@@ -1820,14 +2183,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.803,
+    "score": 1.114,
     "source": "drums",
-    "vol": 0.937,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 40.042,
+    "lane": 2,
+    "dur": 0.58,
+    "type": "hold",
+    "midi": 64,
+    "score": 1.542,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 40.332,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1838,7 +2212,7 @@
   },
   {
     "time": 40.623,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1848,8 +2222,19 @@
     "vote": "raw"
   },
   {
-    "time": 40.918,
+    "time": 40.772,
     "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 64,
+    "score": 0.359,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 40.918,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1860,7 +2245,7 @@
   },
   {
     "time": 41.061,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1926,7 +2311,7 @@
   },
   {
     "time": 42.388,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1938,10 +2323,10 @@
   {
     "time": 42.681,
     "lane": 1,
-    "dur": 0.991,
-    "type": "hold",
+    "dur": 0.0,
+    "type": "tap",
     "midi": 65,
-    "score": 0.928,
+    "score": 0.844,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -1952,10 +2337,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.378,
+    "score": 0.468,
     "source": "drums",
-    "vol": 0.822,
+    "vol": 0.846,
     "vote": "raw"
+  },
+  {
+    "time": 42.685,
+    "lane": 2,
+    "dur": 0.592,
+    "type": "hold",
+    "midi": 64,
+    "score": 0.921,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 42.98,
@@ -1970,7 +2366,7 @@
   },
   {
     "time": 43.275,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -1992,13 +2388,24 @@
   },
   {
     "time": 43.571,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 64,
+    "score": 1.733,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 43.571,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.796,
+    "score": 1.348,
     "source": "drums",
-    "vol": 0.935,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
@@ -2037,7 +2444,7 @@
   {
     "time": 44.744,
     "lane": 0,
-    "dur": 0.74,
+    "dur": 0.148,
     "type": "hold",
     "midi": 61,
     "score": 1.625,
@@ -2058,18 +2465,29 @@
   },
   {
     "time": 45.039,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.323,
+    "score": 0.469,
     "source": "drums",
-    "vol": 0.807,
+    "vol": 0.847,
     "vote": "raw"
   },
   {
-    "time": 45.14,
+    "time": 45.041,
     "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
+    "midi": 63,
+    "score": 1.228,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 45.14,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2080,7 +2498,7 @@
   },
   {
     "time": 45.195,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2091,7 +2509,7 @@
   },
   {
     "time": 45.336,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2102,7 +2520,7 @@
   },
   {
     "time": 45.625,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2113,7 +2531,7 @@
   },
   {
     "time": 45.763,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2124,7 +2542,7 @@
   },
   {
     "time": 45.917,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2150,25 +2568,36 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.222,
+    "score": 0.329,
     "source": "drums",
-    "vol": 0.78,
+    "vol": 0.809,
     "vote": "raw"
+  },
+  {
+    "time": 46.377,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 56,
+    "score": 1.126,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 46.718,
     "lane": 0,
-    "dur": 1.016,
-    "type": "hold",
+    "dur": 0.0,
+    "type": "tap",
     "midi": 61,
-    "score": 1.46,
+    "score": 1.328,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 46.809,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2179,18 +2608,29 @@
   },
   {
     "time": 47.101,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.88,
+    "score": 1.166,
     "source": "drums",
-    "vol": 0.958,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 47.39,
+    "time": 47.101,
     "lane": 1,
+    "dur": 0.58,
+    "type": "hold",
+    "midi": 63,
+    "score": 1.311,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 47.39,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2201,7 +2641,7 @@
   },
   {
     "time": 47.682,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2213,17 +2653,17 @@
   {
     "time": 47.882,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.296,
+    "type": "hold",
     "midi": 62,
-    "score": 0.791,
+    "score": 0.87,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 47.977,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2260,14 +2700,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.379,
+    "score": 0.544,
     "source": "drums",
-    "vol": 0.822,
+    "vol": 0.867,
     "vote": "raw"
   },
   {
+    "time": 48.576,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 56,
+    "score": 1.107,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 48.866,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 58,
@@ -2279,13 +2730,13 @@
   {
     "time": 49.154,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.29,
+    "type": "hold",
     "midi": 59,
-    "score": 1.178,
+    "score": 1.296,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 49.156,
@@ -2300,35 +2751,35 @@
   },
   {
     "time": 49.446,
-    "lane": 0,
-    "dur": 0.592,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.899,
+    "source": "drums",
+    "vol": 0.963,
+    "vote": "raw"
+  },
+  {
+    "time": 49.741,
+    "lane": 1,
+    "dur": 0.148,
     "type": "hold",
-    "midi": 61,
-    "score": 1.482,
+    "midi": 63,
+    "score": 0.971,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 49.446,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 1.383,
-    "source": "drums",
-    "vol": 1.0,
-    "vote": "raw"
-  },
-  {
     "time": 49.742,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.45,
+    "score": 0.648,
     "source": "drums",
-    "vol": 0.841,
+    "vol": 0.895,
     "vote": "raw"
   },
   {
@@ -2344,7 +2795,7 @@
   },
   {
     "time": 50.328,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2356,10 +2807,10 @@
   {
     "time": 50.619,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 54,
-    "score": 2.252,
+    "score": 2.477,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -2378,10 +2829,21 @@
   {
     "time": 50.915,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.444,
+    "type": "hold",
     "midi": 65,
-    "score": 1.484,
+    "score": 1.632,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 51.507,
+    "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
+    "midi": 68,
+    "score": 0.988,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -2410,7 +2872,7 @@
   },
   {
     "time": 51.998,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2421,7 +2883,7 @@
   },
   {
     "time": 52.395,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2432,7 +2894,7 @@
   },
   {
     "time": 52.685,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2476,7 +2938,7 @@
   },
   {
     "time": 53.252,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2499,17 +2961,17 @@
   {
     "time": 53.477,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.168,
+    "type": "hold",
     "midi": 59,
-    "score": 1.59,
+    "score": 1.749,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 53.477,
-    "lane": 3,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 68,
@@ -2535,20 +2997,42 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.777,
+    "score": 1.116,
     "source": "drums",
-    "vol": 0.93,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 54.007,
+    "time": 53.852,
     "lane": 3,
     "dur": 0.0,
     "type": "tap",
+    "midi": 61,
+    "score": 0.875,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 54.005,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 63,
-    "score": 0.534,
+    "score": 0.886,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 54.007,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 0.771,
     "source": "guitar",
-    "vol": 0.816,
+    "vol": 0.877,
     "vote": "raw"
   },
   {
@@ -2570,12 +3054,23 @@
     "midi": 54,
     "score": 0.766,
     "source": "piano",
-    "vol": 0.927,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 54.444,
+    "time": 54.3,
     "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 64,
+    "score": 0.868,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 54.444,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2586,14 +3081,14 @@
   },
   {
     "time": 54.446,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
-    "midi": 63,
+    "midi": 64,
     "score": 1.218,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "crepe_trust_fallback"
+    "vote": "majority"
   },
   {
     "time": 54.741,
@@ -2607,19 +3102,8 @@
     "vote": "raw"
   },
   {
-    "time": 54.741,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 32,
-    "score": 0.469,
-    "source": "bass",
-    "vol": 0.8,
-    "vote": "raw"
-  },
-  {
     "time": 55.035,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2630,7 +3114,7 @@
   },
   {
     "time": 55.037,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2641,57 +3125,57 @@
   },
   {
     "time": 55.333,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.371,
+    "score": 1.942,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 55.333,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
-    "score": 0.729,
+    "score": 0.958,
     "source": "guitar",
-    "vol": 0.866,
+    "vol": 0.924,
     "vote": "raw"
   },
   {
+    "time": 55.334,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 54,
+    "score": 2.409,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 55.605,
-    "lane": 1,
-    "dur": 1.01,
-    "type": "hold",
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 65,
-    "score": 2.335,
+    "score": 2.122,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 55.609,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
     "score": 1.22,
     "source": "drums",
     "vol": 1.0,
-    "vote": "raw"
-  },
-  {
-    "time": 55.832,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.656,
-    "source": "drums",
-    "vol": 0.897,
     "vote": "raw"
   },
   {
@@ -2722,14 +3206,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.784,
+    "score": 1.299,
     "source": "drums",
-    "vol": 0.932,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 56.209,
+    "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
+    "midi": 68,
+    "score": 1.444,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 56.363,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2740,7 +3235,7 @@
   },
   {
     "time": 56.505,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2751,14 +3246,25 @@
   },
   {
     "time": 56.802,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.555,
+    "score": 0.744,
     "source": "drums",
-    "vol": 0.87,
+    "vol": 0.921,
     "vote": "raw"
+  },
+  {
+    "time": 56.804,
+    "lane": 3,
+    "dur": 0.592,
+    "type": "hold",
+    "midi": 62,
+    "score": 1.025,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 57.097,
@@ -2776,10 +3282,10 @@
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.5,
-    "source": "drums",
-    "vol": 0.855,
+    "midi": 63,
+    "score": 0.787,
+    "source": "guitar",
+    "vol": 0.881,
     "vote": "raw"
   },
   {
@@ -2787,10 +3293,10 @@
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 63,
-    "score": 0.787,
-    "source": "guitar",
-    "vol": 0.881,
+    "midi": 36,
+    "score": 0.5,
+    "source": "drums",
+    "vol": 0.855,
     "vote": "raw"
   },
   {
@@ -2806,7 +3312,7 @@
   },
   {
     "time": 57.567,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 35,
@@ -2817,7 +3323,7 @@
   },
   {
     "time": 57.689,
-    "lane": 3,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
@@ -2850,7 +3356,7 @@
   },
   {
     "time": 58.188,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2861,7 +3367,7 @@
   },
   {
     "time": 58.191,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 62,
@@ -2883,7 +3389,7 @@
   },
   {
     "time": 58.566,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2894,7 +3400,7 @@
   },
   {
     "time": 58.718,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2905,7 +3411,7 @@
   },
   {
     "time": 58.861,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -2927,7 +3433,7 @@
   },
   {
     "time": 58.862,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.444,
     "type": "hold",
     "midi": 62,
@@ -2938,7 +3444,7 @@
   },
   {
     "time": 59.057,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2949,7 +3455,7 @@
   },
   {
     "time": 59.454,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -2957,6 +3463,17 @@
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
+  },
+  {
+    "time": 59.561,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 0.344,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 59.744,
@@ -2997,7 +3514,7 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.194,
+    "score": 1.764,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
@@ -3008,14 +3525,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
-    "score": 0.765,
+    "score": 1.051,
     "source": "guitar",
-    "vol": 0.875,
+    "vol": 0.948,
     "vote": "raw"
   },
   {
+    "time": 60.036,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 54,
+    "score": 2.708,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 60.306,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.514,
     "type": "hold",
     "midi": 65,
@@ -3037,7 +3565,7 @@
   },
   {
     "time": 60.534,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3047,37 +3575,48 @@
     "vote": "raw"
   },
   {
-    "time": 60.768,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.494,
-    "source": "drums",
-    "vol": 0.853,
-    "vote": "raw"
-  },
-  {
     "time": 60.927,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.822,
+    "score": 1.199,
     "source": "drums",
-    "vol": 0.942,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 61.078,
+    "time": 60.928,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
+    "midi": 66,
+    "score": 1.47,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 61.078,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 63,
-    "score": 0.554,
+    "score": 0.808,
     "source": "guitar",
-    "vol": 0.821,
+    "vol": 0.886,
     "vote": "raw"
+  },
+  {
+    "time": 61.083,
+    "lane": 1,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 68,
+    "score": 1.416,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 61.219,
@@ -3085,21 +3624,10 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.887,
+    "score": 0.984,
     "source": "drums",
-    "vol": 1.0,
+    "vol": 0.986,
     "vote": "raw"
-  },
-  {
-    "time": 61.219,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 68,
-    "score": 2.295,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
   },
   {
     "time": 61.509,
@@ -3140,14 +3668,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.689,
+    "score": 0.865,
     "source": "drums",
-    "vol": 0.906,
+    "vol": 0.954,
     "vote": "raw"
   },
   {
+    "time": 62.141,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.101,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 62.392,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3158,7 +3697,7 @@
   },
   {
     "time": 62.392,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
@@ -3201,17 +3740,6 @@
     "vote": "raw"
   },
   {
-    "time": 62.893,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 68,
-    "score": 0.645,
-    "source": "guitar",
-    "vol": 0.844,
-    "vote": "raw"
-  },
-  {
     "time": 63.224,
     "lane": 0,
     "dur": 0.0,
@@ -3246,7 +3774,7 @@
   },
   {
     "time": 63.564,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3301,7 +3829,7 @@
   },
   {
     "time": 64.451,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -3312,7 +3840,7 @@
   },
   {
     "time": 64.453,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3356,29 +3884,18 @@
   },
   {
     "time": 64.749,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
     "score": 1.08,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 65.012,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 55,
-    "score": 1.736,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "crepe_trust_fallback"
-  },
-  {
-    "time": 65.012,
-    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3386,6 +3903,17 @@
     "source": "drums",
     "vol": 0.989,
     "vote": "raw"
+  },
+  {
+    "time": 65.012,
+    "lane": 1,
+    "dur": 0.342,
+    "type": "hold",
+    "midi": 55,
+    "score": 1.91,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
   },
   {
     "time": 65.236,
@@ -3411,14 +3939,25 @@
   },
   {
     "time": 65.624,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.849,
+    "score": 1.199,
     "source": "drums",
-    "vol": 0.949,
+    "vol": 1.0,
     "vote": "raw"
+  },
+  {
+    "time": 65.625,
+    "lane": 0,
+    "dur": 0.296,
+    "type": "hold",
+    "midi": 61,
+    "score": 1.452,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 65.777,
@@ -3433,25 +3972,14 @@
   },
   {
     "time": 65.921,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 1.585,
-    "source": "drums",
-    "vol": 1.0,
-    "vote": "raw"
-  },
-  {
-    "time": 65.922,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 63,
-    "score": 1.635,
-    "source": "vocals",
+    "midi": 36,
+    "score": 1.085,
+    "source": "drums",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "raw"
   },
   {
     "time": 66.217,
@@ -3459,10 +3987,10 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
-    "score": 1.117,
+    "score": 1.175,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "unanimous"
   },
   {
     "time": 66.217,
@@ -3470,9 +3998,9 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.663,
+    "score": 0.7,
     "source": "drums",
-    "vol": 0.899,
+    "vol": 0.909,
     "vote": "raw"
   },
   {
@@ -3481,9 +4009,9 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
-    "score": 1.07,
+    "score": 1.377,
     "source": "guitar",
-    "vol": 0.953,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
@@ -3492,20 +4020,31 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.61,
+    "score": 2.155,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 66.514,
+    "time": 66.513,
     "lane": 1,
+    "dur": 0.435,
+    "type": "hold",
+    "midi": 62,
+    "score": 2.961,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 66.514,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 35,
-    "score": 0.589,
+    "score": 1.025,
     "source": "bass",
-    "vol": 0.83,
+    "vol": 0.941,
     "vote": "raw"
   },
   {
@@ -3517,39 +4056,6 @@
     "score": 0.68,
     "source": "drums",
     "vol": 0.904,
-    "vote": "raw"
-  },
-  {
-    "time": 66.803,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 61,
-    "score": 0.645,
-    "source": "guitar",
-    "vol": 0.845,
-    "vote": "raw"
-  },
-  {
-    "time": 66.973,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 35,
-    "score": 0.549,
-    "source": "bass",
-    "vol": 0.82,
-    "vote": "raw"
-  },
-  {
-    "time": 67.094,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 1.004,
-    "source": "guitar",
-    "vol": 0.936,
     "vote": "raw"
   },
   {
@@ -3568,8 +4074,19 @@
     "lane": 2,
     "dur": 0.0,
     "type": "tap",
+    "midi": 63,
+    "score": 1.004,
+    "source": "guitar",
+    "vol": 0.936,
+    "vote": "raw"
+  },
+  {
+    "time": 67.094,
+    "lane": 0,
+    "dur": 0.499,
+    "type": "hold",
     "midi": 61,
-    "score": 2.026,
+    "score": 2.229,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -3586,19 +4103,8 @@
     "vote": "raw"
   },
   {
-    "time": 67.367,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 61,
-    "score": 0.473,
-    "source": "guitar",
-    "vol": 0.801,
-    "vote": "raw"
-  },
-  {
     "time": 67.593,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3609,14 +4115,25 @@
   },
   {
     "time": 67.595,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 49,
-    "score": 0.522,
+    "score": 0.697,
     "source": "guitar",
-    "vol": 0.813,
+    "vol": 0.858,
     "vote": "raw"
+  },
+  {
+    "time": 67.696,
+    "lane": 1,
+    "dur": 0.482,
+    "type": "hold",
+    "midi": 63,
+    "score": 1.044,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 67.986,
@@ -3718,6 +4235,28 @@
     "vote": "majority"
   },
   {
+    "time": 69.74,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 66,
+    "score": 0.86,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 69.836,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 66,
+    "score": 0.868,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 70.171,
     "lane": 0,
     "dur": 0.0,
@@ -3729,30 +4268,30 @@
     "vote": "raw"
   },
   {
-    "time": 70.622,
-    "lane": 0,
+    "time": 70.332,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 61,
-    "score": 1.03,
+    "midi": 63,
+    "score": 0.854,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 70.919,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 1.178,
+    "time": 70.622,
+    "lane": 0,
+    "dur": 0.296,
+    "type": "hold",
+    "midi": 61,
+    "score": 1.133,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 71.215,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3763,7 +4302,7 @@
   },
   {
     "time": 71.656,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3774,7 +4313,7 @@
   },
   {
     "time": 71.796,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3785,11 +4324,11 @@
   },
   {
     "time": 72.086,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 2,
+    "dur": 0.145,
+    "type": "hold",
     "midi": 66,
-    "score": 0.997,
+    "score": 1.097,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -3807,7 +4346,7 @@
   },
   {
     "time": 72.574,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3840,18 +4379,18 @@
   },
   {
     "time": 72.672,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 3,
+    "dur": 0.148,
+    "type": "hold",
     "midi": 68,
-    "score": 0.54,
+    "score": 0.594,
     "source": "other",
-    "vol": 0.577,
+    "vol": 0.587,
     "vote": "raw"
   },
   {
     "time": 72.826,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3862,7 +4401,7 @@
   },
   {
     "time": 72.968,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3906,7 +4445,7 @@
   },
   {
     "time": 73.862,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3917,7 +4456,7 @@
   },
   {
     "time": 74.013,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3928,7 +4467,7 @@
   },
   {
     "time": 74.152,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3939,7 +4478,7 @@
   },
   {
     "time": 74.346,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3949,19 +4488,30 @@
     "vote": "raw"
   },
   {
-    "time": 74.443,
+    "time": 74.442,
     "lane": 0,
+    "dur": 0.145,
+    "type": "hold",
+    "midi": 61,
+    "score": 1.297,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 74.443,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.554,
+    "score": 0.788,
     "source": "drums",
-    "vol": 0.87,
+    "vol": 0.933,
     "vote": "raw"
   },
   {
     "time": 74.733,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -3972,7 +4522,7 @@
   },
   {
     "time": 74.734,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 66,
@@ -3995,6 +4545,17 @@
   {
     "time": 75.029,
     "lane": 0,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 62,
+    "score": 1.42,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 75.029,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4002,17 +4563,6 @@
     "source": "drums",
     "vol": 0.908,
     "vote": "raw"
-  },
-  {
-    "time": 75.029,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 62,
-    "score": 1.291,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
   },
   {
     "time": 75.183,
@@ -4038,11 +4588,11 @@
   },
   {
     "time": 75.325,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 3,
+    "dur": 0.296,
+    "type": "hold",
     "midi": 61,
-    "score": 1.073,
+    "score": 1.181,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -4061,17 +4611,17 @@
   {
     "time": 75.622,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.296,
+    "type": "hold",
     "midi": 63,
-    "score": 1.493,
+    "score": 1.642,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 75.917,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4082,7 +4632,7 @@
   },
   {
     "time": 76.069,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4093,7 +4643,7 @@
   },
   {
     "time": 76.213,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4103,15 +4653,15 @@
     "vote": "raw"
   },
   {
-    "time": 76.321,
-    "lane": 1,
+    "time": 76.225,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.223,
-    "source": "drums",
-    "vol": 0.78,
-    "vote": "raw"
+    "midi": 63,
+    "score": 0.241,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 76.372,
@@ -4147,14 +4697,25 @@
     "vote": "raw"
   },
   {
+    "time": 76.793,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.26,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 76.794,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.358,
+    "score": 0.583,
     "source": "drums",
-    "vol": 0.817,
+    "vol": 0.877,
     "vote": "raw"
   },
   {
@@ -4191,14 +4752,25 @@
     "vote": "raw"
   },
   {
-    "time": 77.375,
+    "time": 77.373,
     "lane": 1,
+    "dur": 1.036,
+    "type": "hold",
+    "midi": 68,
+    "score": 1.325,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 77.375,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.425,
+    "score": 0.643,
     "source": "drums",
-    "vol": 0.835,
+    "vol": 0.894,
     "vote": "raw"
   },
   {
@@ -4214,24 +4786,13 @@
   },
   {
     "time": 77.67,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
     "score": 0.721,
     "source": "drums",
     "vol": 0.915,
-    "vote": "raw"
-  },
-  {
-    "time": 77.874,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.241,
-    "source": "drums",
-    "vol": 0.785,
     "vote": "raw"
   },
   {
@@ -4247,7 +4808,7 @@
   },
   {
     "time": 78.274,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4269,29 +4830,51 @@
   },
   {
     "time": 78.563,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.367,
-    "source": "drums",
-    "vol": 0.819,
-    "vote": "raw"
-  },
-  {
-    "time": 78.715,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.549,
+    "score": 0.552,
     "source": "drums",
-    "vol": 0.868,
+    "vol": 0.869,
     "vote": "raw"
   },
   {
-    "time": 78.854,
+    "time": 78.565,
     "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 68,
+    "score": 1.29,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 78.715,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.801,
+    "source": "drums",
+    "vol": 0.936,
+    "vote": "raw"
+  },
+  {
+    "time": 78.719,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 68,
+    "score": 1.283,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 78.854,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4302,7 +4885,7 @@
   },
   {
     "time": 79.05,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4313,7 +4896,7 @@
   },
   {
     "time": 79.145,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4324,18 +4907,18 @@
   },
   {
     "time": 79.434,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 1,
+    "dur": 0.296,
+    "type": "hold",
     "midi": 59,
-    "score": 1.457,
+    "score": 1.602,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "unanimous"
   },
   {
     "time": 79.435,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4346,7 +4929,7 @@
   },
   {
     "time": 79.631,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4390,7 +4973,7 @@
   },
   {
     "time": 80.027,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 35,
@@ -4451,7 +5034,7 @@
     "midi": 28,
     "score": 0.301,
     "source": "piano",
-    "vol": 0.801,
+    "vol": 0.89,
     "vote": "raw"
   },
   {
@@ -4511,51 +5094,62 @@
   },
   {
     "time": 81.657,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 3,
+    "dur": 0.273,
+    "type": "hold",
     "midi": 57,
-    "score": 0.968,
+    "score": 1.065,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 81.972,
+    "time": 81.976,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 56,
-    "score": 1.004,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "crepe_trust_fallback"
-  },
-  {
-    "time": 81.976,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
     "midi": 36,
-    "score": 1.15,
+    "score": 1.12,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 82.109,
+    "time": 82.022,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 1.668,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 82.108,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 59,
+    "score": 1.307,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
+  },
+  {
+    "time": 82.109,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.487,
+    "score": 1.212,
     "source": "drums",
-    "vol": 0.852,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 82.24,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.592,
     "type": "hold",
     "midi": 62,
@@ -4566,7 +5160,7 @@
   },
   {
     "time": 82.242,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4577,7 +5171,7 @@
   },
   {
     "time": 82.384,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4587,19 +5181,19 @@
     "vote": "raw"
   },
   {
-    "time": 82.68,
-    "lane": 0,
+    "time": 82.838,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.592,
-    "source": "drums",
-    "vol": 0.88,
-    "vote": "raw"
+    "midi": 70,
+    "score": 0.666,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 82.976,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4607,6 +5201,17 @@
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
+  },
+  {
+    "time": 83.173,
+    "lane": 3,
+    "dur": 0.145,
+    "type": "hold",
+    "midi": 57,
+    "score": 0.902,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 83.417,
@@ -4633,10 +5238,10 @@
   {
     "time": 83.557,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.29,
+    "type": "hold",
     "midi": 59,
-    "score": 1.518,
+    "score": 1.67,
     "source": "vocals",
     "vol": 1.0,
     "vote": "unanimous"
@@ -4654,7 +5259,7 @@
   },
   {
     "time": 83.847,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4665,36 +5270,47 @@
   },
   {
     "time": 84.138,
+    "lane": 0,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 59,
+    "score": 1.582,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 84.334,
     "lane": 2,
     "dur": 0.0,
     "type": "tap",
-    "midi": 59,
-    "score": 1.438,
+    "midi": 36,
+    "score": 1.204,
+    "source": "drums",
+    "vol": 1.0,
+    "vote": "raw"
+  },
+  {
+    "time": 84.43,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 58,
+    "score": 1.1,
     "source": "vocals",
     "vol": 1.0,
     "vote": "unanimous"
   },
   {
-    "time": 84.334,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.896,
-    "source": "drums",
-    "vol": 0.962,
-    "vote": "raw"
-  },
-  {
     "time": 84.433,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.398,
-    "source": "drums",
-    "vol": 0.827,
-    "vote": "raw"
+    "midi": 59,
+    "score": 1.161,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 84.585,
@@ -4709,7 +5325,7 @@
   },
   {
     "time": 84.587,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4742,7 +5358,7 @@
   },
   {
     "time": 85.031,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4753,7 +5369,7 @@
   },
   {
     "time": 85.333,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4763,19 +5379,8 @@
     "vote": "raw"
   },
   {
-    "time": 85.335,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 44,
-    "score": 0.311,
-    "source": "piano",
-    "vol": 0.804,
-    "vote": "raw"
-  },
-  {
     "time": 85.623,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4786,7 +5391,7 @@
   },
   {
     "time": 85.764,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4797,7 +5402,7 @@
   },
   {
     "time": 85.913,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4805,6 +5410,17 @@
     "source": "drums",
     "vol": 0.958,
     "vote": "raw"
+  },
+  {
+    "time": 86.055,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 68,
+    "score": 0.243,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 86.207,
@@ -4820,13 +5436,24 @@
   {
     "time": 86.208,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 66,
-    "score": 1.503,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 65,
+    "score": 1.653,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "crepe_trust_fallback"
+    "vote": "majority"
+  },
+  {
+    "time": 86.506,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.101,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 86.699,
@@ -4918,7 +5545,7 @@
   },
   {
     "time": 87.689,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4940,7 +5567,7 @@
   },
   {
     "time": 87.978,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4951,14 +5578,14 @@
   },
   {
     "time": 87.979,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
     "score": 1.756,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 88.131,
@@ -4973,7 +5600,7 @@
   },
   {
     "time": 88.27,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4984,7 +5611,7 @@
   },
   {
     "time": 88.463,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -4996,10 +5623,10 @@
   {
     "time": 88.559,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.435,
+    "type": "hold",
     "midi": 64,
-    "score": 1.546,
+    "score": 1.701,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -5017,7 +5644,7 @@
   },
   {
     "time": 88.851,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5032,36 +5659,36 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.428,
+    "score": 0.531,
     "source": "drums",
-    "vol": 0.835,
+    "vol": 0.863,
     "vote": "raw"
+  },
+  {
+    "time": 89.165,
+    "lane": 1,
+    "dur": 0.871,
+    "type": "hold",
+    "midi": 58,
+    "score": 0.675,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
   },
   {
     "time": 89.454,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 1.064,
-    "source": "drums",
-    "vol": 1.0,
-    "vote": "raw"
-  },
-  {
-    "time": 89.455,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 58,
-    "score": 1.779,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
+    "midi": 36,
+    "score": 0.71,
+    "source": "drums",
+    "vol": 0.912,
+    "vote": "raw"
   },
   {
     "time": 89.744,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5083,7 +5710,7 @@
   },
   {
     "time": 90.335,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5193,7 +5820,7 @@
   },
   {
     "time": 92.687,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5227,10 +5854,10 @@
   {
     "time": 93.273,
     "lane": 0,
-    "dur": 0.726,
-    "type": "hold",
+    "dur": 0.0,
+    "type": "tap",
     "midi": 62,
-    "score": 1.218,
+    "score": 1.107,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -5248,7 +5875,7 @@
   },
   {
     "time": 93.564,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5259,7 +5886,7 @@
   },
   {
     "time": 93.86,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5270,8 +5897,8 @@
   },
   {
     "time": 94.156,
-    "lane": 3,
-    "dur": 0.888,
+    "lane": 0,
+    "dur": 0.444,
     "type": "hold",
     "midi": 56,
     "score": 2.625,
@@ -5281,7 +5908,7 @@
   },
   {
     "time": 94.156,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5292,7 +5919,7 @@
   },
   {
     "time": 94.158,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5303,7 +5930,7 @@
   },
   {
     "time": 94.3,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5325,7 +5952,7 @@
   },
   {
     "time": 94.603,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5336,7 +5963,7 @@
   },
   {
     "time": 94.749,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5369,7 +5996,7 @@
   },
   {
     "time": 95.732,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5391,7 +6018,7 @@
   },
   {
     "time": 96.211,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5413,7 +6040,7 @@
   },
   {
     "time": 96.502,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5446,51 +6073,40 @@
   },
   {
     "time": 96.796,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 56,
-    "score": 1.281,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
-    "time": 96.796,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 56,
-    "score": 1.248,
+    "score": 1.373,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 96.797,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.218,
+    "score": 0.978,
     "source": "drums",
-    "vol": 1.0,
+    "vol": 0.984,
+    "vote": "raw"
+  },
+  {
+    "time": 96.945,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.372,
+    "source": "drums",
+    "vol": 0.82,
     "vote": "raw"
   },
   {
     "time": 97.094,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 1.971,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
-    "time": 97.094,
-    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5500,8 +6116,19 @@
     "vote": "raw"
   },
   {
+    "time": 97.094,
+    "lane": 3,
+    "dur": 0.308,
+    "type": "hold",
+    "midi": 59,
+    "score": 2.168,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
+  },
+  {
     "time": 97.4,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5512,11 +6139,11 @@
   },
   {
     "time": 97.4,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 0,
+    "dur": 0.154,
+    "type": "hold",
     "midi": 56,
-    "score": 1.657,
+    "score": 1.822,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -5527,14 +6154,14 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
-    "score": 1.264,
+    "score": 1.391,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 97.708,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 68,
@@ -5545,7 +6172,7 @@
   },
   {
     "time": 97.709,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5563,11 +6190,11 @@
     "score": 1.117,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 98.127,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5578,7 +6205,7 @@
   },
   {
     "time": 98.278,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -5593,14 +6220,14 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
-    "score": 1.475,
+    "score": 1.623,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 98.573,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5611,7 +6238,7 @@
   },
   {
     "time": 98.725,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5623,10 +6250,10 @@
   {
     "time": 98.869,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.29,
+    "type": "hold",
     "midi": 64,
-    "score": 1.797,
+    "score": 1.976,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -5636,10 +6263,10 @@
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 66,
-    "score": 1.292,
-    "source": "other",
-    "vol": 0.713,
+    "midi": 36,
+    "score": 1.46,
+    "source": "drums",
+    "vol": 1.0,
     "vote": "raw"
   },
   {
@@ -5647,10 +6274,10 @@
     "lane": 2,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 1.46,
-    "source": "drums",
-    "vol": 1.0,
+    "midi": 66,
+    "score": 1.292,
+    "source": "other",
+    "vol": 0.713,
     "vote": "raw"
   },
   {
@@ -5666,7 +6293,7 @@
   },
   {
     "time": 99.159,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5680,17 +6307,6 @@
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.38,
-    "source": "drums",
-    "vol": 0.823,
-    "vote": "raw"
-  },
-  {
-    "time": 99.299,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
     "midi": 66,
     "score": 0.225,
     "source": "other",
@@ -5698,8 +6314,19 @@
     "vote": "raw"
   },
   {
+    "time": 99.299,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.38,
+    "source": "drums",
+    "vol": 0.823,
+    "vote": "raw"
+  },
+  {
     "time": 99.451,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5710,7 +6337,7 @@
   },
   {
     "time": 99.745,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5722,7 +6349,7 @@
   {
     "time": 100.041,
     "lane": 1,
-    "dur": 1.161,
+    "dur": 1.016,
     "type": "hold",
     "midi": 66,
     "score": 1.572,
@@ -5743,7 +6370,7 @@
   },
   {
     "time": 100.434,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5776,7 +6403,7 @@
   },
   {
     "time": 101.204,
-    "lane": 0,
+    "lane": 1,
     "dur": 1.184,
     "type": "hold",
     "midi": 66,
@@ -5787,7 +6414,7 @@
   },
   {
     "time": 101.796,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5798,7 +6425,7 @@
   },
   {
     "time": 101.99,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5809,7 +6436,7 @@
   },
   {
     "time": 102.091,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5820,7 +6447,7 @@
   },
   {
     "time": 102.388,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5831,11 +6458,11 @@
   },
   {
     "time": 102.681,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
     "midi": 62,
-    "score": 0.845,
+    "score": 0.93,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -5864,18 +6491,7 @@
   },
   {
     "time": 103.275,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 1.677,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
-    "time": 103.275,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5883,6 +6499,17 @@
     "source": "drums",
     "vol": 0.923,
     "vote": "raw"
+  },
+  {
+    "time": 103.275,
+    "lane": 1,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 63,
+    "score": 1.844,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 103.427,
@@ -5963,7 +6590,7 @@
   },
   {
     "time": 105.044,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 56,
@@ -5974,7 +6601,7 @@
   },
   {
     "time": 105.186,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -5992,11 +6619,11 @@
     "score": 1.609,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 105.337,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6096,17 +6723,17 @@
   {
     "time": 106.713,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.3,
+    "type": "hold",
     "midi": 62,
-    "score": 1.285,
+    "score": 1.414,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 106.81,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6117,7 +6744,7 @@
   },
   {
     "time": 107.113,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 68,
@@ -6138,19 +6765,8 @@
     "vote": "raw"
   },
   {
-    "time": 107.413,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 68,
-    "score": 0.237,
-    "source": "other",
-    "vol": 0.523,
-    "vote": "raw"
-  },
-  {
     "time": 107.528,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6161,7 +6777,7 @@
   },
   {
     "time": 107.716,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -6183,7 +6799,7 @@
   },
   {
     "time": 107.855,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6194,47 +6810,25 @@
   },
   {
     "time": 107.994,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.53,
+    "score": 0.78,
     "source": "drums",
-    "vol": 0.863,
+    "vol": 0.93,
     "vote": "raw"
   },
   {
-    "time": 108.123,
+    "time": 107.995,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 63,
-    "score": 0.332,
-    "source": "other",
-    "vol": 0.54,
-    "vote": "raw"
-  },
-  {
-    "time": 108.129,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.921,
-    "source": "drums",
-    "vol": 0.969,
-    "vote": "raw"
-  },
-  {
-    "time": 108.274,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 66,
-    "score": 0.983,
-    "source": "other",
-    "vol": 0.657,
-    "vote": "raw"
+    "midi": 59,
+    "score": 1.307,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 108.274,
@@ -6242,32 +6836,54 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.233,
+    "score": 1.612,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 108.569,
+    "time": 108.274,
     "lane": 2,
     "dur": 0.0,
     "type": "tap",
-    "midi": 36,
-    "score": 0.768,
-    "source": "drums",
-    "vol": 0.927,
+    "midi": 66,
+    "score": 1.224,
+    "source": "other",
+    "vol": 0.7,
     "vote": "raw"
   },
   {
-    "time": 108.672,
+    "time": 108.275,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 1.771,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 108.569,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.344,
+    "score": 1.173,
     "source": "drums",
-    "vol": 0.813,
+    "vol": 1.0,
     "vote": "raw"
+  },
+  {
+    "time": 108.571,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.672,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 108.866,
@@ -6275,18 +6891,29 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 40,
-    "score": 1.503,
+    "score": 2.223,
     "source": "bass",
     "vol": 1.0,
     "vote": "raw"
   },
   {
-    "time": 108.867,
+    "time": 108.866,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
-    "score": 1.343,
+    "score": 1.6,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
+  },
+  {
+    "time": 108.867,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 2.122,
     "source": "piano",
     "vol": 1.0,
     "vote": "raw"
@@ -6305,7 +6932,7 @@
   {
     "time": 109.751,
     "lane": 1,
-    "dur": 1.036,
+    "dur": 0.888,
     "type": "hold",
     "midi": 65,
     "score": 0.692,
@@ -6326,7 +6953,7 @@
   },
   {
     "time": 110.822,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6348,7 +6975,7 @@
   },
   {
     "time": 111.211,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6370,7 +6997,7 @@
   },
   {
     "time": 111.804,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6392,7 +7019,7 @@
   },
   {
     "time": 112.303,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6403,18 +7030,29 @@
   },
   {
     "time": 112.304,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 39,
-    "score": 0.247,
+    "score": 0.316,
     "source": "bass",
-    "vol": 0.743,
+    "vol": 0.761,
     "vote": "raw"
   },
   {
+    "time": 112.305,
+    "lane": 2,
+    "dur": 0.168,
+    "type": "hold",
+    "midi": 59,
+    "score": 0.894,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 112.636,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6425,7 +7063,7 @@
   },
   {
     "time": 112.674,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6446,8 +7084,19 @@
     "vote": "raw"
   },
   {
-    "time": 113.277,
+    "time": 113.174,
     "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 64,
+    "score": 0.843,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 113.277,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6458,7 +7107,7 @@
   },
   {
     "time": 113.278,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 64,
@@ -6469,7 +7118,7 @@
   },
   {
     "time": 113.58,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 32,
@@ -6480,11 +7129,22 @@
   },
   {
     "time": 114.054,
-    "lane": 1,
-    "dur": 1.332,
+    "lane": 0,
+    "dur": 0.296,
     "type": "hold",
     "midi": 59,
     "score": 0.942,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 114.454,
+    "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
+    "midi": 64,
+    "score": 1.177,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -6513,7 +7173,7 @@
   },
   {
     "time": 115.925,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6601,7 +7261,7 @@
   },
   {
     "time": 117.24,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6612,7 +7272,7 @@
   },
   {
     "time": 117.398,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6662,7 +7322,7 @@
     "midi": 53,
     "score": 0.227,
     "source": "piano",
-    "vol": 0.781,
+    "vol": 0.868,
     "vote": "raw"
   },
   {
@@ -6732,8 +7392,19 @@
     "vote": "majority"
   },
   {
-    "time": 119.361,
+    "time": 119.259,
     "lane": 1,
+    "dur": 0.168,
+    "type": "hold",
+    "midi": 66,
+    "score": 0.946,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 119.361,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6744,7 +7415,7 @@
   },
   {
     "time": 119.363,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 28,
@@ -6755,7 +7426,7 @@
   },
   {
     "time": 119.592,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6767,10 +7438,10 @@
   {
     "time": 119.698,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.505,
+    "type": "hold",
     "midi": 68,
-    "score": 1.509,
+    "score": 1.659,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -6781,21 +7452,10 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 2.064,
+    "score": 1.642,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
-  },
-  {
-    "time": 119.739,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 68,
-    "score": 1.837,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
   },
   {
     "time": 120.035,
@@ -6810,7 +7470,7 @@
   },
   {
     "time": 120.035,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6877,13 +7537,13 @@
   {
     "time": 121.466,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.25,
+    "type": "hold",
     "midi": 59,
-    "score": 1.075,
+    "score": 1.182,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 121.494,
@@ -6898,7 +7558,7 @@
   },
   {
     "time": 121.718,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6908,8 +7568,19 @@
     "vote": "raw"
   },
   {
-    "time": 121.949,
+    "time": 121.815,
     "lane": 1,
+    "dur": 0.168,
+    "type": "hold",
+    "midi": 63,
+    "score": 0.812,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 121.949,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6920,18 +7591,18 @@
   },
   {
     "time": 122.095,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 0,
+    "dur": 0.444,
+    "type": "hold",
     "midi": 61,
-    "score": 1.759,
+    "score": 1.934,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 122.095,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6953,7 +7624,7 @@
   },
   {
     "time": 122.587,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6964,18 +7635,18 @@
   },
   {
     "time": 122.686,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.74,
     "type": "hold",
     "midi": 59,
     "score": 1.27,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 122.688,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6986,7 +7657,7 @@
   },
   {
     "time": 122.984,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -6997,7 +7668,7 @@
   },
   {
     "time": 122.984,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 32,
@@ -7008,7 +7679,7 @@
   },
   {
     "time": 123.274,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7019,33 +7690,44 @@
   },
   {
     "time": 123.444,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 32,
-    "score": 0.481,
+    "score": 0.558,
     "source": "bass",
-    "vol": 0.803,
+    "vol": 0.822,
     "vote": "raw"
   },
   {
     "time": 123.564,
     "lane": 0,
+    "dur": 0.125,
+    "type": "hold",
+    "midi": 59,
+    "score": 0.585,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 123.564,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.949,
+    "score": 1.201,
     "source": "drums",
-    "vol": 0.976,
+    "vol": 1.0,
     "vote": "raw"
   },
   {
     "time": 123.811,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 0.607,
+    "dur": 0.374,
+    "type": "hold",
+    "midi": 58,
+    "score": 0.668,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -7063,7 +7745,7 @@
   },
   {
     "time": 124.064,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7074,18 +7756,18 @@
   },
   {
     "time": 124.167,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 3,
+    "dur": 0.514,
+    "type": "hold",
     "midi": 59,
-    "score": 1.008,
+    "score": 1.109,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 124.297,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7096,7 +7778,7 @@
   },
   {
     "time": 124.457,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7108,13 +7790,13 @@
   {
     "time": 124.748,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 64,
-    "score": 1.53,
+    "dur": 0.145,
+    "type": "hold",
+    "midi": 63,
+    "score": 1.683,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "crepe_trust_fallback"
+    "vote": "majority"
   },
   {
     "time": 124.749,
@@ -7129,7 +7811,7 @@
   },
   {
     "time": 124.94,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7147,7 +7829,7 @@
     "score": 1.307,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "unanimous"
   },
   {
     "time": 125.039,
@@ -7184,7 +7866,7 @@
   },
   {
     "time": 125.781,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 35,
@@ -7243,9 +7925,9 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 51,
-    "score": 0.285,
+    "score": 0.364,
     "source": "piano",
-    "vol": 0.797,
+    "vol": 0.909,
     "vote": "raw"
   },
   {
@@ -7254,14 +7936,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.057,
+    "score": 1.626,
     "source": "drums",
     "vol": 1.0,
     "vote": "raw"
   },
   {
+    "time": 126.514,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.761,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 126.803,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7272,7 +7965,7 @@
   },
   {
     "time": 126.807,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 35,
@@ -7280,6 +7973,17 @@
     "source": "bass",
     "vol": 0.764,
     "vote": "raw"
+  },
+  {
+    "time": 126.947,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 0.688,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 127.094,
@@ -7317,13 +8021,24 @@
   {
     "time": 128.56,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.444,
+    "type": "hold",
     "midi": 66,
-    "score": 0.972,
+    "score": 1.069,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
+  },
+  {
+    "time": 129.164,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 62,
+    "score": 0.858,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
   },
   {
     "time": 129.45,
@@ -7338,7 +8053,7 @@
   },
   {
     "time": 130.031,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7349,7 +8064,7 @@
   },
   {
     "time": 130.484,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7360,7 +8075,7 @@
   },
   {
     "time": 130.623,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7372,10 +8087,10 @@
   {
     "time": 130.912,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.39,
+    "type": "hold",
     "midi": 66,
-    "score": 1.016,
+    "score": 1.118,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -7393,7 +8108,7 @@
   },
   {
     "time": 131.204,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7404,7 +8119,7 @@
   },
   {
     "time": 131.402,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7415,40 +8130,40 @@
   },
   {
     "time": 131.499,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 68,
-    "score": 0.312,
-    "source": "other",
-    "vol": 0.536,
-    "vote": "raw"
-  },
-  {
-    "time": 131.5,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.527,
-    "source": "drums",
-    "vol": 0.862,
-    "vote": "raw"
-  },
-  {
-    "time": 131.502,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 1.66,
+    "dur": 0.395,
+    "type": "hold",
+    "midi": 62,
+    "score": 1.246,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 131.654,
+    "time": 131.499,
     "lane": 1,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 68,
+    "score": 0.339,
+    "source": "other",
+    "vol": 0.541,
+    "vote": "raw"
+  },
+  {
+    "time": 131.5,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.521,
+    "source": "drums",
+    "vol": 0.861,
+    "vote": "raw"
+  },
+  {
+    "time": 131.654,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7459,7 +8174,7 @@
   },
   {
     "time": 131.796,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7470,7 +8185,7 @@
   },
   {
     "time": 131.994,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7481,7 +8196,7 @@
   },
   {
     "time": 132.092,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7492,7 +8207,7 @@
   },
   {
     "time": 132.388,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7536,7 +8251,7 @@
   },
   {
     "time": 132.98,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7547,7 +8262,7 @@
   },
   {
     "time": 133.264,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 64,
@@ -7569,7 +8284,7 @@
   },
   {
     "time": 133.549,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7580,11 +8295,11 @@
   },
   {
     "time": 133.55,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 1,
+    "dur": 0.148,
+    "type": "hold",
     "midi": 66,
-    "score": 2.134,
+    "score": 2.347,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -7614,17 +8329,17 @@
   {
     "time": 133.845,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 63,
-    "score": 1.315,
+    "score": 1.447,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 133.999,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7636,10 +8351,10 @@
   {
     "time": 134.141,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.302,
+    "type": "hold",
     "midi": 61,
-    "score": 1.455,
+    "score": 1.6,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -7668,7 +8383,7 @@
   },
   {
     "time": 134.345,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7678,30 +8393,19 @@
     "vote": "raw"
   },
   {
-    "time": 134.442,
+    "time": 134.443,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 63,
-    "score": 1.447,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
-    "time": 134.443,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
     "midi": 36,
-    "score": 1.37,
+    "score": 0.795,
     "source": "drums",
-    "vol": 1.0,
+    "vol": 0.935,
     "vote": "raw"
   },
   {
     "time": 134.745,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7712,7 +8416,7 @@
   },
   {
     "time": 134.894,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7723,7 +8427,7 @@
   },
   {
     "time": 135.035,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7734,7 +8438,7 @@
   },
   {
     "time": 135.178,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7756,7 +8460,7 @@
   },
   {
     "time": 135.521,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7768,10 +8472,10 @@
   {
     "time": 135.614,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.145,
+    "type": "hold",
     "midi": 61,
-    "score": 1.402,
+    "score": 1.542,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -7811,7 +8515,7 @@
   },
   {
     "time": 136.104,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7823,12 +8527,23 @@
   {
     "time": 136.202,
     "lane": 1,
+    "dur": 0.148,
+    "type": "hold",
+    "midi": 68,
+    "score": 1.115,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 136.202,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.433,
+    "score": 0.602,
     "source": "drums",
-    "vol": 0.837,
+    "vol": 0.882,
     "vote": "raw"
   },
   {
@@ -7862,11 +8577,11 @@
     "score": 2.513,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "unanimous"
   },
   {
     "time": 136.7,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7887,19 +8602,8 @@
     "vote": "raw"
   },
   {
-    "time": 136.811,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 34,
-    "score": 0.287,
-    "source": "bass",
-    "vol": 0.753,
-    "vote": "raw"
-  },
-  {
     "time": 137.101,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7910,29 +8614,51 @@
   },
   {
     "time": 137.249,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.393,
-    "source": "drums",
-    "vol": 0.826,
-    "vote": "raw"
-  },
-  {
-    "time": 137.39,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.475,
+    "score": 0.603,
     "source": "drums",
-    "vol": 0.848,
+    "vol": 0.883,
     "vote": "raw"
   },
   {
-    "time": 137.543,
+    "time": 137.249,
     "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 68,
+    "score": 1.069,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 137.39,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.749,
+    "source": "drums",
+    "vol": 0.922,
+    "vote": "raw"
+  },
+  {
+    "time": 137.392,
+    "lane": 1,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 68,
+    "score": 1.738,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 137.543,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -7953,17 +8679,6 @@
     "vote": "raw"
   },
   {
-    "time": 137.875,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.274,
-    "source": "drums",
-    "vol": 0.794,
-    "vote": "raw"
-  },
-  {
     "time": 137.972,
     "lane": 0,
     "dur": 0.0,
@@ -7980,10 +8695,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.48,
+    "score": 0.688,
     "source": "drums",
-    "vol": 0.85,
+    "vol": 0.906,
     "vote": "raw"
+  },
+  {
+    "time": 138.263,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 1.383,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
   },
   {
     "time": 138.457,
@@ -8013,10 +8739,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.485,
+    "score": 0.739,
     "source": "drums",
-    "vol": 0.851,
+    "vol": 0.919,
     "vote": "raw"
+  },
+  {
+    "time": 138.713,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.047,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 138.855,
@@ -8042,7 +8779,7 @@
   },
   {
     "time": 139.15,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8053,7 +8790,7 @@
   },
   {
     "time": 139.159,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 39,
@@ -8063,8 +8800,19 @@
     "vote": "raw"
   },
   {
+    "time": 139.302,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 0.882,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 139.447,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8075,7 +8823,7 @@
   },
   {
     "time": 139.733,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.726,
     "type": "hold",
     "midi": 60,
@@ -8086,7 +8834,7 @@
   },
   {
     "time": 139.885,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8097,7 +8845,7 @@
   },
   {
     "time": 140.027,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8108,7 +8856,7 @@
   },
   {
     "time": 140.229,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8130,7 +8878,7 @@
   },
   {
     "time": 140.489,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.569,
     "type": "hold",
     "midi": 56,
@@ -8141,7 +8889,7 @@
   },
   {
     "time": 140.774,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 28,
@@ -8163,7 +8911,7 @@
   },
   {
     "time": 140.915,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8174,8 +8922,8 @@
   },
   {
     "time": 141.056,
-    "lane": 2,
-    "dur": 0.604,
+    "lane": 1,
+    "dur": 0.302,
     "type": "hold",
     "midi": 62,
     "score": 1.88,
@@ -8185,7 +8933,7 @@
   },
   {
     "time": 141.058,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8196,7 +8944,7 @@
   },
   {
     "time": 141.2,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8217,6 +8965,17 @@
     "vote": "raw"
   },
   {
+    "time": 141.666,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 58,
+    "score": 0.513,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
+  },
+  {
     "time": 141.804,
     "lane": 1,
     "dur": 0.0,
@@ -8228,8 +8987,19 @@
     "vote": "raw"
   },
   {
+    "time": 141.951,
+    "lane": 0,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 57,
+    "score": 0.613,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
     "time": 142.245,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8240,29 +9010,18 @@
   },
   {
     "time": 142.384,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 1.409,
+    "score": 0.87,
     "source": "drums",
-    "vol": 1.0,
+    "vol": 0.955,
     "vote": "raw"
   },
   {
-    "time": 142.384,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 1.547,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "unanimous"
-  },
-  {
     "time": 142.576,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 63,
@@ -8294,19 +9053,30 @@
     "vote": "raw"
   },
   {
-    "time": 142.965,
+    "time": 142.821,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
-    "midi": 59,
-    "score": 1.159,
+    "midi": 58,
+    "score": 0.639,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
+  },
+  {
+    "time": 142.965,
+    "lane": 0,
+    "dur": 0.444,
+    "type": "hold",
+    "midi": 59,
+    "score": 1.275,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 143.161,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8316,41 +9086,30 @@
     "vote": "raw"
   },
   {
-    "time": 143.26,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 1.312,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "unanimous"
-  },
-  {
     "time": 143.261,
     "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.624,
+    "score": 0.377,
     "source": "drums",
-    "vol": 0.888,
+    "vol": 0.822,
     "vote": "raw"
   },
   {
     "time": 143.411,
     "lane": 1,
-    "dur": 0.906,
+    "dur": 0.755,
     "type": "hold",
-    "midi": 63,
+    "midi": 62,
     "score": 1.255,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "crepe_trust_fallback"
+    "vote": "majority"
   },
   {
     "time": 143.414,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8427,7 +9186,7 @@
   },
   {
     "time": 144.583,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8438,7 +9197,7 @@
   },
   {
     "time": 144.592,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8446,6 +9205,17 @@
     "source": "drums",
     "vol": 0.871,
     "vote": "raw"
+  },
+  {
+    "time": 144.627,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 68,
+    "score": 0.362,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 144.741,
@@ -8460,7 +9230,7 @@
   },
   {
     "time": 145.051,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8471,18 +9241,18 @@
   },
   {
     "time": 145.367,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 2,
+    "dur": 0.273,
+    "type": "hold",
     "midi": 62,
-    "score": 1.516,
+    "score": 1.667,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 145.508,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8504,7 +9274,7 @@
   },
   {
     "time": 145.772,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8525,19 +9295,8 @@
     "vote": "raw"
   },
   {
-    "time": 146.112,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.307,
-    "source": "drums",
-    "vol": 0.803,
-    "vote": "raw"
-  },
-  {
     "time": 146.209,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8548,7 +9307,7 @@
   },
   {
     "time": 146.21,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 62,
@@ -8558,8 +9317,19 @@
     "vote": "majority"
   },
   {
+    "time": 146.401,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 61,
+    "score": 0.844,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
     "time": 146.506,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8570,7 +9340,7 @@
   },
   {
     "time": 146.697,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8581,7 +9351,7 @@
   },
   {
     "time": 146.795,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8592,11 +9362,22 @@
   },
   {
     "time": 146.796,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
-    "midi": 59,
+    "midi": 60,
     "score": 1.23,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 146.89,
+    "lane": 0,
+    "dur": 0.296,
+    "type": "hold",
+    "midi": 59,
+    "score": 0.698,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -8613,30 +9394,19 @@
     "vote": "raw"
   },
   {
-    "time": 147.232,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 59,
-    "score": 0.429,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
     "time": 147.379,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 1,
+    "dur": 0.444,
+    "type": "hold",
     "midi": 66,
-    "score": 1.126,
+    "score": 1.239,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
     "time": 147.382,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8647,7 +9417,7 @@
   },
   {
     "time": 147.539,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8669,7 +9439,7 @@
   },
   {
     "time": 147.872,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8679,23 +9449,34 @@
     "vote": "raw"
   },
   {
-    "time": 147.969,
+    "time": 147.968,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 62,
+    "score": 1.451,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 147.969,
+    "lane": 3,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.549,
+    "score": 0.831,
     "source": "drums",
-    "vol": 0.868,
+    "vol": 0.944,
     "vote": "raw"
   },
   {
     "time": 148.259,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.302,
+    "type": "hold",
     "midi": 60,
-    "score": 1.779,
+    "score": 1.957,
     "source": "vocals",
     "vol": 1.0,
     "vote": "crepe_trust_fallback"
@@ -8713,7 +9494,7 @@
   },
   {
     "time": 148.459,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8721,17 +9502,6 @@
     "source": "drums",
     "vol": 0.879,
     "vote": "raw"
-  },
-  {
-    "time": 148.561,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 63,
-    "score": 1.058,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
   },
   {
     "time": 148.863,
@@ -8768,11 +9538,11 @@
   },
   {
     "time": 149.733,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "lane": 3,
+    "dur": 0.389,
+    "type": "hold",
     "midi": 66,
-    "score": 1.089,
+    "score": 1.198,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -8801,7 +9571,7 @@
   },
   {
     "time": 150.222,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8834,7 +9604,7 @@
   },
   {
     "time": 150.473,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8845,7 +9615,7 @@
   },
   {
     "time": 150.616,
-    "lane": 3,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8867,7 +9637,7 @@
   },
   {
     "time": 150.918,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8921,6 +9691,17 @@
     "vote": "raw"
   },
   {
+    "time": 151.664,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 0.286,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 151.8,
     "lane": 0,
     "dur": 0.0,
@@ -8945,10 +9726,10 @@
   {
     "time": 152.089,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.435,
+    "type": "hold",
     "midi": 65,
-    "score": 1.669,
+    "score": 1.836,
     "source": "vocals",
     "vol": 1.0,
     "vote": "crepe_trust_fallback"
@@ -8965,8 +9746,19 @@
     "vote": "raw"
   },
   {
+    "time": 152.38,
+    "lane": 2,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 36,
+    "score": 0.522,
+    "source": "drums",
+    "vol": 0.861,
+    "vote": "raw"
+  },
+  {
     "time": 152.575,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -8978,10 +9770,10 @@
   {
     "time": 152.675,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 61,
-    "score": 1.297,
+    "score": 1.427,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -8999,40 +9791,29 @@
   },
   {
     "time": 152.831,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.558,
+    "score": 0.649,
     "source": "drums",
-    "vol": 0.871,
+    "vol": 0.895,
     "vote": "raw"
   },
   {
-    "time": 152.972,
-    "lane": 3,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 61,
-    "score": 1.571,
-    "source": "vocals",
-    "vol": 1.0,
-    "vote": "majority"
-  },
-  {
     "time": 152.973,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.994,
+    "score": 0.611,
     "source": "drums",
-    "vol": 0.988,
+    "vol": 0.885,
     "vote": "raw"
   },
   {
     "time": 153.171,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9044,10 +9825,10 @@
   {
     "time": 153.267,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.296,
+    "type": "hold",
     "midi": 63,
-    "score": 1.325,
+    "score": 1.457,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
@@ -9065,7 +9846,7 @@
   },
   {
     "time": 153.565,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9130,19 +9911,30 @@
     "vote": "raw"
   },
   {
+    "time": 154.434,
+    "lane": 1,
+    "dur": 0.435,
+    "type": "hold",
+    "midi": 71,
+    "score": 1.009,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
     "time": 154.435,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.408,
+    "score": 0.595,
     "source": "drums",
-    "vol": 0.83,
+    "vol": 0.881,
     "vote": "raw"
   },
   {
     "time": 154.726,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9171,7 +9963,7 @@
     "score": 2.015,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "majority"
+    "vote": "crepe_trust_fallback"
   },
   {
     "time": 155.022,
@@ -9322,14 +10114,25 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.764,
+    "score": 0.989,
     "source": "drums",
-    "vol": 0.926,
+    "vol": 0.987,
     "vote": "raw"
   },
   {
-    "time": 157.379,
+    "time": 157.283,
     "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 60,
+    "score": 0.882,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 157.379,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
@@ -9339,41 +10142,19 @@
     "vote": "crepe_trust_fallback"
   },
   {
-    "time": 157.379,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.71,
-    "source": "drums",
-    "vol": 0.912,
-    "vote": "raw"
-  },
-  {
     "time": 157.533,
     "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.148,
+    "type": "hold",
     "midi": 63,
-    "score": 1.645,
+    "score": 1.809,
     "source": "vocals",
     "vol": 1.0,
     "vote": "majority"
   },
   {
-    "time": 157.535,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.823,
-    "source": "drums",
-    "vol": 0.942,
-    "vote": "raw"
-  },
-  {
     "time": 157.675,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9384,7 +10165,7 @@
   },
   {
     "time": 157.824,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 64,
@@ -9399,10 +10180,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.687,
+    "score": 0.998,
     "source": "drums",
-    "vol": 0.905,
+    "vol": 0.989,
     "vote": "raw"
+  },
+  {
+    "time": 157.972,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.357,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 158.267,
@@ -9410,10 +10202,21 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.703,
+    "score": 0.956,
     "source": "drums",
-    "vol": 0.91,
+    "vol": 0.978,
     "vote": "raw"
+  },
+  {
+    "time": 158.268,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 63,
+    "score": 1.244,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 158.463,
@@ -9505,7 +10308,7 @@
   },
   {
     "time": 159.636,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9527,7 +10330,7 @@
   },
   {
     "time": 159.735,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9559,17 +10362,6 @@
     "vote": "raw"
   },
   {
-    "time": 160.23,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.223,
-    "source": "drums",
-    "vol": 0.78,
-    "vote": "raw"
-  },
-  {
     "time": 160.327,
     "lane": 1,
     "dur": 0.0,
@@ -9594,13 +10386,13 @@
   {
     "time": 160.623,
     "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
+    "dur": 0.145,
+    "type": "hold",
     "midi": 59,
-    "score": 1.865,
+    "score": 2.051,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 160.624,
@@ -9615,7 +10407,7 @@
   },
   {
     "time": 160.815,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9626,7 +10418,7 @@
   },
   {
     "time": 160.914,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9636,19 +10428,52 @@
     "vote": "raw"
   },
   {
-    "time": 161.063,
+    "time": 160.917,
     "lane": 0,
     "dur": 0.0,
     "type": "tap",
+    "midi": 58,
+    "score": 1.133,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 161.015,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 58,
+    "score": 1.28,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 161.063,
+    "lane": 1,
+    "dur": 0.0,
+    "type": "tap",
     "midi": 36,
-    "score": 0.497,
+    "score": 1.001,
     "source": "drums",
-    "vol": 0.854,
+    "vol": 0.99,
     "vote": "raw"
   },
   {
+    "time": 161.099,
+    "lane": 0,
+    "dur": 0.0,
+    "type": "tap",
+    "midi": 59,
+    "score": 1.127,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "unanimous"
+  },
+  {
     "time": 161.204,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9669,19 +10494,8 @@
     "vote": "majority"
   },
   {
-    "time": 161.399,
-    "lane": 1,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.26,
-    "source": "drums",
-    "vol": 0.79,
-    "vote": "raw"
-  },
-  {
     "time": 161.494,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9692,7 +10506,7 @@
   },
   {
     "time": 161.785,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9769,7 +10583,7 @@
   },
   {
     "time": 163.129,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9780,7 +10594,7 @@
   },
   {
     "time": 163.27,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9836,12 +10650,23 @@
   {
     "time": 163.851,
     "lane": 1,
+    "dur": 0.29,
+    "type": "hold",
+    "midi": 53,
+    "score": 1.258,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "crepe_trust_fallback"
+  },
+  {
+    "time": 163.851,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.484,
+    "score": 0.689,
     "source": "drums",
-    "vol": 0.851,
+    "vol": 0.906,
     "vote": "raw"
   },
   {
@@ -9905,36 +10730,36 @@
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.853,
+    "score": 1.258,
     "source": "drums",
-    "vol": 0.95,
+    "vol": 1.0,
     "vote": "raw"
+  },
+  {
+    "time": 164.734,
+    "lane": 1,
+    "dur": 0.296,
+    "type": "hold",
+    "midi": 63,
+    "score": 2.149,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
   },
   {
     "time": 164.735,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 32,
-    "score": 0.356,
+    "score": 0.634,
     "source": "bass",
-    "vol": 0.771,
-    "vote": "raw"
-  },
-  {
-    "time": 164.932,
-    "lane": 0,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 36,
-    "score": 0.28,
-    "source": "drums",
-    "vol": 0.796,
+    "vol": 0.842,
     "vote": "raw"
   },
   {
     "time": 165.029,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -9945,7 +10770,7 @@
   },
   {
     "time": 165.031,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 61,
@@ -9989,7 +10814,7 @@
   },
   {
     "time": 165.778,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10000,7 +10825,7 @@
   },
   {
     "time": 165.918,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10011,7 +10836,7 @@
   },
   {
     "time": 166.208,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 64,
@@ -10022,7 +10847,7 @@
   },
   {
     "time": 166.208,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10033,7 +10858,7 @@
   },
   {
     "time": 166.693,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10051,7 +10876,7 @@
     "score": 1.531,
     "source": "vocals",
     "vol": 1.0,
-    "vote": "unanimous"
+    "vote": "majority"
   },
   {
     "time": 166.948,
@@ -10088,7 +10913,7 @@
   },
   {
     "time": 167.285,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10099,7 +10924,7 @@
   },
   {
     "time": 167.386,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10176,7 +11001,7 @@
   },
   {
     "time": 168.565,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10187,7 +11012,7 @@
   },
   {
     "time": 168.855,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10198,7 +11023,7 @@
   },
   {
     "time": 169.048,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10253,7 +11078,7 @@
   },
   {
     "time": 169.436,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 54,
@@ -10264,7 +11089,7 @@
   },
   {
     "time": 169.639,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10275,7 +11100,7 @@
   },
   {
     "time": 169.737,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10286,7 +11111,7 @@
   },
   {
     "time": 170.039,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10297,7 +11122,7 @@
   },
   {
     "time": 170.231,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10308,7 +11133,7 @@
   },
   {
     "time": 170.329,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10341,7 +11166,7 @@
   },
   {
     "time": 170.62,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10353,7 +11178,7 @@
   {
     "time": 170.908,
     "lane": 1,
-    "dur": 0.58,
+    "dur": 0.389,
     "type": "hold",
     "midi": 63,
     "score": 0.757,
@@ -10374,7 +11199,7 @@
   },
   {
     "time": 171.062,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 70,
@@ -10385,7 +11210,7 @@
   },
   {
     "time": 171.2,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10396,7 +11221,7 @@
   },
   {
     "time": 171.397,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10418,7 +11243,7 @@
   },
   {
     "time": 171.497,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10429,7 +11254,7 @@
   },
   {
     "time": 171.497,
-    "lane": 3,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 71,
@@ -10495,7 +11320,7 @@
   },
   {
     "time": 172.686,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10506,7 +11331,7 @@
   },
   {
     "time": 172.782,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 44,
@@ -10528,7 +11353,7 @@
   },
   {
     "time": 172.839,
-    "lane": 3,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 52,
@@ -10539,7 +11364,7 @@
   },
   {
     "time": 172.977,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10561,7 +11386,7 @@
   },
   {
     "time": 173.557,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10572,7 +11397,7 @@
   },
   {
     "time": 173.708,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 56,
@@ -10594,7 +11419,7 @@
   },
   {
     "time": 173.853,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10605,7 +11430,7 @@
   },
   {
     "time": 174.007,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10616,7 +11441,7 @@
   },
   {
     "time": 174.149,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10660,7 +11485,7 @@
   },
   {
     "time": 174.741,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10715,29 +11540,40 @@
   },
   {
     "time": 175.19,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
-    "score": 0.479,
+    "score": 0.653,
     "source": "drums",
-    "vol": 0.849,
+    "vol": 0.896,
     "vote": "raw"
   },
   {
     "time": 175.194,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 73,
-    "score": 0.317,
+    "score": 0.399,
     "source": "guitar",
-    "vol": 0.761,
+    "vol": 0.782,
     "vote": "raw"
   },
   {
-    "time": 175.333,
+    "time": 175.198,
     "lane": 0,
+    "dur": 0.725,
+    "type": "hold",
+    "midi": 59,
+    "score": 0.789,
+    "source": "vocals",
+    "vol": 1.0,
+    "vote": "majority"
+  },
+  {
+    "time": 175.333,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10747,19 +11583,8 @@
     "vote": "raw"
   },
   {
-    "time": 175.334,
-    "lane": 2,
-    "dur": 0.0,
-    "type": "tap",
-    "midi": 75,
-    "score": 0.266,
-    "source": "guitar",
-    "vol": 0.748,
-    "vote": "raw"
-  },
-  {
     "time": 175.624,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10770,7 +11595,7 @@
   },
   {
     "time": 175.914,
-    "lane": 1,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10781,7 +11606,7 @@
   },
   {
     "time": 176.023,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 91,
@@ -10792,7 +11617,7 @@
   },
   {
     "time": 176.109,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10803,7 +11628,7 @@
   },
   {
     "time": 176.21,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10814,7 +11639,7 @@
   },
   {
     "time": 176.364,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10858,7 +11683,7 @@
   },
   {
     "time": 176.802,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10869,7 +11694,7 @@
   },
   {
     "time": 177.098,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10880,7 +11705,7 @@
   },
   {
     "time": 177.293,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10891,7 +11716,7 @@
   },
   {
     "time": 177.394,
-    "lane": 3,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10957,7 +11782,7 @@
   },
   {
     "time": 178.555,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10968,7 +11793,7 @@
   },
   {
     "time": 178.709,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -10990,7 +11815,7 @@
   },
   {
     "time": 179.055,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11001,7 +11826,7 @@
   },
   {
     "time": 179.153,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11012,7 +11837,7 @@
   },
   {
     "time": 179.455,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11023,7 +11848,7 @@
   },
   {
     "time": 179.455,
-    "lane": 2,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 75,
@@ -11034,7 +11859,7 @@
   },
   {
     "time": 179.646,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11045,7 +11870,7 @@
   },
   {
     "time": 179.745,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11056,7 +11881,7 @@
   },
   {
     "time": 179.896,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11067,7 +11892,7 @@
   },
   {
     "time": 180.035,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11078,7 +11903,7 @@
   },
   {
     "time": 180.326,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11089,7 +11914,7 @@
   },
   {
     "time": 180.616,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11100,7 +11925,7 @@
   },
   {
     "time": 180.765,
-    "lane": 0,
+    "lane": 3,
     "dur": 0.0,
     "type": "tap",
     "midi": 73,
@@ -11111,7 +11936,7 @@
   },
   {
     "time": 180.811,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11122,7 +11947,7 @@
   },
   {
     "time": 180.912,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11133,7 +11958,7 @@
   },
   {
     "time": 181.066,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11144,7 +11969,7 @@
   },
   {
     "time": 181.208,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11155,7 +11980,7 @@
   },
   {
     "time": 181.406,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11166,7 +11991,7 @@
   },
   {
     "time": 181.504,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11177,7 +12002,7 @@
   },
   {
     "time": 181.8,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11188,7 +12013,7 @@
   },
   {
     "time": 181.995,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11199,7 +12024,7 @@
   },
   {
     "time": 182.096,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11210,7 +12035,7 @@
   },
   {
     "time": 182.251,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11221,7 +12046,7 @@
   },
   {
     "time": 182.255,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
@@ -11265,7 +12090,7 @@
   },
   {
     "time": 183.169,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11276,7 +12101,7 @@
   },
   {
     "time": 183.173,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
@@ -11287,7 +12112,7 @@
   },
   {
     "time": 183.268,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11298,7 +12123,7 @@
   },
   {
     "time": 183.423,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11309,7 +12134,7 @@
   },
   {
     "time": 183.565,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11320,7 +12145,7 @@
   },
   {
     "time": 183.565,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
@@ -11331,7 +12156,7 @@
   },
   {
     "time": 183.86,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11342,7 +12167,7 @@
   },
   {
     "time": 184.157,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11353,7 +12178,7 @@
   },
   {
     "time": 184.158,
-    "lane": 1,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 59,
@@ -11364,7 +12189,7 @@
   },
   {
     "time": 184.306,
-    "lane": 2,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11375,7 +12200,7 @@
   },
   {
     "time": 184.446,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11397,7 +12222,7 @@
   },
   {
     "time": 184.737,
-    "lane": 2,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11408,7 +12233,7 @@
   },
   {
     "time": 185.027,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11419,7 +12244,7 @@
   },
   {
     "time": 185.318,
-    "lane": 3,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11430,7 +12255,7 @@
   },
   {
     "time": 185.518,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11441,7 +12266,7 @@
   },
   {
     "time": 185.62,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11452,7 +12277,7 @@
   },
   {
     "time": 185.78,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11463,7 +12288,7 @@
   },
   {
     "time": 185.921,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11474,7 +12299,7 @@
   },
   {
     "time": 186.217,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11485,7 +12310,7 @@
   },
   {
     "time": 186.514,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11496,7 +12321,7 @@
   },
   {
     "time": 186.66,
-    "lane": 0,
+    "lane": 1,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11507,7 +12332,7 @@
   },
   {
     "time": 186.809,
-    "lane": 1,
+    "lane": 0,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,
@@ -11551,7 +12376,7 @@
   },
   {
     "time": 188.29,
-    "lane": 0,
+    "lane": 2,
     "dur": 0.0,
     "type": "tap",
     "midi": 36,

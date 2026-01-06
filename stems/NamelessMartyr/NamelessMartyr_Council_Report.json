@@ -20,6 +20,46 @@
     "final_midi": null
   },
   {
+    "time": 12.628,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 13.267,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.63
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
     "time": 13.58,
     "inputs": {
       "FCPE": {
@@ -31,13 +71,93 @@
         "conf": 0.39
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 13.615,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 55,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 55
+  },
+  {
+    "time": 14.254,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.7
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 14.869,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.81
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 62
+  },
+  {
+    "time": 15.276,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
   },
   {
     "time": 15.879,
@@ -51,13 +171,213 @@
         "conf": 0.9
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 63
+  },
+  {
+    "time": 18.526,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.43
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 18.7,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 19.223,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.69
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 62
+  },
+  {
+    "time": 19.908,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.49
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 20.268,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.74
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 20.558,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.93
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 20.93,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.75
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 21.452,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.23
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 21.58,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
+  },
+  {
+    "time": 21.696,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.85
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
   },
   {
     "time": 22.253,
@@ -71,13 +391,33 @@
         "conf": 0.89
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "MAJORITY",
+    "logic": "UNANIMOUS",
     "final_midi": 60
+  },
+  {
+    "time": 22.45,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 22.567,
@@ -91,13 +431,33 @@
         "conf": 0.91
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 62
+  },
+  {
+    "time": 22.88,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.89
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
   },
   {
     "time": 23.275,
@@ -120,6 +480,66 @@
     "final_midi": null
   },
   {
+    "time": 23.344,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 66,
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 66
+  },
+  {
+    "time": 24.204,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.75
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 24.749,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.31
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 25.063,
     "inputs": {
       "FCPE": {
@@ -131,7 +551,7 @@
         "conf": 0.61
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -151,7 +571,7 @@
         "conf": 0.62
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -171,13 +591,173 @@
         "conf": 0.71
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 61
+  },
+  {
+    "time": 28.023,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.74
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 61
+    "final_midi": 62
+  },
+  {
+    "time": 28.29,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 28.43,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 28.673,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.52
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 62
+  },
+  {
+    "time": 29.44,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.62
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 58
+  },
+  {
+    "time": 29.625,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.76
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 29.904,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.9
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 30.473,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.45
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 30.786,
@@ -188,13 +768,133 @@
       },
       "CREPE": null,
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 30.833,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.34
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 31.065,
+    "inputs": {
+      "FCPE": {
+        "midi": 59,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 59,
+        "conf": 0.44
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 31.309,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.51
+      },
+      "RMVPE": {
+        "midi": 61,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 58
+  },
+  {
+    "time": 32.458,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.29
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 32.54,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.4
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 32.714,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.84
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 58
   },
   {
     "time": 33.341,
@@ -217,6 +917,83 @@
     "final_midi": null
   },
   {
+    "time": 33.375,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.49
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 33.828,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 59,
+        "conf": 0.75
+      },
+      "RMVPE": {
+        "midi": 61,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 59
+  },
+  {
+    "time": 34.281,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.28
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 34.873,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.06
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 38.17,
     "inputs": {
       "FCPE": {
@@ -228,13 +1005,33 @@
         "conf": 0.47
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 59,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 38.507,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
   },
   {
     "time": 38.623,
@@ -248,7 +1045,7 @@
         "conf": 0.78
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -257,47 +1054,7 @@
     "final_midi": 63
   },
   {
-    "time": 40.411,
-    "inputs": {
-      "FCPE": {
-        "midi": 63,
-        "conf": 1.0
-      },
-      "CREPE": {
-        "midi": 62,
-        "conf": 0.55
-      },
-      "RMVPE": {
-        "midi": 59,
-        "conf": 1.0
-      }
-    },
-    "status": "ACCEPTED",
-    "logic": "CREPE_TRUST_FALLBACK",
-    "final_midi": 62
-  },
-  {
-    "time": 40.968,
-    "inputs": {
-      "FCPE": {
-        "midi": 64,
-        "conf": 1.0
-      },
-      "CREPE": {
-        "midi": 64,
-        "conf": 0.62
-      },
-      "RMVPE": {
-        "midi": 59,
-        "conf": 1.0
-      }
-    },
-    "status": "ACCEPTED",
-    "logic": "MAJORITY",
-    "final_midi": 64
-  },
-  {
-    "time": 41.154,
+    "time": 39.726,
     "inputs": {
       "FCPE": {
         "midi": 60,
@@ -305,7 +1062,7 @@
       },
       "CREPE": {
         "midi": 60,
-        "conf": 0.79
+        "conf": 0.52
       },
       "RMVPE": {
         "midi": 59,
@@ -328,13 +1085,53 @@
         "conf": 0.58
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 64
+  },
+  {
+    "time": 42.106,
+    "inputs": {
+      "FCPE": {
+        "midi": 64,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 64,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 64
+  },
+  {
+    "time": 44.835,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.16
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 45.322,
@@ -348,13 +1145,73 @@
         "conf": 0.71
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 63
+  },
+  {
+    "time": 45.415,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.31
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 45.659,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.91
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
+    "time": 46.193,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.46
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 46.518,
@@ -384,17 +1241,37 @@
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 62,
+        "midi": 63,
         "conf": 0.35
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 46.843,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.97
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
   },
   {
     "time": 47.157,
@@ -406,6 +1283,83 @@
       "CREPE": {
         "midi": 63,
         "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 47.563,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.46
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 47.725,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.96
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 48.561,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.96
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 48.968,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.58
       },
       "RMVPE": {
         "midi": 59,
@@ -428,13 +1382,73 @@
         "conf": 0.61
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
+    "time": 49.177,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.93
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
+    "time": 49.629,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 54,
+        "conf": 0.82
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 54
+  },
+  {
+    "time": 49.746,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 55,
+        "conf": 0.83
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 60
+    "final_midi": 55
   },
   {
     "time": 51.383,
@@ -457,6 +1471,66 @@
     "final_midi": null
   },
   {
+    "time": 51.742,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.86
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 51.917,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 52.265,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.86
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
     "time": 53.031,
     "inputs": {
       "FCPE": {
@@ -468,7 +1542,7 @@
         "conf": 0.93
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -488,7 +1562,27 @@
         "conf": 0.95
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 54.111,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -504,11 +1598,11 @@
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 64,
+        "midi": 63,
         "conf": 0.31
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -517,7 +1611,7 @@
     "final_midi": null
   },
   {
-    "time": 54.355,
+    "time": 54.308,
     "inputs": {
       "FCPE": {
         "midi": 59,
@@ -525,7 +1619,7 @@
       },
       "CREPE": {
         "midi": 59,
-        "conf": 0.93
+        "conf": 0.67
       },
       "RMVPE": {
         "midi": 60,
@@ -548,13 +1642,93 @@
         "conf": 0.69
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 62
+  },
+  {
+    "time": 54.715,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.91
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
+  },
+  {
+    "time": 54.807,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.42
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 54.9,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 55.098,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.94
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
   },
   {
     "time": 55.481,
@@ -584,37 +1758,17 @@
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 60,
+        "midi": 61,
         "conf": 0.74
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 60
-  },
-  {
-    "time": 55.841,
-    "inputs": {
-      "FCPE": {
-        "midi": 59,
-        "conf": 1.0
-      },
-      "CREPE": {
-        "midi": 59,
-        "conf": 0.82
-      },
-      "RMVPE": {
-        "midi": 59,
-        "conf": 1.0
-      }
-    },
-    "status": "ACCEPTED",
-    "logic": "UNANIMOUS",
-    "final_midi": 59
   },
   {
     "time": 56.363,
@@ -625,13 +1779,33 @@
         "conf": 0.41
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 59,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 56.526,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.54
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
   },
   {
     "time": 56.897,
@@ -654,24 +1828,44 @@
     "final_midi": 59
   },
   {
-    "time": 56.99,
+    "time": 57.118,
     "inputs": {
       "FCPE": {
-        "midi": 62,
+        "midi": 63,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 62,
-        "conf": 0.9
+        "midi": 64,
+        "conf": 0.96
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "MAJORITY",
-    "final_midi": 62
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 64
+  },
+  {
+    "time": 57.269,
+    "inputs": {
+      "FCPE": {
+        "midi": 64,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 64,
+        "conf": 0.38
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 57.362,
@@ -685,13 +1879,33 @@
         "conf": 0.92
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 63
+  },
+  {
+    "time": 58.43,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
   },
   {
     "time": 58.871,
@@ -705,6 +1919,26 @@
         "conf": 0.95
       },
       "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 59.498,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.63
+      },
+      "RMVPE": {
         "midi": 59,
         "conf": 1.0
       }
@@ -714,15 +1948,15 @@
     "final_midi": 63
   },
   {
-    "time": 59.8,
+    "time": 59.556,
     "inputs": {
       "FCPE": {
-        "midi": 62,
+        "midi": 63,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 62,
-        "conf": 0.9
+        "midi": 63,
+        "conf": 0.52
       },
       "RMVPE": {
         "midi": 59,
@@ -731,7 +1965,27 @@
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 62
+    "final_midi": 63
+  },
+  {
+    "time": 59.916,
+    "inputs": {
+      "FCPE": {
+        "midi": 59,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 59,
+        "conf": 0.53
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 59
   },
   {
     "time": 60.531,
@@ -745,7 +1999,7 @@
         "conf": 0.68
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -754,7 +2008,47 @@
     "final_midi": 67
   },
   {
+    "time": 60.671,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.68
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
+  },
+  {
     "time": 60.891,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.94
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 60.984,
     "inputs": {
       "FCPE": {
         "midi": 60,
@@ -785,13 +2079,90 @@
         "conf": 0.69
       },
       "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 63.643,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.59
+      },
+      "RMVPE": {
         "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "UNANIMOUS",
-    "final_midi": 60
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 63.724,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.14
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 64.095,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 64.154,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.53
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
   },
   {
     "time": 64.397,
@@ -801,7 +2172,7 @@
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 66,
+        "midi": 67,
         "conf": 0.56
       },
       "RMVPE": {
@@ -810,8 +2181,105 @@
       }
     },
     "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 64.966,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.51
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 66
+    "final_midi": 65
+  },
+  {
+    "time": 65.233,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.65
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
+  },
+  {
+    "time": 65.535,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": null,
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 65.756,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.42
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 65.825,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.69
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
   },
   {
     "time": 66.162,
@@ -834,7 +2302,27 @@
     "final_midi": null
   },
   {
-    "time": 66.638,
+    "time": 66.232,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 66,
+        "conf": 0.14
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 66.568,
     "inputs": {
       "FCPE": {
         "midi": 63,
@@ -842,10 +2330,10 @@
       },
       "CREPE": {
         "midi": 63,
-        "conf": 0.72
+        "conf": 0.52
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -865,13 +2353,93 @@
         "conf": 0.15
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 67.451,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.74
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 67.66,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.32
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 68.589,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.69
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 69.065,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
   },
   {
     "time": 69.308,
@@ -885,13 +2453,33 @@
         "conf": 0.1
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 69.517,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 61,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
   },
   {
     "time": 69.703,
@@ -905,7 +2493,7 @@
         "conf": 0.3
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -925,7 +2513,7 @@
         "conf": 0.42
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -945,7 +2533,7 @@
         "conf": 0.7
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -965,7 +2553,7 @@
         "conf": 0.37
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -985,7 +2573,7 @@
         "conf": 0.87
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -994,24 +2582,104 @@
     "final_midi": 67
   },
   {
-    "time": 72.385,
+    "time": 71.375,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.69
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 65
+  },
+  {
+    "time": 71.503,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.11
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 72.304,
     "inputs": {
       "FCPE": {
         "midi": 56,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 68,
-        "conf": 0.65
+        "midi": 66,
+        "conf": 0.53
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "MAJORITY_FOLDED",
-    "final_midi": 68
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 66
+  },
+  {
+    "time": 73.151,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.8
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 73.209,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.82
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
   },
   {
     "time": 73.441,
@@ -1025,13 +2693,33 @@
         "conf": 0.25
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 73.825,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.65
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
   },
   {
     "time": 74.742,
@@ -1045,13 +2733,70 @@
         "conf": 0.63
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 64
+  },
+  {
+    "time": 75.38,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.47
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 75.891,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.51
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
+  },
+  {
+    "time": 76.634,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.11
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 76.866,
@@ -1094,6 +2839,26 @@
     "final_midi": null
   },
   {
+    "time": 77.319,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.72
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
     "time": 78.109,
     "inputs": {
       "FCPE": {
@@ -1105,13 +2870,70 @@
         "conf": 0.6
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "CREPE_TRUST_FALLBACK_FOLDED",
     "final_midi": 65
+  },
+  {
+    "time": 78.225,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.04
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 78.387,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.24
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 78.747,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.85
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS_FOLDED",
+    "final_midi": 72
   },
   {
     "time": 78.956,
@@ -1125,13 +2947,73 @@
         "conf": 0.3
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 79.328,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.16
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 79.374,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.23
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 79.583,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.1
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
   },
   {
     "time": 79.792,
@@ -1165,7 +3047,7 @@
         "conf": 0.07
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1185,13 +3067,50 @@
         "conf": 0.53
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY_FOLDED",
     "final_midi": 68
+  },
+  {
+    "time": 81.638,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.55
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 58
+  },
+  {
+    "time": 82.056,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.02
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 82.195,
@@ -1205,7 +3124,47 @@
         "conf": 0.47
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 82.416,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 58,
+        "conf": 0.53
+      },
+      "RMVPE": {
+        "midi": 61,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 58
+  },
+  {
+    "time": 82.602,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.33
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1225,7 +3184,27 @@
         "conf": 0.43
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 83.055,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.22
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1245,7 +3224,27 @@
         "conf": 0.37
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 83.449,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.45
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1265,7 +3264,7 @@
         "conf": 0.1
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1285,13 +3284,73 @@
         "conf": 0.74
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY_FOLDED",
     "final_midi": 67
+  },
+  {
+    "time": 83.902,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.81
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 84.506,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.63
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 85.481,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.21
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 85.864,
@@ -1305,7 +3364,7 @@
         "conf": 0.55
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1325,7 +3384,7 @@
         "conf": 0.58
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -1345,7 +3404,7 @@
         "conf": 0.62
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1354,35 +3413,75 @@
     "final_midi": 68
   },
   {
-    "time": 89.87,
-    "inputs": {
-      "FCPE": {
-        "midi": 62,
-        "conf": 1.0
-      },
-      "CREPE": {
-        "midi": 62,
-        "conf": 0.86
-      },
-      "RMVPE": {
-        "midi": 59,
-        "conf": 1.0
-      }
-    },
-    "status": "ACCEPTED",
-    "logic": "MAJORITY",
-    "final_midi": 62
-  },
-  {
-    "time": 90.427,
+    "time": 88.883,
     "inputs": {
       "FCPE": {
         "midi": 68,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 72,
-        "conf": 0.45
+        "midi": 68,
+        "conf": 0.6
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 89.428,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.35
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 89.661,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.79
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 91.832,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.49
       },
       "RMVPE": {
         "midi": 59,
@@ -1394,44 +3493,24 @@
     "final_midi": null
   },
   {
-    "time": 90.798,
+    "time": 91.925,
     "inputs": {
       "FCPE": {
         "midi": 68,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 70,
-        "conf": 0.73
+        "midi": 73,
+        "conf": 0.11
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 59,
         "conf": 1.0
       }
     },
-    "status": "ACCEPTED",
-    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
-    "final_midi": 70
-  },
-  {
-    "time": 90.845,
-    "inputs": {
-      "FCPE": {
-        "midi": 67,
-        "conf": 1.0
-      },
-      "CREPE": {
-        "midi": 70,
-        "conf": 0.51
-      },
-      "RMVPE": {
-        "midi": 60,
-        "conf": 1.0
-      }
-    },
-    "status": "ACCEPTED",
-    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
-    "final_midi": 70
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 92.11,
@@ -1472,6 +3551,26 @@
     "status": "ACCEPTED",
     "logic": "CREPE_TRUST_FALLBACK_FOLDED",
     "final_midi": 73
+  },
+  {
+    "time": 93.26,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.28
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 94.247,
@@ -1539,12 +3638,32 @@
         "conf": 0.91
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 117.571,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.95
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
     "final_midi": 60
   },
   {
@@ -1559,7 +3678,27 @@
         "conf": 0.95
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 118.349,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.64
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1572,7 +3711,7 @@
     "inputs": {
       "FCPE": null,
       "CREPE": {
-        "midi": 62,
+        "midi": 63,
         "conf": 0.02
       },
       "RMVPE": {
@@ -1596,13 +3735,33 @@
         "conf": 0.35
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 118.848,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 55,
+        "conf": 0.91
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 55
   },
   {
     "time": 119.301,
@@ -1612,17 +3771,37 @@
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 62,
+        "midi": 61,
         "conf": 0.06
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 119.417,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 62
   },
   {
     "time": 119.893,
@@ -1636,16 +3815,96 @@
         "conf": 0.34
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
-    "status": "VETOED",
-    "logic": "CREPE_VETO_SILENCE",
-    "final_midi": null
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 119.998,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.83
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
   },
   {
     "time": 120.404,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 122.041,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.95
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 122.331,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.94
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 122.726,
     "inputs": {
       "FCPE": {
         "midi": 62,
@@ -1665,6 +3924,23 @@
     "final_midi": 62
   },
   {
+    "time": 123.562,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.07
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 123.689,
     "inputs": {
       "FCPE": {
@@ -1674,6 +3950,46 @@
       "CREPE": {
         "midi": 62,
         "conf": 0.5
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 123.922,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 124.061,
+    "inputs": {
+      "FCPE": {
+        "midi": 59,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 59,
+        "conf": 0.45
       },
       "RMVPE": {
         "midi": 60,
@@ -1716,13 +4032,53 @@
         "conf": 0.88
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 55
+  },
+  {
+    "time": 125.501,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 57,
+        "conf": 0.43
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 125.64,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.94
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
   },
   {
     "time": 126.011,
@@ -1736,13 +4092,53 @@
         "conf": 0.9
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
+    "time": 126.546,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.75
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 61
+  },
+  {
+    "time": 126.638,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.9
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 60
+    "final_midi": 63
   },
   {
     "time": 126.917,
@@ -1765,6 +4161,26 @@
     "final_midi": 63
   },
   {
+    "time": 127.08,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.87
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
+  },
+  {
     "time": 127.416,
     "inputs": {
       "FCPE": {
@@ -1776,7 +4192,7 @@
         "conf": 0.78
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -1803,6 +4219,46 @@
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 65
+  },
+  {
+    "time": 129.123,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.54
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 129.936,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.35
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 130.272,
@@ -1853,7 +4309,7 @@
         "conf": 0.49
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -1873,7 +4329,7 @@
         "conf": 0.74
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1903,11 +4359,11 @@
     "inputs": {
       "FCPE": null,
       "CREPE": {
-        "midi": 62,
+        "midi": 63,
         "conf": 0.15
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1927,12 +4383,12 @@
         "conf": 0.91
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 61,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "UNANIMOUS",
+    "logic": "MAJORITY",
     "final_midi": 60
   },
   {
@@ -1947,7 +4403,7 @@
         "conf": 0.89
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -1956,14 +4412,14 @@
     "final_midi": 62
   },
   {
-    "time": 134.231,
+    "time": 133.21,
     "inputs": {
       "FCPE": {
-        "midi": 58,
+        "midi": 62,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 58,
+        "midi": 62,
         "conf": 0.93
       },
       "RMVPE": {
@@ -1973,7 +4429,81 @@
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 58
+    "final_midi": 62
+  },
+  {
+    "time": 134.638,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.86
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 62
+  },
+  {
+    "time": 135.207,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 135.683,
+    "inputs": {
+      "FCPE": {
+        "midi": 55,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 55,
+        "conf": 0.51
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 55
+  },
+  {
+    "time": 135.764,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 55,
+        "conf": 0.07
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 136.066,
@@ -1996,6 +4526,46 @@
     "final_midi": 60
   },
   {
+    "time": 138.144,
+    "inputs": {
+      "FCPE": {
+        "midi": 75,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.25
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 138.225,
+    "inputs": {
+      "FCPE": {
+        "midi": 76,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 64,
+        "conf": 0.16
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 138.457,
     "inputs": {
       "FCPE": null,
@@ -2005,6 +4575,20 @@
       },
       "RMVPE": {
         "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 138.55,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": null,
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2033,15 +4617,35 @@
     "final_midi": 60
   },
   {
-    "time": 139.514,
+    "time": 139.154,
     "inputs": {
       "FCPE": {
-        "midi": 62,
+        "midi": 60,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 62,
-        "conf": 0.64
+        "midi": 60,
+        "conf": 0.84
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS",
+    "final_midi": 60
+  },
+  {
+    "time": 139.851,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.96
       },
       "RMVPE": {
         "midi": 59,
@@ -2050,7 +4654,127 @@
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 62
+    "final_midi": 65
+  },
+  {
+    "time": 141.197,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.97
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
+  },
+  {
+    "time": 141.43,
+    "inputs": {
+      "FCPE": {
+        "midi": 64,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 64,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 64
+  },
+  {
+    "time": 142.254,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.53
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 142.556,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.41
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 142.683,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.09
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 142.916,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 64,
+        "conf": 0.24
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 142.997,
@@ -2064,7 +4788,7 @@
         "conf": 0.09
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2084,7 +4808,27 @@
         "conf": 0.17
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 143.183,
+    "inputs": {
+      "FCPE": {
+        "midi": 64,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.29
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2113,6 +4857,66 @@
     "final_midi": null
   },
   {
+    "time": 143.438,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 143.891,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.41
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 143.972,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.1
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 144.135,
     "inputs": {
       "FCPE": {
@@ -2124,7 +4928,27 @@
         "conf": 0.47
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 144.437,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.36
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2151,6 +4975,46 @@
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 144.68,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.34
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 144.715,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.56
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
   },
   {
     "time": 145.063,
@@ -2193,6 +5057,46 @@
     "final_midi": null
   },
   {
+    "time": 145.539,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.61
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 145.911,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.61
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 67
+  },
+  {
     "time": 146.097,
     "inputs": {
       "FCPE": {
@@ -2204,13 +5108,133 @@
         "conf": 0.16
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 146.224,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 147.107,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.69
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 147.188,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 147.281,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 74,
+        "conf": 0.42
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 147.49,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 147.792,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.68
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 63
   },
   {
     "time": 148.001,
@@ -2224,7 +5248,7 @@
         "conf": 0.21
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2244,7 +5268,67 @@
         "conf": 0.48
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 148.349,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 71,
+        "conf": 0.26
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 148.419,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.64
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 148.616,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.13
+      },
+      "RMVPE": {
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -2273,6 +5357,26 @@
     "final_midi": null
   },
   {
+    "time": 148.825,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.64
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
+  },
+  {
     "time": 149.22,
     "inputs": {
       "FCPE": {
@@ -2284,7 +5388,7 @@
         "conf": 0.32
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2293,7 +5397,7 @@
     "final_midi": null
   },
   {
-    "time": 149.452,
+    "time": 149.406,
     "inputs": {
       "FCPE": {
         "midi": 67,
@@ -2301,7 +5405,104 @@
       },
       "CREPE": {
         "midi": 67,
-        "conf": 0.91
+        "conf": 0.73
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 151.008,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": null,
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 151.298,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.79
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 152.041,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.66
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
+  },
+  {
+    "time": 152.355,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.24
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 152.749,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.57
       },
       "RMVPE": {
         "midi": 60,
@@ -2324,6 +5525,106 @@
         "conf": 0.42
       },
       "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 154.061,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
+  },
+  {
+    "time": 154.398,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
+  },
+  {
+    "time": 154.816,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.79
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 155.431,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 69,
+        "conf": 0.5
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 69
+  },
+  {
+    "time": 155.524,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 69,
+        "conf": 0.3
+      },
+      "RMVPE": {
         "midi": 59,
         "conf": 1.0
       }
@@ -2331,6 +5632,26 @@
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 155.803,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.91
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
   },
   {
     "time": 156.0,
@@ -2344,7 +5665,7 @@
         "conf": 0.42
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
@@ -2364,13 +5685,93 @@
         "conf": 0.24
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 156.337,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.5
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 156.499,
+    "inputs": {
+      "FCPE": {
+        "midi": 58,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.2
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 157.057,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.58
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
+  },
+  {
+    "time": 157.335,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 60,
+        "conf": 0.4
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
   },
   {
     "time": 157.811,
@@ -2384,7 +5785,67 @@
         "conf": 0.14
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 157.927,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.11
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 158.113,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.82
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 158.241,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.1
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2424,12 +5885,12 @@
         "conf": 0.86
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "MAJORITY_FOLDED",
+    "logic": "UNANIMOUS_FOLDED",
     "final_midi": 72
   },
   {
@@ -2453,6 +5914,46 @@
     "final_midi": 70
   },
   {
+    "time": 159.425,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.12
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 159.506,
+    "inputs": {
+      "FCPE": {
+        "midi": 75,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.24
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 159.715,
     "inputs": {
       "FCPE": {
@@ -2463,6 +5964,60 @@
         "midi": 67,
         "conf": 0.22
       },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 160.284,
+    "inputs": {
+      "FCPE": {
+        "midi": 57,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.36
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 160.621,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.43
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 160.946,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": null,
       "RMVPE": {
         "midi": 60,
         "conf": 1.0
@@ -2484,24 +6039,44 @@
         "conf": 0.55
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "MAJORITY_FOLDED",
+    "logic": "UNANIMOUS_FOLDED",
     "final_midi": 72
   },
   {
-    "time": 161.968,
+    "time": 161.364,
     "inputs": {
       "FCPE": {
-        "midi": 70,
+        "midi": 67,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 70,
-        "conf": 0.64
+        "midi": 67,
+        "conf": 0.44
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 161.561,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.78
       },
       "RMVPE": {
         "midi": 60,
@@ -2510,7 +6085,27 @@
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY_FOLDED",
-    "final_midi": 70
+    "final_midi": 68
+  },
+  {
+    "time": 161.712,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.56
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 67
   },
   {
     "time": 162.386,
@@ -2524,13 +6119,53 @@
         "conf": 0.72
       },
       "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 72
+  },
+  {
+    "time": 162.815,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 163.651,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.78
+      },
+      "RMVPE": {
         "midi": 59,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
-    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
-    "final_midi": 75
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 72
   },
   {
     "time": 164.777,
@@ -2553,6 +6188,106 @@
     "final_midi": 65
   },
   {
+    "time": 165.601,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 165.973,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.41
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 166.043,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.33
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 166.078,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.4
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 166.623,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.49
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 166.844,
     "inputs": {
       "FCPE": {
@@ -2564,13 +6299,93 @@
         "conf": 0.29
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 166.902,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.16
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 167.041,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.54
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 65
+  },
+  {
+    "time": 167.447,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 167.54,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.61
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
   },
   {
     "time": 168.446,
@@ -2584,7 +6399,7 @@
         "conf": 0.3
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2593,7 +6408,27 @@
     "final_midi": null
   },
   {
-    "time": 169.375,
+    "time": 169.073,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.82
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS_FOLDED",
+    "final_midi": 72
+  },
+  {
+    "time": 169.34,
     "inputs": {
       "FCPE": {
         "midi": 68,
@@ -2611,6 +6446,26 @@
     "status": "ACCEPTED",
     "logic": "CREPE_TRUST_FALLBACK_FOLDED",
     "final_midi": 70
+  },
+  {
+    "time": 170.071,
+    "inputs": {
+      "FCPE": {
+        "midi": 69,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.41
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 170.187,
@@ -2633,6 +6488,26 @@
     "final_midi": 70
   },
   {
+    "time": 170.605,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 73
+  },
+  {
     "time": 171.557,
     "inputs": {
       "FCPE": {
@@ -2653,18 +6528,75 @@
     "final_midi": 73
   },
   {
-    "time": 190.528,
+    "time": 171.999,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.45
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 190.168,
     "inputs": {
       "FCPE": null,
-      "CREPE": null,
+      "CREPE": {
+        "midi": 76,
+        "conf": 0.33
+      },
       "RMVPE": {
-        "midi": 58,
+        "midi": 59,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 190.528,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": null,
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 190.749,
+    "inputs": {
+      "FCPE": {
+        "midi": 65,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.89
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 65
   },
   {
     "time": 191.538,
@@ -2698,6 +6630,26 @@
         "conf": 0.2
       },
       "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 192.397,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.06
+      },
+      "RMVPE": {
         "midi": 59,
         "conf": 1.0
       }
@@ -2718,7 +6670,47 @@
         "conf": 0.32
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 192.641,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.31
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 193.013,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.18
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2745,6 +6737,66 @@
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 193.465,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.75
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 194.046,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.46
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 194.139,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.57
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
   },
   {
     "time": 194.406,
@@ -2778,7 +6830,7 @@
         "conf": 0.76
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2798,7 +6850,7 @@
         "conf": 0.19
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 59,
         "conf": 1.0
       }
     },
@@ -2827,6 +6879,120 @@
     "final_midi": null
   },
   {
+    "time": 195.462,
+    "inputs": {
+      "FCPE": {
+        "midi": 54,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.25
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 195.915,
+    "inputs": {
+      "FCPE": {
+        "midi": 54,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.28
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 196.472,
+    "inputs": {
+      "FCPE": {
+        "midi": 66,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.58
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 196.623,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.1
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 196.774,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.81
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 197.053,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.35
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 197.32,
     "inputs": {
       "FCPE": {
@@ -2838,13 +7004,53 @@
         "conf": 0.43
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 197.529,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.36
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 197.738,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.51
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
   },
   {
     "time": 197.9,
@@ -2858,7 +7064,7 @@
         "conf": 0.16
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2878,7 +7084,7 @@
         "conf": 0.82
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2898,7 +7104,67 @@
         "conf": 0.46
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 198.562,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.13
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 198.934,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.47
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 200.466,
+    "inputs": {
+      "FCPE": {
+        "midi": 62,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.35
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2918,7 +7184,7 @@
         "conf": 0.67
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2938,7 +7204,27 @@
         "conf": 0.86
       },
       "RMVPE": {
-        "midi": 58,
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 63
+  },
+  {
+    "time": 202.103,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.67
+      },
+      "RMVPE": {
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2958,13 +7244,93 @@
         "conf": 0.68
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 61,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
     "final_midi": 64
+  },
+  {
+    "time": 203.462,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 65,
+        "conf": 0.43
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
+  },
+  {
+    "time": 203.555,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 62,
+        "conf": 0.37
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 203.694,
+    "inputs": {
+      "FCPE": {
+        "midi": 61,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.65
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 61
+  },
+  {
+    "time": 203.996,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 61,
+        "conf": 0.72
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 60
   },
   {
     "time": 205.087,
@@ -2978,7 +7344,7 @@
         "conf": 0.85
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -2998,7 +7364,7 @@
         "conf": 0.37
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -3018,7 +7384,7 @@
         "conf": 0.7
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -3027,15 +7393,35 @@
     "final_midi": 73
   },
   {
-    "time": 207.757,
+    "time": 206.376,
     "inputs": {
       "FCPE": {
-        "midi": 60,
+        "midi": 66,
         "conf": 1.0
       },
       "CREPE": {
-        "midi": 72,
-        "conf": 0.11
+        "midi": 65,
+        "conf": 0.56
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK",
+    "final_midi": 65
+  },
+  {
+    "time": 206.643,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.67
       },
       "RMVPE": {
         "midi": 60,
@@ -3044,7 +7430,107 @@
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY",
-    "final_midi": 60
+    "final_midi": 63
+  },
+  {
+    "time": 207.2,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.53
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 207.664,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.62
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 209.928,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 63,
+        "conf": 0.27
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 210.253,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.11
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 210.37,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.64
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "UNANIMOUS_FOLDED",
+    "final_midi": 72
   },
   {
     "time": 210.671,
@@ -3058,7 +7544,7 @@
         "conf": 0.44
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -3078,7 +7564,7 @@
         "conf": 0.68
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
@@ -3118,13 +7604,53 @@
         "conf": 0.16
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "VETOED",
     "logic": "CREPE_VETO_SILENCE",
     "final_midi": null
+  },
+  {
+    "time": 212.123,
+    "inputs": {
+      "FCPE": {
+        "midi": 67,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 67,
+        "conf": 0.64
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 67
+  },
+  {
+    "time": 213.144,
+    "inputs": {
+      "FCPE": {
+        "midi": 75,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 75,
+        "conf": 0.71
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 75
   },
   {
     "time": 214.085,
@@ -3187,6 +7713,46 @@
     "final_midi": null
   },
   {
+    "time": 215.362,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.43
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 215.397,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.52
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
     "time": 216.186,
     "inputs": {
       "FCPE": {
@@ -3198,13 +7764,113 @@
         "conf": 0.58
       },
       "RMVPE": {
-        "midi": 59,
+        "midi": 60,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY_FOLDED",
     "final_midi": 68
+  },
+  {
+    "time": 216.778,
+    "inputs": {
+      "FCPE": {
+        "midi": 70,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.71
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 216.836,
+    "inputs": {
+      "FCPE": {
+        "midi": 70,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.7
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 217.057,
+    "inputs": {
+      "FCPE": {
+        "midi": 60,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.57
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 72
+  },
+  {
+    "time": 217.603,
+    "inputs": {
+      "FCPE": {
+        "midi": 59,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.17
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY",
+    "final_midi": 59
+  },
+  {
+    "time": 217.777,
+    "inputs": {
+      "FCPE": {
+        "midi": 56,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.14
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 218.241,
@@ -3227,6 +7893,66 @@
     "final_midi": 70
   },
   {
+    "time": 218.647,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.7
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 219.112,
+    "inputs": {
+      "FCPE": {
+        "midi": 69,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.6
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "CREPE_TRUST_FALLBACK_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 219.391,
+    "inputs": {
+      "FCPE": {
+        "midi": 69,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.38
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
     "time": 219.507,
     "inputs": {
       "FCPE": {
@@ -3238,13 +7964,50 @@
         "conf": 0.77
       },
       "RMVPE": {
-        "midi": 60,
+        "midi": 59,
         "conf": 1.0
       }
     },
     "status": "ACCEPTED",
     "logic": "MAJORITY_FOLDED",
     "final_midi": 70
+  },
+  {
+    "time": 219.925,
+    "inputs": {
+      "FCPE": {
+        "midi": 73,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 73,
+        "conf": 0.9
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 73
+  },
+  {
+    "time": 220.76,
+    "inputs": {
+      "FCPE": {
+        "midi": 63,
+        "conf": 1.0
+      },
+      "CREPE": null,
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
   },
   {
     "time": 220.9,
@@ -3265,5 +8028,159 @@
     "status": "ACCEPTED",
     "logic": "CREPE_TRUST_FALLBACK_FOLDED",
     "final_midi": 73
+  },
+  {
+    "time": 221.55,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 221.991,
+    "inputs": {
+      "FCPE": {
+        "midi": 68,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 68,
+        "conf": 0.92
+      },
+      "RMVPE": {
+        "midi": 60,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 68
+  },
+  {
+    "time": 225.637,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.4
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 225.683,
+    "inputs": {
+      "FCPE": null,
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.22
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 225.962,
+    "inputs": {
+      "FCPE": {
+        "midi": 70,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.26
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "VETOED",
+    "logic": "CREPE_VETO_SILENCE",
+    "final_midi": null
+  },
+  {
+    "time": 226.089,
+    "inputs": {
+      "FCPE": {
+        "midi": 70,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.96
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 226.914,
+    "inputs": {
+      "FCPE": {
+        "midi": 70,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 70,
+        "conf": 0.88
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 70
+  },
+  {
+    "time": 227.541,
+    "inputs": {
+      "FCPE": {
+        "midi": 72,
+        "conf": 1.0
+      },
+      "CREPE": {
+        "midi": 72,
+        "conf": 0.8
+      },
+      "RMVPE": {
+        "midi": 59,
+        "conf": 1.0
+      }
+    },
+    "status": "ACCEPTED",
+    "logic": "MAJORITY_FOLDED",
+    "final_midi": 72
   }
 ]

@@ -96,7 +96,7 @@ class SynthBank:
         # "FLOWER_GOTH", "GUMI_WHISPER", "YUKARI_DEEP"
         VOCAL_CHAR = "POWER_RIN" 
         
-        play_len = 0.25 if duration is None else duration
+        play_len = 0.15 if duration is None else duration
             
         # 2. Vowel Selection Logic
         vowels = ['A', 'I', 'U', 'E', 'O']

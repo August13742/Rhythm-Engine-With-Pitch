@@ -48,25 +48,25 @@ CONSTANTS = {
         "mask_ratio": 2.0         
     },
     "harvest": {
-        "sens": {
-            "vocals": 0.05, 
+        "sens": { # lower -> more notes, but more noise (wrong midi) too
+            "vocals": 0.02, 
             "drums": 0.10, "bass": 0.08, 
-            "piano": 0.04, "guitar": 0.03, "other": 0.06
+            "piano": 0.03, "guitar": 0.03, "other": 0.06
         }
     },
     "holds": {
-        "energy_decay": 0.75,
-        "tap_threshold": 0.5,
+        "energy_decay": 0.85,
+        "tap_threshold": 0.15,
         "max_dur": 2.0,
         "gap_buffer": 0.10,
-        "max_pitch_drift": 1.5,
+        "max_pitch_drift": 1.0,
         "allowed_stems": ["vocals", "other"]
     },
     "mixing": {
         "stem_vol": {
             "vocals": 1.25, 
             "drums": 0.90, "bass": 0.85, 
-            "piano": 0.90, "guitar": 0.85, "other": 0.60
+            "piano": 1.00, "guitar": 0.85, "other": 0.60
         },
         "priorities": {
             "vocals": 2.5, 
