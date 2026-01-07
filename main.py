@@ -50,15 +50,16 @@ def main():
     
     # Step 2: Check for generated beatmaps (unless rebake flag is set)
     if not args.rebake:
-        beatmap_files = [
-            os.path.join(folder_path, f"{base_name}_EASY.json"),
-            os.path.join(folder_path, f"{base_name}_NORMAL.json"),
-            os.path.join(folder_path, f"{base_name}_HARD.json"),
-            os.path.join(folder_path, f"{base_name}_ALT_HARD.json")
-        ]
+        # Check V300 Path: stems/base_name/beatmap/*.json
+        v300_dir = os.path.join(folder_path, "beatmap")
+        has_v300 = os.path.isdir(v300_dir) and any(f.endswith(".json") for f in os.listdir(v300_dir))
         
-        if all(os.path.exists(bm) for bm in beatmap_files):
-            print("[VIS] Generated beatmaps found, skipping generation...")
+        # Check Legacy Path: stems/base_name/base_name_DIFF.json
+        legacy_diffs = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
+        has_legacy = any(os.path.exists(os.path.join(folder_path, f"{base_name}_{d}.json")) for d in legacy_diffs)
+        
+        if has_v300 or has_legacy:
+            print("[VIS] Existing beatmaps found, skipping generation...")
             if args.generate_only:
                 print("[VIS] Generate-only mode, exiting...")
                 return
