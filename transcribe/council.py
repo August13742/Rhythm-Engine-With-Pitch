@@ -42,18 +42,38 @@ class CouncilV2:
                 print(f"[Council] Loading RMVPE on {self.device}...")
                 # Assuming weights are at 'models/rmvpe.pt' or similar. 
                 # User's rmvpe_model.py has a downloader.
-                weight_path = os.path.join(os.path.dirname(__file__), "../../models/rmvpe.pt")
+                weight_path = os.path.join(os.path.dirname(__file__), "../models/rmvpe.pt")
                 self.models["rmvpe"] = RMVPE_Infer(model_path=weight_path, device=self.device)
             else:
                 logging.warning("RMVPE_Infer class not found.")
 
-    def transcribe(self, audio_path: str, model_type: Literal["fcpe", "rmvpe"] = "fcpe") -> List[NoteEvent]:
+
+
+    def transcribe(self, audio_path: str, model_type: Literal["fcpe", "rmvpe", "basic_pitch"] = "fcpe") -> List[NoteEvent]:
         if not os.path.exists(audio_path):
             logging.warning(f"Audio file not found: {audio_path}")
             return []
 
         print(f"[Council] Transcribing vocals with {model_type.upper()}...")
         
+        if model_type == "basic_pitch":
+             # Polyphonic Mode
+             print("[Council] Using BasicPitch for Polyphonic Vocals...")
+             # Lazy import
+             from .basic_pitch import BasicPitchTranscriber
+             
+             if "basic_pitch" not in self.models:
+                 self.models["basic_pitch"] = BasicPitchTranscriber()
+             
+             # Relaxed threshold for vocals (softer attacks)
+             return self.models["basic_pitch"].transcribe(
+                 audio_path, 
+                 instrument_name="vocals",
+                 onset_threshold=0.4, 
+                 frame_threshold=0.3
+             )
+
+        # Monophonic Models (FCPE/RMVPE)
         # Load Audio (Shared)
         # Note: FCPE inputs tensor, RMVPE inputs numpy/tensor.
         sr = 16000 # Common denominator

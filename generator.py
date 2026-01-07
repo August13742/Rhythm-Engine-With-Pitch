@@ -4,6 +4,9 @@ import sys
 import json
 import random
 from typing import List
+import numpy as np
+import librosa
+
 
 # Add project root to path if needed
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
@@ -29,8 +32,8 @@ GENERATOR_CONFIG = {
     },
     "holds": {
         "allowed_stems": ["vocals", "vocals_lead", "other"],
-        "min_duration": 0.15, # seconds
-        "max_vocal_duration": 1.5 # Break long vocals to prevent stale SFX pitch
+        "min_duration": 0.5, # seconds
+        "max_vocal_duration": 3.5 # Break long vocals to prevent stale SFX pitch
     },
     "scoring": {
         "weights": {
@@ -53,7 +56,7 @@ GENERATOR_CONFIG = {
     },
     "volume": {
         "primary_boost": 1.2,       # +20% for Primary Layer
-        "support_penalty": 0.9,     # -10% for Support Layer
+        "support_penalty": 1.0,     # -10% for Support Layer
         "instrument_boosts": {
             "drums": 1.15,          # Drums need punch
             "bass": 1.10,           # Bass needs presence
@@ -74,10 +77,11 @@ GENERATOR_CONFIG = {
 
 class StemSelector:
     @staticmethod
-    def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main") -> dict:
+    def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main", stem_weights: dict = None) -> dict:
         """
         Determines Primary/Support stems based on Difficulty and Focus Mode.
         focus_mode: "main" (Vocals/Melody) or "alt" (Instruments/Rhythm)
+        stem_weights: dict of {source: total_velocity} for dynamic selection.
         """
         # 1. Analyze Manifest (What exists?)
         active_stems = []
@@ -116,43 +120,64 @@ class StemSelector:
                 elif "vocals" in active_stems: primary.append("vocals")
                 
                 # In Main/Easy-Hard, Instruments are Backing Tracks.
-                # Move Guitar/Piano to SUPPORT for gating.
-                # Only use them as backing in NORMAL+ (Easy is vocals only)
-                if difficulty != "EASY":
-                     if "guitar" in active_stems: support.append("guitar")
-                     if "piano" in active_stems: support.append("piano")
+                # User Requirement: "it is vocal + drum for this song in particular, there should be no other cases"
+                # So we DO NOT add guitar/piano to support.
+                # if difficulty != "EASY":
+                #      if "guitar" in active_stems: support.append("guitar")
+                #      if "piano" in active_stems: support.append("piano")
+                pass
             
             else:
                 # Instrumental Song: Leads are Primary
-                if "guitar" in active_stems: primary.append("guitar")
-                if "piano" in active_stems: primary.append("piano")
-                if not primary and "other" in active_stems: primary.append("other")
+                # Dynamic Rule: Primary = Most Dynamic Stem
+                candidates = [s for s in active_stems if s not in ["drums", "bass"]]
+                if candidates:
+                    if stem_weights:
+                        candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
+                        print(f"    > Instrumental Main Sort: {candidates}")
+                        primary.append(candidates[0])
+                    else:
+                        if "guitar" in active_stems: primary.append("guitar")
+                        elif "piano" in active_stems: primary.append("piano")
+                        elif "other" in active_stems: primary.append("other")
 
             # Support: Rhythm (Drums/Bass)
             if difficulty != "EASY":
                 if "drums" in active_stems: support.append("drums")
             if difficulty in ["HARD"]: # Bass only on Hard+
-                if "bass" in active_stems: support.append("bass")
+                # User Request: "second layer is always drum" (Implies no Bass)
+                # if "bass" in active_stems: support.append("bass")
+                pass
             
         elif actual_mode == "alt":
             # ALT FOCUS: Instruments (2nd Busiest) > Rhythm
-            # Ignore Vocals
-            primary_candidates = ["guitar", "piano", "other"]
-            for s in primary_candidates:
-                if s in active_stems: primary.append(s)
+            # Dynamic Rule: Pick highest energy non-vocal instrument.
+            # Order of preference (if weights equal/missing): Guitar > Piano > Other
+            
+            # Filter candidates
+            candidates = [s for s in active_stems if s not in ["vocals", "vocals_lead", "drums", "bass"]]
+            
+            if candidates:
+                if stem_weights:
+                    # Sort by weight desc
+                    candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
+                    print(f"    > Dynamic Sort: {candidates} (Weights: {[int(stem_weights.get(s,0)) for s in candidates]})")
+                    primary.append(candidates[0])
+                else:
+                    # Fallback Priority
+                    if "guitar" in candidates: primary.append("guitar")
+                    elif "piano" in candidates: primary.append("piano")
+                    elif "other" in candidates: primary.append("other")
             
             # If no melody instruments, Drums become primary (Drum Chart)
             if not primary and "drums" in active_stems:
                 primary.append("drums")
             elif "drums" in active_stems:
-                # If we have melody, Drums are support? Or Primary for Insane?
-                # For Alt focus, let's keep drums as Primary if it's Insane
-                if difficulty == "ALT_HARD":
-                    primary.append("drums")
-                else:
-                    support.append("drums")
+                # Drums are strictly support in ALT mode (unless it's a drum chart)
+                support.append("drums")
                     
-            if "bass" in active_stems: support.append("bass")
+            # User Feedback: "second layer is supposed to be pure supportive / tempo grounding" (Drums only)
+            # if "bass" in active_stems: support.append("bass")
             
         print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
         print(f"    > Primary: {primary}")
@@ -177,7 +202,15 @@ class ChartGenerator:
         n_lanes = cfg["lanes"]
         
         # --- STAGE 0: LAYER SELECTION ---
-        layers = StemSelector.select_layers(difficulty, manifest, focus_mode)
+        # Calculate Stem Weights (Energy = Sum of Velocity)
+        # This helps ALT mode pick the most dominant instrument dynamically.
+        stem_weights = {}
+        for e in events:
+            s = getattr(e, "source", "other")
+            v = getattr(e, "velocity", 0.5)
+            stem_weights[s] = stem_weights.get(s, 0.0) + v
+            
+        layers = StemSelector.select_layers(difficulty, manifest, focus_mode, stem_weights)
         primary_src = set(layers["primary"])
         support_src = set(layers["support"])
         
@@ -221,6 +254,8 @@ class ChartGenerator:
             else:
                 group_free.append(e)
                 
+        print(f"DEBUG QUANTIZER: Strict Input (Drums/Bass)={len(group_strict)}, Free Input={len(group_free)}")
+            
         # Snap separately
         snapped_strict = self.quantizer.snap_to_grid(group_strict, grids=strict_grids)
         snapped_free = self.quantizer.snap_to_grid(group_free, grids=allowed_grids)
@@ -232,8 +267,12 @@ class ChartGenerator:
         final_events = self._filter_density_windowed(ranked_events, target_nps)
         print(f"  [Sieve] Selected {len(final_events)} notes (NPS Limit: {target_nps})")
         
+        # --- STAGE 2.5: MACRO HOLDS (Visual Consolidation) ---
+        # Fixes "Machine Gun" holds by visually merging them while keeping audio separate
+        consolidated_events = self._consolidate_visuals(final_events)
+        
         # --- STAGE 4: THE MAPPER (Lane Allocation) ---
-        chart_notes = self._allocate_lanes(final_events, n_lanes)
+        chart_notes = self._allocate_lanes(consolidated_events, n_lanes)
         
         return {
             "metadata": {
@@ -244,6 +283,78 @@ class ChartGenerator:
             },
             "notes": chart_notes
         }
+
+    def _consolidate_visuals(self, events: List[NoteEvent]) -> List[NoteEvent]:
+        """
+        Merges contiguous notes of the same source into visual 'Macro Holds'.
+        The original notes are kept as 'Ghost Notes' for audio playback.
+        """
+        if not events: return []
+        events.sort(key=lambda x: x.time)
+        
+        final_list = []
+        
+        # Group by source/lane logic? 
+        # Actually just strictly contiguous vocal notes.
+        # Instruments are usually fine as is (percussive).
+        
+        i = 0
+        while i < len(events):
+            current = events[i]
+            
+            # Only consolidate vocals
+            if current.source not in ["vocals", "vocals_lead", "vocals_harmony"]:
+                final_list.append(current)
+                i += 1
+                continue
+                
+            # Look ahead
+            chain = [current]
+            j = i + 1
+            while j < len(events):
+                next_evt = events[j]
+                
+                # Check continuity
+                gap = next_evt.time - (current.time + current.duration)
+                
+                # Must be same source and very close (gap < 0.05)
+                # And similar pitch? No, pitch changes are exactly what we are hiding!
+                # Just continuity and source.
+                if next_evt.source == current.source and abs(gap) < 0.05:
+                    chain.append(next_evt)
+                    current = next_evt # Advance current pointer for continuity check
+                    j += 1
+                else:
+                    break
+            
+            if len(chain) > 1:
+                # Create Macro Note
+                start = chain[0].time
+                end = chain[-1].time + chain[-1].duration
+                
+                macro = NoteEvent(
+                    time=start, 
+                    duration=end-start, 
+                    pitch=chain[0].pitch, # Visual pitch (start)
+                    velocity=max(n.velocity for n in chain),
+                    source=chain[0].source
+                )
+                macro._score = max(n._score for n in chain) if hasattr(chain[0], "_score") else 1.0
+                
+                # Mark chain as ghosts
+                for n in chain:
+                    n.ghost = True
+                    final_list.append(n)
+                
+                # Add Macro (Not ghost) is implicit default
+                final_list.append(macro)
+                
+                i = j
+            else:
+                final_list.append(current)
+                i += 1
+                
+        return final_list
 
     def _rank_events_layered(self, events: List[NoteEvent], primary_src: set, support_src: set) -> List[NoteEvent]:
         """
@@ -304,18 +415,26 @@ class ChartGenerator:
                          # 2. Weight: Deprioritize
                          base_score *= sf_cfg.get("melodic_support_weight", 0.5)
                 
-                # Only allow support notes on main beats (1/4, 1/8)
+                # Only allow support notes on main beats (1/4, 1/8) UNLESS it's Percussion
                 time_in_beats = n.time / beat_dur
                 beat_fraction = time_in_beats % 1.0
                 is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
                 is_eighth = abs(beat_fraction - 0.5) < 0.1
                 
+                is_percussive = n.source in sf_cfg.get("percussive_stems", [])
+                
                 if is_quarter:
                      base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
-                     if is_valid is not False: is_valid = True # Only set True if not already killed
+                     is_valid = True 
                 elif is_eighth:
                      base_score *= l_cfg["support_multiplier"]
-                     if is_valid is not False: is_valid = True
+                     is_valid = True
+                elif is_percussive:
+                 # User Feedback: "drum should be grid snapped"
+                 # The Quantizer (Stage 2) has ALREADY snapped these to [4, 8, 16].
+                 # So we don't need to double-check here, or we risk floating point errors rejecting valid notes.
+                 base_score *= 2.5 
+                 is_valid = True
                 else:
                      base_score = 0.0
                      is_valid = False
@@ -343,9 +462,14 @@ class ChartGenerator:
                 if i == j: continue
                 other = scored_Events[j]
                 if abs(n.time - other.time) < coincidence_window:
-                    # Logic: If I am Support and Other is Primary -> I get nuked
+                    # Logic: If I am Support and Other is Primary -> I get nuked?
                     if n.source in support_src and other.source in primary_src:
-                        n._score = 0.0 # Shadowed by primary
+                        # Exception: Drums/Bass usually stack with melody. Don't nuke them.
+                        # Only nuke "Melodic Support" (e.g. guitar backing under vocal lead)
+                        if n.source in sf_cfg.get("percussive_stems", []):
+                            pass # Keep the drum hit!
+                        else:
+                            n._score = 0.0 # Shadowed by primary
                     
                     # Logic: If both are same layer -> Coincidence Bonus (Chord)
                     elif (n.source in primary_src and other.source in primary_src):
@@ -430,6 +554,20 @@ class ChartGenerator:
         hold_thresh = max(min_hold_dur, dynamic_thresh)
         
         for ev in events:
+            # GHOST NOTE HANDLING (Audio Only, No Visuals)
+            if getattr(ev, "ghost", False):
+                processed.append({
+                    "time": float(ev.time),
+                    "lane": -1, # HIDDEN
+                    "dur": float(ev.duration), # Keep duration for audio synth bucket?
+                    "type": "ghost",
+                    "midi": int(ev.pitch),
+                    "vol": float(getattr(ev, "velocity", 0.8)),
+                    "source": str(ev.source),
+                    "ghost": True
+                })
+                continue
+
             # Logic: Relative movements
             pitch_delta = ev.pitch - last_pitch
             
@@ -549,7 +687,7 @@ class ChartGenerator:
                                 current["type"] = "tap"
                 
                 final.append(current)
-        
+
         # Re-sort all by time
         return sorted(final, key=lambda x: x["time"])
 
@@ -614,15 +752,114 @@ class TimingCorrector:
                     snapped_count += 1
                     
             print(f"[Timing] Snapped {snapped_count}/{len(events)} events to DSP onsets.")
+            return events
             
         except Exception as e:
             print(f"[Timing] DSP Grounding failed: {e}")
+            return events
             
-        return events
+class ConsensusEngine:
+    @staticmethod
+    def fuse_vocals(lead_notes: List[NoteEvent], poly_notes: List[NoteEvent]) -> List[NoteEvent]:
+        """
+        Fuses High-Quality Monophonic Lead (FCPE) with Polyphonic Harmonies (BasicPitch).
+        Advanced Logic:
+        1. TRUST BP (Chords): If BP detects a chord (>=2 notes) and FCPE is in the middle (averaging error), 
+           discard FCPE and use BP notes.
+        2. LEAD FIRST: Otherwise, keep Lead.
+        3. HARMONIES: Add non-overlapping BP notes as Harmonies/Fillers.
+        """
+        if not poly_notes: return lead_notes
+        if not lead_notes: return poly_notes
+        
+        # Sort
+        lead_notes.sort(key=lambda x: x.time)
+        poly_notes.sort(key=lambda x: x.time)
+        
+        final_events = []
+        valid_intervals = {3, 4, 5, 7, 8, 9, 12, 15, 16, 17, 19, 24}
+        
+        # Track which BP notes are used
+        used_poly_indices = set()
+        
+        # Iterate LEAD notes first to check for Chords/Conflicts
+        for l_idx, l in enumerate(lead_notes):
+            # Find overlapping BP notes
+            overlaps = []
+            overlap_indices = []
+            
+            for p_idx, p in enumerate(poly_notes):
+                # Check overlap
+                if (p.time < l.time + l.duration) and (p.time + p.duration > l.time):
+                     overlaps.append(p)
+                     overlap_indices.append(p_idx)
+            
+            # CONSENSUS CHECK
+            # Case 1: BP detects Chord (>=2)
+            if len(overlaps) >= 2:
+                # Check if FCPE matches any of them
+                match_found = False
+                for p in overlaps:
+                     if abs(p.pitch - l.pitch) < 1.0: # Close enough
+                         match_found = True
+                         break
+                
+                if not match_found:
+                     # TRUST BP: FCPE is likely averaging. Discard Lead.
+                     # Add all overlapping BP notes to final (Mark them as replacement?)
+                     # We treat them as if they are the correct source.
+                     # But we must ensure they aren't added twice (handled by used_poly_indices?)
+                     # No, this loop is driving the Lead edition.
+                     
+                     print(f"[Consensus] Discarding FCPE note at {l.time:.2f}s (Pitch {l.pitch:.1f}) in favor of BP Chord.")
+                     for idx in overlap_indices:
+                         if idx not in used_poly_indices:
+                             # Use BP note. Should it be Harmony? One should be lead.
+                             # Let's keep them as is (source='vocals') or set is_harmony?
+                             # Set closest to original lead as lead? Or just all harmony?
+                             # Let's mark all as "is_harmony=False" (Lead) to ensure at least one is charted?
+                             # Actually simplest is just append them.
+                             final_events.append(poly_notes[idx])
+                             used_poly_indices.add(idx)
+                     continue # Skip adding the Lead 'l'
 
+            # Case 2: Normal Lead Processing
+            final_events.append(l) # Keep Lead
+            
+            # Check harmonies for this lead
+            for idx, p in zip(overlap_indices, overlaps):
+                if idx in used_poly_indices: continue
+                
+                diff = abs(p.pitch - l.pitch)
+                semitone = round(diff)
+                
+                if semitone == 0:
+                    used_poly_indices.add(idx) # Mark as used (absorbed by lead)
+                elif semitone in valid_intervals:
+                    # Good Harmony
+                    p.is_harmony = True
+                    final_events.append(p)
+                    used_poly_indices.add(idx)
+                elif semitone <= 2:
+                    # Dissonance - Reject
+                    used_poly_indices.add(idx) # Mark as processed (rejected)
+        
+        # Add remaining BP notes (Fillers)
+        for i, p in enumerate(poly_notes):
+            if i not in used_poly_indices:
+                p.is_harmony = True # Filler is harmony/backing
+                final_events.append(p)
+                
+        print(f"[Consensus] Fused {len(final_events)} notes from {len(lead_notes)} Lead + {len(poly_notes)} Poly.")
+        return final_events
 class RhythmEngine:
     def __init__(self, stems_folder: str):
         self.stems_folder = stems_folder
+        self.base_name = os.path.basename(os.path.dirname(stems_folder)) if os.path.basename(stems_folder) in ["stems", "beatmap"] else os.path.basename(stems_folder)
+        # Actually stems_folder is usually ".../stems/songname"
+        if os.path.dirname(stems_folder).endswith("stems"):
+             self.base_name = os.path.basename(stems_folder)
+        
         self._ensure_paths()
         
         # Initialize Transcribers
@@ -630,9 +867,76 @@ class RhythmEngine:
         self.council = CouncilV2()
         
         # Estimate BPM or default
-        self.bpm = 120.0 
+        self.bpm = self._detect_bpm() 
+        print(f"[RhythmEngine] BPM set to: {self.bpm}")
+
+        # Model Latency Compensation
+        # Benchmark says BasicPitch is ~8ms EARLY (-0.008s).
+        # However, we often perceive things as late due to audio output latency.
+        # Let's add a configurable offset. 
+        # Positive = shift notes LATER (to fix early notes)
+        # Negative = shift notes EARLIER (to fix late notes)
+        
+        # If BasicPitch is -8ms (Early), we typically don't need to fix it much, 
+        # OR the user perception of "lag" is actually Pygame visual lag.
+        # But if the user says "severe swings", we should trust the jitter.
+        
+        self.latency_offset = 0.008 # Shift +8ms to zero it out? 
+        # Actually, let's leave it 0 for now and let the user config it if needed?
+        # User complained about "swings".
+        
         self.generator = ChartGenerator(bpm=self.bpm)
         self.manifest = self._load_manifest()
+
+
+    def _detect_bpm(self) -> float:
+        """Detects BPM from drums.wav or mixture.wav using Librosa."""
+        try:
+            # Try drums first (best for BPM)
+            target_path = os.path.join(self.stems_folder, "drums.wav")
+            if not os.path.exists(target_path):
+                # Fallback to mixture (source file?) or other
+                 # Actually, usually there is no mixture.wav in stems folder unless we put it there.
+                 # Let's try 'other.wav' or look for original file... 
+                 # But self.stems_folder contains the stems.
+                 pass
+            
+            # If no drums, try to find any valid audio file in the folder to estimate
+            if not os.path.exists(target_path):
+                 for f in ["other.wav", "bass.wav", "vocals.wav"]:
+                     p = os.path.join(self.stems_folder, f)
+                     if os.path.exists(p):
+                         target_path = p
+                         break
+            
+            if not os.path.exists(target_path):
+                print("[RhythmEngine] No audio files found for BPM detection. Defaulting to 120.0")
+                return 120.0
+
+            print(f"[RhythmEngine] Detecting BPM from {os.path.basename(target_path)}...")
+            
+            # Load audio (load 60s max to speed up)
+            y, sr = librosa.load(target_path, sr=22050, duration=60.0)
+            
+            # Detect BPM
+            onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+            tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
+            
+            # librosa returns a scalar or a 1-element array
+            if isinstance(tempo, np.ndarray):
+                tempo = tempo.item()
+                
+            if tempo <= 0:
+                print("[RhythmEngine] BPM detection failed (<=0). Defaulting to 120.0")
+                return 120.0
+                
+            print(f"[RhythmEngine] Detected BPM: {tempo:.2f}")
+            return float(tempo)
+            
+        except Exception as e:
+            print(f"[RhythmEngine] BPM Detection Error: {e}. Defaulting to 120.0")
+            return 120.0
+
 
     def _ensure_paths(self):
         if not os.path.isdir(self.stems_folder):
@@ -651,10 +955,11 @@ class RhythmEngine:
     def run(self):
         print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: Dynamic)")
         
-        # 0. BPM Detection (Basic)
-        self._detect_bpm()
-        self.generator.bpm = self.bpm 
-        self.generator.quantizer.bpm = self.bpm
+        # 0. BPM Detection (Already done in __init__)
+        print(f"[RhythmEngine] Using BPM: {self.bpm}")
+        # self.generator.bpm = self.bpm # Already set during init
+        # self.generator.quantizer.bpm = self.bpm # Already set during init
+        
         
         all_events: List[NoteEvent] = []
         
@@ -671,14 +976,20 @@ class RhythmEngine:
             if os.path.exists(path):
                 print(f"Processing {stem}...")
                 
-                # Tune parameters based on instrument
-                # For melody instruments, we want high precision (fewer false positives)
-                # For drums, we force fixed pitch anyway, so standard params are fine
-                params = {}
-                if stem in ["piano", "guitar"]:
-                     params = {"onset_threshold": 0.6, "frame_threshold": 0.4}
+                # TUNING:
+                # Melody -> BasicPitch (High Precision)
+                # Drums -> Librosa Onset (High Sensitivity, ignore pitch)
                 
-                notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
+                if stem == "drums":
+                    print(f"Processing {stem} with Librosa Onset Detection (High Sensitivity)...")
+                    notes = self._transcribe_drums_onset(path)
+                else:
+                    # BasicPitch for melodic instruments
+                    print(f"Processing {stem} with BasicPitch...")
+                    params = {}
+                    if stem in ["piano", "guitar"]:
+                         params = {"onset_threshold": 0.6, "frame_threshold": 0.4}
+                    notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
                 
                 # Drum Fix: Force Fixed Pitch (e.g., C4 = 60)
                 if stem == "drums":
@@ -686,7 +997,18 @@ class RhythmEngine:
                 
                 # DSP Grounding (New)
                 # Ground instrument notes to audio transients
-                notes = TimingCorrector.ground_events(notes, path)
+                # APPLY OFFSET BEFORE GROUNDING to help it find the right transient
+                
+                # Manual Offset Correction
+                if hasattr(self, "latency_offset") and self.latency_offset != 0:
+                     for n in notes: n.time += self.latency_offset
+                
+                # Skip grounding for Onset detected drums? 
+                # Librosa Onset IS the ground truth. Grounding again might shift it to *neighboring* onset.
+                # But TimingCorrector uses backtracking.
+                # Let's Skip Grounding for drums if we used Onset Detection, as it IS onset detection.
+                if stem != "drums":
+                     notes = TimingCorrector.ground_events(notes, path)
                 
                 # Silence Gate (New)
                 # Remove notes in silent sections (Hallucination removal)
@@ -708,14 +1030,44 @@ class RhythmEngine:
              v_path = os.path.join(self.stems_folder, f"{v_name}.wav")
              if os.path.exists(v_path):
                 print(f"Processing vocals ({v_name})...")
-                v_notes = self.council.transcribe(v_path, model_type="fcpe")
-                # Patch source name
-                for n in v_notes: n.source = v_name
                 
-                # DSP Grounding for Vocals? 
-                # Vocals are softer, onsets might be unreliable.
-                # But let's try it with a relaxed window? 
-                # Or skip it. Let's skip for vocals for now to preserve flow.
+                # CHECK POLYPHONY MODE
+                # If "choir" or "duet" in filename (heuristic) OR manifest flag
+                use_polyphony = False
+                if "choir" in self.base_name.lower() or "duet" in self.base_name.lower() or "poly" in self.base_name.lower():
+                    use_polyphony = True
+                
+                # Specific file overrides from user request (NamelessMartyr, wgf, betelgeuse)
+                special_cases = ["namelessmartyr", "wgf", "betelgeuse"]
+                if any(s in self.base_name.lower() for s in special_cases):
+                    use_polyphony = True
+                    
+                v_notes = []
+                
+                if use_polyphony:
+                    print(f"[Generator] Polyphonic Mode Enabled for {self.base_name}")
+                    # 1. Get Lead (FCPE)
+                    lead_events = self.council.transcribe(v_path, model_type="fcpe")
+                    
+                    # 2. Get Poly/Harmony (BasicPitch)
+                    poly_events = self.council.transcribe(v_path, model_type="basic_pitch")
+                    
+                    # 3. Fuse
+                    v_notes = ConsensusEngine.fuse_vocals(lead_events, poly_events)
+                else:
+                    # Standard Monophonic
+                    v_notes = self.council.transcribe(v_path, model_type="fcpe")
+
+                # Patch source name (Force match to stem name for Layer Selector)
+                for n in v_notes:
+                    n.source = v_name 
+                
+                # DSP Grounding? 
+                # Be careful grounding harmonies, they might shift onto lead transients.
+                # But we have offset now. Let's ground them.
+                if hasattr(self, "latency_offset") and self.latency_offset != 0:
+                     for n in v_notes: n.time += self.latency_offset
+                v_notes = TimingCorrector.ground_events(v_notes, v_path)
                 
                 all_events.extend(v_notes)
                 found_vocals = True
@@ -735,52 +1087,40 @@ class RhythmEngine:
                 json.dump(chart_data, f, indent=2)
             print(f"Saved {out_file}")
 
-    def _detect_bpm(self):
-        try:
-            import librosa
-            import numpy as np
+
+
+    def _transcribe_drums_onset(self, audio_path: str) -> List[NoteEvent]:
+        import librosa
+        # print(f"[Onset] Analyzing {os.path.basename(audio_path)} for transients...")
+        y, sr = librosa.load(audio_path, sr=None)
+        
+        # 1. Onset Envelope
+        onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+        
+        # 2. Pick Peaks (Adaptive threshold)
+        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.2, wait=2)
+        
+        # 3. Convert to times
+        times = librosa.frames_to_time(peaks, sr=sr)
+        
+        # 4. Get Energies (Velocity)
+        energies = onset_env[peaks]
+        if len(energies) > 0:
+            max_e = energies.max()
+            if max_e > 0: energies /= max_e
             
-            # Priority: Drums -> Other -> Vocals -> First available stem
-            candidates = ["drums", "other", "vocals", "bass", "piano", "guitar"]
+        events = []
+        for t, e in zip(times, energies):
+            events.append(NoteEvent(
+                time=float(t),
+                duration=0.1, 
+                pitch=60, 
+                velocity=float(e),
+                source="drums"
+            ))
             
-            bpm_found = 0.0
-            
-            for stem in candidates:
-                path = os.path.join(self.stems_folder, f"{stem}.wav")
-                if os.path.exists(path):
-                    # Check if file has meaningful content (size > 10kb)
-                    # This prevents loading silent/header-only wavs
-                    if os.path.getsize(path) < 10000:
-                        continue
-                        
-                    print(f"Detecting BPM from {stem}...")
-                    try:
-                        y, sr = librosa.load(path, sr=22050, duration=60)
-                        if len(y) < sr * 5: # Skip if shorter than 5 seconds
-                            continue
-                            
-                        onset_env = librosa.onset.onset_strength(y=y, sr=sr)
-                        tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
-                        
-                        if isinstance(tempo, np.ndarray):
-                            tempo = tempo[0]
-                        
-                        val = float(tempo)
-                        if val > 40 and val < 300: # Reasonable range
-                            bpm_found = val
-                            print(f"Detected BPM: {self.bpm:.2f}")
-                            break
-                    except Exception as sub_e:
-                        print(f"Failed to detect BPM from {stem}: {sub_e}")
-                        continue
-            
-            if bpm_found > 0:
-                self.bpm = bpm_found
-            else:
-                print("No suitable audio for BPM detection, using default 120.")
-                
-        except Exception as e:
-            print(f"BPM Detection failed: {e}. Using default 120.")
+        print(f"[Onset] Found {len(events)} drum hits.")
+        return events
 
 
 if __name__ == "__main__":

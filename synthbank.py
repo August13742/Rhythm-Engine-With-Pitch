@@ -153,15 +153,35 @@ class SynthBank:
         t = np.linspace(0, duration, int(sr * duration), False)
         
         if beat_pos % 2 == 0:  # Kick
-            freq_sweep = 150 * np.exp(-60 * t)
-            wave = np.sin(2 * np.pi * freq_sweep * t)
-            wave *= np.exp(-10 * t)
-        else:  # Snare
-            noise = np.random.uniform(-1, 1, len(t))
-            wave = noise * np.exp(-30 * t)
+            # Fixed Kick Synthesis (LOUDER & PUNCHIER)
+            # 1. Frequency Sweep: 150Hz -> 50Hz
+            # Integrated phase for correct pitch
+            f_start = 180.0 # Slightly higher start for punch
+            f_end = 50.0
+            decay = 18.0
             
-        # Tuned down to 0.4
-        return (wave * 0.4 * 32767).astype(np.int16)
+            # Phase = Integral(f(t)) * 2pi
+            phase = 2 * np.pi * (f_end * t - (f_start - f_end)/decay * np.exp(-decay * t))
+            wave = np.sin(phase)
+            
+            # Amplitude Envelope (Slightly longer decay)
+            wave *= np.exp(-8 * t)
+            
+            # Add significant "Click" (transient) for cutting through mix
+            click = np.sin(2 * np.pi * 3200 * t) * np.exp(-400 * t)
+            wave += 0.5 * click
+            
+        else:  # Snare
+            # Punchier Snare
+            noise = np.random.uniform(-1, 1, len(t))
+            wave = noise * np.exp(-20 * t)
+            
+            # Tone underbelly for snare
+            tone = np.sin(2 * np.pi * 200 * t) * np.exp(-15 * t)
+            wave += 0.5 * tone
+            
+        # Tuned to 0.8 (Loud) to cut through other stems
+        return (wave * 0.8 * 32767).astype(np.int16)
 
     @staticmethod
     def gen_drums_tone_midi(midi):

@@ -24,8 +24,20 @@ class Beatmap:
 class EventFilter:
     @staticmethod
     def filter_ghost_notes(notes: List[NoteEvent], min_dur: float = 0.05, min_vel: float = 0.15) -> List[NoteEvent]:
-        """Removes notes that are too short or too quiet."""
-        return [n for n in notes if n.duration >= min_dur and n.velocity >= min_vel]
+        """Removes notes that are too short or too quiet. Exempts Percussion from duration check."""
+        filtered = []
+        for n in notes:
+            # Velocity Check (Global)
+            if n.velocity < min_vel: continue
+            
+            # Duration Check (Melodic Only)
+            # Drums/Bass can be very short (transients)
+            if n.source in ["drums", "bass"]:
+                filtered.append(n)
+            elif n.duration >= min_dur:
+                filtered.append(n)
+                
+        return filtered
 
     @staticmethod
     def consolidate_rolls(notes: List[NoteEvent], gap_threshold: float = 0.03) -> List[NoteEvent]:

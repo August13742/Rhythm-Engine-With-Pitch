@@ -18,7 +18,7 @@ STEM_COLORS = {
     "vocals": (255, 100, 255),      # Magenta - VOCALOID
     "drums": (100, 255, 255),       # Cyan
     "bass": (150, 100, 50),         # Brown/Gold
-    "piano": (100, 200, 255),       # Light Blue
+    "piano": (50, 50, 255),       # Deep Blue
     "guitar": (150, 255, 100),      # Light Green
     "other": (200, 200, 200),       # Light Gray
     "vocals_lead": (255, 100, 255)  # Magenta (Same as vocals)
@@ -215,8 +215,11 @@ class Visualizer:
                         # --- SYNTH MODES ---
                         # --- SYNTH MODES ---
                         if self.mode == "classic":
-                            # All square wave (pure 8-bit)
-                            sound = self.square_bank.get(midi)
+                            # All square wave (pure 8-bit) - EXCEPT DRUMS
+                            if source == "drums":
+                                sound = self.synth_banks.get("drums", {}).get(midi)
+                            else:
+                                sound = self.square_bank.get(midi)
                             
                         elif self.mode == "vocal":
                             # CLASSIC + VOCALS
@@ -224,6 +227,8 @@ class Visualizer:
                             # Everything else = Square Wave (8-bit)
                             if source in ["vocals", "vocals_lead"]:
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
+                            elif source == "drums":
+                                sound = self.synth_banks.get("drums", {}).get(midi)
                             else:
                                 sound = self.square_bank.get(midi)
                                 
@@ -357,6 +362,8 @@ class Visualizer:
             pygame.draw.line(self.screen, (100, 255, 100), (x_off, self.hit_line_y), (x_off + col_w, self.hit_line_y), 2)
             
             for n in notes:
+                if n.get("ghost"): continue # Skip drawing ghost (audio-only) notes
+                
                 if n["time"] < curr - 0.2: continue
                 if n["time"] > curr + 1.5: break
                 
@@ -368,6 +375,15 @@ class Visualizer:
                 if n.get("dur", 0) > 0:
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
+                
+                # DEBUG DRUMS
+                if n.get("source") == "drums":
+                     # Print debug for drums 
+                     # Use crude rate limiting to avoid spamming 60fps
+                     if not hasattr(self, "_drum_debug_ids"): self._drum_debug_ids = set()
+                     nid = f"{n['time']}_{n['lane']}"
+                     if nid not in self._drum_debug_ids:
+                         self._drum_debug_ids.add(nid)
                 
                 # Get stem-specific color
                 source = n.get("source", "other")
