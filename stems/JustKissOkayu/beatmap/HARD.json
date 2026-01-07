@@ -1,0 +1,3223 @@
+{
+  "metadata": {
+    "difficulty": "HARD",
+    "version": "V300",
+    "bpm": 103.359375,
+    "focus": "main"
+  },
+  "notes": [
+    {
+      "time": 0.9674981103552532,
+      "lane": 2,
+      "dur": 0.31998346765860713,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 1.5963718820861679,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 1.8866213151927438,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 2.128495842781557,
+      "lane": 1,
+      "dur": 0.7699602190535235,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 3.869992441421013,
+      "lane": 1,
+      "dur": 0.27998553420128125,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 4.208616780045352,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 4.450491307634165,
+      "lane": 1,
+      "dur": 0.3899798512089275,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 5.659863945578231,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 5.950113378684807,
+      "lane": 2,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 6.240362811791384,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 6.3854875283446715,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 6.578987150415722,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 6.820861678004535,
+      "lane": 1,
+      "dur": 0.5199731349452366,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 13.157974300831444,
+      "lane": 1,
+      "dur": 0.2886243386243379,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 13.496598639455783,
+      "lane": 1,
+      "dur": 0.45997623475924776,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 14.222222222222223,
+      "lane": 1,
+      "dur": 0.8799545360611696,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 15.479969765684052,
+      "lane": 2,
+      "dur": 0.3369992441421008,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 15.866969009826153,
+      "lane": 2,
+      "dur": 0.45997623475924776,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 16.640967498110356,
+      "lane": 2,
+      "dur": 0.8299571192395123,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 17.850340136054424,
+      "lane": 3,
+      "dur": 0.2886243386243379,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 18.188964474678762,
+      "lane": 3,
+      "dur": 0.4799752014879107,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 18.962962962962962,
+      "lane": 3,
+      "dur": 0.8699550526968381,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 20.17233560090703,
+      "lane": 3,
+      "dur": 0.3853741496598637,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 20.607709750566894,
+      "lane": 3,
+      "dur": 0.45997623475924776,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 21.28495842781557,
+      "lane": 3,
+      "dur": 0.8699550526968381,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 22.49433106575964,
+      "lane": 3,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 22.929705215419503,
+      "lane": 3,
+      "dur": 0.4999741682165737,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 23.65532879818594,
+      "lane": 3,
+      "dur": 0.8799545360611696,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 24.816326530612244,
+      "lane": 3,
+      "dur": 0.379980367844596,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 25.348450491307634,
+      "lane": 3,
+      "dur": 0.4899746848522422,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 25.97732426303855,
+      "lane": 3,
+      "dur": 0.8899540194255011,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 27.28344671201814,
+      "lane": 3,
+      "dur": 0.3369992441421026,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 27.670445956160243,
+      "lane": 3,
+      "dur": 0.5199731349452366,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 28.444444444444446,
+      "lane": 3,
+      "dur": 0.8799545360611696,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 29.60544217687075,
+      "lane": 3,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 30.040816326530614,
+      "lane": 3,
+      "dur": 0.5099736515809051,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 30.766439909297052,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 31.05668934240363,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 31.92743764172336,
+      "lane": 3,
+      "dur": 0.9658730158730151,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 32.94331065759637,
+      "lane": 3,
+      "dur": 1.0999431700764646,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 34.10430839002267,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 34.394557823129254,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 34.63643235071807,
+      "lane": 2,
+      "dur": 0.39997933457325896,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 35.26530612244898,
+      "lane": 1,
+      "dur": 0.28998501756561273,
+      "type": "hold",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 35.60393046107332,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 35.79743008314437,
+      "lane": 2,
+      "dur": 0.6899643521388725,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 36.426303854875286,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 36.76492819349962,
+      "lane": 2,
+      "dur": 0.9499509196114899,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 38.31292517006803,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 38.6031746031746,
+      "lane": 1,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 38.89342403628118,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 39.038548752834465,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 39.183673469387756,
+      "lane": 1,
+      "dur": 0.5267275957017787,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 39.76417233560091,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 40.054421768707485,
+      "lane": 2,
+      "dur": 0.24024943310657676,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 40.34467120181406,
+      "lane": 2,
+      "dur": 0.24024943310657676,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 40.63492063492063,
+      "lane": 2,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 41.40891912320484,
+      "lane": 2,
+      "dur": 1.3044973544973573,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 42.763416477702194,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 42.956916099773245,
+      "lane": 2,
+      "dur": 0.8207482993197317,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 43.827664399092974,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 43.97278911564626,
+      "lane": 2,
+      "dur": 0.6299674519528793,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 44.6984126984127,
+      "lane": 2,
+      "dur": 0.27998553420128125,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 45.0854119425548,
+      "lane": 2,
+      "dur": 0.6699653854102087,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 46.585034013605444,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 46.82690854119426,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.02040816326531,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.31065759637188,
+      "lane": 1,
+      "dur": 0.09512471655329335,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.45578231292517,
+      "lane": 1,
+      "dur": 0.359981401115931,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.98790627362056,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 48.18140589569161,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 48.95540438397581,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 49.197278911564624,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 49.487528344671205,
+      "lane": 1,
+      "dur": 0.24024943310657676,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 49.77777777777778,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 50.06802721088435,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 50.11640211640212,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 50.93877551020408,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 51.08390022675737,
+      "lane": 1,
+      "dur": 0.38537414965986727,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 51.519274376417236,
+      "lane": 1,
+      "dur": 0.5899695184955576,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 52.244897959183675,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 52.390022675736965,
+      "lane": 0,
+      "dur": 0.9399514362471584,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 53.98639455782313,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.276643990929706,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.56689342403628,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.85714285714286,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 55.5827664399093,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 55.72789115646259,
+      "lane": 0,
+      "dur": 0.38537414965986017,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 56.16326530612245,
+      "lane": 0,
+      "dur": 0.4399772680305848,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 56.69538926681784,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 56.88888888888889,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 57.082388510959944,
+      "lane": 0,
+      "dur": 0.38673482860113495,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 57.66288737717309,
+      "lane": 0,
+      "dur": 0.5199731349452366,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 58.24338624338625,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 58.4368858654573,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 58.823885109599395,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 59.06575963718821,
+      "lane": 1,
+      "dur": 0.288624338624345,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 59.40438397581255,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.3718820861678,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.51700680272109,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.758881330309904,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.952380952380956,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 67,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 61.24263038548753,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 61.532879818594104,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 61.726379440665156,
+      "lane": 1,
+      "dur": 0.5304988662131578,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 62.30687830687831,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 63.08087679516251,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 63.27437641723356,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 63.564625850340136,
+      "lane": 1,
+      "dur": 0.09512471655329335,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 63.709750566893426,
+      "lane": 1,
+      "dur": 0.24024943310657676,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 64.0,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 64.24187452758882,
+      "lane": 1,
+      "dur": 0.33699924414210614,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 64.62887377173092,
+      "lane": 1,
+      "dur": 0.359981401115933,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 65.59637188208617,
+      "lane": 1,
+      "dur": 0.2999845009299442,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 65.98337112622828,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 66.17687074829932,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 66.61224489795919,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 66.90249433106577,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 67.04761904761905,
+      "lane": 1,
+      "dur": 0.4467317287871282,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 67.6281179138322,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 67.91836734693878,
+      "lane": 1,
+      "dur": 0.28998501756561273,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 68.30536659108088,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 68.49886621315193,
+      "lane": 1,
+      "dur": 0.38537414965986727,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 68.93424036281179,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 69.07936507936508,
+      "lane": 1,
+      "dur": 0.5199731349452366,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 70.0952380952381,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 70.43386243386243,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 70.67573696145125,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 70.96598639455783,
+      "lane": 1,
+      "dur": 0.24024943310656965,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 71.2562358276644,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 71.54648526077098,
+      "lane": 1,
+      "dur": 0.09512471655328625,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 71.69160997732426,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 72.70748299319727,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 73.14285714285714,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 73.28798185941044,
+      "lane": 1,
+      "dur": 0.34998191775160153,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 73.86848072562358,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 74.8843537414966,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 75.17460317460318,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 75.46485260770976,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 75.60997732426304,
+      "lane": 2,
+      "dur": 0.38537414965986727,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 76.0453514739229,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 76.19047619047619,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 77.3514739229025,
+      "lane": 3,
+      "dur": 0.24024943310656965,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 77.64172335600907,
+      "lane": 3,
+      "dur": 0.288624338624345,
+      "type": "hold",
+      "midi": 70,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 77.98034769463341,
+      "lane": 3,
+      "dur": 0.48212396069538954,
+      "type": "hold",
+      "midi": 69,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 78.5124716553288,
+      "lane": 3,
+      "dur": 0.8199576358751699,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 79.91534391534391,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 80.25396825396825,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 80.39909297052155,
+      "lane": 2,
+      "dur": 0.27998553420128125,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 80.88284202569918,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 81.26984126984127,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 81.41496598639456,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 81.65684051398337,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 81.85034013605443,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 82.140589569161,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 82.23733938019653,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 82.43083900226758,
+      "lane": 2,
+      "dur": 0.4499767513949163,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 82.86621315192744,
+      "lane": 3,
+      "dur": 0.2999845009299442,
+      "type": "hold",
+      "midi": 70,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 83.3015873015873,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 83.59183673469389,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 83.78533635676493,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 83.88208616780045,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 84.31746031746032,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 84.6077097505669,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 84.75283446712018,
+      "lane": 3,
+      "dur": 0.4699757181235782,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 85.18820861678005,
+      "lane": 2,
+      "dur": 0.4799752014879107,
+      "type": "hold",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 85.72033257747543,
+      "lane": 3,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 86.78458049886622,
+      "lane": 2,
+      "dur": 0.6099684852242291,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 87.46182917611489,
+      "lane": 2,
+      "dur": 0.4337490551776284,
+      "type": "hold",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 87.94557823129252,
+      "lane": 2,
+      "dur": 0.39673431196547426,
+      "type": "hold",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 88.6228269085412,
+      "lane": 3,
+      "dur": 0.2999845009299442,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 89.25170068027211,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 89.3968253968254,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 89.68707482993197,
+      "lane": 2,
+      "dur": 0.359981401115933,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 90.12244897959184,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 90.26757369614512,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 90.5578231292517,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 91.28344671201815,
+      "lane": 3,
+      "dur": 0.379980367844596,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 91.8639455782313,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 92.10582010582011,
+      "lane": 3,
+      "dur": 0.8199576358751808,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 93.0249433106576,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 93.26681783824641,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 93.46031746031747,
+      "lane": 2,
+      "dur": 0.4699757181235792,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 94.1859410430839,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 94.47619047619048,
+      "lane": 2,
+      "dur": 0.6599659020458688,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 95.20181405895691,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 95.34693877551021,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 95.63718820861678,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 95.92743764172336,
+      "lane": 2,
+      "dur": 0.5099736515809051,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 96.79818594104309,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 97.37868480725623,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 97.66893424036282,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 97.9591836734694,
+      "lane": 2,
+      "dur": 0.4199783013019219,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 98.53968253968254,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 98.87830687830689,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 99.12018140589569,
+      "lane": 3,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 100.03930461073318,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 100.57142857142857,
+      "lane": 3,
+      "dur": 0.529972618309568,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 101.20030234315949,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 101.4421768707483,
+      "lane": 3,
+      "dur": 1.1999380037197769,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 102.74829931972789,
+      "lane": 3,
+      "dur": 0.3099839842942771,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 103.32879818594104,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 103.5222978080121,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 103.9092970521542,
+      "lane": 3,
+      "dur": 0.6099684852242199,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 105.0702947845805,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 105.65079365079366,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 105.8442932728647,
+      "lane": 3,
+      "dur": 0.33699924414210614,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 106.2312925170068,
+      "lane": 3,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 106.81179138321995,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 107.3922902494331,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 107.97278911564626,
+      "lane": 2,
+      "dur": 0.24024943310656965,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 108.26303854875283,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 108.55328798185941,
+      "lane": 2,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 108.843537414966,
+      "lane": 1,
+      "dur": 0.379980367844596,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 109.27891156462586,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 109.32728647014362,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 109.42403628117914,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 109.56916099773242,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 109.859410430839,
+      "lane": 2,
+      "dur": 0.3183609563547094,
+      "type": "hold",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 110.14965986394559,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 110.29478458049887,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 110.48828420256991,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 110.58503401360545,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 111.02040816326532,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 111.26228269085412,
+      "lane": 1,
+      "dur": 1.1109977324263127,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 112.42328042328043,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.05215419501134,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.34240362811792,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.58427815570673,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.77777777777779,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.92290249433107,
+      "lane": 1,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.21315192743765,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 54,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.35827664399093,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.35827664399093,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.55177626606198,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.7936507936508,
+      "lane": 1,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.22902494331066,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.51927437641724,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.66439909297053,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.90627362055933,
+      "lane": 2,
+      "dur": 0.33699924414210614,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 116.29327286470144,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 116.53514739229026,
+      "lane": 2,
+      "dur": 0.5499715850382358,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 117.06727135298564,
+      "lane": 3,
+      "dur": 0.35835888981203823,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 117.55102040816327,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 117.69614512471655,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 117.84126984126985,
+      "lane": 2,
+      "dur": 0.27998553420128125,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 118.22826908541195,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 119.5827664399093,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 119.72789115646259,
+      "lane": 3,
+      "dur": 0.569970551766886,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 120.45351473922902,
+      "lane": 2,
+      "dur": 0.529972618309568,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 121.03401360544218,
+      "lane": 2,
+      "dur": 0.3899798512089275,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 121.51776266061981,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 122.19501133786848,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 122.48526077097506,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 122.6787603930461,
+      "lane": 2,
+      "dur": 0.7099633188675345,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 123.45275888133031,
+      "lane": 2,
+      "dur": 0.42997778466625336,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 124.61375661375662,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 124.80725623582767,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 125.09750566893425,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 125.38775510204081,
+      "lane": 2,
+      "dur": 0.27998553420128125,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 125.96825396825398,
+      "lane": 2,
+      "dur": 0.5099736515809051,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 126.54875283446712,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 126.6938775510204,
+      "lane": 2,
+      "dur": 0.31998346765860713,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 127.12925170068027,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 127.32275132275133,
+      "lane": 2,
+      "dur": 0.48212396069538954,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 127.85487528344672,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 128.09674981103552,
+      "lane": 2,
+      "dur": 0.3899798512089275,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 128.58049886621316,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 129.4512471655329,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 129.88662131519274,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 131.6281179138322,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 131.77324263038548,
+      "lane": 2,
+      "dur": 0.24024943310658387,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 132.06349206349208,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 132.20861678004536,
+      "lane": 2,
+      "dur": 0.7099633188675345,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 134.0952380952381,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 134.38548752834467,
+      "lane": 2,
+      "dur": 0.4799752014879107,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 134.96598639455783,
+      "lane": 2,
+      "dur": 0.4199783013019219,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 135.64323507180652,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 136.4172335600907,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 136.562358276644,
+      "lane": 3,
+      "dur": 0.7699602190535235,
+      "type": "hold",
+      "midi": 70,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 137.38473167044597,
+      "lane": 3,
+      "dur": 0.8599555693325067,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 138.30385487528346,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 138.7392290249433,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 139.02947845804988,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 139.60997732426304,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 140.0453514739229,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 140.1904761904762,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 140.48072562358277,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 140.91609977324262,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 141.06122448979593,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 141.3514739229025,
+      "lane": 3,
+      "dur": 0.33998243438727005,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 141.64172335600907,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 141.78684807256235,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.07709750566895,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.3673469387755,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.60922146636432,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.8027210884354,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.99622071050644,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 143.5283446712018,
+      "lane": 3,
+      "dur": 0.6083459739203363,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 144.15721844293273,
+      "lane": 2,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 144.54421768707482,
+      "lane": 3,
+      "dur": 0.4399772680305848,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 145.12471655328798,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 145.8987150415722,
+      "lane": 3,
+      "dur": 0.1918745275887943,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 146.140589569161,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 146.28571428571428,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 146.57596371882087,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 146.72108843537416,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 146.86621315192744,
+      "lane": 3,
+      "dur": 0.38537414965986727,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 147.30158730158732,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 148.02721088435374,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 148.31746031746033,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 148.89795918367346,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 149.18820861678006,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 149.7687074829932,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 150.63945578231292,
+      "lane": 2,
+      "dur": 0.24024943310658387,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 150.92970521541952,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 151.3167044595616,
+      "lane": 2,
+      "dur": 0.4983516569126891,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 152.0907029478458,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 152.96145124716554,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 153.2517006802721,
+      "lane": 1,
+      "dur": 0.3699808844802645,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 153.83219954648527,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 154.4126984126984,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 155.38019652305368,
+      "lane": 1,
+      "dur": 0.14349962207103317,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 155.57369614512473,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 155.718820861678,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 155.96069538926682,
+      "lane": 1,
+      "dur": 1.0699447199834675,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 157.1216931216931,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 158.0408163265306,
+      "lane": 2,
+      "dur": 0.19187452758882273,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 158.28269085411944,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 158.47619047619048,
+      "lane": 2,
+      "dur": 0.4699757181235782,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 159.20181405895693,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 160.07256235827666,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 160.36281179138322,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 160.6530612244898,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 160.94331065759638,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 161.08843537414967,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 161.37868480725623,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 161.66893424036283,
+      "lane": 2,
+      "dur": 0.5199731349452366,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 162.24943310657596,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 162.39455782312925,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 162.53968253968253,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 162.7331821617536,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 163.1201814058957,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 163.31368102796674,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 163.8941798941799,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 53,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 164.71655328798187,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 165.0551776266062,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 165.5873015873016,
+      "lane": 1,
+      "dur": 0.31998346765860713,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 166.02267573696145,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 166.21617535903252,
+      "lane": 2,
+      "dur": 0.2699860508369498,
+      "type": "hold",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 167.18367346938777,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 167.32879818594105,
+      "lane": 1,
+      "dur": 1.1699395536267616,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 171.97278911564626,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 172.11791383219955,
+      "lane": 2,
+      "dur": 0.09512471655327204,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 172.26303854875283,
+      "lane": 2,
+      "dur": 1.9199008059516416,
+      "type": "hold",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 174.5366591080877,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 174.73015873015873,
+      "lane": 2,
+      "dur": 1.989897189501963,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    }
+  ]
+}

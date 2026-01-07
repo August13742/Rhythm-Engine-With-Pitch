@@ -687,6 +687,11 @@ class RhythmEngine:
                 # DSP Grounding (New)
                 # Ground instrument notes to audio transients
                 notes = TimingCorrector.ground_events(notes, path)
+                
+                # Silence Gate (New)
+                # Remove notes in silent sections (Hallucination removal)
+                # Threshold 0.01 (~-40dB)
+                notes = EventFilter.gate_silence(notes, path, threshold=0.01)
                     
                 all_events.extend(notes)
                 

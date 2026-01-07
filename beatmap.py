@@ -65,6 +65,54 @@ class EventFilter:
         # Re-sort by time
         return sorted(merged, key=lambda x: x.time)
 
+    @staticmethod
+    def gate_silence(notes: List[NoteEvent], audio_path: str, threshold: float = 0.005) -> List[NoteEvent]:
+        """Removes notes that occur during silent sections of the audio."""
+        import librosa
+        import numpy as np
+        import os
+        
+        if not notes: return []
+        if not os.path.exists(audio_path): return notes
+        
+        try:
+            # Optimize: Load only if needed? No, we need it for all notes.
+            # Using sr=None to preserve original quality for analysis, though lower sr is faster.
+            # sr=22050 is fine for RMS.
+            y, sr = librosa.load(audio_path, sr=22050)
+        except Exception as e:
+            print(f"[Filter] Error loading audio for gating: {e}")
+            return notes
+            
+        filtered = []
+        dropped = 0
+        
+        # Pre-calc squared energy for speed? iterating is O(N*W), valid for N~1000
+        for n in notes:
+            # Check window around note (0.15s window centered)
+            sample = int(n.time * sr)
+            if sample < 0 or sample >= len(y):
+                continue # Out of bounds (drop?) - Let's keep it safe? No, if no audio, no note.
+                
+            win_size = int(0.15 * sr)
+            start = max(0, sample - win_size // 2)
+            end = min(len(y), sample + win_size // 2)
+            
+            segment = y[start:end]
+            if len(segment) == 0: continue
+            
+            rms = np.sqrt(np.mean(segment**2))
+            
+            if rms >= threshold:
+                filtered.append(n)
+            else:
+                dropped += 1
+        
+        if dropped > 0:
+            print(f"[Filter] Gated {dropped} silent notes (RMS < {threshold})")
+            
+        return filtered
+
 class Quantizer:
     def __init__(self, bpm: float):
         self.bpm = bpm if bpm > 0 else 120.0

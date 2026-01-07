@@ -1,3 +1,5 @@
+import os
+import sys
 import torch
 import numpy as np
 import librosa
@@ -9,12 +11,8 @@ try:
 except ImportError:
     spawn_bundled_infer_model = None
 
-# Try importing RMVPE from root
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 try:
-    from rmvpe_model import RMVPE_Infer
+    from .rmvpe_model import RMVPE_Infer
 except ImportError:
     RMVPE_Infer = None
 
