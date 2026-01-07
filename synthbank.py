@@ -88,6 +88,39 @@ class SynthBank:
         return bank
     
     @staticmethod
+    def gen_smart_instrument_bank(beatmaps: Dict, instrument_name: str) -> Dict[Tuple[int, float], np.ndarray]:
+        """
+        Generic Smart Bank Generator for instruments (Piano, Guitar).
+        Scans beatmaps for notes from `instrument_name` and generates exact (midi, bucket) combos.
+        """
+        required_keys = set()
+        print(f"[SYNTH] Scanning beatmap for required {instrument_name} notes...")
+
+        for diff_name, notes in beatmaps.items():
+            for n in notes:
+                if n.get("source", "") == instrument_name:
+                    midi = n["midi"]
+                    dur = n.get("dur", 0.15)
+                    bucket = SynthBank.get_bucket(dur)
+                    required_keys.add((midi, bucket))
+
+        print(f"[SYNTH] Unique {instrument_name} variants to bake: {len(required_keys)}")
+        
+        bank = {}
+        for midi, bucket in required_keys:
+            if instrument_name == "guitar":
+                audio = SynthBank.gen_guitar_ks(midi, duration=bucket)
+            elif instrument_name == "piano":
+                audio = SynthBank.gen_piano_fm(midi, duration=bucket)
+            else:
+                # Fallback to square
+                audio = SynthBank.gen_square_tone(midi, duration=bucket)
+                
+            bank[(midi, bucket)] = np.ascontiguousarray(audio)
+            
+        return bank
+
+    @staticmethod
     def gen_vocal_tone(midi, duration=None):
         """
         Vocal Generator V3 with Dynamic Duration Support.
@@ -112,7 +145,6 @@ class SynthBank:
             duration=play_len, 
             profile_name=VOCAL_CHAR
         )
-
 
     @staticmethod
     def gen_drums_tone(beat_pos):
@@ -150,30 +182,75 @@ class SynthBank:
 
     @staticmethod
     def gen_piano_tone(midi):
-        freq = 440.0 * (2.0 ** ((midi - 69) / 12.0))
-        duration = 0.3
-        sr = 44100
-        t = np.linspace(0, duration, int(sr * duration), False)
-        
-        mod_index = 2.0 * np.exp(-15 * t)
-        wave = np.sin(2 * np.pi * freq * t + mod_index * np.sin(2 * np.pi * freq * 2 * t))
-        env = np.exp(-5 * t)
-        wave = wave * env * 0.3 # Tuned down
-        
-        return (wave * 32767).astype(np.int16)
+        """Classic Piano Tone (kept for legacy support)"""
+        return SynthBank.gen_piano_fm(midi, 0.3)
 
     @staticmethod
     def gen_guitar_tone(midi):
-        freq = 440.0 * (2.0 ** ((midi - 69) / 12.0))
-        duration = 0.2
-        sr = 44100
-        t = np.linspace(0, duration, int(sr * duration), False)
+        """Classic Guitar Tone (kept for legacy support)"""
+        return SynthBank.gen_guitar_ks(midi, 0.2)
         
-        phase = (t * freq) % 1
-        wave = np.where(phase < 0.4, 1.0, -1.0).astype(np.float64)
-        wave = wave + 0.2 * np.sin(2 * np.pi * freq * 2 * t)
-        env = np.exp(-12 * t)
-        wave = wave * env * 0.3 # Tuned down
+    @staticmethod
+    def gen_guitar_ks(midi: int, duration: float = 0.2) -> np.ndarray:
+        """
+        Karplus-Strong String Synthesis.
+        Physically models a plucked string using a ring buffer delay line.
+        """
+        sr = 44100
+        freq = 440.0 * (2.0 ** ((midi - 69) / 12.0))
+        
+        # Buffer size = SampleRate / Frequency
+        N = int(sr / freq)
+        
+        # Initialize buffer with noise (Pluck excitation)
+        buf = np.random.uniform(-1, 1, N).astype(np.float32)
+        
+        # Output buffer
+        n_samples = int(sr * duration)
+        out = np.zeros(n_samples, dtype=np.float32)
+        
+        # Pointer for ring buffer
+        ptr = 0
+        
+        # Karplus-Strong Loop
+        for i in range(n_samples):
+            out[i] = buf[ptr]
+            
+            # Lowpass filter feedback
+            # avg = 0.5 * (current + previous)
+            prev_ptr = (ptr - 1 + N) % N
+            avg = 0.992 * 0.5 * (buf[ptr] + buf[prev_ptr]) # 0.992 decay factor ensures sustain
+            
+            buf[ptr] = avg
+            ptr = (ptr + 1) % N
+            
+        return (out * 0.5 * 32767).astype(np.int16)
+        
+    @staticmethod
+    def gen_piano_fm(midi: int, duration: float = 0.3) -> np.ndarray:
+        """
+        FM Synthesis E-Piano.
+        """
+        sr = 44100
+        freq = 440.0 * (2.0 ** ((midi - 69) / 12.0))
+        n_samples = int(sr * duration)
+        t = np.linspace(0, duration, n_samples, False)
+        
+        # Modulator
+        mod_freq = freq * 1.0 # Ratio 1:1 for bell-like tone
+        # Decay envelop for modulator (brightness decay)
+        mod_env = np.exp(-8 * t) 
+        mod_amp = 3.0 * mod_env # Modulation index
+        
+        modulator = mod_amp * np.sin(2 * np.pi * mod_freq * t)
+        
+        # Carrier
+        carrier = np.sin(2 * np.pi * freq * t + modulator)
+        
+        # Carrier Envelope (Amplitude decay)
+        amp_env = np.exp(-2.5 * t)
+        
+        wave = carrier * amp_env * 0.4
         
         return (wave * 32767).astype(np.int16)
 
@@ -188,9 +265,6 @@ class SynthBank:
         wave = np.sign(np.sin(2 * np.pi * freq * 1.5 * t))
         
         # Calculate a decay rate that ensures the sound lasts the full 'dur'.
-        # 3.0 ensures the volume drops to ~5% (exp(-3)) by the exact end of the note.
-        # Short notes (0.15s) get rate ~20 (fast snappy decay).
-        # Long notes (2.0s) get rate ~1.5 (slow sustain decay).
         decay_rate = 3.0 / dur
         env = np.exp(-decay_rate * t)
 

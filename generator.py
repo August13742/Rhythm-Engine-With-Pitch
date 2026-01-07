@@ -50,6 +50,20 @@ GENERATOR_CONFIG = {
         "support_multiplier": 0.8,
         "support_on_beat_bonus": 1.5,
         "shadow_window": 0.05
+    },
+    "volume": {
+        "primary_boost": 1.2,       # +20% for Primary Layer
+        "support_penalty": 0.9,     # -10% for Support Layer
+        "instrument_boosts": {
+            "drums": 1.15,          # Drums need punch
+            "bass": 1.10,           # Bass needs presence
+            "vocals": 1.05,         # Vocals are key
+            "vocals_lead": 1.05,
+            "guitar": 1.0,          # Standard
+            "piano": 1.0,
+            "other": 0.9            # Background stuff slightly quieter
+        },
+        "global_limit": 1.0         # Hard clip at 1.0
     }
 }
 
@@ -221,6 +235,7 @@ class ChartGenerator:
         scored_Events = []
         l_cfg = GENERATOR_CONFIG["layers"]
         s_cfg = GENERATOR_CONFIG["scoring"]
+        v_cfg = GENERATOR_CONFIG.get("volume", {})
         
         beat_dur = 60.0 / self.bpm if self.bpm > 0 else 0.5
         
@@ -229,26 +244,32 @@ class ChartGenerator:
             base_score = n.velocity
             is_valid = False
             
+            # --- VOLUME COMPENSATION START ---
+            # 1. Instrument Boost
+            inst_boost = v_cfg.get("instrument_boosts", {}).get(n.source, 1.0)
+            n.velocity *= inst_boost
+            
+            # 2. Pitch Compensation (Bass Boost)
+            # Fletcher-Munson: Low freq needs boost
+            if n.pitch < 55: # Below G2
+                 n.velocity *= 1.2
+            
             # Layer Logic
             if n.source in primary_src:
                 base_score *= l_cfg["primary_multiplier"]
                 is_valid = True
                 
+                # Active Layer Volume Boost
+                n.velocity *= v_cfg.get("primary_boost", 1.2)
+                
             elif n.source in support_src:
                 # Support: GRID LIMIT CHECK
+                # Active Layer Volume Penalty
+                n.velocity *= v_cfg.get("support_penalty", 0.9)
+                
                 # Only allow support notes on main beats (1/4, 1/8)
-                # We can check quantization grid or time
-                # Ideally, we want "Tempo Setters".
-                
                 time_in_beats = n.time / beat_dur
-                # Check for 1/2 beat (Eighth note) precision
-                # E.g., 0.0, 0.5, 1.0, 1.5...
-                
-                # Allow 1/4 notes (Strongest) and 1/8 (Strong)
-                # Reject 1/16 fills for Support
-                
                 beat_fraction = time_in_beats % 1.0
-                # Close to 0.0 (Quarter) or 0.5 (Eighth)
                 is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
                 is_eighth = abs(beat_fraction - 0.5) < 0.1
                 
@@ -259,13 +280,16 @@ class ChartGenerator:
                      base_score *= l_cfg["support_multiplier"]
                      is_valid = True
                 else:
-                     # Filter out complex fills (16ths) for Support layer
                      base_score = 0.0
                      is_valid = False
             else:
                 # KILL NON-FOCUS
                 base_score = 0.0
                 is_valid = False
+            
+            # Clip Volume
+            n.velocity = min(v_cfg.get("global_limit", 1.0), n.velocity)
+            # --- VOLUME COMPENSATION END ---
                 
             if is_valid:
                 setattr(n, "_score", base_score) 
@@ -275,10 +299,6 @@ class ChartGenerator:
         # If a Support note coincides with a Primary note, suppress the Support note?
         scored_Events.sort(key=lambda x: x.time)
         coincidence_window = l_cfg["shadow_window"]
-        
-        # Since we filtered `scored_Events` to only include valid notes, we can loop through them
-        # However, we need to be careful: if we removed a note, it can't shadow anything.
-        # But Primary notes are always valid. Support notes might be removed if non-grid.
         
         for i, n in enumerate(scored_Events):
             # Check neighbors

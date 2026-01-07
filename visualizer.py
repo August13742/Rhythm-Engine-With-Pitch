@@ -118,15 +118,14 @@ class Visualizer:
         vocal_bank_raw = SynthBank.gen_smart_vocal_bank(self.beatmaps)
         other_bank_raw = SynthBank.gen_smart_other_bank(self.beatmaps)
         
+        # V300: Add Smart Banks for Piano and Guitar
+        piano_bank_raw = SynthBank.gen_smart_instrument_bank(self.beatmaps, "piano")
+        guitar_bank_raw = SynthBank.gen_smart_instrument_bank(self.beatmaps, "guitar")
+        
         print(f"[VIS] Vocal bank has {len(vocal_bank_raw)} combinations")
         if vocal_bank_raw:
             for key in list(vocal_bank_raw.keys())[:3]:
                 print(f"[VIS]   Example: {key}, shape={vocal_bank_raw[key].shape}")
-        
-        print(f"[VIS] Other bank has {len(other_bank_raw)} combinations")
-        if other_bank_raw:
-            for key in list(other_bank_raw.keys())[:3]:
-                print(f"[VIS]   Example: {key}, shape={other_bank_raw[key].shape}")
         
         # Convert raw audio to pygame Sound objects
         self.synth_banks["vocals"] = {}
@@ -141,8 +140,20 @@ class Visualizer:
             self.synth_banks["other"][(midi, bucket)] = pygame.sndarray.make_sound(
                 np.stack([audio, audio], axis=1)
             )
+
+        self.synth_banks["piano"] = {}
+        for (midi, bucket), audio in piano_bank_raw.items():
+            self.synth_banks["piano"][(midi, bucket)] = pygame.sndarray.make_sound(
+                np.stack([audio, audio], axis=1)
+            )
+
+        self.synth_banks["guitar"] = {}
+        for (midi, bucket), audio in guitar_bank_raw.items():
+            self.synth_banks["guitar"][(midi, bucket)] = pygame.sndarray.make_sound(
+                np.stack([audio, audio], axis=1)
+            )
         
-        # For other stems (drums, bass, piano, guitar), still generate all MIDI values with default duration
+        # For simple drums/bass, still use static generation
         for midi in range(24, 108):
             # Square wave (8-bit)
             square_audio = SynthBank.gen_square_tone(midi)
@@ -150,7 +161,7 @@ class Visualizer:
                 np.stack([square_audio, square_audio], axis=1)
             )
             
-            # Stem-specific synths (drums, bass, piano, guitar with default durations)
+            # Stem-specific synths (drums, bass only)
             self.synth_banks["drums"] = self.synth_banks.get("drums", {})
             drums_audio = SynthBank.gen_drums_tone_midi(midi)
             self.synth_banks["drums"][midi] = pygame.sndarray.make_sound(
@@ -161,18 +172,6 @@ class Visualizer:
             bass_audio = SynthBank.gen_bass_tone(midi)
             self.synth_banks["bass"][midi] = pygame.sndarray.make_sound(
                 np.stack([bass_audio, bass_audio], axis=1)
-            )
-            
-            self.synth_banks["piano"] = self.synth_banks.get("piano", {})
-            piano_audio = SynthBank.gen_piano_tone(midi)
-            self.synth_banks["piano"][midi] = pygame.sndarray.make_sound(
-                np.stack([piano_audio, piano_audio], axis=1)
-            )
-            
-            self.synth_banks["guitar"] = self.synth_banks.get("guitar", {})
-            guitar_audio = SynthBank.gen_guitar_tone(midi)
-            self.synth_banks["guitar"][midi] = pygame.sndarray.make_sound(
-                np.stack([guitar_audio, guitar_audio], axis=1)
             )
         
         # 3. SETUP
@@ -214,28 +213,38 @@ class Visualizer:
                         bucket = SynthBank.get_bucket(dur)
                         
                         # --- SYNTH MODES ---
+                        # --- SYNTH MODES ---
                         if self.mode == "classic":
                             # All square wave (pure 8-bit)
                             sound = self.square_bank.get(midi)
                             
                         elif self.mode == "vocal":
-                            # VOCALOID vocals + default other synth for non-vocals (both with duration)
+                            # CLASSIC + VOCALS
+                            # Vocals = Smart Bank (Vocaloid)
+                            # Everything else = Square Wave (8-bit)
                             if source in ["vocals", "vocals_lead"]:
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
-                            elif source == "other":
-                                sound = self.synth_banks["other"].get((midi, bucket))
                             else:
-                                # Fallback to square wave if source is unknown
                                 sound = self.square_bank.get(midi)
                                 
                         elif self.mode == "experimental":
-                            # VOCALOID vocals + stem-specific synths (vocals and other use smart banks with duration)
+                            # FULL SMART BANK SUPPORT
+                            # Vocals, Piano, Guitar, Other = Smart Banks (midi, bucket)
+                            # Drums, Bass = Simple Banks (midi)
+                            
                             if source in ["vocals", "vocals_lead"]:
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
                             elif source == "other":
                                 sound = self.synth_banks["other"].get((midi, bucket))
-                            else:
+                            elif source == "piano":
+                                sound = self.synth_banks["piano"].get((midi, bucket))
+                            elif source == "guitar":
+                                sound = self.synth_banks["guitar"].get((midi, bucket))
+                            elif source in ["drums", "bass"]:
                                 sound = self.synth_banks.get(source, {}).get(midi)
+                            else:
+                                # Fallback
+                                sound = self.square_bank.get(midi)
 
                         if sound: 
                             chan = pygame.mixer.find_channel()
