@@ -14,10 +14,10 @@ from transcribe.council import CouncilV2
 
 # Configuration for Visualizer compatibility & Generator Logic
 DIFF_CONFIGS = {
-    "EASY":   {"lanes": 4, "nps": 2.0},
-    "NORMAL": {"lanes": 4, "nps": 4.0},
-    "HARD":   {"lanes": 4, "nps": 6.0},
-    "INSANE": {"lanes": 4, "nps": 9.0}
+    "EASY":   {"lanes": 4, "nps": 4.0}, # Was NORMAL
+    "NORMAL": {"lanes": 4, "nps": 6.0}, # Was HARD
+    "HARD":   {"lanes": 4, "nps": 9.0}, # Was INSANE
+    "ALT_HARD": {"lanes": 4, "nps": 8.0}  # New "ALT HARD" (Complimentary)
 }
 # Removed hardcoded primary/support from DIFF_CONFIGS because it is now dynamic
 
@@ -64,6 +64,11 @@ GENERATOR_CONFIG = {
             "other": 0.9            # Background stuff slightly quieter
         },
         "global_limit": 1.0         # Hard clip at 1.0
+    },
+    "layer_sifting": {
+        "melodic_support_gate": 0.25,   # Min velocity for Melodic Support notes
+        "melodic_support_weight": 0.5,  # Score penalty (Deprioritize in density)
+        "percussive_stems": ["drums", "bass"] # Stems EXEMPT from sifting
     }
 }
 
@@ -91,10 +96,17 @@ class StemSelector:
         support = []
         
         # Difficulty Logic (Generalized)
-        # Low Diffs always prefer Main Focus to avoid confusion
+        # Force specific modes for specific difficulties based on new user mapping:
+        # EASY/NORMAL/HARD -> MAIN Focus
+        # ALT_HARD -> ALT Focus (Alternative Hard/Complimentary)
+        
         actual_mode = focus_mode
-        if difficulty in ["EASY", "NORMAL"]:
+        if difficulty in ["EASY", "NORMAL", "HARD"]:
             actual_mode = "main"
+        elif difficulty == "ALT_HARD":
+            actual_mode = "alt"
+            
+        print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
 
         if actual_mode == "main":
             # MAIN FOCUS: Vocals > Lead > Rhythm
@@ -103,21 +115,25 @@ class StemSelector:
                 if "vocals_lead" in active_stems: primary.append("vocals_lead")
                 elif "vocals" in active_stems: primary.append("vocals")
                 
-                # Hard/Insane adds Lead Guitar/Piano to primary?
-                if difficulty in ["HARD", "INSANE"]:
-                    if "guitar" in active_stems: primary.append("guitar")
+                # In Main/Easy-Hard, Instruments are Backing Tracks.
+                # Move Guitar/Piano to SUPPORT for gating.
+                # Only use them as backing in NORMAL+ (Easy is vocals only)
+                if difficulty != "EASY":
+                     if "guitar" in active_stems: support.append("guitar")
+                     if "piano" in active_stems: support.append("piano")
+            
             else:
-                # Instrumental: Leads are Primary
+                # Instrumental Song: Leads are Primary
                 if "guitar" in active_stems: primary.append("guitar")
                 if "piano" in active_stems: primary.append("piano")
                 if not primary and "other" in active_stems: primary.append("other")
 
-            # Support: Rhythm
+            # Support: Rhythm (Drums/Bass)
             if difficulty != "EASY":
                 if "drums" in active_stems: support.append("drums")
-            if difficulty in ["HARD", "INSANE"]:
+            if difficulty in ["HARD"]: # Bass only on Hard+
                 if "bass" in active_stems: support.append("bass")
-
+            
         elif actual_mode == "alt":
             # ALT FOCUS: Instruments (2nd Busiest) > Rhythm
             # Ignore Vocals
@@ -131,7 +147,7 @@ class StemSelector:
             elif "drums" in active_stems:
                 # If we have melody, Drums are support? Or Primary for Insane?
                 # For Alt focus, let's keep drums as Primary if it's Insane
-                if difficulty == "INSANE":
+                if difficulty == "ALT_HARD":
                     primary.append("drums")
                 else:
                     support.append("drums")
@@ -220,7 +236,12 @@ class ChartGenerator:
         chart_notes = self._allocate_lanes(final_events, n_lanes)
         
         return {
-            "metadata": {"difficulty": difficulty, "version": "V300", "bpm": self.bpm},
+            "metadata": {
+                "difficulty": difficulty, 
+                "version": "V300", 
+                "bpm": self.bpm,
+                "focus": focus_mode  # Export Focus Mode for Visualizer
+            },
             "notes": chart_notes
         }
 
@@ -236,6 +257,7 @@ class ChartGenerator:
         l_cfg = GENERATOR_CONFIG["layers"]
         s_cfg = GENERATOR_CONFIG["scoring"]
         v_cfg = GENERATOR_CONFIG.get("volume", {})
+        sf_cfg = GENERATOR_CONFIG.get("layer_sifting", {})
         
         beat_dur = 60.0 / self.bpm if self.bpm > 0 else 0.5
         
@@ -267,6 +289,21 @@ class ChartGenerator:
                 # Active Layer Volume Penalty
                 n.velocity *= v_cfg.get("support_penalty", 0.9)
                 
+                # --- MELODIC SUPPORT GATING ---
+                # "Punish" melodic backing tracks (Guitar/Piano)
+                if n.source not in sf_cfg.get("percussive_stems", []):
+                     # 1. Gate: Check absolute velocity
+                     # BasicPitch output is often low (0.1-0.4).
+                     # Gate must be low enough to catch accents but high enough to filter noise.
+                     gate_thresh = sf_cfg.get("melodic_support_gate", 0.25)
+                     
+                     if n.velocity < gate_thresh:
+                         is_valid = False # Kill it
+                         base_score = 0.0
+                     else:
+                         # 2. Weight: Deprioritize
+                         base_score *= sf_cfg.get("melodic_support_weight", 0.5)
+                
                 # Only allow support notes on main beats (1/4, 1/8)
                 time_in_beats = n.time / beat_dur
                 beat_fraction = time_in_beats % 1.0
@@ -275,10 +312,10 @@ class ChartGenerator:
                 
                 if is_quarter:
                      base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
-                     is_valid = True
+                     if is_valid is not False: is_valid = True # Only set True if not already killed
                 elif is_eighth:
                      base_score *= l_cfg["support_multiplier"]
-                     is_valid = True
+                     if is_valid is not False: is_valid = True
                 else:
                      base_score = 0.0
                      is_valid = False
@@ -611,8 +648,8 @@ class RhythmEngine:
                 return {}
         return {}
 
-    def run(self, focus_mode: str = "main"):
-        print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: {focus_mode})")
+    def run(self):
+        print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: Dynamic)")
         
         # 0. BPM Detection (Basic)
         self._detect_bpm()
@@ -685,8 +722,8 @@ class RhythmEngine:
         output_dir = os.path.join(self.stems_folder, "beatmap")
         os.makedirs(output_dir, exist_ok=True)
         
-        for diff in ["EASY", "NORMAL", "HARD", "INSANE"]:
-            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest, focus_mode=focus_mode) # Pass copy & manifest
+        for diff in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
+            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest) # Pass copy & manifest
             
             out_file = os.path.join(output_dir, f"{diff}.json")
             with open(out_file, "w") as f:

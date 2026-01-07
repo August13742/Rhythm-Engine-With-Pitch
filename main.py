@@ -15,7 +15,6 @@ def main():
     parser.add_argument("audio_file", help="Path to audio file")
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
-    parser.add_argument("--focus", choices=["main", "alt"], default="main", help="Charting Focus Mode: 'main' (Vocals) or 'alt' (Instruments)")
     parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
     args = parser.parse_args()
     
@@ -55,7 +54,7 @@ def main():
             os.path.join(folder_path, f"{base_name}_EASY.json"),
             os.path.join(folder_path, f"{base_name}_NORMAL.json"),
             os.path.join(folder_path, f"{base_name}_HARD.json"),
-            os.path.join(folder_path, f"{base_name}_INSANE.json")
+            os.path.join(folder_path, f"{base_name}_ALT_HARD.json")
         ]
         
         if all(os.path.exists(bm) for bm in beatmap_files):
@@ -85,7 +84,7 @@ def main():
     # V300 Update: Use new RhythmEngine
     # The new engine handles transcribing stems and generating charts internally
     engine = RhythmEngine(folder_path)
-    engine.run(focus_mode=args.focus)
+    engine.run()
     print("[VIS] Beatmaps generated and saved!")
     
     if args.generate_only:

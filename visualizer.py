@@ -11,7 +11,7 @@ import librosa
 from synthbank import SynthBank
 
 # --- CONFIG ---
-COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "INSANE": (255, 50, 50) }
+COLORS = { "bg": (20, 20, 25), "EASY": (100, 255, 100), "NORMAL": (100, 200, 255), "HARD": (255, 200, 50), "ALT_HARD": (255, 50, 50) }
 
 # Stem Colors (for different note sources)
 STEM_COLORS = {
@@ -73,7 +73,7 @@ class Visualizer:
         
         duration = librosa.get_duration(path=os.path.join(folder_path, f"{duration_track}.wav"))
         from generator import DIFF_CONFIGS
-        for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
+        for d in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
             # V300 Path: beatmap/DIFF.json
             v300_path = os.path.join(folder_path, "beatmap", f"{d}.json")
             # Legacy Path: base_name_DIFF.json
@@ -181,7 +181,7 @@ class Visualizer:
         self.sfx_vol = 0.8
         pygame.mixer.music.set_volume(self.music_vol)
         
-        self.diff = "INSANE"
+        self.diff = "ALT_HARD"
         self.playing = True
         self.start_time = time.time()
         self.pause_time = 0
@@ -280,7 +280,7 @@ class Visualizer:
                     if e.key == pygame.K_1: self.diff = "EASY"
                     if e.key == pygame.K_2: self.diff = "NORMAL"
                     if e.key == pygame.K_3: self.diff = "HARD"
-                    if e.key == pygame.K_4: self.diff = "INSANE"
+                    if e.key == pygame.K_4: self.diff = "ALT_HARD"
                     if e.key == pygame.K_m: self._cycle_mode()
                     if e.key == pygame.K_SPACE:
                         if self.playing:
@@ -320,14 +320,19 @@ class Visualizer:
     def draw(self, curr):
         self.screen.fill(COLORS["bg"])
         col_w = self.width // 4
-        diffs = ["EASY", "NORMAL", "HARD", "INSANE"]
+        diffs = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
         
         for i, diff in enumerate(diffs):
             x_off = i * col_w
-            col = COLORS.get(diff, (255,255,255))
-            notes = self.beatmaps[diff]
-            meta = self.metadata[diff]
-            lanes = self.metadata[diff]["lanes"]
+            col = COLORS.get(diff, (255,100,255)) # Default pink for ALT_HARD
+            if diff == "ALT_HARD": col = (255, 100, 255)
+            
+            notes = self.beatmaps.get(diff, [])
+            if not notes: continue # Skip if missing
+            
+            # Safe metadata access
+            meta = self.metadata.get(diff, {"count": 0, "nps": 0.0, "lanes": 4, "focus": "unknown"})
+            lanes = meta.get("lanes", 4)
             is_selected = (diff == self.diff)
             
             pygame.draw.rect(self.screen, col if is_selected else (60,60,65), (x_off, 0, col_w, self.height), 2 if is_selected else 1)
@@ -338,8 +343,14 @@ class Visualizer:
                 lx = x_off + l * lane_w
                 pygame.draw.line(self.screen, (35,35,45), (lx, 0), (lx, self.height))
                 
-            title = self.big_font.render(f"{diff}", True, col if is_selected else (col[0]//2, col[1]//2, col[2]//2))
+            title_text = diff
+            # if diff == "INSANE": title_text = "ALT HARD" # No longer needed, key is ALT_HARD
+            
+            title = self.big_font.render(f"{title_text}", True, col if is_selected else (col[0]//2, col[1]//2, col[2]//2))
             self.screen.blit(title, (x_off + 10, 20))
+            
+            # Subtitle: NPS + Count
+            # focus_mode = meta.get("focus", "main").upper() # Hidden per user request
             stats = self.font.render(f"Notes: {meta['count']} | NPS: {meta['nps']:.1f}", True, (200,200,200))
             self.screen.blit(stats, (x_off + 10, 50))
 
