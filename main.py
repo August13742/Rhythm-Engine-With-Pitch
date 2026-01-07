@@ -3,7 +3,7 @@ import argparse
 import os
 import sys
 from visualizer import Visualizer
-from generator import MapGenerator
+from generator import RhythmEngine # V300 Engine
 from separator import separate_audio
 
 # Suppress CUDA compatibility warnings for newer GPUs
@@ -15,7 +15,7 @@ def main():
     parser.add_argument("audio_file", help="Path to audio file")
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
-    parser.add_argument("--mode", choices=["high", "medium", "low"], default="high", help="Separation quality: high (3-pass SOTA), medium (2-pass), low (legacy)")
+    parser.add_argument("--focus", choices=["main", "alt"], default="main", help="Charting Focus Mode: 'main' (Vocals) or 'alt' (Instruments)")
     parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
     args = parser.parse_args()
     
@@ -47,7 +47,7 @@ def main():
     elif stems_exist:
         print("[VIS] Stems already exist, skipping separation...")
     else:
-        folder_path = separate_audio(args.audio_file, mode=args.mode)
+        folder_path = separate_audio(args.audio_file)
     
     # Step 2: Check for generated beatmaps (unless rebake flag is set)
     if not args.rebake:
@@ -82,8 +82,10 @@ def main():
         "guitar": os.path.join(folder_path, "guitar.wav")
     }
     
-    gen = MapGenerator(stems_dict, use_holds=True)
-    gen.generate_all()
+    # V300 Update: Use new RhythmEngine
+    # The new engine handles transcribing stems and generating charts internally
+    engine = RhythmEngine(folder_path)
+    engine.run(focus_mode=args.focus)
     print("[VIS] Beatmaps generated and saved!")
     
     if args.generate_only:

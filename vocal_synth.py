@@ -106,10 +106,8 @@ class VocalSynth:
         # Ensure the vocal is at least 0.45s (Tap length) so it sings clearly
         duration = max(duration, 0.45)
 
-        profile_override = "CRYSTAL_IA"
         presets = VocalSynth.get_presets()
-        # profile = presets.get(profile_name, presets["POWER_RIN"])
-        profile = presets.get(profile_override, presets["POWER_RIN"])
+        profile = presets.get(profile_name, presets["POWER_RIN"])
         
         # 1. Setup
         f0 = 440.0 * (2.0 ** ((midi_note - 69) / 12.0))

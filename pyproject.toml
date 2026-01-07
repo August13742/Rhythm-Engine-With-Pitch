@@ -17,8 +17,10 @@ dependencies = [
     "onnxruntime-gpu>=1.23.2",
     "huggingface-hub>=1.2.3",
     "faster-whisper>=1.2.1",
-    "torchcrepe>=0.0.24",
     "torchfcpe>=0.0.4",
+    "nnAudio>=0.3.2",
+    "pretty_midi>=0.2.10",
+    "mir_eval>=0.7",
 ]
 
 [[tool.uv.index]]

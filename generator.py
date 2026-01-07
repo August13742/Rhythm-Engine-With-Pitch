@@ -1,745 +1,730 @@
-"""
-V208 - THE COUNCIL
-Combined Best Features:
-  - V205 Gameplay Logic: Magnetic Quantization, Physics, Coincidence Voting.
-  - V208 Pitch Logic: FCPE + Crepe + RMVPE running in parallel.
-  - Hardware: Optimized for RTX 5090 (Float32 precision).
-"""
-
-import numpy as np
-import librosa
-import scipy.ndimage
-import json
 import os
 import argparse
-import torch
-import torchcrepe
-from torchfcpe import spawn_bundled_infer_model
-from rmvpe_model import RMVPE_Infer
+import sys
+import json
+import random
+from typing import List
 
-# ==========================================
-#        TUNING & CONFIGURATION
-# ==========================================
+# Add project root to path if needed
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-CONSTANTS = {
-    "system": {
-        "global_offset_sec": -0.02,
-        "device": "cuda" if torch.cuda.is_available() else "cpu",
-        "rmvpe_path": "models/rmvpe.pt" 
-    },
-    "audio": {
-        "sr": 44100,
-        "hop_length": 512,
-        "pyin": {
-            "frame_length": 4096, 
-            "fmin": 40, "fmax": 2000, "confidence": 0.15 
-        },
-    },
-    "council": {
-        "fcpe": {"threshold": 0.09, "f0_min": 50, "f0_max": 1100},
-        "crepe": {"confidence": 0.50, "model": "full"},
-        "rmvpe": {"threshold": 0.10}
-    },
-    "coincidence": {
-        "window": 0.05,           
-        "min_support": 0.3,       
-        "boost_scale": 0.5,       
-        "mask_threshold": 0.35,   
-        "mask_ratio": 2.0         
-    },
-    "harvest": {
-        "sens": { # lower -> more notes, but more noise (wrong midi) too
-            "vocals": 0.025, 
-            "drums": 0.10, "bass": 0.08, 
-            "piano": 0.03, "guitar": 0.03, "other": 0.06
-        }
+from beatmap import Beatmap, NoteEvent, EventFilter, Quantizer
+from transcribe.basic_pitch import BasicPitchTranscriber
+from transcribe.council import CouncilV2
+
+# Configuration for Visualizer compatibility & Generator Logic
+DIFF_CONFIGS = {
+    "EASY":   {"lanes": 4, "nps": 2.0},
+    "NORMAL": {"lanes": 4, "nps": 4.0},
+    "HARD":   {"lanes": 4, "nps": 6.0},
+    "INSANE": {"lanes": 4, "nps": 9.0}
+}
+# Removed hardcoded primary/support from DIFF_CONFIGS because it is now dynamic
+
+GENERATOR_CONFIG = {
+    "cleaning": {
+        "min_duration": 0.03,
+        "min_velocity": 0.1,
+        "roll_consolidation_gap": 0.03
     },
     "holds": {
-        "energy_decay": 0.85,
-        "tap_threshold": 0.1,
-        "max_dur": 2.0,
-        "gap_buffer": 0.10,
-        "max_pitch_drift": 1.5,
-        "allowed_stems": ["vocals", "other"]
+        "allowed_stems": ["vocals", "vocals_lead", "other"],
+        "min_duration": 0.15, # seconds
+        "max_vocal_duration": 1.5 # Break long vocals to prevent stale SFX pitch
     },
-    "mixing": {
-        "stem_vol": {
-            "vocals": 1.25, 
-            "drums": 0.90, "bass": 0.85, 
-            "piano": 1.00, "guitar": 0.85, "other": 0.60
+    "scoring": {
+        "weights": {
+            "vocals": 1.5, "vocals_lead": 1.6,
+            "piano": 1.2, "guitar": 1.2,
+            "drums": 1.1, "bass": 1.0,
+            "other": 0.8
         },
-        "priorities": {
-            "vocals": 2.5, 
-            "drums": 1.1, "bass": 0.9, 
-            "piano": 1.1, "guitar": 1.1, "other": 1.0
-        }
+        "coincidence_bonus": 0.2,
+        "min_score_threshold": 0.2
     },
-    "visuals": {
-        "ranges": {
-            "vocals": (48, 84), "piano": (48, 88), "guitar": (40, 76),
-            "bass": (36, 60), "other": (48, 88)
-        }
+    "windowing": {
+        "size": 1.0, 
     },
-    "difficulty": {
-        "EASY":   {"lanes": 4, "grids": [4],       "poly": 1, "density": 2.0, "min_score": 0.60, "chaos": 0.0},
-        "NORMAL": {"lanes": 4, "grids": [4, 8],    "poly": 2, "density": 4.0, "min_score": 0.50, "chaos": 0.0},
-        "HARD":   {"lanes": 4, "grids": [4, 8, 12, 16], "poly": 3, "density": 6.0, "min_score": 0.35, "chaos": 0.1},
-        "INSANE": {"lanes": 4, "grids": [4, 8, 12, 16, 24], "poly": 4, "density": 8.0, "min_score": 0.20, "chaos": 0.2},
+    "layers": {
+        "primary_multiplier": 2.0,
+        "support_multiplier": 0.8,
+        "support_on_beat_bonus": 1.5,
+        "shadow_window": 0.05
     }
 }
-DIFF_CONFIGS = CONSTANTS["difficulty"]
 
-class MapGenerator:
-    def __init__(self, stems_path, use_holds=True):
-        print(f"[INIT] V208 Tri-Cameral Generator (Optimized)...")
-        self.paths = stems_path
-        self.use_holds = use_holds
-        self.cfg = CONSTANTS
-        self.device = self.cfg["system"]["device"]
-        self.manifest = self._load_manifest()
-        self.council_report = []
+class StemSelector:
+    @staticmethod
+    def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main") -> dict:
+        """
+        Determines Primary/Support stems based on Difficulty and Focus Mode.
+        focus_mode: "main" (Vocals/Melody) or "alt" (Instruments/Rhythm)
+        """
+        # 1. Analyze Manifest (What exists?)
+        active_stems = []
+        has_vocals = False
         
-        self.audio_data = self._load_audio()
-        self.envs = {}
-        self.rms = {}
-        self._generate_envelopes()
-        
-        self.council_data = {}
-        self._convene_council()
-            
-        self.rhythm = self._analyze_rhythm()
-        self.raw_notes = self._harvest_all()
-        self.voted_pool = self._apply_coincidence_voting(self.raw_notes)
-        self.master_pool = self._score_and_sort(self.voted_pool)
-        print(f"[INIT] Ready. Master Pool: {len(self.master_pool)} events.")
-
-    def _load_audio(self):
-        loaded = {}
-        max_len = 0
-        sr = self.cfg["audio"]["sr"]
-        print("[DSP] Loading Stems...")
-        for name, path in self.paths.items():
-            if not os.path.exists(path): continue
-            y, _ = librosa.load(path, sr=sr, mono=True)
-            peak = np.max(np.abs(y))
-            if peak > 0: y /= peak
-            loaded[name] = y
-            max_len = max(max_len, len(y))
-        final = {}
-        for name, data in loaded.items():
-            if data is None: final[name] = np.zeros(max_len, dtype=np.float32)
-            elif len(data) < max_len:
-                padded = np.zeros(max_len, dtype=np.float32)
-                padded[:len(data)] = data
-                final[name] = padded
-            else: final[name] = data
-        return final
-
-    def _generate_envelopes(self):
-        sr = self.cfg["audio"]["sr"]
-        hop = self.cfg["audio"]["hop_length"]
-        for name, y in self.audio_data.items():
-            rms = librosa.feature.rms(y=y, frame_length=2048, hop_length=hop)[0]
-            if rms.max() > 0: rms /= rms.max()
-            self.rms[name] = rms
-            if "vocals" in name:
-                onset = librosa.onset.onset_strength(y=y, sr=sr)
-                if onset.max() > 0: onset /= onset.max()
-                self.envs[name] = (onset * 0.5) + (rms * 0.5)
-            else:
-                self.envs[name] = librosa.onset.onset_strength(y=y, sr=sr)
-                if self.envs[name].max() > 0: self.envs[name] /= self.envs[name].max()
-
-    # =========================================================
-    #   PHASE 3: THE COUNCIL MEETING
-    # =========================================================
-    def _convene_council(self):
-        if "vocals" not in self.audio_data and "vocals_lead" not in self.audio_data: return
-        print(f"\n--- CONVENING THE TRI-CAMERAL COUNCIL ---")
-        
-        # 1. SELECT SOURCE (Priority: Viperx Lead > Mixed Vocals)
-        if "vocals_lead" in self.audio_data and self._check_signal("vocals_lead"):
-            print("  [DSP] Source: Viperx Lead Vocal (High Quality)")
-            y = self.audio_data["vocals_lead"]
+        if manifest:
+            for k, v in manifest.items():
+                if isinstance(v, dict) and not v.get("is_silent", True):
+                    active_stems.append(k)
+                    if k in ["vocals", "vocals_lead"]: has_vocals = True
         else:
-            print("  [DSP] Source: Mixed Vocals (Standard)")
-            y = self.audio_data["vocals"]
+             active_stems = ["vocals", "drums", "bass", "other"]
+             has_vocals = True
 
-        # 2. HYGIENE: Restore Anti-Bleed Masking
-        # Even with Viperx, we might want to crush sections where Backing > Lead
-        if "vocals_backing" in self.audio_data and self._check_signal("vocals_backing"):
-            print("  [DSP] Applying Dynamic Anti-Bleed Masking...")
-            y_back = self.audio_data["vocals_backing"]
-            
-            # Fast RMS subtraction
-            hop = 512
-            rms_lead = librosa.feature.rms(y=y, frame_length=2048, hop_length=hop)[0]
-            rms_back = librosa.feature.rms(y=y_back, frame_length=2048, hop_length=hop)[0]
-            
-            # Align lengths
-            min_len = min(len(rms_lead), len(rms_back))
-            rms_lead = rms_lead[:min_len]
-            rms_back = rms_back[:min_len]
-            
-            # Calculate mask (Aggressive Gating)
-            # If backing energy is > 70% of lead energy, crush the signal
-            ratio = rms_back / (rms_lead + 1e-6)
-            mask = np.where(ratio > 0.7, 0.1, 1.0) 
-            
-            # Upsample mask to audio rate
-            mask_audio = scipy.ndimage.zoom(mask, len(y)/len(mask), order=0)
-            y = y * mask_audio[:len(y)]
-
-        # 3. Resample for AI Models
-        print("  [DSP] Resampling to 16k for AI Models...")
-        y_16k = librosa.resample(y, orig_sr=44100, target_sr=16000)
+        primary = []
+        support = []
         
-        # 4. Run Models
-        self.council_data["fcpe"] = self._run_fcpe(y_16k)
-        self.council_data["crepe"] = self._run_crepe(y_16k)
-        self.council_data["rmvpe"] = self._run_rmvpe(y_16k)
-        print("--- COUNCIL IN SESSION ---\n")
+        # Difficulty Logic (Generalized)
+        # Low Diffs always prefer Main Focus to avoid confusion
+        actual_mode = focus_mode
+        if difficulty in ["EASY", "NORMAL"]:
+            actual_mode = "main"
 
-    def _check_signal(self, name):
-        if name not in self.audio_data: return False
-        return np.max(np.abs(self.audio_data[name])) > 0.02
-
-    def _run_fcpe(self, y_16k):
-        print(f"  [1/3] FCPE...")
-        audio_t = torch.tensor(y_16k, device=self.device).float().unsqueeze(0).unsqueeze(-1)
-        model = spawn_bundled_infer_model(device=self.device)
-        f_cfg = self.cfg["council"]["fcpe"]
-        f0_t = model.infer(audio_t, sr=16000, decoder_mode="local_argmax",
-                           threshold=f_cfg["threshold"], f0_min=f_cfg["f0_min"], f0_max=f_cfg["f0_max"])
-        return {"f0": f0_t.squeeze().cpu().numpy(), "time_step": len(y_16k)/len(f0_t.squeeze())/16000.0}
-
-    def _run_crepe(self, y_16k):
-        print(f"  [2/3] TorchCrepe...")
-        audio_t = torch.tensor(y_16k, device=self.device).float().unsqueeze(0)
-        hop_len = 160
-        f0, conf = torchcrepe.predict(audio_t, sample_rate=16000, hop_length=hop_len,
-                                      fmin=50, fmax=880, model='full', batch_size=2048,
-                                      device=self.device, return_periodicity=True)
-        return {"f0": f0.squeeze().cpu().numpy(), "conf": conf.squeeze().cpu().numpy(), "time_step": hop_len/16000.0}
-
-    def _run_rmvpe(self, y_16k):
-        print(f"  [3/3] RMVPE...")
-        os.makedirs("models", exist_ok=True)
-        w_path = self.cfg["system"]["rmvpe_path"]
-        try:
-            model = RMVPE_Infer(w_path, self.device)
-            raw_f0 = model.infer(y_16k, thred=self.cfg["council"]["rmvpe"]["threshold"])
-            return {"f0": raw_f0, "time_step": len(y_16k)/len(raw_f0)/16000.0}
-        except Exception as e:
-            print(f"    [ERR] RMVPE Failed: {e}")
-            return None
-
-    # =========================================================
-    #   PHASE 4: HARVESTING 
-    # =========================================================
-
-    def _harvest_all(self):
-        pool = []
-        sens = self.cfg["harvest"]["sens"]
-        
-        # Use Lead envelope if available, else standard vocals
-        src_vocals = "vocals_lead" if "vocals_lead" in self.envs else "vocals"
-        
-        if src_vocals in self.audio_data:
-            pool.extend(self._harvest_vocals_voting(src_vocals, sens["vocals"]))
-        
-        for inst in ["bass", "piano", "guitar", "other"]:
-            if self._check_stem(inst):
-                pool.extend(self._harvest_inst_pyin(inst, sens[inst]))
-        if self._check_stem("drums"):
-            pool.extend(self._harvest_drums(sens["drums"]))
-        return pool
-
-    def _harvest_vocals_voting(self, source, sensitivity):
-        env = self.envs[source]
-        sr = 44100
-        frames = librosa.util.peak_pick(env, pre_max=2, post_max=2, pre_avg=2, post_avg=2, delta=sensitivity, wait=2)
-        notes = []
-        busy_until = 0.0
-        
-        for f in frames:
-            t_onset = librosa.frames_to_time(f, sr=sr) + self.cfg["system"]["global_offset_sec"]
-            if t_onset < 0 or t_onset < busy_until: continue 
-            
-            t_start = t_onset + 0.040
-            t_end = t_start + 0.100
-            
-            vote_result = self._cast_votes(t_start, t_end)
-            if vote_result is None: continue
-            
-            midi_final, confidence_label = vote_result
-            
-            dur = self._measure_duration(source, f)
-            if dur > 0: busy_until = t_onset + dur + 0.05
+        if actual_mode == "main":
+            # MAIN FOCUS: Vocals > Lead > Rhythm
+            if has_vocals:
+                # Prefer Lead
+                if "vocals_lead" in active_stems: primary.append("vocals_lead")
+                elif "vocals" in active_stems: primary.append("vocals")
                 
-            notes.append({
-                "time": t_onset, "midi": midi_final, "dur": dur, 
-                "source": "vocals", # Normalize name for mixing priority
-                "score": float(env[f]), "voice_id": 0,
-                "vote_type": confidence_label
-            })
-        return notes
+                # Hard/Insane adds Lead Guitar/Piano to primary?
+                if difficulty in ["HARD", "INSANE"]:
+                    if "guitar" in active_stems: primary.append("guitar")
+            else:
+                # Instrumental: Leads are Primary
+                if "guitar" in active_stems: primary.append("guitar")
+                if "piano" in active_stems: primary.append("piano")
+                if not primary and "other" in active_stems: primary.append("other")
 
-    def _cast_votes(self, t_start, t_end):
-        log_entry = {
-            "time": float(f"{t_start:.3f}"),
-            "inputs": {},
-            "status": "REJECTED",
-            "logic": "N/A",
-            "final_midi": None
+            # Support: Rhythm
+            if difficulty != "EASY":
+                if "drums" in active_stems: support.append("drums")
+            if difficulty in ["HARD", "INSANE"]:
+                if "bass" in active_stems: support.append("bass")
+
+        elif actual_mode == "alt":
+            # ALT FOCUS: Instruments (2nd Busiest) > Rhythm
+            # Ignore Vocals
+            primary_candidates = ["guitar", "piano", "other"]
+            for s in primary_candidates:
+                if s in active_stems: primary.append(s)
+            
+            # If no melody instruments, Drums become primary (Drum Chart)
+            if not primary and "drums" in active_stems:
+                primary.append("drums")
+            elif "drums" in active_stems:
+                # If we have melody, Drums are support? Or Primary for Insane?
+                # For Alt focus, let's keep drums as Primary if it's Insane
+                if difficulty == "INSANE":
+                    primary.append("drums")
+                else:
+                    support.append("drums")
+                    
+            if "bass" in active_stems: support.append("bass")
+            
+        print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
+        print(f"    > Primary: {primary}")
+        print(f"    > Support: {support}")
+        
+        return {"primary": primary, "support": support}
+
+class ChartGenerator:
+    def __init__(self, bpm: float = 120.0):
+        self.quantizer = Quantizer(bpm)
+        self.bpm = bpm
+        
+    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main") -> dict:
+        """
+        Converts raw events into a playable chart using V300 pipeline.
+        focus_mode: "main" or "alt"
+        """
+        print(f"[Generator] Starting {difficulty} chart generation (Mode: {focus_mode})...")
+        
+        cfg = DIFF_CONFIGS.get(difficulty, DIFF_CONFIGS["NORMAL"])
+        target_nps = cfg["nps"]
+        n_lanes = cfg["lanes"]
+        
+        # --- STAGE 0: LAYER SELECTION ---
+        layers = StemSelector.select_layers(difficulty, manifest, focus_mode)
+        primary_src = set(layers["primary"])
+        support_src = set(layers["support"])
+        
+        # --- STAGE 1: THE CLEANER ---
+        c_cfg = GENERATOR_CONFIG["cleaning"]
+        clean_events = EventFilter.filter_ghost_notes(
+            events, 
+            min_dur=c_cfg["min_duration"], 
+            min_vel=c_cfg["min_velocity"]
+        )
+        clean_events = EventFilter.consolidate_rolls(
+            clean_events, 
+            gap_threshold=c_cfg["roll_consolidation_gap"]
+        )
+        print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
+        
+        # --- STAGE 2: ADAPTIVE GRID (Quantization) ---
+        # Define Grids per Difficulty
+        # 4=Quarter, 8=Eighth, 12=Triplet Eighth, 16=Sixteenth, 24=Triplet Sixteenth
+        diff_grids = {
+            "EASY":   [4],
+            "NORMAL": [4, 8],
+            "HARD":   [4, 8, 12, 16],
+            "INSANE": [4, 8, 12, 16, 24, 32] 
+        }
+        allowed_grids = diff_grids.get(difficulty, [4, 8])
+        
+        # Define Stems that require Strict Grids (Backbone)
+        # Even on Insane, a Bass/Drum backing track feels better if locked to standard grooves
+        strict_stems = ["drums", "bass"]
+        strict_grids = [4, 8]
+        if difficulty in ["HARD", "INSANE"]: strict_grids.append(16) # Allow 16th kicks on Hard+
+        
+        # Split events
+        group_strict = []
+        group_free = []
+        
+        for e in clean_events:
+            if e.source in strict_stems:
+                group_strict.append(e)
+            else:
+                group_free.append(e)
+                
+        # Snap separately
+        snapped_strict = self.quantizer.snap_to_grid(group_strict, grids=strict_grids)
+        snapped_free = self.quantizer.snap_to_grid(group_free, grids=allowed_grids)
+        
+        quantized_events = snapped_strict + snapped_free
+        
+        # --- STAGE 3: THE SIEVE (Scoring & Selection) ---
+        ranked_events = self._rank_events_layered(quantized_events, primary_src, support_src)
+        final_events = self._filter_density_windowed(ranked_events, target_nps)
+        print(f"  [Sieve] Selected {len(final_events)} notes (NPS Limit: {target_nps})")
+        
+        # --- STAGE 4: THE MAPPER (Lane Allocation) ---
+        chart_notes = self._allocate_lanes(final_events, n_lanes)
+        
+        return {
+            "metadata": {"difficulty": difficulty, "version": "V300", "bpm": self.bpm},
+            "notes": chart_notes
         }
 
-        # --- 1. GATHER DATA ---
-        v_fcpe, c_fcpe = self._sample_f0_detailed(self.council_data["fcpe"], t_start, t_end)
-        v_crepe, c_crepe = self._sample_f0_detailed(self.council_data["crepe"], t_start, t_end, conf_key="conf")
-        v_rmvpe, c_rmvpe = self._sample_f0_detailed(self.council_data["rmvpe"], t_start, t_end)
-
-        log_entry["inputs"] = {
-            "FCPE":  {"midi": v_fcpe, "conf": float(f"{c_fcpe:.2f}")} if v_fcpe else None,
-            "CREPE": {"midi": v_crepe, "conf": float(f"{c_crepe:.2f}")} if v_crepe else None,
-            "RMVPE": {"midi": v_rmvpe, "conf": float(f"{c_rmvpe:.2f}")} if v_rmvpe else None
-        }
-
-        crepe_thresh = self.cfg["council"]["crepe"]["confidence"]
-
-        # --- 2. THE VETO ---
-        if c_crepe < crepe_thresh:
-            if v_fcpe and v_rmvpe and abs(v_fcpe - v_rmvpe) < 0.8:
-                log_entry["logic"] = "VETO_OVERRIDDEN_BY_MAJORITY"
+    def _rank_events_layered(self, events: List[NoteEvent], primary_src: set, support_src: set) -> List[NoteEvent]:
+        """
+        Rank events based on their Layer Assignment.
+        Strict Mode: Non-Focus notes get 0 score.
+        Support Mode: Must be on-beat.
+        """
+        if not events: return []
+        
+        scored_Events = []
+        l_cfg = GENERATOR_CONFIG["layers"]
+        s_cfg = GENERATOR_CONFIG["scoring"]
+        
+        beat_dur = 60.0 / self.bpm if self.bpm > 0 else 0.5
+        
+        for n in events:
+            # Base Score = Velocity
+            base_score = n.velocity
+            is_valid = False
+            
+            # Layer Logic
+            if n.source in primary_src:
+                base_score *= l_cfg["primary_multiplier"]
+                is_valid = True
+                
+            elif n.source in support_src:
+                # Support: GRID LIMIT CHECK
+                # Only allow support notes on main beats (1/4, 1/8)
+                # We can check quantization grid or time
+                # Ideally, we want "Tempo Setters".
+                
+                time_in_beats = n.time / beat_dur
+                # Check for 1/2 beat (Eighth note) precision
+                # E.g., 0.0, 0.5, 1.0, 1.5...
+                
+                # Allow 1/4 notes (Strongest) and 1/8 (Strong)
+                # Reject 1/16 fills for Support
+                
+                beat_fraction = time_in_beats % 1.0
+                # Close to 0.0 (Quarter) or 0.5 (Eighth)
+                is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
+                is_eighth = abs(beat_fraction - 0.5) < 0.1
+                
+                if is_quarter:
+                     base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
+                     is_valid = True
+                elif is_eighth:
+                     base_score *= l_cfg["support_multiplier"]
+                     is_valid = True
+                else:
+                     # Filter out complex fills (16ths) for Support layer
+                     base_score = 0.0
+                     is_valid = False
             else:
-                log_entry["status"] = "VETOED"
-                log_entry["logic"] = "CREPE_VETO_SILENCE"
-                self.council_report.append(log_entry)
-                return None
-
-        # --- 3. FILTER VALID VOTES ---
-        votes = {}
-        if v_fcpe: votes["fcpe"] = v_fcpe
-        if v_crepe and c_crepe >= crepe_thresh: votes["crepe"] = v_crepe
-        if v_rmvpe: votes["rmvpe"] = v_rmvpe
-
-        if not votes:
-            log_entry["logic"] = "NO_VALID_VOTES"
-            self.council_report.append(log_entry)
-            return None
-        
-        # --- 4. OCTAVE FOLDING ---
-        folded = False
-        if len(votes) >= 2:
-            anchor = None
-            if "crepe" in votes: anchor = votes["crepe"]
-            elif "rmvpe" in votes: anchor = votes["rmvpe"]
-            else: anchor = votes["fcpe"]
-
-            for k in votes:
-                if votes[k] == anchor: continue
-                diff = votes[k] - anchor
-                shift = int(round(diff / 12.0))
-                if shift != 0:
-                    votes[k] -= (shift * 12)
-                    folded = True
-        
-        vals = list(votes.values())
-
-        # --- 5. CONSENSUS LOGIC ---
-        final_res = None
-        logic_tag = "UNKNOWN"
-
-        if len(vals) >= 2:
-            count = 0
-            for v1 in vals:
-                local_count = 0
-                for v2 in vals:
-                    if abs(v1 - v2) < 0.8: 
-                        local_count += 1
-                if local_count >= 2:
-                    final_res = int(round(v1))
-                    logic_tag = "UNANIMOUS" if len(vals) == 3 and local_count == 3 else "MAJORITY"
-                    break
+                # KILL NON-FOCUS
+                base_score = 0.0
+                is_valid = False
+                
+            if is_valid:
+                setattr(n, "_score", base_score) 
+                scored_Events.append(n)
             
-            if final_res is None:
-                pairs = [("fcpe", "crepe"), ("fcpe", "rmvpe"), ("crepe", "rmvpe")]
-                for m1, m2 in pairs:
-                    if m1 in votes and m2 in votes and abs(votes[m1] - votes[m2]) < 0.8:
-                        final_res = int(round((votes[m1] + votes[m2])/2))
-                        logic_tag = f"SPLIT_DECISION_{m1.upper()}_{m2.upper()}"
-                        break
+        # Coincidence Bonus (Shadowing)
+        # If a Support note coincides with a Primary note, suppress the Support note?
+        scored_Events.sort(key=lambda x: x.time)
+        coincidence_window = l_cfg["shadow_window"]
+        
+        # Since we filtered `scored_Events` to only include valid notes, we can loop through them
+        # However, we need to be careful: if we removed a note, it can't shadow anything.
+        # But Primary notes are always valid. Support notes might be removed if non-grid.
+        
+        for i, n in enumerate(scored_Events):
+            # Check neighbors
+            for j in range(max(0, i-5), min(len(scored_Events), i+5)):
+                if i == j: continue
+                other = scored_Events[j]
+                if abs(n.time - other.time) < coincidence_window:
+                    # Logic: If I am Support and Other is Primary -> I get nuked
+                    if n.source in support_src and other.source in primary_src:
+                        n._score = 0.0 # Shadowed by primary
+                    
+                    # Logic: If both are same layer -> Coincidence Bonus (Chord)
+                    elif (n.source in primary_src and other.source in primary_src):
+                        n._score += s_cfg["coincidence_bonus"]
 
-        # Fallbacks
-        if final_res is None:
-            if "crepe" in votes: 
-                final_res = int(round(votes["crepe"]))
-                logic_tag = "CREPE_TRUST_FALLBACK"
-            elif "rmvpe" in votes: 
-                final_res = int(round(votes["rmvpe"]))
-                logic_tag = "RMVPE_LAST_RESORT"
-        
-        # --- 6. FINALIZE ---
-        if final_res is not None:
-            log_entry["status"] = "ACCEPTED"
-            log_entry["final_midi"] = final_res
-            log_entry["logic"] = f"{logic_tag}{'_FOLDED' if folded else ''}"
-            self.council_report.append(log_entry)
-            return final_res, logic_tag.lower()
-        else:
-            log_entry["logic"] = "NO_AGREEMENT"
-            self.council_report.append(log_entry)
-            return None
+        # Final Filter: remove zero score notes
+        return [e for e in scored_Events if getattr(e, "_score", 0) > 0.001]
 
-    def _harvest_inst_pyin(self, source, sensitivity):
-        env = self.envs[source]
-        y = self.audio_data[source]
-        sr = 44100
-        hop = 512
-        p_cfg = self.cfg["audio"]["pyin"]
+    def _filter_density_windowed(self, events: List[NoteEvent], target_nps: float) -> List[NoteEvent]:
+        """
+        Selects notes using a Sliding Window approach.
+        NPS is treated as a LIMIT per window, not a target to fill.
+        Also enforces a minimum quality threshold to avoid garbage.
+        """
+        if not events: return []
         
-        frames = librosa.util.peak_pick(env, pre_max=2, post_max=2, pre_avg=2, post_avg=2, delta=sensitivity, wait=5)
-        notes = []
-        busy_until = 0.0
+        # 1. Global Quality Filter
+        min_score = GENERATOR_CONFIG["scoring"]["min_score_threshold"]
+        valid_events = [e for e in events if getattr(e, "_score", 0) >= min_score]
         
-        for f in frames:
-            t = librosa.frames_to_time(f, sr=sr) + self.cfg["system"]["global_offset_sec"]
-            if t < 0 or t < busy_until: continue
+        if not valid_events: return []
+        
+        valid_events.sort(key=lambda x: x.time)
+        
+        final_selection = []
+        window_size = GENERATOR_CONFIG["windowing"]["size"]
+        max_notes_per_window = int(target_nps * window_size)
+        
+        # 2. Windowed Sieve
+        # Iterate through windows
+        start_time = valid_events[0].time
+        end_time = valid_events[-1].time
+        
+        curr_t = start_time
+        event_idx = 0
+        n_events = len(valid_events)
+        
+        while curr_t < end_time:
+            next_t = curr_t + window_size
             
-            start_samp = int(f * hop)
-            chunk = y[start_samp : start_samp + p_cfg["frame_length"]]
-            if len(chunk) < p_cfg["frame_length"] // 2: continue
+            # Collect notes in this window
+            window_notes = []
+            temp_idx = event_idx
+            while temp_idx < n_events and valid_events[temp_idx].time < next_t:
+                window_notes.append(valid_events[temp_idx])
+                temp_idx += 1
             
-            f0, _, prob = librosa.pyin(
-                chunk, fmin=p_cfg["fmin"], fmax=p_cfg["fmax"], 
-                sr=sr, frame_length=p_cfg["frame_length"], fill_na=np.nan
-            )
-            mask = prob > p_cfg["confidence"]
-            valid_f0 = f0[mask]
-            valid_f0 = valid_f0[~np.isnan(valid_f0)]
+            # Process window
+            if len(window_notes) > max_notes_per_window:
+                # Sieve inside the window by Score
+                window_notes.sort(key=lambda x: x._score, reverse=True)
+                selected = window_notes[:max_notes_per_window]
+                final_selection.extend(selected)
+            else:
+                final_selection.extend(window_notes)
+                
+            # Move index
+            event_idx = temp_idx
+            curr_t = next_t
             
-            if len(valid_f0) == 0: continue
-            midi = int(round(librosa.hz_to_midi(np.median(valid_f0))))
-            dur = self._measure_duration(source, f)
-            if dur > 0: busy_until = t + dur + 0.05
+        final_selection.sort(key=lambda x: x.time)
+        return final_selection
+
+    def _allocate_lanes(self, events: List[NoteEvent], n_lanes: int) -> List[dict]:
+        """
+        Maps notes to lanes [0, n_lanes-1].
+        """
+        processed = []
+        
+        # State for anchoring
+        last_pitch = events[0].pitch if events else 60
+        last_lane = n_lanes // 2
+        
+        # Configuration
+        allowed_holds = GENERATOR_CONFIG["holds"]["allowed_stems"]
+        min_hold_dur = GENERATOR_CONFIG["holds"]["min_duration"]
+        
+        # Calculate dynamic hold threshold based on BPM (still useful as a relative minimum)
+        beat_dur = 60.0 / self.bpm
+        # Dynamic thresh should not be lower than absolute min_hold_dur
+        dynamic_thresh = (beat_dur / 2.0) * 0.9 
+        hold_thresh = max(min_hold_dur, dynamic_thresh)
+        
+        for ev in events:
+            # Logic: Relative movements
+            pitch_delta = ev.pitch - last_pitch
             
-            notes.append({
-                "time": t, "midi": midi, "dur": dur, 
-                "source": source, "score": float(env[f]), "voice_id": 0
+            # If large jump, absolute mapping
+            if abs(pitch_delta) > 12: # Octave jump
+                # Map 40-80 to 0-(n-1)
+                norm = max(0.0, min(1.0, (ev.pitch - 48) / 36.0))
+                lane = int(norm * (n_lanes - 0.01))
+            else:
+                # Relative move
+                move = 0
+                if pitch_delta > 2: move = 1
+                elif pitch_delta < -2: move = -1
+                
+                lane = max(0, min(n_lanes - 1, last_lane + move))
+            
+            # Update state
+            last_pitch = ev.pitch
+            last_lane = lane
+            
+            # Check hold type
+            # 1. Must be allowed stem
+            # 2. Must exceed threshold
+            is_hold = False
+            if ev.source in allowed_holds:
+                if ev.duration > hold_thresh:
+                    is_hold = True
+            
+            processed.append({
+                "time": float(ev.time),
+                "lane": int(lane),
+                "dur": float(ev.duration) if is_hold else 0.0, # Taps = 0.0 dur
+                "type": "hold" if is_hold else "tap",
+                "midi": int(ev.pitch),
+                "vol": float(getattr(ev, "velocity", 0.8)), # Default vol if missing
+                "source": str(ev.source)
             })
-        return notes
-
-    def _harvest_drums(self, sensitivity):
-        source = "drums"
-        env = self.envs[source]
-        sr = 44100
-        frames = librosa.util.peak_pick(env, pre_max=3, post_max=3, pre_avg=3, post_avg=3, delta=sensitivity, wait=4)
-        notes = []
-        for f in frames:
-            t = librosa.frames_to_time(f, sr=sr) + self.cfg["system"]["global_offset_sec"]
-            if t < 0: continue
-            notes.append({"time": t, "midi": 36, "dur": 0.0, "source": source, "score": float(env[f]), "voice_id": 0})
-        return notes
-
-    def _apply_coincidence_voting(self, pool):
-        print("[GEN] Applying Psychoacoustic Voting...")
-        v_cfg = self.cfg["coincidence"]
-        priorities = self.cfg["mixing"]["priorities"]
-        pool.sort(key=lambda x: x["time"])
-        n_notes = len(pool)
         
-        for i in range(n_notes):
-            current = pool[i]
-            t = current["time"]
-            src = current["source"]
-            support_score = 0.0
-            masking_energy = 0.0
-            
-            j = i - 1
-            while j >= 0:
-                neighbor = pool[j]
-                if t - neighbor["time"] > v_cfg["window"]: break 
-                if neighbor["source"] != src:
-                    w = priorities.get(neighbor["source"], 0.8)
-                    support_score += w * neighbor["score"]
-                    masking_energy += neighbor["score"]
-                j -= 1
-            k = i + 1
-            while k < n_notes:
-                neighbor = pool[k]
-                if neighbor["time"] - t > v_cfg["window"]: break 
-                if neighbor["source"] != src:
-                    w = priorities.get(neighbor["source"], 0.8)
-                    support_score += w * neighbor["score"]
-                    masking_energy += neighbor["score"]
-                k += 1
+        # Post-process: Resolve conflicts (Hold overlaps)
+        return self._resolve_conflicts(processed)
 
-            if support_score > v_cfg["min_support"]:
-                current["score"] *= (1.0 + support_score * v_cfg["boost_scale"])
-            elif current["score"] < v_cfg["mask_threshold"]:
-                if src == "vocals": pass
-                elif masking_energy > (current["score"] * v_cfg["mask_ratio"]):
-                    current["score"] *= 0.1
-        return pool
-
-    def _measure_duration(self, source, start_frame, pmap=None, start_pitch=None):
-        if not self.use_holds: return 0.0
-        allowed = self.cfg["holds"]["allowed_stems"]
-        if not any(a in source for a in allowed): return 0.0
-        
-        rms = self.rms[source]
-        h_cfg = self.cfg["holds"]
-        sr = 44100
-        hop = 512
-        
-        if start_frame >= len(rms): return 0.0
-        threshold = rms[start_frame] * h_cfg["energy_decay"]
-        
-        curr = start_frame + 1
-        max_dist = int(h_cfg["max_dur"] * sr / hop)
-        end = min(len(rms), start_frame + max_dist)
-        
-        while curr < end:
-            if rms[curr] < threshold: break
-            curr += 1
-            
-        dur = librosa.frames_to_time(curr - start_frame, sr=sr, hop_length=hop)
-        return dur if dur >= h_cfg["tap_threshold"] else 0.0
-
-    def _sample_f0_detailed(self, data, t_start, t_end, conf_key=None):
-        if data is None: return None, 0.0
-        f0_arr = data["f0"]
-        step = data["time_step"]
-        idx_s = int(t_start / step)
-        idx_e = min(int(t_end / step), len(f0_arr))
-        
-        if idx_s >= len(f0_arr): return None, 0.0
-        
-        segment = f0_arr[idx_s:idx_e]
-        conf_val = 1.0
-        if conf_key:
-            c_seg = data[conf_key][idx_s:idx_e]
-            if len(c_seg) > 0: conf_val = np.mean(c_seg)
-            else: conf_val = 0.0
-            mask = c_seg > 0.1
-            segment = segment[mask]
-        else:
-            segment = segment[segment > 40]
-
-        if len(segment) == 0: return None, 0.0
-        
-        hz = np.median(segment)
-        if hz < 40: return None, 0.0
-        
-        return int(round(librosa.hz_to_midi(hz))), conf_val
-
-    def _export_council_report(self):
-        if not self.council_report: return
-        folder = "."
-        for path in self.paths.values():
-            if os.path.exists(path):
-                folder = os.path.dirname(path)
-                break
-        base = os.path.basename(folder)
-        fname = os.path.join(folder, f"{base}_Council_Report.json")
-        print(f"[REPORT] Saving Council Minutes to {fname}...")
-        with open(fname, 'w') as f:
-            json.dump(self.council_report, f, indent=2)
-            
-    def generate_all(self):
-        for diff in self.cfg["difficulty"]:
-            self._generate_chart(diff)
-        self._export_council_report()
-
-    def _generate_chart(self, diff_name):
-        print(f"[GEN] Processing {diff_name}...")
-        d_cfg = self.cfg["difficulty"][diff_name]
-        q = self._quantize_magnetic(self.master_pool, d_cfg["grids"])
-        s = self._sieve_density(q, d_cfg)
-        m = self._allocate_lanes(s, d_cfg["lanes"], d_cfg["chaos"])
-        f = self._resolve_physics(m)
-        self._export_json(f, diff_name)
-
-    def _quantize_magnetic(self, pool, grids):
-        beats = self.rhythm["beat_times"]
-        out = []
-        snap_strength = 0.6
-        for n in pool:
-            t = n["time"]
-            if len(beats) < 2: out.append(n); continue
-            idx = (np.abs(beats - t)).argmin()
-            beat_t = beats[idx]
-            if idx < len(beats)-1: b_dur = beats[idx+1] - beat_t
-            else: b_dur = beat_t - beats[idx-1]
-            
-            best_t = t
-            min_dist = 999.0
-            for div in grids:
-                step = b_dur / (div/4.0)
-                cand = beat_t + round((t-beat_t)/step)*step
-                d = abs(cand - t)
-                if d < min_dist: min_dist = d; best_t = cand
-            
-            if min_dist < 0.07:
-                n["time"] = t + (best_t - t) * snap_strength
-                if n["dur"] > 0:
-                    sixteenth = b_dur/4.0
-                    n["dur"] = round(n["dur"]/sixteenth)*sixteenth
-            out.append(n)
-        return sorted(out, key=lambda x: x["time"])
-
-    def _sieve_density(self, pool, d_cfg):
-        buckets = {}
-        for n in pool:
-            s = int(n["time"])
-            if s not in buckets: buckets[s] = []
-            buckets[s].append(n)
-        final = []
-        for s in sorted(buckets.keys()):
-            candidates = buckets[s]
-            if s+1 in buckets: candidates.extend(buckets[s+1])
-            window = [c for c in candidates if s <= c["time"] < s+1 and c["score"] >= d_cfg["min_score"]]
-            window.sort(key=lambda x: x["score"], reverse=True)
-            count = 0
-            for node in window:
-                if count < d_cfg["density"]:
-                    if node not in final: final.append(node)
-                    count += 1
-        return sorted(final, key=lambda x: x["time"])
-
-    def _allocate_lanes(self, pool, lanes, chaos):
-        out = []
-        r_cfg = self.cfg["visuals"]["ranges"]
-        m_cfg = self.cfg["mixing"]
-        last_lane = 0
-        for n in pool:
-            src = n["source"]
-            target = 0
-            if "vocals" in src:
-                norm = np.clip((n["midi"]-48)/36, 0.0, 1.0)
-                target = int(norm * 2.5)
-            else:
-                low, high = r_cfg.get(src, r_cfg["other"])
-                norm = np.clip((n["midi"]-low)/(high-low), 0.0, 1.0)
-                target = int(norm*(lanes-1))
-            
-            if chaos>0 and np.random.rand()<chaos: target = np.random.randint(0, lanes)
-            elif target==last_lane and "vocals" not in src: target=(target+1)%lanes
-            
-            base_vol = m_cfg["stem_vol"].get(src, 0.8)
-            n["vol"] = np.clip(base_vol*(0.8+n["score"]*0.3), 0.0, 1.0)
-            n["lane"] = target
-            n["type"] = "hold" if n["dur"]>0 else "tap"
-            out.append(n)
-            last_lane = target
-        return out
-
-    def _resolve_physics(self, notes):
-        notes.sort(key=lambda x: x["time"])
-        cleaned = []
-        lane_end = {i: -1.0 for i in range(4)}
+    def _resolve_conflicts(self, notes: List[dict]) -> List[dict]:
+        """
+        Prevents overlapping notes in the same lane.
+        Trims holds to ensure a gap before the next note.
+        Also merges notes that are too close (Minijacks) to avoid tap bursts.
+        """
+        # Group by lane
+        lanes_dict = {}
         for n in notes:
             l = n["lane"]
-            if n["time"] < lane_end[l]+0.05:
-                for c in [0,1,2,3]:
-                    if c!=l and n["time"] >= lane_end[c]+0.05:
-                        n["lane"]=c; lane_end[c]=n["time"]+n["dur"]
-                        cleaned.append(n); break
-            else:
-                lane_end[l]=n["time"]+n["dur"]
-                cleaned.append(n)
-        
-        cleaned.sort(key=lambda x: x["time"])
+            if l not in lanes_dict: lanes_dict[l] = []
+            lanes_dict[l].append(n)
+            
         final = []
-        per_lane = {i:[] for i in range(4)}
-        for n in cleaned: per_lane[n["lane"]].append(n)
-        gap = self.cfg["holds"]["gap_buffer"]
-        for l in per_lane:
-            stack = per_lane[l]
-            for i in range(len(stack)):
-                c = stack[i]
-                if c["type"]=="hold" and i+1<len(stack):
-                    lim = stack[i+1]["time"] - gap
-                    if c["time"]+c["dur"] > lim:
-                        c["dur"] = max(0.0, lim - c["time"])
-                        if c["dur"] < self.cfg["holds"]["tap_threshold"]: 
-                            c["dur"]=0; c["type"]="tap"
-                final.append(c)
+        gap = 0.05 # 50ms gap
+        minijack_thresh = 0.1 # 100ms threshold for merging close notes (approx 1/16 at 150BPM)
+        allowed_holds = GENERATOR_CONFIG["holds"]["allowed_stems"]
+
+        for l in lanes_dict:
+            # Sort by time
+            stack = sorted(lanes_dict[l], key=lambda x: x["time"])
+            
+            # Merged stack
+            merged_stack = []
+            if not stack: continue
+            
+            # Pass 1: Merge close notes
+            curr = stack[0]
+            for i in range(1, len(stack)):
+                next_n = stack[i]
+                
+                # Check proximity
+                if next_n["time"] - curr["time"] < minijack_thresh:
+                    # Merge!
+                    # Only create hold if allowed
+                    can_hold = curr["source"] in allowed_holds
+                    
+                    if can_hold:
+                        # Extend current duration to cover next note
+                        new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
+                        curr["dur"] = max(0.1, new_end - curr["time"]) # Make it a hold if merged
+                        curr["type"] = "hold"
+                    else:
+                        # Cannot hold (e.g. guitar/drums). 
+                        # Absorb the next note but keep as tap (dur=0).
+                        # Essentially "de-jacking" the chart.
+                        curr["dur"] = 0.0
+                        curr["type"] = "tap"
+                        
+                    # Skip next_n (it's absorbed)
+                else:
+                    merged_stack.append(curr)
+                    curr = next_n
+            merged_stack.append(curr)
+            
+            # Pass 2: Overlap Prevention (Hold Escape)
+            for i in range(len(merged_stack)):
+                current = merged_stack[i]
+                
+                # Check against next note
+                if i + 1 < len(merged_stack):
+                    next_note = merged_stack[i+1]
+                    
+                    if current["type"] == "hold":
+                        limit = next_note["time"] - gap
+                        end_t = current["time"] + current["dur"]
+                        
+                        if end_t > limit:
+                            # Trim duration
+                            new_dur = max(0.0, limit - current["time"])
+                            current["dur"] = new_dur
+                            
+                            # If too short, convert back to tap
+                            if new_dur < 0.05:
+                                current["dur"] = 0.0
+                                current["type"] = "tap"
+                
+                final.append(current)
+        
+        # Re-sort all by time
         return sorted(final, key=lambda x: x["time"])
 
-    def _score_and_sort(self, pool):
-        beat_arr = np.array(self.rhythm["beat_times"])
-        prio = self.cfg["mixing"]["priorities"]
-        for n in pool:
-            src = n["source"]
-            if "vocals" in src and src not in prio: src="vocals"
-            n["score"] *= prio.get(src, 1.0)
-            if len(beat_arr)>0 and np.min(np.abs(beat_arr-n["time"])) < 0.05: n["score"] *= 1.25
-            if n["dur"]>0: n["score"] *= 1.1
-        return sorted(pool, key=lambda x: x["time"])
+class TimingCorrector:
+    @staticmethod
+    def ground_events(events: List[NoteEvent], audio_path: str, window: float = 0.05) -> List[NoteEvent]:
+        """
+        Uses DSP (librosa onset detection) to snap event times to the nearest true audio onset.
+        This corrects latency/jitter from the ML transcription model.
+        """
+        try:
+            import librosa
+            import numpy as np
+        except ImportError:
+            return events
+            
+        if not os.path.exists(audio_path) or not events:
+            return events
+            
+        print(f"[Timing] Grounding {len(events)} events with DSP ({os.path.basename(audio_path)})...")
+        
+        try:
+            # Load audio (lightweight load)
+            y, sr = librosa.load(audio_path, sr=22050)
+            
+            # Detect Onsets
+            # backtracking=True helps find the precise start of the transient
+            onset_frames = librosa.onset.onset_detect(y=y, sr=sr, backtrack=True, units='frames')
+            onset_times = librosa.frames_to_time(onset_frames, sr=sr)
+            
+            if len(onset_times) == 0:
+                return events
+                
+            # Snap events
+            snapped_count = 0
+            for e in events:
+                # Find nearest onset
+                # Search sorted array efficiently? Or just simple search for now (n*m) is slow if large.
+                # Use numpy for speed if possible, but events is list of objects.
+                # valid range: [e.time - window, e.time + window]
+                
+                # Simple linear scan optimized by knowing onsets are sorted?
+                # Let's use numpy searchsorted
+                idx = np.searchsorted(onset_times, e.time)
+                
+                candidates = []
+                if idx < len(onset_times): candidates.append(onset_times[idx])
+                if idx > 0: candidates.append(onset_times[idx - 1])
+                
+                best_onset = -1
+                min_dist = window
+                
+                for t in candidates:
+                    dist = abs(t - e.time)
+                    if dist < min_dist:
+                        min_dist = dist
+                        best_onset = t
+                        
+                if best_onset != -1:
+                    # Apply correction
+                    e.time = float(best_onset)
+                    snapped_count += 1
+                    
+            print(f"[Timing] Snapped {snapped_count}/{len(events)} events to DSP onsets.")
+            
+        except Exception as e:
+            print(f"[Timing] DSP Grounding failed: {e}")
+            
+        return events
 
-    def _analyze_rhythm(self):
-        y = np.zeros_like(next(iter(self.audio_data.values())))
-        if self._check_stem("drums"): y += self.audio_data["drums"]
-        if self._check_stem("bass"): y += self.audio_data["bass"]
-        sr = 44100
-        onset = librosa.onset.onset_strength(y=y, sr=sr)
-        _, beats = librosa.beat.beat_track(onset_envelope=onset, sr=sr)
-        return {"beat_times": librosa.frames_to_time(beats, sr=sr)}
+class RhythmEngine:
+    def __init__(self, stems_folder: str):
+        self.stems_folder = stems_folder
+        self._ensure_paths()
+        
+        # Initialize Transcribers
+        self.bp_transcriber = BasicPitchTranscriber()
+        self.council = CouncilV2()
+        
+        # Estimate BPM or default
+        self.bpm = 120.0 
+        self.generator = ChartGenerator(bpm=self.bpm)
+        self.manifest = self._load_manifest()
 
-    def _check_stem(self, name):
-        return (name in self.audio_data and self.audio_data[name] is not None)
+    def _ensure_paths(self):
+        if not os.path.isdir(self.stems_folder):
+            raise ValueError(f"Stems folder does not exist: {self.stems_folder}")
 
     def _load_manifest(self):
-        for path in self.paths.values():
-            if os.path.exists(path):
-                d = os.path.dirname(path)
-                p = os.path.join(d, "stems_manifest.json")
-                if os.path.exists(p):
-                    with open(p, 'r') as f: return json.load(f)
-        return {k: {"exists": True} for k in self.paths}
+        m_path = os.path.join(self.stems_folder, "stems_manifest.json")
+        if os.path.exists(m_path):
+            try:
+                with open(m_path, 'r') as f:
+                    return json.load(f)
+            except: 
+                return {}
+        return {}
 
-    def _export_json(self, notes, diff_name):
-        folder = "."
-        for path in self.paths.values():
+    def run(self, focus_mode: str = "main"):
+        print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: {focus_mode})")
+        
+        # 0. BPM Detection (Basic)
+        self._detect_bpm()
+        self.generator.bpm = self.bpm 
+        self.generator.quantizer.bpm = self.bpm
+        
+        all_events: List[NoteEvent] = []
+        
+        # 1. Transcribe Instruments
+        # Use Manifest to skip silent stems
+        for stem in ["piano", "guitar", "bass", "other", "drums"]:
+            # Check manifest first
+            if stem in self.manifest:
+                if self.manifest[stem].get("is_silent", False):
+                    print(f"Skipping {stem} (Silent per manifest).")
+                    continue
+            
+            path = os.path.join(self.stems_folder, f"{stem}.wav")
             if os.path.exists(path):
-                folder = os.path.dirname(path)
+                print(f"Processing {stem}...")
+                
+                # Tune parameters based on instrument
+                # For melody instruments, we want high precision (fewer false positives)
+                # For drums, we force fixed pitch anyway, so standard params are fine
+                params = {}
+                if stem in ["piano", "guitar"]:
+                     params = {"onset_threshold": 0.6, "frame_threshold": 0.4}
+                
+                notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
+                
+                # Drum Fix: Force Fixed Pitch (e.g., C4 = 60)
+                if stem == "drums":
+                    for n in notes: n.pitch = 60
+                
+                # DSP Grounding (New)
+                # Ground instrument notes to audio transients
+                notes = TimingCorrector.ground_events(notes, path)
+                    
+                all_events.extend(notes)
+                
+        # 2. Transcribe Vocals
+        # Prefer Lead > Mixed
+        v_sources = ["vocals_lead", "vocals"]
+        found_vocals = False
+        for v_name in v_sources:
+             # Check manifest
+             if v_name in self.manifest:
+                 if self.manifest[v_name].get("is_silent", False):
+                     continue
+
+             v_path = os.path.join(self.stems_folder, f"{v_name}.wav")
+             if os.path.exists(v_path):
+                print(f"Processing vocals ({v_name})...")
+                v_notes = self.council.transcribe(v_path, model_type="fcpe")
+                # Patch source name
+                for n in v_notes: n.source = v_name
+                
+                # DSP Grounding for Vocals? 
+                # Vocals are softer, onsets might be unreliable.
+                # But let's try it with a relaxed window? 
+                # Or skip it. Let's skip for vocals for now to preserve flow.
+                
+                all_events.extend(v_notes)
+                found_vocals = True
                 break
-        base = os.path.basename(folder)
-        fname = os.path.join(folder, f"{base}_{diff_name}.json")
-        out = []
-        for n in notes:
-            out.append({
-                "time": float(f"{n['time']:.3f}"), "lane": int(n["lane"]),
-                "dur": float(f"{n['dur']:.3f}"), "type": n["type"],
-                "midi": int(n["midi"]), "score": float(f"{n['score']:.3f}"),
-                "source": n["source"], "vol": float(f"{n['vol']:.3f}"),
-                "vote": n.get("vote_type", "raw")
-            })
-        with open(fname, 'w') as f: json.dump(out, f, indent=2)
-        print(f"[EXPORT] Saved {len(out)} notes -> {fname}")
+            
+        print(f"Total collected events: {len(all_events)}")
+        
+        # 3. Generate Charts
+        output_dir = os.path.join(self.stems_folder, "beatmap")
+        os.makedirs(output_dir, exist_ok=True)
+        
+        for diff in ["EASY", "NORMAL", "HARD", "INSANE"]:
+            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest, focus_mode=focus_mode) # Pass copy & manifest
+            
+            out_file = os.path.join(output_dir, f"{diff}.json")
+            with open(out_file, "w") as f:
+                json.dump(chart_data, f, indent=2)
+            print(f"Saved {out_file}")
+
+    def _detect_bpm(self):
+        try:
+            import librosa
+            import numpy as np
+            
+            # Priority: Drums -> Other -> Vocals -> First available stem
+            candidates = ["drums", "other", "vocals", "bass", "piano", "guitar"]
+            
+            bpm_found = 0.0
+            
+            for stem in candidates:
+                path = os.path.join(self.stems_folder, f"{stem}.wav")
+                if os.path.exists(path):
+                    # Check if file has meaningful content (size > 10kb)
+                    # This prevents loading silent/header-only wavs
+                    if os.path.getsize(path) < 10000:
+                        continue
+                        
+                    print(f"Detecting BPM from {stem}...")
+                    try:
+                        y, sr = librosa.load(path, sr=22050, duration=60)
+                        if len(y) < sr * 5: # Skip if shorter than 5 seconds
+                            continue
+                            
+                        onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+                        tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
+                        
+                        if isinstance(tempo, np.ndarray):
+                            tempo = tempo[0]
+                        
+                        val = float(tempo)
+                        if val > 40 and val < 300: # Reasonable range
+                            bpm_found = val
+                            print(f"Detected BPM: {self.bpm:.2f}")
+                            break
+                    except Exception as sub_e:
+                        print(f"Failed to detect BPM from {stem}: {sub_e}")
+                        continue
+            
+            if bpm_found > 0:
+                self.bpm = bpm_found
+            else:
+                print("No suitable audio for BPM detection, using default 120.")
+                
+        except Exception as e:
+            print(f"BPM Detection failed: {e}. Using default 120.")
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("folder", help="Path to stems folder")
-    parser.add_argument("--holds", action="store_true", help="Enable hold notes")
+    parser = argparse.ArgumentParser(description="Rhythm Engine V300")
+    parser.add_argument("folder", help="Path to the folder containing separated stems")
     args = parser.parse_args()
-    
-    stems = {
-        "vocals": os.path.join(args.folder, "vocals.wav"),
-        "vocals_lead": os.path.join(args.folder, "vocals_lead.wav"),
-        "vocals_backing": os.path.join(args.folder, "vocals_backing.wav"),
-        "drums":  os.path.join(args.folder, "drums.wav"),
-        "bass":   os.path.join(args.folder, "bass.wav"),
-        "piano":  os.path.join(args.folder, "piano.wav"),
-        "guitar": os.path.join(args.folder, "guitar.wav"),
-        "other":  os.path.join(args.folder, "other.wav"),
-    }
-    
-    try:
-        gen = MapGenerator(stems, use_holds=args.holds)
-        gen.generate_all()
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        print(f"[FATAL] {e}")
+
+    engine = RhythmEngine(args.folder)
+    engine.run()

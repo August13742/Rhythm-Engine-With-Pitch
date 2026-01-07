@@ -8,6 +8,7 @@ import json
 import pygame
 import numpy as np
 import librosa
+from generator import MapGenerator
 from synthbank import SynthBank
 
 # --- CONFIG ---
@@ -20,8 +21,7 @@ STEM_COLORS = {
     "bass": (150, 100, 50),         # Brown/Gold
     "piano": (100, 200, 255),       # Light Blue
     "guitar": (150, 255, 100),      # Light Green
-    "other": (200, 200, 200),       # Light Gray
-    "vocals_lead": (255, 100, 255)  # Magenta (Same as vocals)
+    "other": (200, 200, 200)        # Light Gray
 }
 
 class Visualizer:
@@ -74,39 +74,14 @@ class Visualizer:
         duration = librosa.get_duration(path=os.path.join(folder_path, f"{duration_track}.wav"))
         from generator import DIFF_CONFIGS
         for d in ["EASY", "NORMAL", "HARD", "INSANE"]:
-            # V300 Path: beatmap/DIFF.json
-            v300_path = os.path.join(folder_path, "beatmap", f"{d}.json")
-            # Legacy Path: base_name_DIFF.json
-            legacy_path = os.path.join(folder_path, f"{base_name}_{d}.json")
+            beatmap_file = os.path.join(folder_path, f"{base_name}_{d}.json")
+            with open(beatmap_file, 'r') as f:
+                self.beatmaps[d] = json.load(f)
             
-            target_file = v300_path if os.path.exists(v300_path) else legacy_path
-            
-            try:
-                with open(target_file, 'r') as f:
-                    data = json.load(f)
-                    # V300 Support: Extract notes from dict
-                    if isinstance(data, dict) and "notes" in data:
-                        self.beatmaps[d] = data["notes"]
-                        self.metadata[d] = data.get("metadata", {})
-                    else:
-                        # Legacy Support: List of notes
-                        self.beatmaps[d] = data
-                        self.metadata[d] = {}
-            except FileNotFoundError:
-                print(f"[VIS] Warning: Beatmap not found: {target_file}")
-                self.beatmaps[d] = []
-            
-            # Calculate Metadata if missing
-            count = len(self.beatmaps[d])
-            nps = count / duration if duration > 0 else 0
-            # Legacy didn't have lanes in file, use config
+            nps = len(self.beatmaps[d]) / duration if duration > 0 else 0
             lanes = DIFF_CONFIGS[d]["lanes"]
-            
-            # Update metadata dict for internal use
-            if "nps" not in self.metadata[d]:
-                self.metadata[d].update({"count": count, "lanes": lanes, "nps": nps})
-                
-            print(f"[VIS] Loaded {d}: {count} notes")
+            self.metadata[d] = {"count": len(self.beatmaps[d]), "lanes": lanes, "nps": nps}
+            print(f"[VIS] Loaded {d}: {len(self.beatmaps[d])} notes")
         
         # 2. SYNTHESIZE BANKS
         print("[VIS] Synthesizing Sound Banks...")
@@ -220,7 +195,7 @@ class Visualizer:
                             
                         elif self.mode == "vocal":
                             # VOCALOID vocals + default other synth for non-vocals (both with duration)
-                            if source in ["vocals", "vocals_lead"]:
+                            if source == "vocals":
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
                             elif source == "other":
                                 sound = self.synth_banks["other"].get((midi, bucket))
@@ -230,7 +205,7 @@ class Visualizer:
                                 
                         elif self.mode == "experimental":
                             # VOCALOID vocals + stem-specific synths (vocals and other use smart banks with duration)
-                            if source in ["vocals", "vocals_lead"]:
+                            if source == "vocals":
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
                             elif source == "other":
                                 sound = self.synth_banks["other"].get((midi, bucket))
@@ -244,7 +219,7 @@ class Visualizer:
                                 l_ratio = n["lane"] / max(1, self.metadata[target_diff]["lanes"]-1)
                                 
                                 # Vocals centered
-                                if source in ["vocals", "vocals_lead"] and self.mode != "classic":
+                                if source == "vocals" and self.mode != "classic":
                                     chan.set_volume(v, v)
                                 else:
                                     chan.set_volume((1-l_ratio)*0.7*v, (0.3+l_ratio*0.7)*v)

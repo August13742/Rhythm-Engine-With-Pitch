@@ -4,7 +4,7 @@ from typing import Dict, Tuple
 class SynthBank:
     # Duration Buckets (Seconds)
     # 0.15 = Tap, 0.5 = Short Hold, 1.0+ = Long Holds
-    DUR_BUCKETS = [0.25,0.50,0.75, 1.0,1.25,1.5,1.75, 2.0,2.25,2.5,3.0, 4.0]
+    DUR_BUCKETS = [0.15, 0.5, 1.0, 2.0, 4.0]
     @staticmethod
     def get_bucket(dur: float) -> float:
         """Finds the closest duration bucket efficiently."""
@@ -39,9 +39,9 @@ class SynthBank:
         for diff_name, notes in beatmaps.items():
             for n in notes:
                 # Only collect actual vocal notes
-                if n.get("source", "other") in ["vocals", "vocals_lead"]:
+                if n.get("source", "other") == "vocals":
                     midi = n["midi"]
-                    dur = n.get("dur", 0.15)
+                    dur = n.get("dur", 0)
                     bucket = SynthBank.get_bucket(dur)
                     required_keys.add((midi, bucket))
 
@@ -72,7 +72,7 @@ class SynthBank:
                 # Only collect actual other notes
                 if n.get("source", "other") == "other":
                     midi = n["midi"]
-                    dur = n.get("dur", 0.15)
+                    dur = n.get("dur", 0)
                     bucket = SynthBank.get_bucket(dur)
                     required_keys.add((midi, bucket))
 
@@ -116,7 +116,7 @@ class SynthBank:
 
     @staticmethod
     def gen_drums_tone(beat_pos):
-        duration = 0.15
+        duration = 0.1
         sr = 44100
         t = np.linspace(0, duration, int(sr * duration), False)
         

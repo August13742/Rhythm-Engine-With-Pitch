@@ -94,7 +94,7 @@ def _prepare_audio(input_path: str, temp_dir: Path) -> str:
         print(f"  [WARN] Normalization failed: {e}. Using original file.")
         return input_path
 
-def separate_audio(audio_path: str, mode: str = "high"):
+def separate_audio(audio_path: str):
     base_name = Path(audio_path).stem
     root_dir = Path("stems") / base_name
     s1_dir = root_dir / "stage1_temp"
