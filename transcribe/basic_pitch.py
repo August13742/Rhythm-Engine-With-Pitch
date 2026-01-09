@@ -77,6 +77,88 @@ class BasicPitchTranscriber:
             ))
             
         print(f"[BasicPitch] Found {len(note_events)} notes for {instrument_name}.")
+        
+        # PASS 2: Multi-Pass Consensus (Time+Pitch Check)
+        if kwargs.get("multipass_consensus", False):
+            try:
+                import librosa
+                import soundfile as sf
+                import numpy as np
+                
+                print(f"[BasicPitch] Running Multi-Pass Consensus (3-Pass: +12st, -12st)...")
+                
+                def run_pass(semitones):
+                    if semitones == 0: return # Skip base
+                    
+                    # 1. Create Shifted Audio
+                    y, sr = librosa.load(audio_path, sr=None)
+                    y_shifted = librosa.effects.pitch_shift(y, sr=sr, n_steps=semitones)
+                    
+                    suffix = f"_p{semitones}" if semitones > 0 else f"_m{abs(semitones)}"
+                    temp_path = audio_path.replace(".wav", "").replace(".mp3", "").replace(".ogg", "") + f"{suffix}.wav"
+                    sf.write(temp_path, y_shifted, sr)
+                    
+                    # 2. Transcribe
+                    _, _, evs = predict(
+                        temp_path,
+                        model_path=model_path,
+                        onset_threshold=kwargs.get("onset_threshold", 0.6),
+                        frame_threshold=kwargs.get("frame_threshold", 0.4),
+                        minimum_note_length=kwargs.get("minimum_note_length", 58.0)
+                    )
+                    
+                    if os.path.exists(temp_path): os.remove(temp_path)
+                    
+                    # 3. Shift Back
+                    p_notes = []
+                    for s, e, p, v, _ in evs:
+                        p_notes.append(NoteEvent(
+                            time=s, duration=e-s, pitch=p-semitones, velocity=v, source=instrument_name
+                        ))
+                    p_notes.sort(key=lambda x: x.time)
+                    return p_notes
+
+                # Run Passes
+                pass_plus12 = run_pass(12)
+                pass_minus12 = run_pass(-12)
+                
+                # Voting Consensus (2 out of 3)
+                # We iterate through Base notes (Pass 0) and check for support.
+                # If a note has support from EITHER +12 or -12, we keep it.
+                # (We prioritize Base notes to keep timing accuracy)
+                
+                consensus_notes = []
+                note_events.sort(key=lambda x: x.time)
+                
+                kept = 0
+                for n0 in note_events:
+                    votes = 1 # Base has it
+                    
+                    # Check +12
+                    for n1 in pass_plus12:
+                        if abs(n0.time - n1.time) < 0.1 and abs(n0.pitch - n1.pitch) < 0.5:
+                            votes += 1
+                            break
+                        if n1.time > n0.time + 0.1: break
+                            
+                    # Check -12
+                    for n2 in pass_minus12:
+                        if abs(n0.time - n2.time) < 0.1 and abs(n0.pitch - n2.pitch) < 0.5:
+                            votes += 1
+                            break
+                        if n2.time > n0.time + 0.1: break
+                        
+                    if votes >= 2:
+                        consensus_notes.append(n0)
+                        kept += 1
+                
+                print(f"[BasicPitch] 3-Pass Consensus: Kept {kept}/{len(note_events)} notes.")
+                return consensus_notes
+                
+            except Exception as e:
+                logging.error(f"[BasicPitch] Multi-Pass Failed: {e}")
+                return note_events
+        
         return note_events
 
 if __name__ == "__main__":

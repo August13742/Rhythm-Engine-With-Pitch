@@ -1016,7 +1016,11 @@ class RhythmEngine:
                     # User Request: "make sure what we did to improve vocal pitch accuracy also applies to other instruments"
                     # Applying High Precision Thresholds to ALL instruments (Bass, Other, Piano, Guitar)
                     # Update: "lowest acceptable parameters" (High Recall) -> 0.35/0.30
-                    params = {"onset_threshold": 0.35, "frame_threshold": 0.30}
+                    params = {
+                        "onset_threshold": 0.35, 
+                        "frame_threshold": 0.30,
+                        "multipass_consensus": True # User Request: High Quality / Avoid Octave Leaks
+                    }
                     
                     notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
                     
@@ -1084,8 +1088,10 @@ class RhythmEngine:
                     lead_events = self.council.transcribe(v_path, model_type="fcpe")
                     
                     # 2. Get Poly/Harmony (BasicPitch)
+                    # 2. Get Poly/Harmony (BasicPitch)
                     # Note: Defaults tuned in Council (onset=0.4, frame=0.3)
-                    poly_events = self.council.transcribe(v_path, model_type="basic_pitch")
+                    # User Update: Enable Multi-Pass to reduce harmony noise
+                    poly_events = self.council.transcribe(v_path, model_type="basic_pitch", multipass_consensus=True)
                     
                     # 3. Fuse
                     v_notes = ConsensusEngine.fuse_vocals(lead_events, poly_events)

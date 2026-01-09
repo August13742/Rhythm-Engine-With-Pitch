@@ -49,7 +49,7 @@ class CouncilV2:
 
 
 
-    def transcribe(self, audio_path: str, model_type: Literal["fcpe", "rmvpe", "basic_pitch"] = "fcpe") -> List[NoteEvent]:
+    def transcribe(self, audio_path: str, model_type: Literal["fcpe", "rmvpe", "basic_pitch"] = "fcpe", **kwargs) -> List[NoteEvent]:
         if not os.path.exists(audio_path):
             logging.warning(f"Audio file not found: {audio_path}")
             return []
@@ -70,8 +70,9 @@ class CouncilV2:
              return self.models["basic_pitch"].transcribe(
                  audio_path, 
                  instrument_name="vocals",
-                 onset_threshold=0.35, 
-                 frame_threshold=0.30
+                 onset_threshold=kwargs.get("onset_threshold", 0.35), 
+                 frame_threshold=kwargs.get("frame_threshold", 0.30),
+                 multipass_consensus=kwargs.get("multipass_consensus", False)
              )
 
         # Monophonic Models (FCPE/RMVPE)
