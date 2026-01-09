@@ -65,12 +65,13 @@ class CouncilV2:
              if "basic_pitch" not in self.models:
                  self.models["basic_pitch"] = BasicPitchTranscriber()
              
-             # Relaxed threshold for vocals (softer attacks)
+             # Relaxed threshold for vocals (softer attacks) but gated for noise
+             # Update: "lowest acceptable parameters" (High Recall) -> 0.35/0.30
              return self.models["basic_pitch"].transcribe(
                  audio_path, 
                  instrument_name="vocals",
-                 onset_threshold=0.4, 
-                 frame_threshold=0.3
+                 onset_threshold=0.35, 
+                 frame_threshold=0.30
              )
 
         # Monophonic Models (FCPE/RMVPE)

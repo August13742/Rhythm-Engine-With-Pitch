@@ -188,6 +188,41 @@ class SynthBank:
         return SynthBank.gen_drums_tone(midi)
 
     @staticmethod
+    def gen_drums_8bit_tone(midi):
+        """Generates an 8-bit style drum sound (Square Kick / Noise Snare)."""
+        duration = 0.12
+        sr = 44100
+        t = np.linspace(0, duration, int(sr * duration), False)
+        
+        # Simple Mapping based on even/odd midi (similar to standard drum gen)
+        if midi % 2 == 0: # Kick
+            # Square wave slide - Deeper and faster slide for "Thump"
+            freq_start = 100.0 # Lower start
+            freq_end = 30.0    # Lower end
+            
+            # Linear slide
+            inst_f = np.linspace(freq_start, freq_end, len(t))
+            phase = np.cumsum(inst_f) / sr * 2 * np.pi
+            
+            wave = np.where((phase % (2*np.pi)) < np.pi, 1.0, -1.0)
+            
+            # Softer envelope
+            env = np.exp(-18 * t)
+            wave *= env
+            
+        else: # Snare
+            # White Noise burst - Filtered/Softer
+            wave = np.random.uniform(-0.5, 0.5, size=len(t)) # Reduced amplitude range
+            
+            # Faster decay for a tighter snap
+            env = np.exp(-30 * t) 
+            wave *= env
+            
+        # Reduced Global Volume for 8-bit drums (Too distracting)
+        # 0.6 -> 0.3
+        return (wave * 0.3 * 32767).astype(np.int16)
+
+    @staticmethod
     def gen_bass_tone(midi):
         freq = 440.0 * (2.0 ** ((midi - 69) / 12.0))
         duration = 0.2

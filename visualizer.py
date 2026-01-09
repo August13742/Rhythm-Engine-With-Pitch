@@ -168,6 +168,13 @@ class Visualizer:
                 np.stack([drums_audio, drums_audio], axis=1)
             )
             
+            # 8-bit Drums (Vocal Mode)
+            self.synth_banks["drums_8bit"] = self.synth_banks.get("drums_8bit", {})
+            drums_8bit = SynthBank.gen_drums_8bit_tone(midi)
+            self.synth_banks["drums_8bit"][midi] = pygame.sndarray.make_sound(
+                np.stack([drums_8bit, drums_8bit], axis=1)
+            )
+            
             self.synth_banks["bass"] = self.synth_banks.get("bass", {})
             bass_audio = SynthBank.gen_bass_tone(midi)
             self.synth_banks["bass"][midi] = pygame.sndarray.make_sound(
@@ -228,7 +235,8 @@ class Visualizer:
                             if source in ["vocals", "vocals_lead"]:
                                 sound = self.synth_banks["vocals"].get((midi, bucket))
                             elif source == "drums":
-                                sound = self.synth_banks.get("drums", {}).get(midi)
+                                # User Request: "different sound effect in vocal mode... more 8-bit like"
+                                sound = self.synth_banks.get("drums_8bit", {}).get(midi)
                             else:
                                 sound = self.square_bank.get(midi)
                                 
@@ -282,10 +290,10 @@ class Visualizer:
             for e in pygame.event.get():
                 if e.type == pygame.QUIT: return
                 if e.type == pygame.KEYDOWN:
-                    if e.key == pygame.K_1: self.diff = "EASY"
-                    if e.key == pygame.K_2: self.diff = "NORMAL"
-                    if e.key == pygame.K_3: self.diff = "HARD"
-                    if e.key == pygame.K_4: self.diff = "ALT_HARD"
+                    if e.key == pygame.K_1: self._set_difficulty("EASY")
+                    if e.key == pygame.K_2: self._set_difficulty("NORMAL")
+                    if e.key == pygame.K_3: self._set_difficulty("HARD")
+                    if e.key == pygame.K_4: self._set_difficulty("ALT_HARD")
                     if e.key == pygame.K_m: self._cycle_mode()
                     if e.key == pygame.K_SPACE:
                         if self.playing:
@@ -321,6 +329,27 @@ class Visualizer:
         print(f"[VIS] Mode switched to: {self.mode.upper()}")
         for i in range(pygame.mixer.get_num_channels()):
             pygame.mixer.Channel(i).stop()
+
+    def _set_difficulty(self, new_diff):
+        """Switches difficulty and fast-forwards the note pointer to avoid SFX explosion."""
+        if new_diff == self.diff: return
+        
+        self.diff = new_diff
+        curr = time.time() - self.start_time if self.playing else self.pause_time
+        
+        # Fast-forward index to current time
+        # We want played_indices[new_diff] to be the first note where note.time > curr
+        notes = self.beatmaps.get(new_diff, [])
+        idx = 0
+        
+        # Optimization: Use binary search? List is sorted by time.
+        # But even linear scan is fast for <5k items.
+        # Let's just catch up.
+        while idx < len(notes) and notes[idx]["time"] <= curr:
+            idx += 1
+            
+        self.played_indices[new_diff] = idx
+        print(f"[VIS] Switched to {new_diff} (Fast-forwarded to note {idx})")
 
     def draw(self, curr):
         self.screen.fill(COLORS["bg"])

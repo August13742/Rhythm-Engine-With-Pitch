@@ -19,7 +19,7 @@ from transcribe.council import CouncilV2
 DIFF_CONFIGS = {
     "EASY":   {"lanes": 4, "nps": 4.0}, # Was NORMAL
     "NORMAL": {"lanes": 4, "nps": 6.0}, # Was HARD
-    "HARD":   {"lanes": 4, "nps": 9.0}, # Was INSANE
+    "HARD":   {"lanes": 4, "nps": 8.0}, # Was INSANE
     "ALT_HARD": {"lanes": 4, "nps": 8.0}  # New "ALT HARD" (Complimentary)
 }
 # Removed hardcoded primary/support from DIFF_CONFIGS because it is now dynamic
@@ -160,9 +160,28 @@ class StemSelector:
             if candidates:
                 if stem_weights:
                     # Sort by weight desc
-                    candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
+                    # User Fix: "other track is empty half the time... should not happen"
+                    # Solution: Apply penalities/bonuses to selection logic
+                    def get_selection_score(s):
+                        w = stem_weights.get(s, 0)
+                        if s == "other": w *= 0.4 # Heavy penalty for Other (noise prone)
+                        if s in ["piano", "guitar"]: w *= 1.2 # Bonus for Melodic Instruments
+                        return w
+                        
+                    candidates.sort(key=get_selection_score, reverse=True)
                     print(f"    > Dynamic Sort: {candidates} (Weights: {[int(stem_weights.get(s,0)) for s in candidates]})")
-                    primary.append(candidates[0])
+                    
+                    # Logic Update: Instrumental Songs (No Vocals)
+                    # If this is an instrumental song, "MAIN" already picked candidates[0].
+                    # So "ALT" should pick candidates[1] to be different.
+                    # If Vocals exist, MAIN picked Vocals, so ALT picking candidates[0] is fine (it's the best backing).
+                    
+                    selected_idx = 0
+                    if not has_vocals and len(candidates) > 1:
+                        print("    > Instrumental Mode: Selecting 2nd best track for ALT diversity.")
+                        selected_idx = 1
+                        
+                    primary.append(candidates[selected_idx])
                 else:
                     # Fallback Priority
                     if "guitar" in candidates: primary.append("guitar")
@@ -240,27 +259,33 @@ class ChartGenerator:
         
         # Define Stems that require Strict Grids (Backbone)
         # Even on Insane, a Bass/Drum backing track feels better if locked to standard grooves
-        strict_stems = ["drums", "bass"]
-        strict_grids = [4, 8]
-        if difficulty in ["HARD", "INSANE"]: strict_grids.append(16) # Allow 16th kicks on Hard+
+        # User Update: "turn off grid snapping for piano notes too... only drums benefit"
+        strict_stems = ["drums"]
+        # User Update: "maybe grid snapping it is a good idea... just need to do it more strictly"
+        # Restricting drums to 1/4 and 1/8 only (Beat Feel)
+        strict_grids = [4, 8] # Removed [16] append for Hard/Insane
         
         # Split events
         group_strict = []
         group_free = []
+        group_unsnapped = []
         
         for e in clean_events:
             if e.source in strict_stems:
                 group_strict.append(e)
             else:
-                group_free.append(e)
+                # User Request: "turn off grid snapping for piano... only drums benefit"
+                # Decision: Vocals, Piano, Guitar, Bass, Other -> ALL UNSNAPPED (High Fidelity)
+                # We rely on DSP Grounding in Stage 0 for timing accuracy.
+                group_unsnapped.append(e)
                 
-        print(f"DEBUG QUANTIZER: Strict Input (Drums/Bass)={len(group_strict)}, Free Input={len(group_free)}")
+        print(f"DEBUG QUANTIZER: Strict(Drums)={len(group_strict)}, Unsnapped(All Else)={len(group_unsnapped)}")
             
         # Snap separately
         snapped_strict = self.quantizer.snap_to_grid(group_strict, grids=strict_grids)
-        snapped_free = self.quantizer.snap_to_grid(group_free, grids=allowed_grids)
+        # snapped_free = self.quantizer.snap_to_grid(group_free, grids=allowed_grids) # IGNORED
         
-        quantized_events = snapped_strict + snapped_free
+        quantized_events = snapped_strict + group_unsnapped
         
         # --- STAGE 3: THE SIEVE (Scoring & Selection) ---
         ranked_events = self._rank_events_layered(quantized_events, primary_src, support_src)
@@ -268,8 +293,9 @@ class ChartGenerator:
         print(f"  [Sieve] Selected {len(final_events)} notes (NPS Limit: {target_nps})")
         
         # --- STAGE 2.5: MACRO HOLDS (Visual Consolidation) ---
-        # Fixes "Machine Gun" holds by visually merging them while keeping audio separate
-        consolidated_events = self._consolidate_visuals(final_events)
+        # Feature Removed: User request "remove shadow notes... leads to confusion"
+        # consolidated_events = self._consolidate_visuals(final_events)
+        consolidated_events = final_events
         
         # --- STAGE 4: THE MAPPER (Lane Allocation) ---
         chart_notes = self._allocate_lanes(consolidated_events, n_lanes)
@@ -881,9 +907,9 @@ class RhythmEngine:
         # OR the user perception of "lag" is actually Pygame visual lag.
         # But if the user says "severe swings", we should trust the jitter.
         
-        self.latency_offset = 0.008 # Shift +8ms to zero it out? 
-        # Actually, let's leave it 0 for now and let the user config it if needed?
-        # User complained about "swings".
+        self.latency_offset = -0.01 # Shift -10ms (conservative correction)
+        # Detailed in benchmark_report.md
+        print(f"[RhythmEngine] Latency Compensation: {self.latency_offset*1000:.1f}ms")
         
         self.generator = ChartGenerator(bpm=self.bpm)
         self.manifest = self._load_manifest()
@@ -986,10 +1012,18 @@ class RhythmEngine:
                 else:
                     # BasicPitch for melodic instruments
                     print(f"Processing {stem} with BasicPitch...")
-                    params = {}
-                    if stem in ["piano", "guitar"]:
-                         params = {"onset_threshold": 0.6, "frame_threshold": 0.4}
+                    
+                    # User Request: "make sure what we did to improve vocal pitch accuracy also applies to other instruments"
+                    # Applying High Precision Thresholds to ALL instruments (Bass, Other, Piano, Guitar)
+                    # Update: "lowest acceptable parameters" (High Recall) -> 0.35/0.30
+                    params = {"onset_threshold": 0.35, "frame_threshold": 0.30}
+                    
                     notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
+                    
+                    # Apply Smoothing (Level 0.7)
+                    # Use Same Smoother as Vocals for high fidelity feel
+                    from transcribe.smoother import VocalSmoother
+                    notes = VocalSmoother.smooth(notes, level=0.7)
                 
                 # Drum Fix: Force Fixed Pitch (e.g., C4 = 60)
                 if stem == "drums":
@@ -1008,7 +1042,7 @@ class RhythmEngine:
                 # But TimingCorrector uses backtracking.
                 # Let's Skip Grounding for drums if we used Onset Detection, as it IS onset detection.
                 if stem != "drums":
-                     notes = TimingCorrector.ground_events(notes, path)
+                     notes = TimingCorrector.ground_events(notes, path, window=0.1)
                 
                 # Silence Gate (New)
                 # Remove notes in silent sections (Hallucination removal)
@@ -1050,6 +1084,7 @@ class RhythmEngine:
                     lead_events = self.council.transcribe(v_path, model_type="fcpe")
                     
                     # 2. Get Poly/Harmony (BasicPitch)
+                    # Note: Defaults tuned in Council (onset=0.4, frame=0.3)
                     poly_events = self.council.transcribe(v_path, model_type="basic_pitch")
                     
                     # 3. Fuse
@@ -1057,6 +1092,11 @@ class RhythmEngine:
                 else:
                     # Standard Monophonic
                     v_notes = self.council.transcribe(v_path, model_type="fcpe")
+
+                # Vocal Smoothing (Tunable)
+                from transcribe.smoother import VocalSmoother
+                print(f"[Generator] Applying Vocal Smoothing (Level=0.7)...")
+                v_notes = VocalSmoother.smooth(v_notes, level=0.7)
 
                 # Patch source name (Force match to stem name for Layer Selector)
                 for n in v_notes:
@@ -1067,7 +1107,7 @@ class RhythmEngine:
                 # But we have offset now. Let's ground them.
                 if hasattr(self, "latency_offset") and self.latency_offset != 0:
                      for n in v_notes: n.time += self.latency_offset
-                v_notes = TimingCorrector.ground_events(v_notes, v_path)
+                v_notes = TimingCorrector.ground_events(v_notes, v_path, window=0.1)
                 
                 all_events.extend(v_notes)
                 found_vocals = True
@@ -1098,7 +1138,9 @@ class RhythmEngine:
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
         # 2. Pick Peaks (Adaptive threshold)
-        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.2, wait=2)
+        # User Request: "limit cap its note counts to strictly provide beat feel only"
+        # Increased delta (0.2 -> 0.35) and wait (2 -> 4 frames)
+        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.35, wait=4)
         
         # 3. Convert to times
         times = librosa.frames_to_time(peaks, sr=sr)

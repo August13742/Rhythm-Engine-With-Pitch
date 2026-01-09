@@ -7,7 +7,7 @@
   },
   "notes": [
     {
-      "time": 33.78503401360544,
+      "time": 33.69215419501134,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -16,7 +16,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 35.178231292517005,
+      "time": 35.25972647202199,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -25,7 +25,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 35.87482993197278,
+      "time": 35.76972251683999,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -34,7 +34,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 36.91972789115646,
+      "time": 36.81971437381825,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -43,7 +43,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 37.964625850340134,
+      "time": 37.8485260770975,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -52,7 +52,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 39.3578231292517,
+      "time": 39.24172335600907,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -61,7 +61,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 40.40272108843537,
+      "time": 40.56526077097506,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -70,7 +70,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 41.44761904761904,
+      "time": 41.319679475153634,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -79,7 +79,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 43.53741496598639,
+      "time": 43.39966334421532,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -88,7 +88,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 54.33469387755102,
+      "time": 54.339578501684,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -97,7 +97,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 54.68299319727891,
+      "time": 54.679575864896016,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -106,7 +106,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 55.0312925170068,
+      "time": 55.12957237502955,
       "lane": 1,
       "dur": 0.7499941835558985,
       "type": "hold",
@@ -115,16 +115,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 56.07619047619047,
+      "time": 55.96956586061215,
       "lane": 3,
-      "dur": 0.10000000000000142,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 79,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 56.42448979591836,
+      "time": 56.10956477487591,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "hold",
+      "midi": 81,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 56.35956283606122,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -133,55 +142,52 @@
       "source": "vocals_lead"
     },
     {
-      "time": 59.559183673469384,
+      "time": 59.449538872311514,
       "lane": 1,
-      "dur": 1.2448964081319076,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 65,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 59.559183673469384,
-      "lane": -1,
-      "dur": 0.34999728565941857,
-      "type": "ghost",
-      "midi": 65,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 59.90748299319728,
-      "lane": -1,
-      "dur": 0.739994261108485,
-      "type": "ghost",
+      "time": 59.89953538244505,
+      "lane": 0,
+      "dur": 0.6999941835559014,
+      "type": "hold",
       "midi": 60,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 60.604081632653056,
-      "lane": -1,
-      "dur": 0.1999984489482392,
-      "type": "ghost",
+      "time": 60.64952956600095,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 62,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 60.95238095238095,
+      "time": 60.86952785984401,
       "lane": 0,
-      "dur": 1.289989995716141,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 62.345578231292514,
+      "time": 61.04952646389743,
+      "lane": 0,
+      "dur": 1.289989995716143,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 62.33951645961357,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -190,16 +196,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 65.82857142857142,
+      "time": 65.65949071215434,
       "lane": 0,
-      "dur": 0.2982993197279029,
+      "dur": 0.5099956570550717,
       "type": "hold",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 66.17687074829932,
+      "time": 66.2194863692094,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -208,7 +214,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 66.52517006802721,
+      "time": 66.66948287934294,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -217,7 +223,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 66.8734693877551,
+      "time": 66.85948140584377,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -226,16 +232,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 67.57006802721088,
-      "lane": 2,
+      "time": 66.94948070787048,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 79,
+      "midi": 74,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 67.57006802721088,
+      "time": 67.41947706289885,
       "lane": 1,
       "dur": 0.1,
       "type": "hold",
@@ -244,46 +250,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 70.7047619047619,
-      "lane": 1,
-      "dur": 0.5982973809131948,
-      "type": "hold",
+      "time": 70.54945278893878,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 65,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 70.7047619047619,
-      "lane": -1,
-      "dur": 0.3399973632120208,
-      "type": "ghost",
-      "midi": 65,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 71.0530612244898,
-      "lane": -1,
-      "dur": 0.249998061185299,
-      "type": "ghost",
-      "midi": 60,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 71.40136054421768,
-      "lane": -1,
-      "dur": 0.34999728565941857,
-      "type": "ghost",
-      "midi": 60,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 71.40136054421768,
+      "time": 70.9894493766249,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -292,26 +268,43 @@
       "source": "vocals_lead"
     },
     {
-      "time": 71.74965986394557,
-      "lane": -1,
-      "dur": 0.1499988367111794,
-      "type": "ghost",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 72.09795918367347,
+      "time": 71.37944635207397,
       "lane": 0,
-      "dur": 1.2099906161368637,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 73.83945578231292,
+      "time": 71.7394435601808,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 71.94944193157646,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 72.1494403805247,
+      "lane": 0,
+      "dur": 1.2099906161368637,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 73.68942843742614,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -320,16 +313,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 74.5360544217687,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 68,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 74.5360544217687,
+      "time": 74.46942238832428,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -338,7 +322,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 75.58095238095238,
+      "time": 74.61942122503545,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -347,7 +331,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 76.27755102040815,
+      "time": 75.65061224489796,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 76.17940912683173,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -356,7 +349,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 76.62585034013605,
+      "time": 76.60263038548753,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -365,25 +358,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 76.97414965986394,
+      "time": 77.13940168178327,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 72,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 77.32244897959183,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "hold",
       "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 78.7156462585034,
+      "time": 77.32244897959184,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -392,7 +376,34 @@
       "source": "vocals_lead"
     },
     {
-      "time": 79.06394557823128,
+      "time": 77.46939912254786,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 77.68939741639092,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 78.54939074686835,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 79.14938609371306,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -401,7 +412,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 79.76054421768707,
+      "time": 79.64938221608367,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -410,7 +421,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 80.80544217687074,
+      "time": 80.75900226757369,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -419,16 +430,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 81.50204081632653,
+      "time": 81.43936833417041,
       "lane": 1,
-      "dur": 0.5999953468447176,
+      "dur": 0.546731439072218,
       "type": "hold",
       "midi": 72,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 82.19863945578231,
+      "time": 82.03609977324263,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -437,7 +448,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 82.5469387755102,
+      "time": 82.4293606564642,
       "lane": 1,
       "dur": 0.1,
       "type": "hold",
@@ -446,35 +457,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 82.89523809523808,
+      "time": 82.71935840743913,
       "lane": 1,
-      "dur": 0.6465986394557888,
+      "dur": 0.759994106003309,
       "type": "hold",
       "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 83.59183673469387,
+      "time": 83.57935173791657,
       "lane": 1,
-      "dur": 0.6465986394557888,
-      "type": "hold",
-      "midi": 70,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 83.59183673469387,
-      "lane": -1,
       "dur": 0.6799947264240133,
-      "type": "ghost",
+      "type": "hold",
       "midi": 70,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 84.28843537414966,
+      "time": 84.3348752834467,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -483,17 +484,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 84.28843537414966,
-      "lane": -1,
-      "dur": 0.13999891426376743,
-      "type": "ghost",
+      "time": 84.3348752834467,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 58,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 84.63673469387754,
+      "time": 84.6993430520267,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -502,16 +502,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 87.77142857142857,
+      "time": 87.65932009646065,
       "lane": 1,
-      "dur": 0.2982993197278887,
+      "dur": 0.49999573460765134,
       "type": "hold",
       "midi": 72,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 88.11972789115646,
+      "time": 88.2093158310683,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -520,7 +520,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 88.46802721088434,
+      "time": 88.30931505554241,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -529,7 +529,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 88.46802721088434,
+      "time": 88.49124716553288,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -538,7 +538,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 88.81632653061224,
+      "time": 88.79931125546561,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -547,7 +547,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 89.16462585034013,
+      "time": 88.97930985951902,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -556,7 +556,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 89.51292517006802,
+      "time": 89.34930699007326,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -565,7 +565,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 91.25442176870747,
+      "time": 91.20929256529189,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -574,7 +574,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 109.71428571428571,
+      "time": 109.64914955831955,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -583,7 +583,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 110.75918367346938,
+      "time": 110.6891414928504,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -592,7 +592,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 111.80408163265305,
+      "time": 111.73913334982865,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -601,7 +601,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 112.84897959183672,
+      "time": 112.76912536191207,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -610,7 +610,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 115.28707482993197,
+      "time": 115.19910651663318,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -619,7 +619,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 116.33197278911564,
+      "time": 116.23909297052154,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -628,7 +628,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 117.37687074829931,
+      "time": 117.27909038569487,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -637,7 +637,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 118.0734693877551,
+      "time": 118.15908356106713,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -646,7 +646,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 118.42176870748298,
+      "time": 118.31908232022572,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -655,7 +655,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 123.99455782312924,
+      "time": 124.14903710706689,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -664,17 +664,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 124.69115646258503,
-      "lane": -1,
-      "dur": 0.35999720810683056,
-      "type": "ghost",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 124.69115646258503,
+      "time": 124.54903400496336,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -683,17 +673,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 125.03945578231291,
-      "lane": -1,
-      "dur": 0.10999914692153157,
-      "type": "ghost",
+      "time": 125.17902911915031,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 62,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 125.38775510204081,
+      "time": 125.39902741299338,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 125.47902679257267,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -702,34 +700,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 125.38775510204081,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 125.7360544217687,
+      "time": 125.73902477620538,
       "lane": 2,
-      "dur": 0.5599956570550688,
+      "dur": 0.6799947264240274,
       "type": "hold",
       "midi": 79,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 126.43265306122449,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 129.21904761904761,
+      "time": 129.03899918385136,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -738,36 +718,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 129.21904761904761,
-      "lane": -1,
-      "dur": 0.30999759586977077,
-      "type": "ghost",
-      "midi": 60,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 129.21904761904761,
+      "time": 129.248997555247,
       "lane": 0,
-      "dur": 0.6465986394557603,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 129.5673469387755,
-      "lane": -1,
-      "dur": 0.40999682034389034,
-      "type": "ghost",
+      "time": 129.5989948409064,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 129.9156462585034,
+      "time": 130.01899158369773,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -776,16 +745,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 130.26394557823127,
+      "time": 130.23898987754077,
       "lane": 0,
-      "dur": 1.8899853425608626,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 132.35374149659864,
+      "time": 130.4189884815942,
+      "lane": 0,
+      "dur": 1.8899853425608604,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 132.30897382415506,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -794,16 +772,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 135.48843537414965,
+      "time": 135.36895009306312,
       "lane": 0,
-      "dur": 0.1,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 136.18503401360545,
+      "time": 135.63894799914326,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 136.06894466438195,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -812,16 +799,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 136.53333333333333,
+      "time": 136.53894101941032,
       "lane": 2,
-      "dur": 0.1,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 79,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 136.88163265306122,
+      "time": 136.6789399336741,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 79,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 136.87893838262232,
       "lane": 2,
       "dur": 0.50999604481801,
       "type": "hold",
@@ -830,16 +826,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 140.36462585034013,
+      "time": 140.3489114718743,
       "lane": 1,
-      "dur": 0.6465986394557603,
+      "dur": 0.7099941060032791,
       "type": "hold",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 141.0612244897959,
+      "time": 141.10890557787758,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -848,16 +844,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 141.4095238095238,
+      "time": 141.33890379416806,
       "lane": 1,
-      "dur": 0.8699932529248429,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 142.45442176870748,
+      "time": 141.51890239822146,
+      "lane": 1,
+      "dur": 0.8699932529248404,
+      "type": "hold",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 142.3888956511463,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -866,16 +871,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 142.80272108843536,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 70,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 142.80272108843536,
+      "time": 142.6634013605442,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -884,7 +880,16 @@
       "source": "vocals_lead"
     },
     {
-      "time": 143.15102040816325,
+      "time": 142.76889270414796,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 70,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 143.06889037757034,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -902,16 +907,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 146.98231292517005,
+      "time": 146.82886121779723,
       "lane": 2,
-      "dur": 0.1,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 74,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 147.33061224489794,
+      "time": 147.03885958919287,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 147.37885695240487,
       "lane": 2,
       "dur": 0.8199936406877839,
       "type": "hold",
@@ -920,7 +934,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 148.37551020408162,
+      "time": 148.47884842162017,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -929,7 +943,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 151.85850340136054,
+      "time": 151.78882275171355,
       "lane": 2,
       "dur": 0.1,
       "type": "hold",
@@ -938,7 +952,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 152.20680272108842,
+      "time": 152.05882065779366,
       "lane": 2,
       "dur": 2.029984256824628,
       "type": "hold",
@@ -947,7 +961,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 153.94829931972788,
+      "time": 154.0888049146183,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
@@ -956,36 +970,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 154.29659863945577,
+      "time": 154.32880305335618,
       "lane": 2,
-      "dur": 0.5182980013339034,
-      "type": "hold",
+      "dur": 0.0,
+      "type": "tap",
       "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 154.29659863945577,
-      "lane": -1,
-      "dur": 0.35999720810683056,
-      "type": "ghost",
-      "midi": 70,
-      "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
-    },
-    {
-      "time": 154.64489795918365,
-      "lane": -1,
-      "dur": 0.16999868160600332,
-      "type": "ghost",
+      "time": 154.7387998737001,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 82,
       "vol": 1.0,
-      "source": "vocals_lead",
-      "ghost": true
+      "source": "vocals_lead"
     },
     {
-      "time": 157.77959183673468,
+      "time": 157.9287751344245,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -994,7 +997,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 158.82448979591837,
+      "time": 158.6787693179804,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
@@ -1003,11 +1006,11 @@
       "source": "vocals_lead"
     },
     {
-      "time": 163.00408163265305,
+      "time": 163.0505215419501,
       "lane": 2,
       "dur": 0.1,
       "type": "hold",
-      "midi": 72,
+      "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     }
