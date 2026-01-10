@@ -24,6 +24,31 @@ DIFF_CONFIGS = {
 }
 # Removed hardcoded primary/support from DIFF_CONFIGS because it is now dynamic
 
+class AudioCache:
+    """
+    Simple cache to prevent re-loading the same audio file multiple times.
+    Stores separate buffers for different sample rates.
+    """
+    _cache = {}
+
+    @classmethod
+    def get(cls, path: str, sr: int = 22050):
+        key = (path, sr)
+        if key not in cls._cache:
+            if not os.path.exists(path):
+                return None, None
+            # print(f"[Cache] Loading {os.path.basename(path)} (sr={sr})...")
+            y, s = librosa.load(path, sr=sr)
+            cls._cache[key] = (y, s)
+        else:
+            # print(f"[Cache] Hit: {os.path.basename(path)} (sr={sr})")
+            pass
+        return cls._cache[key]
+
+    @classmethod
+    def clear(cls):
+        cls._cache.clear()
+
 GENERATOR_CONFIG = {
     "cleaning": {
         "min_duration": 0.03,
@@ -77,6 +102,19 @@ GENERATOR_CONFIG = {
 
 class StemSelector:
     @staticmethod
+    def get_stem_energy(stem_name: str, manifest: dict) -> float:
+        """Returns the peak energy or RMS from manifest."""
+        if not manifest or stem_name not in manifest:
+            return 0.0
+        
+        info = manifest[stem_name]
+        # Prefer RMS (avg power) over Peak (transients) for "dominance"
+        # manifest currently stores 'peak_energy'. Let's assume we might have 'rms' or use peak.
+        # Original separator also keys 'vocals_lead' rms into a stats dict but manifest saves peak.
+        # Fallback to peak if RMS missing.
+        return info.get("peak_energy", 0.0)
+
+    @staticmethod
     def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main", stem_weights: dict = None) -> dict:
         """
         Determines Primary/Support stems based on Difficulty and Focus Mode.
@@ -122,9 +160,6 @@ class StemSelector:
                 # In Main/Easy-Hard, Instruments are Backing Tracks.
                 # User Requirement: "it is vocal + drum for this song in particular, there should be no other cases"
                 # So we DO NOT add guitar/piano to support.
-                # if difficulty != "EASY":
-                #      if "guitar" in active_stems: support.append("guitar")
-                #      if "piano" in active_stems: support.append("piano")
                 pass
             
             else:
@@ -132,49 +167,51 @@ class StemSelector:
                 # Dynamic Rule: Primary = Most Dynamic Stem
                 candidates = [s for s in active_stems if s not in ["drums", "bass"]]
                 if candidates:
+                    # Dynamic Sort using Energy (RMS/Peak) + Note Velocity Sum (stem_weights)
+                    # Combined Score = (Manifest Energy * 0.5) + (Note Velocity Sum * 0.5) normalized?
+                    # actually stem_weights (velocity sum) is a good proxy for "musical activity"
                     if stem_weights:
                         candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
                         print(f"    > Instrumental Main Sort: {candidates}")
                         primary.append(candidates[0])
                     else:
+                        # Fallback
                         if "guitar" in active_stems: primary.append("guitar")
                         elif "piano" in active_stems: primary.append("piano")
                         elif "other" in active_stems: primary.append("other")
 
-            # Support: Rhythm (Drums/Bass)
+            # Support: Rhythm (Drums)
             if difficulty != "EASY":
-                if "drums" in active_stems: support.append("drums")
-            if difficulty in ["HARD"]: # Bass only on Hard+
-                # User Request: "second layer is always drum" (Implies no Bass)
-                # if "bass" in active_stems: support.append("bass")
-                pass
+                 if "drums" in active_stems: support.append("drums")
             
         elif actual_mode == "alt":
             # ALT FOCUS: Instruments (2nd Busiest) > Rhythm
             # Dynamic Rule: Pick highest energy non-vocal instrument.
-            # Order of preference (if weights equal/missing): Guitar > Piano > Other
+            # Order of preference: PURELY DYNAMIC.
             
-            # Filter candidates
+            # Filter candidates: All melodic instruments (No Vocals, No Drums, No Bass)
             candidates = [s for s in active_stems if s not in ["vocals", "vocals_lead", "drums", "bass"]]
             
             if candidates:
                 if stem_weights:
-                    # Sort by weight desc
-                    # User Fix: "other track is empty half the time... should not happen"
-                    # Solution: Apply penalities/bonuses to selection logic
+                    # Sort by weight desc (Total Note Velocity)
+                    # We REMOVED the hardcoded penalties. Trust the data.
+                    # Use a hybrid score? 
+                    # Let's trust stem_weights (Sum of Vel). 
+                    # Example: Solo Guitar (High Sum) vs Quiet Strings (Low Sum).
+                    
+                    # Logic Update: "logic is 'most dynamic / dominant (that is not just volume)'"
+                    # stem_weights = Sum(Velocity) which IS dynamic density.
+                    
                     def get_selection_score(s):
-                        w = stem_weights.get(s, 0)
-                        if s == "other": w *= 0.4 # Heavy penalty for Other (noise prone)
-                        if s in ["piano", "guitar"]: w *= 1.2 # Bonus for Melodic Instruments
-                        return w
+                        return stem_weights.get(s, 0)
                         
                     candidates.sort(key=get_selection_score, reverse=True)
-                    print(f"    > Dynamic Sort: {candidates} (Weights: {[int(stem_weights.get(s,0)) for s in candidates]})")
+                    print(f"    > Dynamic Sort: {candidates} (Scores: {[f'{stem_weights.get(s,0):.3f}' for s in candidates]})")
                     
                     # Logic Update: Instrumental Songs (No Vocals)
-                    # If this is an instrumental song, "MAIN" already picked candidates[0].
-                    # So "ALT" should pick candidates[1] to be different.
-                    # If Vocals exist, MAIN picked Vocals, so ALT picking candidates[0] is fine (it's the best backing).
+                    # If Main picked #1, Alt picks #2.
+                    # If Vocals exist, Main picked Vocals, so Alt picks #1 (Best Instrument).
                     
                     selected_idx = 0
                     if not has_vocals and len(candidates) > 1:
@@ -195,9 +232,6 @@ class StemSelector:
                 # Drums are strictly support in ALT mode (unless it's a drum chart)
                 support.append("drums")
                     
-            # User Feedback: "second layer is supposed to be pure supportive / tempo grounding" (Drums only)
-            # if "bass" in active_stems: support.append("bass")
-            
         print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
         print(f"    > Primary: {primary}")
         print(f"    > Support: {support}")
@@ -661,29 +695,41 @@ class ChartGenerator:
             merged_stack = []
             if not stack: continue
             
-            # Pass 1: Merge close notes
+            # Pass 1: Merge close notes (Minijacks)
             curr = stack[0]
             for i in range(1, len(stack)):
                 next_n = stack[i]
                 
                 # Check proximity
-                if next_n["time"] - curr["time"] < minijack_thresh:
+                gap = next_n["time"] - curr["time"]
+                
+                # Logic: Only merge if strictly a "Jack" (Same Pitch + Close Time)
+                # If pitch is different, it's a trill/stream -> Allow it (unless very fast glitch)
+                is_same_pitch =  abs(next_n["midi"] - curr["midi"]) < 1.0
+                
+                # Thresholds
+                # Same Pitch: 100ms (standard jack removal)
+                # Different Pitch: 40ms (glitch removal, very fast trills allowed > 40ms)
+                thresh = minijack_thresh if is_same_pitch else 0.04
+                
+                if gap < thresh:
                     # Merge!
                     # Only create hold if allowed
                     can_hold = curr["source"] in allowed_holds
                     
-                    if can_hold:
-                        # Extend current duration to cover next note
-                        new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
-                        curr["dur"] = max(0.1, new_end - curr["time"]) # Make it a hold if merged
-                        curr["type"] = "hold"
+                    if can_hold and is_same_pitch:
+                         # Extend current duration to cover next note
+                         new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
+                         curr["dur"] = max(0.1, new_end - curr["time"]) # Make it a hold if merged
+                         curr["type"] = "hold"
                     else:
-                        # Cannot hold (e.g. guitar/drums). 
-                        # Absorb the next note but keep as tap (dur=0).
-                        # Essentially "de-jacking" the chart.
-                        curr["dur"] = 0.0
-                        curr["type"] = "tap"
-                        
+                         # Cannot hold (e.g. guitar/drums) OR Trill glitch
+                         # Absorb the next note.
+                         # If it was a trill glitch (<40ms), we just delete the second note.
+                         # If it was a jack, we keep the first one.
+                         curr["dur"] = 0.0
+                         curr["type"] = "tap"
+                         
                     # Skip next_n (it's absorbed)
                 else:
                     merged_stack.append(curr)
@@ -737,7 +783,7 @@ class TimingCorrector:
         
         try:
             # Load audio (lightweight load)
-            y, sr = librosa.load(audio_path, sr=22050)
+            y, sr = AudioCache.get(audio_path, sr=22050)
             
             # Detect Onsets
             # backtracking=True helps find the precise start of the transient
@@ -878,6 +924,7 @@ class ConsensusEngine:
                 
         print(f"[Consensus] Fused {len(final_events)} notes from {len(lead_notes)} Lead + {len(poly_notes)} Poly.")
         return final_events
+        
 class RhythmEngine:
     def __init__(self, stems_folder: str):
         self.stems_folder = stems_folder
@@ -916,53 +963,102 @@ class RhythmEngine:
 
 
     def _detect_bpm(self) -> float:
-        """Detects BPM from drums.wav or mixture.wav using Librosa."""
-        try:
-            # Try drums first (best for BPM)
-            target_path = os.path.join(self.stems_folder, "drums.wav")
-            if not os.path.exists(target_path):
-                # Fallback to mixture (source file?) or other
-                 # Actually, usually there is no mixture.wav in stems folder unless we put it there.
-                 # Let's try 'other.wav' or look for original file... 
-                 # But self.stems_folder contains the stems.
-                 pass
-            
-            # If no drums, try to find any valid audio file in the folder to estimate
-            if not os.path.exists(target_path):
-                 for f in ["other.wav", "bass.wav", "vocals.wav"]:
-                     p = os.path.join(self.stems_folder, f)
-                     if os.path.exists(p):
-                         target_path = p
-                         break
-            
-            if not os.path.exists(target_path):
-                print("[RhythmEngine] No audio files found for BPM detection. Defaulting to 120.0")
-                return 120.0
+        """
+        Detects BPM using Madmom (DBNBeatTracker) with Librosa fallback.
+        Includes Sanity Check to prefer 100-180 BPM range.
+        """
+        target_path = os.path.join(self.stems_folder, "drums.wav")
+        if not os.path.exists(target_path):
+             for f in ["other.wav", "bass.wav", "vocals.wav"]:
+                 p = os.path.join(self.stems_folder, f)
+                 if os.path.exists(p):
+                     target_path = p
+                     break
+        
+        if not os.path.exists(target_path):
+            print("[RhythmEngine] No audio files found for BPM detection. Defaulting to 120.0")
+            return 120.0
 
-            print(f"[RhythmEngine] Detecting BPM from {os.path.basename(target_path)}...")
+        print(f"[RhythmEngine] Detecting BPM from {os.path.basename(target_path)}...")
+        
+        # 1. Try Madmom (DBNBeatTracker)
+        try:
+            # Output of madmom relies on 'collections', which removed MutableSequence in Py3.10+
+            import collections
+            if not hasattr(collections, 'MutableSequence'):
+                import collections.abc
+                collections.MutableSequence = collections.abc.MutableSequence
+                collections.Iterable = collections.abc.Iterable
             
-            # Load audio (load 60s max to speed up)
-            y, sr = librosa.load(target_path, sr=22050, duration=60.0)
+            # Madmom also relies on np.float, np.int, np.bool which were removed in Numpy 1.24+
+            import numpy as np
+            if not hasattr(np, 'float'):
+                np.float = float
+            if not hasattr(np, 'int'):
+                np.int = int
+            if not hasattr(np, 'bool'):
+                np.bool = bool
             
-            # Detect BPM
+            import madmom
+            import madmom.features.beats
+            print("  [BPM] Using Madmom DBNBeatTracker...")
+            
+            # Madmom proc handles loading internally effectively, but let's pass file path
+            # DBNBeatTracker might be DBNBeatTrackingProcessor in this version
+            if hasattr(madmom.features.beats, 'DBNBeatTracker'):
+                proc = madmom.features.beats.DBNBeatTracker(fps=100)
+            else:
+                proc = madmom.features.beats.DBNBeatTrackingProcessor(fps=100)
+                
+            act = madmom.features.beats.RNNBeatProcessor()(target_path)
+            beats = proc(act)
+            
+            # Calculate BPM from beats (inter-beat interval)
+            if len(beats) > 1:
+                intervals = np.diff(beats)
+                median_interval = np.median(intervals)
+                bpm = 60.0 / median_interval
+                print(f"  [BPM] Madmom Raw: {bpm:.2f}")
+                return self._sanitize_bpm(bpm)
+            
+        except ImportError:
+            print("  [BPM] Madmom not found. Falling back to Librosa.")
+        except Exception as e:
+            print(f"  [BPM] Madmom failed: {e}. Falling back to Librosa.")
+
+        # 2. Fallback: Librosa
+        try:
+            # Use Cache for consistency (though Madmom used its own loader above)
+            y, sr = AudioCache.get(target_path, sr=22050)
             onset_env = librosa.onset.onset_strength(y=y, sr=sr)
             tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
             
-            # librosa returns a scalar or a 1-element array
-            if isinstance(tempo, np.ndarray):
-                tempo = tempo.item()
-                
-            if tempo <= 0:
-                print("[RhythmEngine] BPM detection failed (<=0). Defaulting to 120.0")
-                return 120.0
-                
-            print(f"[RhythmEngine] Detected BPM: {tempo:.2f}")
-            return float(tempo)
-            
+            if isinstance(tempo, np.ndarray): tempo = tempo.item()
+            print(f"  [BPM] Librosa Raw: {tempo:.2f}")
+            return self._sanitize_bpm(float(tempo))
+
         except Exception as e:
             print(f"[RhythmEngine] BPM Detection Error: {e}. Defaulting to 120.0")
             return 120.0
 
+    def _sanitize_bpm(self, bpm: float) -> float:
+        """
+        Sanity Checker: Bias towards 100-180 BPM.
+        Corrects for Double/Half time errors.
+        """
+        if bpm <= 0: return 120.0
+        
+        original = bpm
+        # Logic: If < 90, try 2x. If > 180, try 0.5x.
+        # This is a heuristic.
+        while bpm < 90:
+            bpm *= 2
+        while bpm > 185:
+            bpm /= 2
+            
+        if bpm != original:
+            print(f"  [BPM] Sanity Check: {original:.2f} -> {bpm:.2f}")
+        return bpm
 
     def _ensure_paths(self):
         if not os.path.isdir(self.stems_folder):
@@ -1013,13 +1109,12 @@ class RhythmEngine:
                     # BasicPitch for melodic instruments
                     print(f"Processing {stem} with BasicPitch...")
                     
-                    # User Request: "make sure what we did to improve vocal pitch accuracy also applies to other instruments"
-                    # Applying High Precision Thresholds to ALL instruments (Bass, Other, Piano, Guitar)
-                    # Update: "lowest acceptable parameters" (High Recall) -> 0.35/0.30
+                    # User Request: "Revert Consensus for Instruments to fix pitch degradation"
+                    # Default multipass_consensus=False for instruments logic.
                     params = {
                         "onset_threshold": 0.35, 
                         "frame_threshold": 0.30,
-                        "multipass_consensus": True # User Request: High Quality / Avoid Octave Leaks
+                        "multipass_consensus": False # REVERTED: False for instruments
                     }
                     
                     notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
@@ -1075,11 +1170,6 @@ class RhythmEngine:
                 if "choir" in self.base_name.lower() or "duet" in self.base_name.lower() or "poly" in self.base_name.lower():
                     use_polyphony = True
                 
-                # Specific file overrides from user request (NamelessMartyr, wgf, betelgeuse)
-                special_cases = ["namelessmartyr", "wgf", "betelgeuse"]
-                if any(s in self.base_name.lower() for s in special_cases):
-                    use_polyphony = True
-                    
                 v_notes = []
                 
                 if use_polyphony:
@@ -1138,15 +1228,16 @@ class RhythmEngine:
     def _transcribe_drums_onset(self, audio_path: str) -> List[NoteEvent]:
         import librosa
         # print(f"[Onset] Analyzing {os.path.basename(audio_path)} for transients...")
-        y, sr = librosa.load(audio_path, sr=None)
+        y, sr = AudioCache.get(audio_path, sr=None)
         
         # 1. Onset Envelope
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
         # 2. Pick Peaks (Adaptive threshold)
         # User Request: "limit cap its note counts to strictly provide beat feel only"
-        # Increased delta (0.2 -> 0.35) and wait (2 -> 4 frames)
-        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.35, wait=4)
+        # Increased delta (0.35 -> 0.45) for stricter picking
+        # Increased wait (4 -> 6) to reduce rolls
+        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.45, wait=6)
         
         # 3. Convert to times
         times = librosa.frames_to_time(peaks, sr=sr)
@@ -1158,8 +1249,18 @@ class RhythmEngine:
             if max_e > 0: energies /= max_e
             
         events = []
+        
+        # --- GRID DECIMATOR ---
+        # Cap density to 1 hit per 1/8th note approx. (120BPM -> 250ms)
+        # Actually let's use a time window (e.g. 0.1s)
+        # If multiple hits in window, pick loudest.
+        decim_window = 0.12 # approx 1/8 at high bpm
+        
+        last_t = -1.0
+        pending_candidates = [] # list of (t, energy)
+        
         for t, e in zip(times, energies):
-            events.append(NoteEvent(
+             events.append(NoteEvent(
                 time=float(t),
                 duration=0.1, 
                 pitch=60, 
@@ -1167,8 +1268,32 @@ class RhythmEngine:
                 source="drums"
             ))
             
-        print(f"[Onset] Found {len(events)} drum hits.")
-        return events
+        # Run Decimation Pass on raw events?
+        # Actually doing it here in loop is cleaner.
+        # But simplistic approach: just filter by delta time.
+        
+        final_events = []
+        if events:
+            # Sort by time just in case
+            events.sort(key=lambda x: x.time)
+            
+            # Group into 1/8th windows?
+            # Or simplified: if next note is too close, keep loudest.
+            
+            curr = events[0]
+            for i in range(1, len(events)):
+                next_e = events[i]
+                if next_e.time - curr.time < decim_window:
+                    # Conflict! Keep louder.
+                    if next_e.velocity > curr.velocity:
+                        curr = next_e
+                else:
+                    final_events.append(curr)
+                    curr = next_e
+            final_events.append(curr)
+            
+        print(f"[Onset] Found {len(events)} -> Decimated {len(final_events)} drum hits.")
+        return final_events
 
 
 if __name__ == "__main__":

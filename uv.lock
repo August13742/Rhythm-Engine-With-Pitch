@@ -638,6 +638,18 @@ wheels = [
 ]
 
 [[package]]
+name = "madmom"
+version = "0.16.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "cython" },
+    { name = "mido" },
+    { name = "numpy" },
+    { name = "scipy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c7/a3/9f3de3e8068a3606331134d96b84c8db4f7624d6715be8ab3c1f56e6731d/madmom-0.16.1.tar.gz", hash = "sha256:64a86a29106e7c4e0c5f4ec96801c2d1a8492db710e4fe27e097da5517d68cb2", size = 20040947, upload-time = "2018-11-14T14:56:22.83Z" }
+
+[[package]]
 name = "markupsafe"
 version = "3.0.3"
 source = { registry = "https://pypi.org/simple" }
@@ -1092,6 +1104,7 @@ dependencies = [
     { name = "faster-whisper" },
     { name = "huggingface-hub" },
     { name = "librosa" },
+    { name = "madmom" },
     { name = "mir-eval" },
     { name = "nnaudio" },
     { name = "numba" },
@@ -1103,6 +1116,7 @@ dependencies = [
     { name = "soundfile" },
     { name = "torch" },
     { name = "torchaudio" },
+    { name = "torchcrepe" },
     { name = "torchfcpe" },
     { name = "torchvision" },
 ]
@@ -1114,6 +1128,7 @@ requires-dist = [
     { name = "faster-whisper", specifier = ">=1.2.1" },
     { name = "huggingface-hub", specifier = ">=1.2.3" },
     { name = "librosa", specifier = ">=0.11.0" },
+    { name = "madmom", specifier = ">=0.16.1" },
     { name = "mir-eval", specifier = ">=0.7" },
     { name = "nnaudio", specifier = ">=0.3.2" },
     { name = "numba", specifier = ">=0.59.0" },
@@ -1125,6 +1140,7 @@ requires-dist = [
     { name = "soundfile", specifier = ">=0.13.1" },
     { name = "torch", index = "https://download.pytorch.org/whl/nightly/cu128" },
     { name = "torchaudio", index = "https://download.pytorch.org/whl/nightly/cu128" },
+    { name = "torchcrepe", specifier = ">=0.0.24" },
     { name = "torchfcpe", specifier = ">=0.0.4" },
     { name = "torchvision", index = "https://download.pytorch.org/whl/nightly/cu128" },
 ]
@@ -1395,6 +1411,23 @@ dependencies = [
 wheels = [
     { url = "https://download.pytorch.org/whl/nightly/cu128/torchaudio-2.10.0.dev20251124%2Bcu128-cp313-cp313-win_amd64.whl" },
     { url = "https://download.pytorch.org/whl/nightly/cu128/torchaudio-2.10.0.dev20251124%2Bcu128-cp313-cp313t-win_amd64.whl" },
+]
+
+[[package]]
+name = "torchcrepe"
+version = "0.0.24"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "librosa" },
+    { name = "resampy" },
+    { name = "scipy" },
+    { name = "torch" },
+    { name = "torchaudio" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/c8/98/0da59205962218ed1be90034aa11db3e2e10a54293508ef0aa07a1e5ceb9/torchcrepe-0.0.24.tar.gz", hash = "sha256:7eebdd59bdfed822ac19820cb73823335e4eba88f1c76c411a7ab05f7ca6db0a", size = 72329307, upload-time = "2025-05-16T18:41:41.393Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9b/a9/799d00b9dc7a18bb0ff53fccc187b1d83c690e337d078345c17ec0a1a224/torchcrepe-0.0.24-py3-none-any.whl", hash = "sha256:ec054c23c9d45328f213f93a0131570a3f0e5903e9382792bed95f17a8c36d5a", size = 72326298, upload-time = "2025-05-16T18:41:13.419Z" },
 ]
 
 [[package]]

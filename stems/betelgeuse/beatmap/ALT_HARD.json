@@ -53,29 +53,11 @@
     },
     {
       "time": 3.111473922902494,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.39907026290893555,
-      "source": "guitar"
-    },
-    {
-      "time": 3.111473922902494,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
-      "vol": 0.6506505608558655,
-      "source": "guitar"
-    },
-    {
-      "time": 3.2769074829931975,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.4155406355857849,
+      "vol": 0.6066064834594727,
       "source": "guitar"
     },
     {
@@ -89,20 +71,29 @@
     },
     {
       "time": 3.4133333333333336,
-      "lane": 3,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.40159422159194946,
+      "midi": 62,
+      "vol": 0.5906973481178284,
       "source": "guitar"
     },
     {
-      "time": 4.040272108843538,
+      "time": 3.4133333333333336,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 86,
-      "vol": 0.34145551919937134,
+      "midi": 79,
+      "vol": 0.47948068380355835,
+      "source": "guitar"
+    },
+    {
+      "time": 3.4133333333333336,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 48,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -197,16 +188,16 @@
     },
     {
       "time": 5.7817687074829935,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 81,
+      "vol": 0.5570534467697144,
       "source": "guitar"
     },
     {
-      "time": 5.7817687074829935,
-      "lane": 3,
+      "time": 6.106848072562358,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
@@ -214,21 +205,12 @@
       "source": "guitar"
     },
     {
-      "time": 6.106848072562358,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.4305574297904968,
-      "source": "guitar"
-    },
-    {
-      "time": 6.106848072562358,
+      "time": 6.6873469387755105,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.9189894199371338,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -238,15 +220,6 @@
       "type": "tap",
       "midi": 81,
       "vol": 0.3667926788330078,
-      "source": "guitar"
-    },
-    {
-      "time": 6.9366181405895695,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.4108676612377167,
       "source": "guitar"
     },
     {
@@ -286,15 +259,6 @@
       "source": "guitar"
     },
     {
-      "time": 7.383945578231293,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 7.726096598639456,
       "lane": 3,
       "dur": 0.0,
@@ -326,8 +290,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.35719558596611023,
+      "midi": 81,
+      "vol": 0.3887881338596344,
       "source": "guitar"
     },
     {
@@ -337,15 +301,6 @@
       "type": "tap",
       "midi": 79,
       "vol": 0.36205020546913147,
-      "source": "guitar"
-    },
-    {
-      "time": 9.24828752834467,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.39700934290885925,
       "source": "guitar"
     },
     {
@@ -385,24 +340,6 @@
       "source": "guitar"
     },
     {
-      "time": 10.100680272108843,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.7539988160133362,
-      "source": "guitar"
-    },
-    {
-      "time": 10.100680272108843,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.36879631876945496,
-      "source": "guitar"
-    },
-    {
       "time": 10.425759637188209,
       "lane": 1,
       "dur": 0.0,
@@ -427,15 +364,6 @@
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 10.727619047619047,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.3142961263656616,
       "source": "guitar"
     },
     {
@@ -466,17 +394,26 @@
       "source": "guitar"
     },
     {
+      "time": 11.377777777777778,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.6937451362609863,
+      "source": "guitar"
+    },
+    {
       "time": 11.792156462585035,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 79,
-      "vol": 0.4709015190601349,
+      "midi": 81,
+      "vol": 0.42318111658096313,
       "source": "guitar"
     },
     {
       "time": 12.027936507936507,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -484,7 +421,7 @@
       "source": "guitar"
     },
     {
-      "time": 12.234619501133787,
+      "time": 12.027936507936507,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -530,16 +467,7 @@
     },
     {
       "time": 12.747755102040816,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.4484080672264099,
-      "source": "guitar"
-    },
-    {
-      "time": 12.747755102040816,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -547,8 +475,17 @@
       "source": "guitar"
     },
     {
-      "time": 13.116977777777779,
+      "time": 12.747755102040816,
       "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 13.116977777777779,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -557,20 +494,11 @@
     },
     {
       "time": 13.397913832199546,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 13.5813768707483,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.4093995690345764,
       "source": "guitar"
     },
     {
@@ -602,15 +530,6 @@
     },
     {
       "time": 14.094512471655328,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.45032188296318054,
-      "source": "guitar"
-    },
-    {
-      "time": 14.094512471655328,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -619,12 +538,12 @@
       "source": "guitar"
     },
     {
-      "time": 14.744671201814059,
-      "lane": 2,
+      "time": 14.639168707482993,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.7664843797683716,
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -646,30 +565,12 @@
       "source": "guitar"
     },
     {
-      "time": 15.069750566893424,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 15.441269841269841,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
-      "vol": 0.859273374080658,
-      "source": "guitar"
-    },
-    {
-      "time": 15.441269841269841,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.3836301565170288,
+      "vol": 0.7285434007644653,
       "source": "guitar"
     },
     {
@@ -718,26 +619,17 @@
       "source": "guitar"
     },
     {
-      "time": 16.439727891156462,
+      "time": 17.345306122448978,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
+      "midi": 43,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 16.788027210884355,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.3967059254646301,
-      "source": "guitar"
-    },
-    {
       "time": 17.484897052154192,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -746,7 +638,7 @@
     },
     {
       "time": 17.716825396825396,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -773,11 +665,11 @@
     },
     {
       "time": 18.04190476190476,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.9886212944984436,
+      "midi": 67,
+      "vol": 0.859273374080658,
       "source": "guitar"
     },
     {
@@ -794,8 +686,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
+      "midi": 50,
+      "vol": 0.9886212944984436,
       "source": "guitar"
     },
     {
@@ -808,16 +700,7 @@
       "source": "guitar"
     },
     {
-      "time": 18.48463900226757,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.45737114548683167,
-      "source": "guitar"
-    },
-    {
-      "time": 18.531078911564624,
+      "time": 18.76172335600907,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -844,15 +727,6 @@
       "source": "guitar"
     },
     {
-      "time": 18.94903809523809,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.8339446783065796,
-      "source": "guitar"
-    },
-    {
       "time": 19.13324263038549,
       "lane": 3,
       "dur": 0.0,
@@ -863,20 +737,20 @@
     },
     {
       "time": 19.435102040816325,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 79,
-      "vol": 0.32346630096435547,
+      "midi": 67,
+      "vol": 0.8339446783065796,
       "source": "guitar"
     },
     {
-      "time": 19.73851655328798,
-      "lane": 3,
+      "time": 19.9459410430839,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 79,
-      "vol": 0.43210864067077637,
+      "midi": 57,
+      "vol": 0.6293169260025024,
       "source": "guitar"
     },
     {
@@ -884,8 +758,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 57,
-      "vol": 0.6293169260025024,
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -916,26 +790,8 @@
       "source": "guitar"
     },
     {
-      "time": 20.40156916099773,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.8315190076828003,
-      "source": "guitar"
-    },
-    {
-      "time": 20.796308390022677,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.8149843215942383,
-      "source": "guitar"
-    },
-    {
       "time": 21.08655782312925,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -944,7 +800,7 @@
     },
     {
       "time": 21.27231746031746,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 69,
@@ -952,17 +808,8 @@
       "source": "guitar"
     },
     {
-      "time": 21.45807709750567,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.4178147315979004,
-      "source": "guitar"
-    },
-    {
       "time": 21.77154648526077,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -970,11 +817,11 @@
       "source": "guitar"
     },
     {
-      "time": 21.783156462585033,
+      "time": 21.888930158730158,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 38,
+      "midi": 42,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -983,8 +830,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.534381091594696,
+      "midi": 64,
+      "vol": 0.6320668458938599,
       "source": "guitar"
     },
     {
@@ -992,8 +839,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6166933178901672,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -1001,8 +848,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 48,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 23.26639455782313,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5620585680007935,
       "source": "guitar"
     },
     {
@@ -1015,17 +871,17 @@
       "source": "guitar"
     },
     {
-      "time": 23.875520181405896,
-      "lane": 0,
+      "time": 24.03265306122449,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.7526089549064636,
+      "midi": 67,
+      "vol": 0.34177061915397644,
       "source": "guitar"
     },
     {
       "time": 24.03265306122449,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -1034,7 +890,7 @@
     },
     {
       "time": 24.03265306122449,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -1042,26 +898,35 @@
       "source": "guitar"
     },
     {
-      "time": 24.03265306122449,
-      "lane": 3,
+      "time": 24.142549659863946,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6537580490112305,
+      "midi": 64,
+      "vol": 0.6807935237884521,
       "source": "guitar"
     },
     {
-      "time": 24.177379591836733,
+      "time": 24.20059954648526,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 35,
-      "vol": 0.7299540042877197,
+      "midi": 55,
+      "vol": 0.7070054411888123,
       "source": "guitar"
     },
     {
       "time": 24.397969160997732,
-      "lane": 1,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.6334733366966248,
+      "source": "guitar"
+    },
+    {
+      "time": 24.397969160997732,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -1073,8 +938,17 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6564733982086182,
+      "midi": 67,
+      "vol": 0.6785668134689331,
+      "source": "guitar"
+    },
+    {
+      "time": 24.56671201814059,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.46640488505363464,
       "source": "guitar"
     },
     {
@@ -1082,8 +956,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.46640488505363464,
+      "midi": 74,
+      "vol": 0.46642032265663147,
       "source": "guitar"
     },
     {
@@ -1106,20 +980,20 @@
     },
     {
       "time": 25.396427210884355,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.3192360997200012,
-      "source": "guitar"
-    },
-    {
-      "time": 25.396427210884355,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
       "vol": 0.5004020929336548,
+      "source": "guitar"
+    },
+    {
+      "time": 25.68126984126984,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.7217633724212646,
       "source": "guitar"
     },
     {
@@ -1204,8 +1078,8 @@
       "source": "guitar"
     },
     {
-      "time": 27.871920181405894,
-      "lane": 0,
+      "time": 28.0497052154195,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -1223,20 +1097,38 @@
     },
     {
       "time": 28.0497052154195,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.6477630138397217,
+      "source": "guitar"
+    },
+    {
+      "time": 28.0497052154195,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
+      "midi": 43,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 28.19699954648526,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 28.382759183673468,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.42776060104370117,
       "source": "guitar"
     },
     {
@@ -1258,12 +1150,12 @@
       "source": "guitar"
     },
     {
-      "time": 29.125797732426303,
-      "lane": 0,
+      "time": 29.24189750566893,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.9888127446174622,
+      "midi": 64,
+      "vol": 0.5705211758613586,
       "source": "guitar"
     },
     {
@@ -1312,15 +1204,6 @@
       "source": "guitar"
     },
     {
-      "time": 29.717906575963717,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 29.837641723356008,
       "lane": 2,
       "dur": 0.0,
@@ -1334,22 +1217,31 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
+      "midi": 62,
+      "vol": 0.42976316809654236,
+      "source": "guitar"
+    },
+    {
+      "time": 29.837641723356008,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 30.65034013605442,
-      "lane": 2,
+      "time": 30.427399092970518,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.6282800436019897,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 30.65034013605442,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -1358,10 +1250,19 @@
     },
     {
       "time": 30.810528344671198,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 30.85696825396825,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -1370,8 +1271,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 51,
-      "vol": 1.0,
+      "midi": 74,
+      "vol": 0.6044557094573975,
       "source": "guitar"
     },
     {
@@ -1384,12 +1285,30 @@
       "source": "guitar"
     },
     {
-      "time": 31.72771655328798,
+      "time": 31.41659863945578,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 51,
+      "midi": 47,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 31.634836734693874,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.5663816332817078,
+      "source": "guitar"
+    },
+    {
+      "time": 31.90421768707483,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.4258654713630676,
       "source": "guitar"
     },
     {
@@ -1397,8 +1316,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.735345721244812,
+      "midi": 55,
+      "vol": 0.5605165362358093,
       "source": "guitar"
     },
     {
@@ -1412,11 +1331,29 @@
     },
     {
       "time": 32.066757369614514,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.4106777012348175,
+      "source": "guitar"
+    },
+    {
+      "time": 32.066757369614514,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 40,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 32.23983945578232,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.6460316777229309,
       "source": "guitar"
     },
     {
@@ -1424,13 +1361,31 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 59,
+      "vol": 0.5843827128410339,
+      "source": "guitar"
+    },
+    {
+      "time": 32.866778231292514,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 33.065215419501136,
-      "lane": 2,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.7452975511550903,
+      "source": "guitar"
+    },
+    {
+      "time": 33.065215419501136,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -1438,8 +1393,8 @@
       "source": "guitar"
     },
     {
-      "time": 33.065215419501136,
-      "lane": 1,
+      "time": 33.23829750566893,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
@@ -1448,7 +1403,7 @@
     },
     {
       "time": 33.36707482993197,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -1457,7 +1412,7 @@
     },
     {
       "time": 33.36707482993197,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -1465,26 +1420,8 @@
       "source": "guitar"
     },
     {
-      "time": 33.71430657596372,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.4015066921710968,
-      "source": "guitar"
-    },
-    {
       "time": 33.72591655328798,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.651976466178894,
-      "source": "guitar"
-    },
-    {
-      "time": 33.72591655328798,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -1493,7 +1430,7 @@
     },
     {
       "time": 33.72591655328798,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -1501,17 +1438,17 @@
       "source": "guitar"
     },
     {
-      "time": 33.85469387755102,
-      "lane": 2,
+      "time": 33.72591655328798,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.6625726819038391,
+      "midi": 55,
+      "vol": 0.651976466178894,
       "source": "guitar"
     },
     {
       "time": 33.85469387755102,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -1520,11 +1457,20 @@
     },
     {
       "time": 33.85469387755102,
-      "lane": 0,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.8455596566200256,
+      "midi": 74,
+      "vol": 0.6625726819038391,
+      "source": "guitar"
+    },
+    {
+      "time": 34.412189115646264,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.5641635060310364,
       "source": "guitar"
     },
     {
@@ -1557,15 +1503,6 @@
     {
       "time": 35.22467120181406,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.6328213810920715,
-      "source": "guitar"
-    },
-    {
-      "time": 35.22467120181406,
-      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -1618,21 +1555,21 @@
       "source": "guitar"
     },
     {
-      "time": 36.060589569160996,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 57,
-      "vol": 0.4491575062274933,
-      "source": "guitar"
-    },
-    {
       "time": 36.30589931972789,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 36.39877913832199,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.6471589207649231,
       "source": "guitar"
     },
     {
@@ -1691,24 +1628,6 @@
     },
     {
       "time": 37.36090702947846,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.6034500598907471,
-      "source": "guitar"
-    },
-    {
-      "time": 37.36090702947846,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.731465756893158,
-      "source": "guitar"
-    },
-    {
-      "time": 37.47850702947846,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -1717,17 +1636,17 @@
       "source": "guitar"
     },
     {
-      "time": 37.72231655328798,
-      "lane": 1,
+      "time": 38.034285714285716,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 74,
+      "vol": 0.46473610401153564,
       "source": "guitar"
     },
     {
       "time": 38.034285714285716,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -1735,17 +1654,17 @@
       "source": "guitar"
     },
     {
-      "time": 38.034285714285716,
-      "lane": 1,
+      "time": 38.3040993197279,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 38.38536916099773,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -1754,20 +1673,11 @@
     },
     {
       "time": 38.40858911564626,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
       "vol": 0.48669353127479553,
-      "source": "guitar"
-    },
-    {
-      "time": 38.43180907029479,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -1807,21 +1717,21 @@
       "source": "guitar"
     },
     {
+      "time": 38.77732426303855,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 38.97747800453515,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
       "vol": 0.4229787290096283,
-      "source": "guitar"
-    },
-    {
-      "time": 39.221287528344675,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.3746342957019806,
       "source": "guitar"
     },
     {
@@ -1840,24 +1750,6 @@
       "type": "tap",
       "midi": 64,
       "vol": 0.8684486150741577,
-      "source": "guitar"
-    },
-    {
-      "time": 40.03120181405896,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 100,
-      "vol": 0.3210195302963257,
-      "source": "guitar"
-    },
-    {
-      "time": 40.24424943310658,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.38324111700057983,
       "source": "guitar"
     },
     {
@@ -1883,8 +1775,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.5106434226036072,
+      "midi": 66,
+      "vol": 0.7684512734413147,
       "source": "guitar"
     },
     {
@@ -1892,8 +1784,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.7684512734413147,
+      "midi": 57,
+      "vol": 0.7489970922470093,
+      "source": "guitar"
+    },
+    {
+      "time": 41.37795918367347,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5106434226036072,
       "source": "guitar"
     },
     {
@@ -1943,20 +1844,11 @@
     },
     {
       "time": 42.67827664399093,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 42.67827664399093,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.7782810926437378,
       "source": "guitar"
     },
     {
@@ -1969,30 +1861,12 @@
       "source": "guitar"
     },
     {
-      "time": 43.0203179138322,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.4682506024837494,
-      "source": "guitar"
-    },
-    {
       "time": 43.031927891156464,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 43.18285759637188,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 78,
-      "vol": 0.40225663781166077,
       "source": "guitar"
     },
     {
@@ -2041,8 +1915,17 @@
       "source": "guitar"
     },
     {
-      "time": 44.87919818594105,
+      "time": 44.356749206349214,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.43767526745796204,
+      "source": "guitar"
+    },
+    {
+      "time": 44.87919818594105,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -2059,6 +1942,15 @@
       "source": "guitar"
     },
     {
+      "time": 45.023492063492064,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 45.227497505668936,
       "lane": 1,
       "dur": 0.0,
@@ -2068,21 +1960,12 @@
       "source": "guitar"
     },
     {
-      "time": 45.2391074829932,
+      "time": 45.227497505668936,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6854193806648254,
-      "source": "guitar"
-    },
-    {
-      "time": 45.37179138321996,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.5011006593704224,
+      "midi": 45,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -2095,26 +1978,17 @@
       "source": "guitar"
     },
     {
-      "time": 46.09952970521542,
+      "time": 45.774450340136056,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.7882816195487976,
+      "midi": 67,
+      "vol": 0.42327821254730225,
       "source": "guitar"
     },
     {
       "time": 46.09952970521542,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 46.09952970521542,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -2123,20 +1997,20 @@
     },
     {
       "time": 46.09952970521542,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.8245803117752075,
-      "source": "guitar"
-    },
-    {
-      "time": 46.41668934240363,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 57,
-      "vol": 0.5205622911453247,
+      "midi": 55,
+      "vol": 0.7882816195487976,
+      "source": "guitar"
+    },
+    {
+      "time": 46.09952970521542,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -2158,7 +2032,25 @@
       "source": "guitar"
     },
     {
-      "time": 46.5755387755102,
+      "time": 46.69532879818594,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.5685131549835205,
+      "source": "guitar"
+    },
+    {
+      "time": 46.69532879818594,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.5205622911453247,
+      "source": "guitar"
+    },
+    {
+      "time": 47.05154784580499,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2185,30 +2077,21 @@
       "source": "guitar"
     },
     {
-      "time": 47.41514739229025,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 47.527556916099776,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 47.900360090702954,
+      "time": 47.71700680272109,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 59,
+      "vol": 0.6610767245292664,
+      "source": "guitar"
+    },
+    {
+      "time": 47.71700680272109,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.7182084918022156,
       "source": "guitar"
     },
     {
@@ -2216,7 +2099,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
+      "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -2225,22 +2108,13 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.5294786095619202,
-      "source": "guitar"
-    },
-    {
-      "time": 48.06530612244898,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
       "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 48.06530612244898,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -2248,16 +2122,25 @@
       "source": "guitar"
     },
     {
-      "time": 49.04054421768708,
-      "lane": 1,
+      "time": 48.06530612244898,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
+      "midi": 59,
+      "vol": 0.6690778732299805,
+      "source": "guitar"
+    },
+    {
+      "time": 48.06530612244898,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 49.04054421768708,
+      "time": 48.446029024943314,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2285,6 +2168,15 @@
     },
     {
       "time": 49.412063492063496,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.6054786443710327,
+      "source": "guitar"
+    },
+    {
+      "time": 49.412063492063496,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -2294,11 +2186,29 @@
     },
     {
       "time": 49.412063492063496,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 0.5982146263122559,
+      "source": "guitar"
+    },
+    {
+      "time": 49.412063492063496,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
+      "midi": 48,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 49.66636054421769,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.37946298718452454,
       "source": "guitar"
     },
     {
@@ -2311,30 +2221,39 @@
       "source": "guitar"
     },
     {
-      "time": 49.99256235827664,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 50.33973922902494,
+      "time": 49.805680272108845,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.4575917720794678,
       "source": "guitar"
     },
     {
       "time": 50.36295918367347,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 0.9814690351486206,
+      "source": "guitar"
+    },
+    {
+      "time": 50.38617913832199,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.44872403144836426,
+      "source": "guitar"
+    },
+    {
+      "time": 50.397789115646255,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.5618822574615479,
       "source": "guitar"
     },
     {
@@ -2357,6 +2276,15 @@
     },
     {
       "time": 50.6659410430839,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 50.82735827664399,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2393,6 +2321,15 @@
     },
     {
       "time": 52.01269841269841,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 69,
+      "vol": 0.5210626125335693,
+      "source": "guitar"
+    },
+    {
+      "time": 52.01269841269841,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -2411,7 +2348,7 @@
     },
     {
       "time": 52.73251700680272,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 54,
@@ -2420,7 +2357,7 @@
     },
     {
       "time": 53.08081632653061,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -2429,7 +2366,7 @@
     },
     {
       "time": 53.08081632653061,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
@@ -2437,7 +2374,16 @@
       "source": "guitar"
     },
     {
-      "time": 53.08081632653061,
+      "time": 53.22013605442177,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 53.22013605442177,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2446,17 +2392,8 @@
       "source": "guitar"
     },
     {
-      "time": 53.22013605442177,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 53.35945578231293,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -2465,7 +2402,7 @@
     },
     {
       "time": 53.62664671201814,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -2474,7 +2411,7 @@
     },
     {
       "time": 53.73242040816327,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -2483,11 +2420,20 @@
     },
     {
       "time": 53.755640362811796,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
       "vol": 0.7550313472747803,
+      "source": "guitar"
+    },
+    {
+      "time": 53.860130158730165,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -2497,15 +2443,6 @@
       "type": "tap",
       "midi": 59,
       "vol": 0.6908277869224548,
-      "source": "guitar"
-    },
-    {
-      "time": 54.07927437641723,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -2546,15 +2483,6 @@
     },
     {
       "time": 54.72943310657596,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 72,
-      "vol": 0.4600985050201416,
-      "source": "guitar"
-    },
-    {
-      "time": 54.72943310657596,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -2564,15 +2492,6 @@
     },
     {
       "time": 54.72943310657596,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 55.09078775510205,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2590,11 +2509,11 @@
       "source": "guitar"
     },
     {
-      "time": 55.86721088435374,
+      "time": 55.649350566893425,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -2618,15 +2537,6 @@
     },
     {
       "time": 55.98331065759637,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.41254720091819763,
-      "source": "guitar"
-    },
-    {
-      "time": 55.98331065759637,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2644,6 +2554,15 @@
       "source": "guitar"
     },
     {
+      "time": 56.42721904761905,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.4450191557407379,
+      "source": "guitar"
+    },
+    {
       "time": 56.43882902494331,
       "lane": 1,
       "dur": 0.0,
@@ -2654,16 +2573,25 @@
     },
     {
       "time": 56.679909297052156,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.48607733845710754,
       "source": "guitar"
     },
     {
       "time": 57.0746485260771,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.395793080329895,
+      "source": "guitar"
+    },
+    {
+      "time": 57.0746485260771,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -2672,7 +2600,7 @@
     },
     {
       "time": 57.0746485260771,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -2680,12 +2608,12 @@
       "source": "guitar"
     },
     {
-      "time": 57.0746485260771,
-      "lane": 0,
+      "time": 57.35328798185941,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
+      "midi": 66,
+      "vol": 0.40640199184417725,
       "source": "guitar"
     },
     {
@@ -2698,30 +2626,30 @@
       "source": "guitar"
     },
     {
+      "time": 57.35328798185941,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 57.740430385487535,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 63,
+      "vol": 0.4737265110015869,
+      "source": "guitar"
+    },
+    {
       "time": 57.980226757369614,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
       "vol": 0.4433729946613312,
-      "source": "guitar"
-    },
-    {
-      "time": 57.980226757369614,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 54,
-      "vol": 0.7760488390922546,
-      "source": "guitar"
-    },
-    {
-      "time": 57.980226757369614,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 51,
-      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -2734,35 +2662,17 @@
       "source": "guitar"
     },
     {
-      "time": 58.40219909297053,
+      "time": 58.41380907029479,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 58.41380907029479,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
       "midi": 55,
-      "vol": 0.7770764827728271,
-      "source": "guitar"
-    },
-    {
-      "time": 58.41380907029479,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "vol": 0.4150182604789734,
       "source": "guitar"
     },
     {
       "time": 58.42541904761905,
-      "lane": 3,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -2774,8 +2684,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 0.9237196445465088,
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 58.72326530612245,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.7770764827728271,
       "source": "guitar"
     },
     {
@@ -2790,33 +2709,6 @@
     {
       "time": 58.72326530612245,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 58.95947800453515,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 59.07557777777778,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 59.11040770975057,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 40,
@@ -2825,7 +2717,16 @@
     },
     {
       "time": 59.396643990929704,
-      "lane": 2,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.4195384085178375,
+      "source": "guitar"
+    },
+    {
+      "time": 59.396643990929704,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -2834,7 +2735,7 @@
     },
     {
       "time": 59.7449433106576,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -2842,26 +2743,8 @@
       "source": "guitar"
     },
     {
-      "time": 59.7449433106576,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.9580361247062683,
-      "source": "guitar"
-    },
-    {
       "time": 60.00036281179138,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 72,
-      "vol": 0.5528849959373474,
-      "source": "guitar"
-    },
-    {
-      "time": 60.00036281179138,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -2870,33 +2753,33 @@
     },
     {
       "time": 60.00036281179138,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.9397467374801636,
-      "source": "guitar"
-    },
-    {
-      "time": 60.69696145124716,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6054394245147705,
+      "midi": 48,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 60.69696145124716,
-      "lane": 3,
+      "time": 60.133369614512475,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 84,
-      "vol": 0.37966540455818176,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 60.69696145124716,
+      "time": 60.92284807256236,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 0.4886787533760071,
+      "source": "guitar"
+    },
+    {
+      "time": 61.09170068027211,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -2923,15 +2806,6 @@
       "source": "guitar"
     },
     {
-      "time": 61.37034013605442,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 61.50334693877551,
       "lane": 0,
       "dur": 0.0,
@@ -2950,12 +2824,12 @@
       "source": "guitar"
     },
     {
-      "time": 61.67219954648526,
-      "lane": 1,
+      "time": 62.09015873015873,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.5794242024421692,
       "source": "guitar"
     },
     {
@@ -2964,15 +2838,6 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 62.09015873015873,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -3017,8 +2882,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.4444442391395569,
+      "midi": 57,
+      "vol": 0.499491810798645,
       "source": "guitar"
     },
     {
@@ -3068,7 +2933,7 @@
     },
     {
       "time": 63.73877551020408,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -3076,8 +2941,17 @@
       "source": "guitar"
     },
     {
+      "time": 63.73877551020408,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 64.04063492063491,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
@@ -3086,7 +2960,7 @@
     },
     {
       "time": 64.04063492063491,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
@@ -3094,44 +2968,8 @@
       "source": "guitar"
     },
     {
-      "time": 64.04063492063491,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 64.24586938775509,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.8727723956108093,
-      "source": "guitar"
-    },
-    {
-      "time": 64.38893424036281,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.7550598382949829,
-      "source": "guitar"
-    },
-    {
       "time": 64.7372335600907,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 65.20163265306122,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -3143,13 +2981,31 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 65.29451247165532,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 65.39525714285713,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 65.39525714285713,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -3157,35 +3013,17 @@
       "source": "guitar"
     },
     {
-      "time": 65.39525714285713,
+      "time": 65.4068671201814,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 66.03755102040816,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.4871271252632141,
       "source": "guitar"
     },
     {
       "time": 66.03755102040816,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 66.03755102040816,
-      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -3194,7 +3032,7 @@
     },
     {
       "time": 66.15118956916099,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -3220,8 +3058,17 @@
       "source": "guitar"
     },
     {
-      "time": 66.41821904761905,
+      "time": 66.5575387755102,
       "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 66.59236870748299,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -3242,8 +3089,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 59,
+      "vol": 0.430134117603302,
+      "source": "guitar"
+    },
+    {
+      "time": 67.10566893424036,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 79,
+      "vol": 0.4425033926963806,
       "source": "guitar"
     },
     {
@@ -3251,17 +3107,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 0.8982343077659607,
-      "source": "guitar"
-    },
-    {
-      "time": 67.4075283446712,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.662638247013092,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -3269,8 +3116,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.46986353397369385,
+      "source": "guitar"
+    },
+    {
+      "time": 67.4075283446712,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.662638247013092,
       "source": "guitar"
     },
     {
@@ -3283,26 +3139,17 @@
       "source": "guitar"
     },
     {
-      "time": 67.76626031746032,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.44151028990745544,
-      "source": "guitar"
-    },
-    {
-      "time": 67.76626031746032,
+      "time": 67.75465034013605,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.59080570936203,
+      "midi": 64,
+      "vol": 0.3850340247154236,
       "source": "guitar"
     },
     {
       "time": 67.76626031746032,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 74,
@@ -3320,19 +3167,19 @@
     },
     {
       "time": 68.0344671201814,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.7425769567489624,
+      "source": "guitar"
+    },
+    {
+      "time": 68.0344671201814,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 68.16099954648526,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -3346,21 +3193,12 @@
       "source": "guitar"
     },
     {
-      "time": 69.15945759637188,
+      "time": 68.75428571428571,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 69.35800453514739,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.7567090392112732,
       "source": "guitar"
     },
     {
@@ -3375,24 +3213,6 @@
     {
       "time": 69.35800453514739,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 69.62514058956916,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.9420191049575806,
-      "source": "guitar"
-    },
-    {
-      "time": 69.67158049886622,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -3400,17 +3220,26 @@
       "source": "guitar"
     },
     {
-      "time": 69.7412403628118,
-      "lane": 2,
+      "time": 69.67158049886622,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.9283682703971863,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 70.0778231292517,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.7050249576568604,
+      "source": "guitar"
+    },
+    {
+      "time": 70.0778231292517,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -3418,17 +3247,8 @@
       "source": "guitar"
     },
     {
-      "time": 70.0778231292517,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.6455711722373962,
-      "source": "guitar"
-    },
-    {
       "time": 70.40300907029479,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -3436,12 +3256,12 @@
       "source": "guitar"
     },
     {
-      "time": 70.40300907029479,
+      "time": 70.54222222222222,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.49526354670524597,
       "source": "guitar"
     },
     {
@@ -3449,8 +3269,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 72,
+      "vol": 0.6846076846122742,
       "source": "guitar"
     },
     {
@@ -3458,7 +3278,16 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
+      "midi": 55,
+      "vol": 0.6960875391960144,
+      "source": "guitar"
+    },
+    {
+      "time": 70.75120181405896,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -3472,39 +3301,21 @@
       "source": "guitar"
     },
     {
-      "time": 71.07638775510205,
-      "lane": 0,
+      "time": 71.58851065759636,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 71.37814058956916,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.550225019454956,
       "source": "guitar"
     },
     {
       "time": 71.84253968253968,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 71.84253968253968,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.8568913340568542,
       "source": "guitar"
     },
     {
@@ -3521,8 +3332,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 59,
+      "vol": 0.46829459071159363,
       "source": "guitar"
     },
     {
@@ -3530,17 +3341,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.9065911769866943,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 72.3315492063492,
-      "lane": 0,
+      "time": 72.27349931972788,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.5774649381637573,
       "source": "guitar"
     },
     {
@@ -3549,12 +3360,39 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
-      "vol": 0.6975939273834229,
+      "vol": 0.7592498064041138,
+      "source": "guitar"
+    },
+    {
+      "time": 72.43603900226756,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.5684791803359985,
+      "source": "guitar"
+    },
+    {
+      "time": 72.72489795918368,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 72.99331791383219,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 73.0861977324263,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -3562,26 +3400,17 @@
       "source": "guitar"
     },
     {
-      "time": 73.21390748299319,
-      "lane": 1,
+      "time": 73.39827664399093,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.44285979866981506,
-      "source": "guitar"
-    },
-    {
-      "time": 73.28356734693877,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 0.9640066027641296,
+      "midi": 69,
+      "vol": 0.44518423080444336,
       "source": "guitar"
     },
     {
       "time": 73.39827664399093,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -3590,15 +3419,6 @@
     },
     {
       "time": 73.39827664399093,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 73.51705079365078,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -3608,7 +3428,7 @@
     },
     {
       "time": 73.67691609977324,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -3617,7 +3437,7 @@
     },
     {
       "time": 73.80730022675736,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -3626,7 +3446,7 @@
     },
     {
       "time": 73.80730022675736,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -3638,8 +3458,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 54,
-      "vol": 0.8798553347587585,
+      "midi": 66,
+      "vol": 0.6262640953063965,
+      "source": "guitar"
+    },
+    {
+      "time": 74.07165532879819,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -3653,15 +3482,6 @@
     },
     {
       "time": 74.37351473922902,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 0.9743140339851379,
-      "source": "guitar"
-    },
-    {
-      "time": 74.37351473922902,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -3670,17 +3490,8 @@
       "source": "guitar"
     },
     {
-      "time": 74.51283446712019,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 74.67537414965986,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -3689,7 +3500,7 @@
     },
     {
       "time": 74.67537414965986,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -3698,7 +3509,7 @@
     },
     {
       "time": 75.07278775510203,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -3707,7 +3518,7 @@
     },
     {
       "time": 75.07278775510203,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 40,
@@ -3742,15 +3553,6 @@
       "source": "guitar"
     },
     {
-      "time": 75.73584036281179,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 75.99891156462586,
       "lane": 1,
       "dur": 0.0,
@@ -3770,6 +3572,33 @@
     },
     {
       "time": 76.69551020408163,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.5402047634124756,
+      "source": "guitar"
+    },
+    {
+      "time": 76.69551020408163,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.5821815133094788,
+      "source": "guitar"
+    },
+    {
+      "time": 76.69551020408163,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 76.83878820861678,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -3778,39 +3607,12 @@
       "source": "guitar"
     },
     {
-      "time": 76.69551020408163,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 77.23352743764171,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.6010689735412598,
-      "source": "guitar"
-    },
-    {
       "time": 77.2683573696145,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 77.36888888888889,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.606744110584259,
       "source": "guitar"
     },
     {
@@ -3824,7 +3626,7 @@
     },
     {
       "time": 77.72243038548753,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -3832,26 +3634,17 @@
       "source": "guitar"
     },
     {
-      "time": 78.06548752834468,
+      "time": 77.7340403628118,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.7204815149307251,
+      "midi": 67,
+      "vol": 0.48346802592277527,
       "source": "guitar"
     },
     {
       "time": 78.06548752834468,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 78.06548752834468,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
@@ -3860,88 +3653,25 @@
     },
     {
       "time": 78.06548752834468,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.6869451999664307,
-      "source": "guitar"
-    },
-    {
-      "time": 78.36734693877551,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 78.58156870748299,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.7204815149307251,
       "source": "guitar"
     },
     {
-      "time": 78.60478866213151,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 78.76208616780045,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 57,
-      "vol": 0.4931722581386566,
-      "source": "guitar"
-    },
-    {
-      "time": 78.76208616780045,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 51,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 78.76208616780045,
+      "time": 78.06548752834468,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.4656190574169159,
+      "midi": 71,
+      "vol": 0.41028907895088196,
       "source": "guitar"
     },
     {
-      "time": 78.76208616780045,
+      "time": 78.06548752834468,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 79.0639455782313,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 79.6908843537415,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -3949,20 +3679,47 @@
       "source": "guitar"
     },
     {
+      "time": 78.36734693877551,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.5732021927833557,
+      "source": "guitar"
+    },
+    {
+      "time": 78.76208616780045,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.6133372783660889,
+      "source": "guitar"
+    },
+    {
+      "time": 78.76208616780045,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 79.36580498866213,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 79.6908843537415,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 0.942821204662323,
-      "source": "guitar"
-    },
-    {
-      "time": 79.87664399092971,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
+      "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -3971,7 +3728,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -3980,13 +3737,22 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
+      "midi": 74,
+      "vol": 0.5026022791862488,
+      "source": "guitar"
+    },
+    {
+      "time": 80.06240362811792,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 80.38239909297052,
-      "lane": 1,
+      "time": 80.06240362811792,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -3994,17 +3760,17 @@
       "source": "guitar"
     },
     {
-      "time": 81.06738775510205,
-      "lane": 2,
+      "time": 80.71256235827664,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.9634258151054382,
+      "midi": 64,
+      "vol": 0.41115155816078186,
       "source": "guitar"
     },
     {
       "time": 81.0789977324263,
-      "lane": 3,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
@@ -4012,17 +3778,17 @@
       "source": "guitar"
     },
     {
-      "time": 81.36272108843538,
-      "lane": 2,
+      "time": 81.2067074829932,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.7997670769691467,
+      "midi": 52,
+      "vol": 0.7450382709503174,
       "source": "guitar"
     },
     {
       "time": 81.36272108843538,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -4031,7 +3797,16 @@
     },
     {
       "time": 81.36272108843538,
-      "lane": 3,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 81.36272108843538,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -4040,7 +3815,7 @@
     },
     {
       "time": 81.5679006802721,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
@@ -4048,21 +3823,21 @@
       "source": "guitar"
     },
     {
-      "time": 81.5679006802721,
-      "lane": 0,
+      "time": 81.57951065759636,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 36,
-      "vol": 0.7892515659332275,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 81.82332018140589,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.7981604933738708,
+      "midi": 67,
+      "vol": 0.39434394240379333,
       "source": "guitar"
     },
     {
@@ -4084,39 +3859,12 @@
       "source": "guitar"
     },
     {
-      "time": 82.92626802721088,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.39941588044166565,
-      "source": "guitar"
-    },
-    {
-      "time": 83.67059047619047,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.7624035477638245,
-      "source": "guitar"
-    },
-    {
       "time": 83.74025034013604,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
       "vol": 0.44477415084838867,
-      "source": "guitar"
-    },
-    {
-      "time": 83.7866902494331,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.843142569065094,
       "source": "guitar"
     },
     {
@@ -4139,6 +3887,15 @@
     },
     {
       "time": 83.98657596371882,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.7624035477638245,
+      "source": "guitar"
+    },
+    {
+      "time": 83.98657596371882,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -4148,7 +3905,7 @@
     },
     {
       "time": 84.08854965986394,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
@@ -4156,17 +3913,17 @@
       "source": "guitar"
     },
     {
-      "time": 85.28437732426303,
-      "lane": 0,
+      "time": 84.08854965986394,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
+      "midi": 66,
+      "vol": 0.9157449007034302,
       "source": "guitar"
     },
     {
       "time": 85.31920725623583,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 69,
@@ -4196,8 +3953,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.7461134791374207,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -4205,7 +3962,7 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -4214,8 +3971,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.4232933223247528,
+      "midi": 55,
+      "vol": 0.7461134791374207,
       "source": "guitar"
     },
     {
@@ -4223,17 +3980,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
+      "midi": 43,
+      "vol": 0.9569655656814575,
       "source": "guitar"
     },
     {
-      "time": 87.09681768707483,
+      "time": 87.18969750566893,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.3916594088077545,
+      "midi": 62,
+      "vol": 0.679313600063324,
       "source": "guitar"
     },
     {
@@ -4264,15 +4021,6 @@
       "source": "guitar"
     },
     {
-      "time": 89.09501768707483,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.378390908241272,
-      "source": "guitar"
-    },
-    {
       "time": 89.21111746031745,
       "lane": 2,
       "dur": 0.0,
@@ -4295,8 +4043,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 66,
+      "vol": 0.5110160708427429,
       "source": "guitar"
     },
     {
@@ -4304,7 +4052,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -4331,8 +4079,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.6124383211135864,
+      "midi": 62,
+      "vol": 0.3806932866573334,
       "source": "guitar"
     },
     {
@@ -4340,8 +4088,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6826425194740295,
+      "midi": 59,
+      "vol": 0.6124383211135864,
       "source": "guitar"
     },
     {
@@ -4349,8 +4097,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.3806932866573334,
+      "midi": 67,
+      "vol": 0.8027761578559875,
       "source": "guitar"
     },
     {
@@ -4358,13 +4106,22 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
+      "midi": 55,
+      "vol": 0.6826425194740295,
+      "source": "guitar"
+    },
+    {
+      "time": 90.50110884353741,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 43,
-      "vol": 1.0,
+      "vol": 0.9846083521842957,
       "source": "guitar"
     },
     {
       "time": 90.74358276643991,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -4417,6 +4174,15 @@
       "source": "guitar"
     },
     {
+      "time": 91.73305034013605,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.5171102285385132,
+      "source": "guitar"
+    },
+    {
       "time": 92.02068027210885,
       "lane": 0,
       "dur": 0.0,
@@ -4462,8 +4228,26 @@
       "source": "guitar"
     },
     {
+      "time": 92.74049886621316,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 79,
+      "vol": 0.3966764807701111,
+      "source": "guitar"
+    },
+    {
       "time": 93.11201814058957,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.6147478818893433,
+      "source": "guitar"
+    },
+    {
+      "time": 93.11201814058957,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -4472,20 +4256,11 @@
     },
     {
       "time": 93.11201814058957,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 93.11201814058957,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.6147478818893433,
       "source": "guitar"
     },
     {
@@ -4507,53 +4282,8 @@
       "source": "guitar"
     },
     {
-      "time": 93.7621768707483,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.4787704646587372,
-      "source": "guitar"
-    },
-    {
-      "time": 93.7621768707483,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 0.807201087474823,
-      "source": "guitar"
-    },
-    {
-      "time": 93.7621768707483,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.4613340198993683,
-      "source": "guitar"
-    },
-    {
-      "time": 93.91700997732426,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.7405833005905151,
-      "source": "guitar"
-    },
-    {
       "time": 94.08725623582767,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.3666820526123047,
-      "source": "guitar"
-    },
-    {
-      "time": 94.08725623582767,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -4562,20 +4292,20 @@
     },
     {
       "time": 94.08725623582767,
-      "lane": 0,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.91048663854599,
+      "midi": 67,
+      "vol": 0.7405833005905151,
       "source": "guitar"
     },
     {
-      "time": 94.46267891156462,
+      "time": 94.45106893424035,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.8073453307151794,
+      "midi": 55,
+      "vol": 0.5981284379959106,
       "source": "guitar"
     },
     {
@@ -4597,17 +4327,8 @@
       "source": "guitar"
     },
     {
-      "time": 94.8458081632653,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 95.08571428571429,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
@@ -4615,12 +4336,12 @@
       "source": "guitar"
     },
     {
-      "time": 95.38757369614513,
-      "lane": 1,
+      "time": 95.08571428571429,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.7217854857444763,
+      "midi": 62,
+      "vol": 0.557136058807373,
       "source": "guitar"
     },
     {
@@ -4628,8 +4349,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 31,
-      "vol": 0.9935751557350159,
+      "midi": 59,
+      "vol": 0.7217854857444763,
       "source": "guitar"
     },
     {
@@ -4723,15 +4444,6 @@
       "source": "guitar"
     },
     {
-      "time": 96.71111111111111,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.7968409657478333,
-      "source": "guitar"
-    },
-    {
       "time": 97.43092970521542,
       "lane": 2,
       "dur": 0.0,
@@ -4805,11 +4517,29 @@
     },
     {
       "time": 98.73124716553288,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.4509688913822174,
+      "source": "guitar"
+    },
+    {
+      "time": 98.73124716553288,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 0.8758570551872253,
+      "source": "guitar"
+    },
+    {
+      "time": 98.73124716553288,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.5181190967559814,
       "source": "guitar"
     },
     {
@@ -4823,11 +4553,11 @@
     },
     {
       "time": 99.07954648526078,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.4326019585132599,
       "source": "guitar"
     },
     {
@@ -4844,26 +4574,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.9293484091758728,
+      "midi": 59,
+      "vol": 0.5718317627906799,
       "source": "guitar"
     },
     {
       "time": 99.38140589569161,
-      "lane": 0,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.7940825819969177,
-      "source": "guitar"
-    },
-    {
-      "time": 99.56331065759636,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.468395471572876,
+      "midi": 71,
+      "vol": 0.3937866687774658,
       "source": "guitar"
     },
     {
@@ -4876,8 +4597,26 @@
       "source": "guitar"
     },
     {
+      "time": 100.03156462585034,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 100.1786394557823,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 100.42630385487529,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -4886,7 +4625,7 @@
     },
     {
       "time": 100.42630385487529,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -4898,17 +4637,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.8026880025863647,
-      "source": "guitar"
-    },
-    {
-      "time": 100.72816326530612,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
       "midi": 62,
-      "vol": 0.5229653716087341,
+      "vol": 0.6527998447418213,
       "source": "guitar"
     },
     {
@@ -4916,26 +4646,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.6374555230140686,
-      "source": "guitar"
-    },
-    {
-      "time": 100.72816326530612,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 101.09968253968253,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.6527998447418213,
+      "midi": 67,
+      "vol": 0.8026880025863647,
       "source": "guitar"
     },
     {
@@ -4985,7 +4697,7 @@
     },
     {
       "time": 102.00526077097506,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 74,
@@ -4993,12 +4705,12 @@
       "source": "guitar"
     },
     {
-      "time": 102.00526077097506,
-      "lane": 0,
+      "time": 102.2116693877551,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 53,
-      "vol": 0.7585723996162415,
+      "midi": 79,
+      "vol": 0.4544011354446411,
       "source": "guitar"
     },
     {
@@ -5012,15 +4724,6 @@
     },
     {
       "time": 102.4,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.5150829553604126,
-      "source": "guitar"
-    },
-    {
-      "time": 102.4,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -5029,12 +4732,21 @@
       "source": "guitar"
     },
     {
-      "time": 103.05015873015873,
+      "time": 102.72507936507937,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
-      "vol": 0.8297052979469299,
+      "vol": 0.8370504975318909,
+      "source": "guitar"
+    },
+    {
+      "time": 102.72507936507937,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -5047,12 +4759,12 @@
       "source": "guitar"
     },
     {
-      "time": 103.05015873015873,
-      "lane": 0,
+      "time": 103.37523809523809,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 71,
+      "vol": 0.6947323679924011,
       "source": "guitar"
     },
     {
@@ -5060,8 +4772,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.6947323679924011,
+      "midi": 79,
+      "vol": 0.49950194358825684,
       "source": "guitar"
     },
     {
@@ -5128,15 +4840,6 @@
       "source": "guitar"
     },
     {
-      "time": 104.72199546485261,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 0.998023271560669,
-      "source": "guitar"
-    },
-    {
       "time": 105.27927120181405,
       "lane": 0,
       "dur": 0.0,
@@ -5200,24 +4903,6 @@
       "source": "guitar"
     },
     {
-      "time": 106.39383219954648,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.459296852350235,
-      "source": "guitar"
-    },
-    {
-      "time": 106.67247165532879,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.37682539224624634,
-      "source": "guitar"
-    },
-    {
       "time": 106.67247165532879,
       "lane": 0,
       "dur": 0.0,
@@ -5241,7 +4926,7 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
-      "vol": 0.7381671071052551,
+      "vol": 0.7675508260726929,
       "source": "guitar"
     },
     {
@@ -5308,17 +4993,8 @@
       "source": "guitar"
     },
     {
-      "time": 108.2062693877551,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 91,
-      "vol": 0.40661317110061646,
-      "source": "guitar"
-    },
-    {
       "time": 108.38041904761904,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -5340,16 +5016,7 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
-      "vol": 0.632469117641449,
-      "source": "guitar"
-    },
-    {
-      "time": 108.71582766439909,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 0.9198795557022095,
+      "vol": 0.6315026879310608,
       "source": "guitar"
     },
     {
@@ -5366,8 +5033,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.8802962303161621,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -5377,24 +5044,6 @@
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 109.55174603174603,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.310782790184021,
-      "source": "guitar"
-    },
-    {
-      "time": 109.66784580498866,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.808199942111969,
       "source": "guitar"
     },
     {
@@ -5416,6 +5065,15 @@
       "source": "guitar"
     },
     {
+      "time": 109.99292517006803,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 110.13480952380951,
       "lane": 0,
       "dur": 0.0,
@@ -5426,7 +5084,7 @@
     },
     {
       "time": 110.34122448979592,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -5434,8 +5092,8 @@
       "source": "guitar"
     },
     {
-      "time": 110.34122448979592,
-      "lane": 1,
+      "time": 110.49471882086166,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
@@ -5444,7 +5102,7 @@
     },
     {
       "time": 110.58759863945578,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -5456,7 +5114,7 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -5465,16 +5123,7 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.5474827289581299,
-      "source": "guitar"
-    },
-    {
-      "time": 110.71274376417233,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -5506,8 +5155,17 @@
       "source": "guitar"
     },
     {
+      "time": 111.6647619047619,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.7410405874252319,
+      "source": "guitar"
+    },
+    {
       "time": 111.94340136054421,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
@@ -5516,20 +5174,20 @@
     },
     {
       "time": 111.94340136054421,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 111.94340136054421,
-      "lane": 0,
+      "time": 112.05173968253968,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.4704858958721161,
       "source": "guitar"
     },
     {
@@ -5548,6 +5206,15 @@
       "type": "tap",
       "midi": 74,
       "vol": 0.690218448638916,
+      "source": "guitar"
+    },
+    {
+      "time": 112.59356009070295,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.39143773913383484,
       "source": "guitar"
     },
     {
@@ -5570,7 +5237,7 @@
     },
     {
       "time": 113.2669387755102,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -5579,19 +5246,19 @@
     },
     {
       "time": 113.2669387755102,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.4321894347667694,
+      "source": "guitar"
+    },
+    {
+      "time": 113.2669387755102,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 113.38817097505668,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -5669,7 +5336,7 @@
     },
     {
       "time": 115.68181405895692,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
@@ -5677,8 +5344,35 @@
       "source": "guitar"
     },
     {
+      "time": 115.68181405895692,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 0.7230482697486877,
+      "source": "guitar"
+    },
+    {
+      "time": 116.00689342403628,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.4453968107700348,
+      "source": "guitar"
+    },
+    {
       "time": 116.00689342403628,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 116.00689342403628,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -5690,13 +5384,13 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 116.11779954648526,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
@@ -5714,6 +5408,15 @@
     },
     {
       "time": 116.5641723356009,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.6674955487251282,
+      "source": "guitar"
+    },
+    {
+      "time": 116.5641723356009,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -5723,11 +5426,20 @@
     },
     {
       "time": 116.93569160997733,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
       "vol": 0.8320518136024475,
+      "source": "guitar"
+    },
+    {
+      "time": 117.30721088435374,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.43139514327049255,
       "source": "guitar"
     },
     {
@@ -5746,6 +5458,15 @@
       "type": "tap",
       "midi": 47,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 117.43101088435374,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.7209841012954712,
       "source": "guitar"
     },
     {
@@ -5845,6 +5566,15 @@
       "type": "tap",
       "midi": 47,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 119.72208616780046,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 0.9065163731575012,
       "source": "guitar"
     },
     {
@@ -5956,7 +5686,7 @@
       "source": "guitar"
     },
     {
-      "time": 121.95120181405896,
+      "time": 122.39238095238095,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -5965,53 +5695,26 @@
       "source": "guitar"
     },
     {
-      "time": 122.04408163265306,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 122.1936693877551,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 122.2865492063492,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 122.39238095238095,
-      "lane": 0,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 0.84879070520401,
-      "source": "guitar"
-    },
-    {
-      "time": 122.57814058956916,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.6267677545547485,
+      "midi": 79,
+      "vol": 0.38280054926872253,
       "source": "guitar"
     },
     {
       "time": 122.57814058956916,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.6552090644836426,
+      "source": "guitar"
+    },
+    {
+      "time": 122.57814058956916,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -6020,7 +5723,7 @@
     },
     {
       "time": 122.71746031746032,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
@@ -6029,7 +5732,7 @@
     },
     {
       "time": 122.83221814058956,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -6055,16 +5758,7 @@
       "source": "guitar"
     },
     {
-      "time": 123.77391020408163,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 0.6748030185699463,
-      "source": "guitar"
-    },
-    {
-      "time": 123.77391020408163,
+      "time": 123.65781043083899,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -6073,8 +5767,35 @@
       "source": "guitar"
     },
     {
+      "time": 123.77391020408163,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.7142823934555054,
+      "source": "guitar"
+    },
+    {
       "time": 124.0409977324263,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.5055561661720276,
+      "source": "guitar"
+    },
+    {
+      "time": 124.0409977324263,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 124.0409977324263,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
@@ -6083,19 +5804,10 @@
     },
     {
       "time": 124.0409977324263,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.5780889987945557,
-      "source": "guitar"
-    },
-    {
-      "time": 124.0409977324263,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 51,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6104,8 +5816,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.5657115578651428,
+      "midi": 51,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -6113,7 +5825,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 51,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6176,7 +5888,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 40,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6190,8 +5902,17 @@
       "source": "guitar"
     },
     {
-      "time": 126.45709886621316,
+      "time": 126.36421904761904,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.5211219191551208,
+      "source": "guitar"
+    },
+    {
+      "time": 126.45709886621316,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -6200,7 +5921,7 @@
     },
     {
       "time": 126.57319863945578,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -6209,11 +5930,20 @@
     },
     {
       "time": 126.57319863945578,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 126.68807256235827,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.3877866864204407,
       "source": "guitar"
     },
     {
@@ -6240,16 +5970,7 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
-      "vol": 0.9202696681022644,
-      "source": "guitar"
-    },
-    {
-      "time": 127.92123990929703,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "vol": 0.6178305149078369,
       "source": "guitar"
     },
     {
@@ -6284,8 +6005,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.8352474570274353,
+      "midi": 64,
+      "vol": 0.9202696681022644,
       "source": "guitar"
     },
     {
@@ -6293,8 +6014,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.9312992691993713,
+      "midi": 55,
+      "vol": 0.8352474570274353,
+      "source": "guitar"
+    },
+    {
+      "time": 128.5688888888889,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.8770724534988403,
       "source": "guitar"
     },
     {
@@ -6302,8 +6032,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 69,
-      "vol": 0.7427788972854614,
+      "midi": 62,
+      "vol": 0.556921660900116,
       "source": "guitar"
     },
     {
@@ -6320,8 +6050,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.536202073097229,
+      "midi": 66,
+      "vol": 0.38864952325820923,
       "source": "guitar"
     },
     {
@@ -6343,6 +6073,24 @@
       "source": "guitar"
     },
     {
+      "time": 129.70666666666668,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.7200174331665039,
+      "source": "guitar"
+    },
+    {
+      "time": 130.05496598639456,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.677305281162262,
+      "source": "guitar"
+    },
+    {
       "time": 130.05496598639456,
       "lane": 1,
       "dur": 0.0,
@@ -6353,34 +6101,16 @@
     },
     {
       "time": 130.05496598639456,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.8299998641014099,
+      "source": "guitar"
+    },
+    {
+      "time": 130.05496598639456,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.8732652068138123,
-      "source": "guitar"
-    },
-    {
-      "time": 130.3568253968254,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.7396326661109924,
-      "source": "guitar"
-    },
-    {
-      "time": 130.3568253968254,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.7852771878242493,
-      "source": "guitar"
-    },
-    {
-      "time": 130.46510884353742,
-      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
@@ -6389,7 +6119,7 @@
     },
     {
       "time": 130.59281859410433,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -6415,17 +6145,8 @@
       "source": "guitar"
     },
     {
-      "time": 130.99916780045353,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.8733968138694763,
-      "source": "guitar"
-    },
-    {
       "time": 131.0107777777778,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
@@ -6434,7 +6155,7 @@
     },
     {
       "time": 131.06882766439912,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 69,
@@ -6446,8 +6167,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 72,
-      "vol": 0.57712721824646,
+      "midi": 55,
+      "vol": 0.7403801679611206,
       "source": "guitar"
     },
     {
@@ -6455,8 +6176,17 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.7403801679611206,
+      "midi": 52,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 132.07510204081632,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.3569908142089844,
       "source": "guitar"
     },
     {
@@ -6464,8 +6194,35 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 48,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 132.26593922902495,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.46622204780578613,
+      "source": "guitar"
+    },
+    {
+      "time": 132.61423854875284,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 133.09678004535147,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.5411710739135742,
       "source": "guitar"
     },
     {
@@ -6497,15 +6254,6 @@
     },
     {
       "time": 133.3754195011338,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.5883091688156128,
-      "source": "guitar"
-    },
-    {
-      "time": 133.3754195011338,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -6514,17 +6262,8 @@
       "source": "guitar"
     },
     {
-      "time": 133.5211006802721,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 0.7356612682342529,
-      "source": "guitar"
-    },
-    {
       "time": 133.78813015873016,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
@@ -6533,7 +6272,7 @@
     },
     {
       "time": 133.78813015873016,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -6560,6 +6299,15 @@
     },
     {
       "time": 134.39709750566894,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.4012817442417145,
+      "source": "guitar"
+    },
+    {
+      "time": 134.39709750566894,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -6577,26 +6325,26 @@
       "source": "guitar"
     },
     {
-      "time": 135.41877551020409,
-      "lane": 2,
+      "time": 134.69895691609977,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 69,
-      "vol": 0.47144779562950134,
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 135.26388117913834,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 135.41877551020409,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.6156819462776184,
-      "source": "guitar"
-    },
-    {
-      "time": 135.41877551020409,
-      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -6604,12 +6352,12 @@
       "source": "guitar"
     },
     {
-      "time": 135.74385487528346,
-      "lane": 1,
+      "time": 135.41877551020409,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.8445079326629639,
+      "midi": 57,
+      "vol": 0.6128915548324585,
       "source": "guitar"
     },
     {
@@ -6617,8 +6365,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.6706441044807434,
+      "midi": 59,
+      "vol": 0.8445079326629639,
       "source": "guitar"
     },
     {
@@ -6635,7 +6383,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6644,7 +6392,16 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 136.99773242630386,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6653,7 +6410,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
+      "midi": 45,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6694,35 +6451,44 @@
       "source": "guitar"
     },
     {
-      "time": 137.65682040816327,
+      "time": 137.59877052154195,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 72,
+      "vol": 0.7673239707946777,
       "source": "guitar"
     },
     {
-      "time": 138.04263038548754,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 138.04263038548754,
+      "time": 137.645210430839,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
+      "midi": 64,
+      "vol": 0.4016348123550415,
+      "source": "guitar"
+    },
+    {
+      "time": 137.65682040816327,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
+      "time": 137.88901995464852,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 0.5845259428024292,
+      "source": "guitar"
+    },
+    {
       "time": 138.04263038548754,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
@@ -6730,30 +6496,30 @@
       "source": "guitar"
     },
     {
-      "time": 138.2140993197279,
-      "lane": 3,
+      "time": 138.04263038548754,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.42638924717903137,
+      "midi": 55,
+      "vol": 0.8200182318687439,
+      "source": "guitar"
+    },
+    {
+      "time": 138.04263038548754,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 138.23731927437643,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
       "vol": 0.6056252717971802,
-      "source": "guitar"
-    },
-    {
-      "time": 138.39092970521543,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 0.6667033433914185,
       "source": "guitar"
     },
     {
@@ -6763,6 +6529,15 @@
       "type": "tap",
       "midi": 64,
       "vol": 0.5720199942588806,
+      "source": "guitar"
+    },
+    {
+      "time": 138.57400861678005,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -6784,30 +6559,12 @@
       "source": "guitar"
     },
     {
-      "time": 138.7392290249433,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 139.36616780045352,
+      "time": 139.14418140589572,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.45714786648750305,
-      "source": "guitar"
-    },
-    {
-      "time": 139.36616780045352,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 67,
+      "vol": 0.6235092878341675,
       "source": "guitar"
     },
     {
@@ -6838,24 +6595,6 @@
       "source": "guitar"
     },
     {
-      "time": 139.73768707482992,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.5025622844696045,
-      "source": "guitar"
-    },
-    {
-      "time": 139.73768707482992,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 140.0627664399093,
       "lane": 2,
       "dur": 0.0,
@@ -6865,8 +6604,8 @@
       "source": "guitar"
     },
     {
-      "time": 140.18907936507938,
-      "lane": 0,
+      "time": 140.0627664399093,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -6874,12 +6613,12 @@
       "source": "guitar"
     },
     {
-      "time": 140.66648526077097,
+      "time": 140.0627664399093,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 59,
+      "vol": 0.574900209903717,
       "source": "guitar"
     },
     {
@@ -6911,6 +6650,15 @@
     },
     {
       "time": 141.33986394557823,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5387894511222839,
+      "source": "guitar"
+    },
+    {
+      "time": 141.33986394557823,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -6932,8 +6680,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.5065090656280518,
+      "midi": 74,
+      "vol": 0.5435286164283752,
       "source": "guitar"
     },
     {
@@ -6950,7 +6698,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 40,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -6970,6 +6718,33 @@
       "type": "tap",
       "midi": 47,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 142.41947891156462,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 142.4310888888889,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 142.57040861678004,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.6805659532546997,
       "source": "guitar"
     },
     {
@@ -6986,22 +6761,13 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.5608123540878296,
-      "source": "guitar"
-    },
-    {
-      "time": 142.7562811791383,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
       "midi": 55,
       "vol": 0.6709213256835938,
       "source": "guitar"
     },
     {
       "time": 142.7562811791383,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -7009,26 +6775,17 @@
       "source": "guitar"
     },
     {
-      "time": 143.02319773242633,
-      "lane": 1,
+      "time": 142.7562811791383,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.5608123540878296,
       "source": "guitar"
     },
     {
-      "time": 143.1057514739229,
+      "time": 143.1405814058957,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 143.33678004535147,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -7037,11 +6794,20 @@
     },
     {
       "time": 143.6746403628118,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 143.7675201814059,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.45528432726860046,
       "source": "guitar"
     },
     {
@@ -7082,16 +6848,16 @@
     },
     {
       "time": 144.4292888888889,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.7834627032279968,
+      "midi": 67,
+      "vol": 0.5908597707748413,
       "source": "guitar"
     },
     {
       "time": 144.44089886621316,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -7099,30 +6865,21 @@
       "source": "guitar"
     },
     {
-      "time": 145.05751156462586,
-      "lane": 2,
+      "time": 144.4525088435374,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.4960446059703827,
-      "source": "guitar"
-    },
-    {
-      "time": 145.06912154195012,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
+      "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 145.06912154195012,
+      "time": 145.09234149659866,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 0.5478176474571228,
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -7135,17 +6892,26 @@
       "source": "guitar"
     },
     {
-      "time": 145.78894013605444,
+      "time": 145.35691609977323,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.5392059087753296,
+      "source": "guitar"
+    },
+    {
+      "time": 145.35691609977323,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 51,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 146.07673469387754,
-      "lane": 2,
+      "time": 145.77733015873017,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -7154,11 +6920,29 @@
     },
     {
       "time": 146.07673469387754,
-      "lane": 3,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.502581000328064,
+      "source": "guitar"
+    },
+    {
+      "time": 146.07673469387754,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
-      "vol": 0.6739378571510315,
+      "vol": 0.5712552666664124,
+      "source": "guitar"
+    },
+    {
+      "time": 146.07673469387754,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.5008094906806946,
       "source": "guitar"
     },
     {
@@ -7166,8 +6950,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 0.7274571061134338,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -7181,7 +6965,7 @@
     },
     {
       "time": 146.40181405895692,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -7189,7 +6973,7 @@
       "source": "guitar"
     },
     {
-      "time": 146.40181405895692,
+      "time": 146.53197868480729,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -7199,7 +6983,7 @@
     },
     {
       "time": 146.70367346938775,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -7208,29 +6992,29 @@
     },
     {
       "time": 146.70367346938775,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 146.70367346938775,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 146.81061814058958,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 147.09054149659863,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.6593725681304932,
       "source": "guitar"
     },
     {
@@ -7244,7 +7028,7 @@
     },
     {
       "time": 147.40027210884352,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -7253,7 +7037,7 @@
     },
     {
       "time": 147.40027210884352,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -7262,7 +7046,7 @@
     },
     {
       "time": 147.62460045351474,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -7271,19 +7055,10 @@
     },
     {
       "time": 147.7639201814059,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 147.9148498866213,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -7292,22 +7067,13 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 72,
-      "vol": 0.549217700958252,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 148.05043083900227,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.532870888710022,
-      "source": "guitar"
-    },
-    {
-      "time": 148.05043083900227,
-      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -7321,15 +7087,6 @@
       "type": "tap",
       "midi": 72,
       "vol": 0.5346562266349792,
-      "source": "guitar"
-    },
-    {
-      "time": 148.739158276644,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.5156833529472351,
       "source": "guitar"
     },
     {
@@ -7369,35 +7126,8 @@
       "source": "guitar"
     },
     {
-      "time": 151.7951501133787,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.9516753554344177,
-      "source": "guitar"
-    },
-    {
-      "time": 152.0907029478458,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 57,
-      "vol": 0.4910384714603424,
-      "source": "guitar"
-    },
-    {
       "time": 152.0907029478458,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 152.0907029478458,
-      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
@@ -7409,8 +7139,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 38,
-      "vol": 0.8408113121986389,
+      "midi": 57,
+      "vol": 0.4910384714603424,
       "source": "guitar"
     },
     {
@@ -7442,19 +7172,10 @@
     },
     {
       "time": 153.20526077097506,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 153.20526077097506,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -7481,8 +7202,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 0.9548613429069519,
+      "midi": 55,
+      "vol": 0.6323620080947876,
       "source": "guitar"
     },
     {
@@ -7495,17 +7216,26 @@
       "source": "guitar"
     },
     {
-      "time": 153.56115056689342,
+      "time": 153.89783990929706,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 43,
-      "vol": 0.95442134141922,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 154.43591836734694,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.56307053565979,
+      "source": "guitar"
+    },
+    {
+      "time": 154.43591836734694,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -7514,20 +7244,20 @@
     },
     {
       "time": 154.43591836734694,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
-      "vol": 0.930080771446228,
+      "midi": 62,
+      "vol": 0.5956935882568359,
       "source": "guitar"
     },
     {
       "time": 154.43591836734694,
-      "lane": 3,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 55,
-      "vol": 0.56307053565979,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -7550,6 +7280,15 @@
     },
     {
       "time": 154.7609977324263,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 154.7609977324263,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -7558,12 +7297,12 @@
       "source": "guitar"
     },
     {
-      "time": 155.3879365079365,
-      "lane": 1,
+      "time": 154.7609977324263,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
-      "vol": 0.6418813467025757,
+      "vol": 0.43557611107826233,
       "source": "guitar"
     },
     {
@@ -7580,8 +7319,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 57,
+      "vol": 0.6418813467025757,
       "source": "guitar"
     },
     {
@@ -7612,12 +7351,39 @@
       "source": "guitar"
     },
     {
-      "time": 156.1077551020408,
-      "lane": 1,
+      "time": 155.81477006802723,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 156.1077551020408,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.5390831232070923,
+      "source": "guitar"
+    },
+    {
+      "time": 156.1077551020408,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 156.1077551020408,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.36174440383911133,
       "source": "guitar"
     },
     {
@@ -7631,29 +7397,29 @@
     },
     {
       "time": 156.75791383219953,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.6094192266464233,
+      "source": "guitar"
+    },
+    {
+      "time": 156.75791383219953,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.5233940482139587,
       "source": "guitar"
     },
     {
       "time": 157.0597732426304,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 157.26730113378684,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 0.9615378975868225,
       "source": "guitar"
     },
     {
@@ -7667,11 +7433,29 @@
     },
     {
       "time": 157.38485260770975,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.523152232170105,
+      "source": "guitar"
+    },
+    {
+      "time": 157.38485260770975,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 157.38485260770975,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.6164275407791138,
       "source": "guitar"
     },
     {
@@ -7684,26 +7468,17 @@
       "source": "guitar"
     },
     {
-      "time": 157.59238049886622,
+      "time": 157.52272063492063,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 31,
-      "vol": 0.9624485373497009,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 158.08145124716555,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.33214861154556274,
-      "source": "guitar"
-    },
-    {
-      "time": 158.08145124716555,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -7712,11 +7487,20 @@
     },
     {
       "time": 158.08145124716555,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 158.08145124716555,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.33214861154556274,
       "source": "guitar"
     },
     {
@@ -7756,39 +7540,21 @@
       "source": "guitar"
     },
     {
-      "time": 158.78820816326532,
+      "time": 158.8230380952381,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.615310788154602,
       "source": "guitar"
     },
     {
-      "time": 159.35854875283448,
+      "time": 158.92881179138325,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 159.75328798185942,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 160.05514739229025,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.493405282497406,
       "source": "guitar"
     },
     {
@@ -7805,13 +7571,22 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.6031477451324463,
+      "midi": 50,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 160.2059092970522,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 160.68208616780046,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 54,
@@ -7820,7 +7595,7 @@
     },
     {
       "time": 160.68208616780046,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -7828,17 +7603,8 @@
       "source": "guitar"
     },
     {
-      "time": 161.05360544217686,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 161.2393650793651,
-      "lane": 1,
+      "time": 160.95023174603176,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -7846,8 +7612,8 @@
       "source": "guitar"
     },
     {
-      "time": 161.2393650793651,
-      "lane": 0,
+      "time": 161.05360544217686,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 40,
@@ -7856,7 +7622,7 @@
     },
     {
       "time": 161.40190476190477,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -7864,8 +7630,26 @@
       "source": "guitar"
     },
     {
-      "time": 161.80937006802722,
+      "time": 161.40190476190477,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 161.40190476190477,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.5410321354866028,
+      "source": "guitar"
+    },
+    {
+      "time": 161.80937006802722,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -7873,12 +7657,12 @@
       "source": "guitar"
     },
     {
-      "time": 161.8209800453515,
-      "lane": 2,
+      "time": 161.9824036281179,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.48815855383872986,
+      "midi": 52,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -7887,15 +7671,6 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 162.0996195011338,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -7923,7 +7698,7 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
-      "vol": 0.48361924290657043,
+      "vol": 0.45870381593704224,
       "source": "guitar"
     },
     {
@@ -7945,17 +7720,8 @@
       "source": "guitar"
     },
     {
-      "time": 163.0877514739229,
+      "time": 162.9948716553288,
       "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 163.13419138321996,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -7987,6 +7753,15 @@
       "type": "tap",
       "midi": 59,
       "vol": 0.5657640099525452,
+      "source": "guitar"
+    },
+    {
+      "time": 163.7471201814059,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -8030,8 +7805,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.5878068804740906,
       "source": "guitar"
     },
     {
@@ -8039,25 +7814,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 164.62947845804987,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 164.62947845804987,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -8080,12 +7837,12 @@
       "source": "guitar"
     },
     {
-      "time": 165.08595147392293,
+      "time": 165.07434149659866,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 62,
-      "vol": 0.5710315108299255,
+      "midi": 74,
+      "vol": 0.4380214214324951,
       "source": "guitar"
     },
     {
@@ -8116,7 +7873,7 @@
       "source": "guitar"
     },
     {
-      "time": 165.80577006802721,
+      "time": 166.04589569160999,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
@@ -8135,7 +7892,7 @@
     },
     {
       "time": 166.41741496598638,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -8144,7 +7901,7 @@
     },
     {
       "time": 166.41741496598638,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -8152,12 +7909,12 @@
       "source": "guitar"
     },
     {
-      "time": 166.41741496598638,
-      "lane": 0,
+      "time": 166.55673469387756,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.5605848431587219,
       "source": "guitar"
     },
     {
@@ -8165,13 +7922,22 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
+      "midi": 50,
+      "vol": 0.9953092932701111,
       "source": "guitar"
     },
     {
       "time": 166.74249433106576,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.8702734112739563,
+      "source": "guitar"
+    },
+    {
+      "time": 166.74249433106576,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -8180,25 +7946,16 @@
     },
     {
       "time": 166.74249433106576,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 57,
+      "vol": 0.4774917960166931,
       "source": "guitar"
     },
     {
       "time": 166.74249433106576,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 54,
-      "vol": 0.8702734112739563,
-      "source": "guitar"
-    },
-    {
-      "time": 167.36943310657597,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -8206,8 +7963,8 @@
       "source": "guitar"
     },
     {
-      "time": 167.36943310657597,
-      "lane": 3,
+      "time": 166.94483174603175,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -8216,7 +7973,7 @@
     },
     {
       "time": 167.47889070294787,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -8225,7 +7982,7 @@
     },
     {
       "time": 167.7409523809524,
-      "lane": 3,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 51,
@@ -8234,20 +7991,11 @@
     },
     {
       "time": 167.90349206349205,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 40,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 167.90349206349205,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.5070457458496094,
       "source": "guitar"
     },
     {
@@ -8288,7 +8036,7 @@
     },
     {
       "time": 168.71619047619046,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -8296,21 +8044,21 @@
       "source": "guitar"
     },
     {
-      "time": 168.71619047619046,
+      "time": 169.0939614512472,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 169.12879138321998,
-      "lane": 0,
+      "time": 169.10557142857147,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 0.8660672307014465,
+      "midi": 59,
+      "vol": 0.5701208710670471,
       "source": "guitar"
     },
     {
@@ -8333,6 +8081,15 @@
     },
     {
       "time": 169.38956916099772,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.6370152235031128,
+      "source": "guitar"
+    },
+    {
+      "time": 169.38956916099772,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -8345,8 +8102,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
+      "midi": 57,
+      "vol": 0.5887987017631531,
       "source": "guitar"
     },
     {
@@ -8354,8 +8111,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 41,
+      "midi": 53,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 170.4344671201814,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.8051068186759949,
       "source": "guitar"
     },
     {
@@ -8363,8 +8129,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 65,
-      "vol": 0.8051068186759949,
+      "midi": 53,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -8381,31 +8147,58 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
+      "midi": 41,
+      "vol": 0.8860316872596741,
       "source": "guitar"
     },
     {
-      "time": 170.92208616780044,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 170.92208616780044,
+      "time": 170.73632653061225,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 84,
-      "vol": 0.4453155994415283,
+      "vol": 0.3134358525276184,
+      "source": "guitar"
+    },
+    {
+      "time": 170.92208616780044,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 53,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 171.06140589569162,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 41,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 171.36326530612246,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.5610224604606628,
       "source": "guitar"
     },
     {
       "time": 171.36326530612246,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 53,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 171.36326530612246,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 60,
@@ -8413,17 +8206,8 @@
       "source": "guitar"
     },
     {
-      "time": 171.36326530612246,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 171.60300045351474,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 53,
@@ -8431,12 +8215,12 @@
       "source": "guitar"
     },
     {
-      "time": 171.7580045351474,
-      "lane": 0,
+      "time": 171.63783038548755,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 0.973665177822113,
+      "midi": 48,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -8458,8 +8242,17 @@
       "source": "guitar"
     },
     {
-      "time": 172.20671927437644,
+      "time": 172.03664399092972,
       "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 172.20671927437644,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -8467,7 +8260,7 @@
       "source": "guitar"
     },
     {
-      "time": 172.45052879818596,
+      "time": 172.20671927437644,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -8485,12 +8278,21 @@
       "source": "guitar"
     },
     {
-      "time": 173.10476190476192,
-      "lane": 0,
+      "time": 172.756462585034,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 172.756462585034,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.5560670495033264,
       "source": "guitar"
     },
     {
@@ -8584,6 +8386,24 @@
       "source": "guitar"
     },
     {
+      "time": 175.4267573696145,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.6039010286331177,
+      "source": "guitar"
+    },
+    {
+      "time": 175.4267573696145,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.6784035563468933,
+      "source": "guitar"
+    },
+    {
       "time": 175.61101043083903,
       "lane": 1,
       "dur": 0.0,
@@ -8642,13 +8462,22 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
+      "midi": 67,
+      "vol": 0.418708860874176,
+      "source": "guitar"
+    },
+    {
+      "time": 176.7502947845805,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 74,
       "vol": 0.7031610012054443,
       "source": "guitar"
     },
     {
       "time": 176.97066167800455,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -8656,21 +8485,12 @@
       "source": "guitar"
     },
     {
-      "time": 177.08676145124718,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.8126795887947083,
-      "source": "guitar"
-    },
-    {
       "time": 177.3540136054422,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.5787431001663208,
+      "midi": 64,
+      "vol": 0.43922480940818787,
       "source": "guitar"
     },
     {
@@ -8680,6 +8500,15 @@
       "type": "tap",
       "midi": 57,
       "vol": 0.5298448801040649,
+      "source": "guitar"
+    },
+    {
+      "time": 177.3540136054422,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.5787431001663208,
       "source": "guitar"
     },
     {
@@ -8705,8 +8534,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.5455722212791443,
+      "midi": 74,
+      "vol": 0.8022257089614868,
       "source": "guitar"
     },
     {
@@ -8719,17 +8548,17 @@
       "source": "guitar"
     },
     {
-      "time": 178.097052154195,
-      "lane": 3,
+      "time": 178.67755102040817,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.8022257089614868,
+      "midi": 67,
+      "vol": 0.41062676906585693,
       "source": "guitar"
     },
     {
       "time": 178.67755102040817,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -8738,7 +8567,25 @@
     },
     {
       "time": 178.67755102040817,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 178.78181814058956,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.6500673294067383,
+      "source": "guitar"
+    },
+    {
+      "time": 178.78181814058956,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -8746,35 +8593,17 @@
       "source": "guitar"
     },
     {
-      "time": 178.67755102040817,
-      "lane": 0,
+      "time": 178.8527619047619,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 178.84115192743764,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 179.21267120181406,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 28,
-      "vol": 0.8004761934280396,
+      "midi": 67,
+      "vol": 0.5058813095092773,
       "source": "guitar"
     },
     {
       "time": 179.37414965986395,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 74,
@@ -8782,30 +8611,12 @@
       "source": "guitar"
     },
     {
-      "time": 179.37414965986395,
-      "lane": 1,
+      "time": 179.80478004535146,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.4324154257774353,
-      "source": "guitar"
-    },
-    {
-      "time": 179.52614058956917,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 28,
-      "vol": 0.8991503119468689,
-      "source": "guitar"
-    },
-    {
-      "time": 180.00108843537416,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
+      "midi": 62,
+      "vol": 0.4860366880893707,
       "source": "guitar"
     },
     {
@@ -8818,8 +8629,17 @@
       "source": "guitar"
     },
     {
+      "time": 180.09396825396826,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 48,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 180.4201088435374,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -8828,20 +8648,11 @@
     },
     {
       "time": 180.74412698412698,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 74,
       "vol": 0.6679564118385315,
-      "source": "guitar"
-    },
-    {
-      "time": 180.95545170068027,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.3965854346752167,
       "source": "guitar"
     },
     {
@@ -8881,24 +8692,6 @@
       "source": "guitar"
     },
     {
-      "time": 181.58239047619048,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 31,
-      "vol": 0.8291264772415161,
-      "source": "guitar"
-    },
-    {
-      "time": 181.74493015873017,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.3697970509529114,
-      "source": "guitar"
-    },
-    {
       "time": 182.04444444444445,
       "lane": 2,
       "dur": 0.0,
@@ -8921,8 +8714,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.48484694957733154,
+      "midi": 59,
+      "vol": 0.5688993334770203,
       "source": "guitar"
     },
     {
@@ -8930,8 +8723,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 59,
-      "vol": 0.5688993334770203,
+      "midi": 51,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -8939,7 +8732,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 51,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -8954,25 +8747,34 @@
     },
     {
       "time": 183.36798185941043,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.778171956539154,
+      "source": "guitar"
+    },
+    {
+      "time": 183.36798185941043,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.641808032989502,
+      "source": "guitar"
+    },
+    {
+      "time": 183.36798185941043,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 57,
+      "vol": 0.48288261890411377,
       "source": "guitar"
     },
     {
       "time": 184.01814058956916,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.5955365300178528,
-      "source": "guitar"
-    },
-    {
-      "time": 184.01814058956916,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -8981,11 +8783,29 @@
     },
     {
       "time": 184.01814058956916,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 184.01814058956916,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.5955365300178528,
+      "source": "guitar"
+    },
+    {
+      "time": 184.01814058956916,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 0.9748631119728088,
       "source": "guitar"
     },
     {
@@ -9097,26 +8917,8 @@
       "source": "guitar"
     },
     {
-      "time": 186.53080861678006,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 186.68843537414966,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.6502633094787598,
-      "source": "guitar"
-    },
-    {
-      "time": 186.68843537414966,
-      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -9125,11 +8927,20 @@
     },
     {
       "time": 186.68843537414966,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 186.68843537414966,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.5449590086936951,
+      "midi": 55,
+      "vol": 0.6502633094787598,
       "source": "guitar"
     },
     {
@@ -9143,7 +8954,7 @@
     },
     {
       "time": 186.85717188208616,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 43,
@@ -9152,7 +8963,7 @@
     },
     {
       "time": 186.96166167800453,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
@@ -9169,12 +8980,21 @@
       "source": "guitar"
     },
     {
-      "time": 187.71631020408165,
+      "time": 187.40825396825397,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 0.8044615983963013,
+      "midi": 55,
+      "vol": 0.6073169708251953,
+      "source": "guitar"
+    },
+    {
+      "time": 187.7627501133787,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.5283470153808594,
       "source": "guitar"
     },
     {
@@ -9196,21 +9016,21 @@
       "source": "guitar"
     },
     {
-      "time": 188.0762195011338,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.31148865818977356,
-      "source": "guitar"
-    },
-    {
       "time": 188.08782947845805,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
+      "midi": 57,
+      "vol": 0.472373902797699,
+      "source": "guitar"
+    },
+    {
+      "time": 188.08782947845805,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 67,
-      "vol": 0.5001710057258606,
+      "vol": 0.51614910364151,
       "source": "guitar"
     },
     {
@@ -9242,15 +9062,6 @@
     },
     {
       "time": 189.28907029478458,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.5082553029060364,
-      "source": "guitar"
-    },
-    {
-      "time": 189.28907029478458,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -9260,7 +9071,7 @@
     },
     {
       "time": 189.4010408163265,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
@@ -9269,11 +9080,20 @@
     },
     {
       "time": 189.4010408163265,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 0.9843004941940308,
+      "source": "guitar"
+    },
+    {
+      "time": 189.45909070294783,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -9295,12 +9115,21 @@
       "source": "guitar"
     },
     {
-      "time": 190.3762789115646,
+      "time": 190.30661904761905,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
-      "vol": 0.8651934266090393,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 190.6590476190476,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.4051285982131958,
       "source": "guitar"
     },
     {
@@ -9322,15 +9151,6 @@
       "source": "guitar"
     },
     {
-      "time": 190.7606920634921,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 0.8760476112365723,
-      "source": "guitar"
-    },
-    {
       "time": 191.08577142857143,
       "lane": 0,
       "dur": 0.0,
@@ -9340,8 +9160,26 @@
       "source": "guitar"
     },
     {
+      "time": 191.2599210884354,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.5795360207557678,
+      "source": "guitar"
+    },
+    {
       "time": 191.37886621315192,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5795580744743347,
+      "source": "guitar"
+    },
+    {
+      "time": 191.37886621315192,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -9349,35 +9187,17 @@
       "source": "guitar"
     },
     {
-      "time": 191.37886621315192,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 192.07546485260772,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.922568142414093,
+      "midi": 67,
+      "vol": 0.7900294661521912,
       "source": "guitar"
     },
     {
       "time": 192.07546485260772,
       "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 48,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 192.07546485260772,
-      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -9386,11 +9206,20 @@
     },
     {
       "time": 192.07546485260772,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 79,
+      "vol": 0.47362640500068665,
+      "source": "guitar"
+    },
+    {
+      "time": 192.07546485260772,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.9155642986297607,
+      "midi": 48,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -9422,15 +9251,6 @@
     },
     {
       "time": 193.35256235827666,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.37481966614723206,
-      "source": "guitar"
-    },
-    {
-      "time": 193.35256235827666,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -9440,7 +9260,7 @@
     },
     {
       "time": 193.7705215419501,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -9449,7 +9269,7 @@
     },
     {
       "time": 193.7705215419501,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 57,
@@ -9457,39 +9277,21 @@
       "source": "guitar"
     },
     {
-      "time": 194.09560090702948,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 194.09560090702948,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.885753870010376,
-      "source": "guitar"
-    },
-    {
-      "time": 194.09560090702948,
+      "time": 193.7705215419501,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 38,
-      "vol": 0.6386693120002747,
+      "midi": 50,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 194.42068027210885,
-      "lane": 1,
+      "time": 194.09560090702948,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 50,
-      "vol": 1.0,
+      "midi": 67,
+      "vol": 0.6474185585975647,
       "source": "guitar"
     },
     {
@@ -9499,15 +9301,6 @@
       "type": "tap",
       "midi": 38,
       "vol": 0.6785856485366821,
-      "source": "guitar"
-    },
-    {
-      "time": 194.60487845804988,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -9524,8 +9317,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.7644994854927063,
+      "midi": 42,
+      "vol": 0.7685035467147827,
       "source": "guitar"
     },
     {
@@ -9539,20 +9332,20 @@
     },
     {
       "time": 194.9776816326531,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.41737207770347595,
-      "source": "guitar"
-    },
-    {
-      "time": 194.9776816326531,
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 78,
       "vol": 0.877267062664032,
+      "source": "guitar"
+    },
+    {
+      "time": 194.9776816326531,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.41737207770347595,
       "source": "guitar"
     },
     {
@@ -9569,8 +9362,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.48517075181007385,
+      "midi": 60,
+      "vol": 0.5248808860778809,
       "source": "guitar"
     },
     {
@@ -9580,6 +9373,15 @@
       "type": "tap",
       "midi": 55,
       "vol": 0.7227551341056824,
+      "source": "guitar"
+    },
+    {
+      "time": 196.04607709750567,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.48517075181007385,
       "source": "guitar"
     },
     {
@@ -9614,8 +9416,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.5842492580413818,
       "source": "guitar"
     },
     {
@@ -9623,13 +9425,13 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
+      "midi": 40,
+      "vol": 0.8126023411750793,
       "source": "guitar"
     },
     {
       "time": 197.04453514739228,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 48,
@@ -9637,17 +9439,8 @@
       "source": "guitar"
     },
     {
-      "time": 197.04453514739228,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 197.2429111111111,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -9656,11 +9449,29 @@
     },
     {
       "time": 197.34639455782312,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.5051017999649048,
+      "source": "guitar"
+    },
+    {
+      "time": 197.34639455782312,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.6721323728561401,
+      "source": "guitar"
+    },
+    {
+      "time": 197.34639455782312,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.49996939301490784,
       "source": "guitar"
     },
     {
@@ -9668,17 +9479,17 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.871218204498291,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 198.06621315192743,
-      "lane": 2,
+      "time": 197.77697006802723,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.6048581600189209,
+      "midi": 47,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -9715,6 +9526,15 @@
       "type": "tap",
       "midi": 55,
       "vol": 0.802937388420105,
+      "source": "guitar"
+    },
+    {
+      "time": 198.43773242630385,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 79,
+      "vol": 0.4066706895828247,
       "source": "guitar"
     },
     {
@@ -9772,35 +9592,35 @@
       "source": "guitar"
     },
     {
-      "time": 199.62424036281178,
-      "lane": 0,
+      "time": 200.03990929705216,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 199.78448979591838,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.8117354512214661,
-      "source": "guitar"
-    },
-    {
-      "time": 199.78448979591838,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 40,
-      "vol": 0.8131834268569946,
+      "midi": 67,
+      "vol": 0.6010686159133911,
       "source": "guitar"
     },
     {
       "time": 200.03990929705216,
       "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 0.9124584197998047,
+      "source": "guitar"
+    },
+    {
+      "time": 200.03990929705216,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.4644125998020172,
+      "source": "guitar"
+    },
+    {
+      "time": 200.03990929705216,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -9808,21 +9628,12 @@
       "source": "guitar"
     },
     {
-      "time": 200.03990929705216,
+      "time": 200.1582993197279,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 40,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 200.16990929705216,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.7795538306236267,
       "source": "guitar"
     },
     {
@@ -9862,12 +9673,39 @@
       "source": "guitar"
     },
     {
-      "time": 201.58761043083902,
+      "time": 201.4599006802721,
       "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 0.8524906039237976,
+      "source": "guitar"
+    },
+    {
+      "time": 201.58761043083902,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 201.5992204081633,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 72,
+      "vol": 0.6117020845413208,
+      "source": "guitar"
+    },
+    {
+      "time": 201.73854013605444,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.46043556928634644,
       "source": "guitar"
     },
     {
@@ -9889,29 +9727,11 @@
       "source": "guitar"
     },
     {
-      "time": 202.26098911564628,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 202.3851247165533,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 202.3851247165533,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -9943,7 +9763,34 @@
       "source": "guitar"
     },
     {
+      "time": 203.07497142857144,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.7263553142547607,
+      "source": "guitar"
+    },
+    {
+      "time": 203.09819138321996,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.5643015503883362,
+      "source": "guitar"
+    },
+    {
       "time": 203.33714285714285,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5292842388153076,
+      "source": "guitar"
+    },
+    {
+      "time": 203.48132063492065,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -9953,19 +9800,19 @@
     },
     {
       "time": 203.7318820861678,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 203.7318820861678,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 203.88766984126985,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10001,8 +9848,8 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 54,
-      "vol": 0.9142048954963684,
+      "midi": 51,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -10010,13 +9857,13 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 51,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 205.19473922902495,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -10028,8 +9875,8 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.7902402281761169,
       "source": "guitar"
     },
     {
@@ -10051,17 +9898,35 @@
       "source": "guitar"
     },
     {
-      "time": 205.6536702947846,
-      "lane": 2,
+      "time": 205.76977006802724,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 67,
+      "vol": 0.47669368982315063,
       "source": "guitar"
     },
     {
       "time": 206.0306575963719,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.48221179842948914,
+      "source": "guitar"
+    },
+    {
+      "time": 206.0306575963719,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.36313068866729736,
+      "source": "guitar"
+    },
+    {
+      "time": 206.0306575963719,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 71,
@@ -10070,19 +9935,10 @@
     },
     {
       "time": 206.0306575963719,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 206.38509886621318,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 40,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10096,12 +9952,30 @@
       "source": "guitar"
     },
     {
+      "time": 206.43153877551023,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 45,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 206.72725623582767,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.5084937810897827,
+      "source": "guitar"
+    },
+    {
       "time": 206.72725623582767,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
+      "midi": 60,
+      "vol": 0.5231594443321228,
       "source": "guitar"
     },
     {
@@ -10109,8 +9983,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 84,
-      "vol": 0.41131991147994995,
+      "midi": 72,
+      "vol": 0.48722803592681885,
       "source": "guitar"
     },
     {
@@ -10118,12 +9992,12 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 207.40063492063493,
+      "time": 207.12942131519276,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -10133,7 +10007,7 @@
     },
     {
       "time": 207.75636009070297,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -10142,16 +10016,34 @@
     },
     {
       "time": 207.7679700680272,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 45,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.716606855392456,
       "source": "guitar"
     },
     {
       "time": 208.0275736961451,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.47578468918800354,
+      "source": "guitar"
+    },
+    {
+      "time": 208.0275736961451,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 47,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 208.0275736961451,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 71,
@@ -10160,61 +10052,43 @@
     },
     {
       "time": 208.0275736961451,
-      "lane": 1,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 0.8698363304138184,
+      "source": "guitar"
+    },
+    {
+      "time": 208.20914920634922,
+      "lane": 3,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.48525288701057434,
+      "source": "guitar"
+    },
+    {
+      "time": 208.45295873015874,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
-      "vol": 0.7088134288787842,
+      "vol": 0.7958520650863647,
       "source": "guitar"
     },
     {
-      "time": 208.0275736961451,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 208.7241723356009,
+      "time": 208.464568707483,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.9232664704322815,
-      "source": "guitar"
-    },
-    {
-      "time": 208.7241723356009,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 64,
+      "vol": 0.5780347585678101,
       "source": "guitar"
     },
     {
       "time": 209.42077097505668,
       "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.6393113136291504,
-      "source": "guitar"
-    },
-    {
-      "time": 209.42077097505668,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 51,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 209.42077097505668,
-      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 69,
@@ -10223,16 +10097,43 @@
     },
     {
       "time": 209.42077097505668,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.6393113136291504,
+      "source": "guitar"
+    },
+    {
+      "time": 209.42077097505668,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
+      "midi": 51,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
+      "time": 209.74585034013606,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 51,
       "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 210.0709297052154,
       "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.45085155963897705,
+      "source": "guitar"
+    },
+    {
+      "time": 210.0709297052154,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 59,
@@ -10241,11 +10142,11 @@
     },
     {
       "time": 210.0709297052154,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 54,
-      "vol": 0.8019287586212158,
+      "midi": 51,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -10253,16 +10154,43 @@
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
+      "midi": 69,
+      "vol": 0.486208438873291,
+      "source": "guitar"
+    },
+    {
+      "time": 210.39600907029478,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
       "midi": 50,
       "vol": 1.0,
       "source": "guitar"
     },
     {
-      "time": 210.39600907029478,
-      "lane": 1,
+      "time": 210.55854875283447,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 47,
+      "vol": 0.9480783343315125,
+      "source": "guitar"
+    },
+    {
+      "time": 210.72108843537416,
+      "lane": 2,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 74,
+      "vol": 0.5264732241630554,
+      "source": "guitar"
+    },
+    {
+      "time": 210.72108843537416,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10271,25 +10199,7 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 211.37124716553288,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.5319513082504272,
-      "source": "guitar"
-    },
-    {
-      "time": 211.37124716553288,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 52,
+      "midi": 47,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10298,8 +10208,8 @@
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 47,
-      "vol": 1.0,
+      "midi": 55,
+      "vol": 0.733685314655304,
       "source": "guitar"
     },
     {
@@ -10357,35 +10267,17 @@
       "source": "guitar"
     },
     {
-      "time": 212.04462585034014,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.9280987977981567,
-      "source": "guitar"
-    },
-    {
       "time": 212.55513242630386,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 64,
-      "vol": 0.5108155012130737,
-      "source": "guitar"
-    },
-    {
-      "time": 212.6712321995465,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 72,
-      "vol": 0.5679792761802673,
+      "vol": 0.46963828802108765,
       "source": "guitar"
     },
     {
       "time": 212.694452154195,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 52,
@@ -10393,12 +10285,12 @@
       "source": "guitar"
     },
     {
-      "time": 213.12402131519275,
-      "lane": 1,
+      "time": 212.8221619047619,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.4051588475704193,
+      "midi": 72,
+      "vol": 0.4688144326210022,
       "source": "guitar"
     },
     {
@@ -10420,24 +10312,6 @@
       "source": "guitar"
     },
     {
-      "time": 213.21690113378685,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.4281790554523468,
-      "source": "guitar"
-    },
-    {
-      "time": 213.63486031746032,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.3705175518989563,
-      "source": "guitar"
-    },
-    {
       "time": 213.63486031746032,
       "lane": 3,
       "dur": 0.0,
@@ -10453,33 +10327,6 @@
       "type": "tap",
       "midi": 64,
       "vol": 0.48206791281700134,
-      "source": "guitar"
-    },
-    {
-      "time": 213.99476961451248,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.44267818331718445,
-      "source": "guitar"
-    },
-    {
-      "time": 214.11086938775512,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.40158650279045105,
-      "source": "guitar"
-    },
-    {
-      "time": 214.34306893424036,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.6017460227012634,
       "source": "guitar"
     },
     {
@@ -10506,11 +10353,20 @@
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
-      "vol": 0.8182548880577087,
+      "vol": 0.7870470881462097,
       "source": "guitar"
     },
     {
       "time": 214.73814058956916,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 38,
+      "vol": 0.7772139310836792,
+      "source": "guitar"
+    },
+    {
+      "time": 214.866801814059,
       "lane": 0,
       "dur": 0.0,
       "type": "tap",
@@ -10528,30 +10384,12 @@
       "source": "guitar"
     },
     {
-      "time": 215.7365986394558,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 42,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 216.06167800453514,
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 66,
       "vol": 0.8072496652603149,
-      "source": "guitar"
-    },
-    {
-      "time": 216.06167800453514,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.8933680653572083,
       "source": "guitar"
     },
     {
@@ -10591,20 +10429,11 @@
       "source": "guitar"
     },
     {
-      "time": 216.93466167800455,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 38,
-      "vol": 0.7396329045295715,
-      "source": "guitar"
-    },
-    {
       "time": 217.3619954648526,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
-      "midi": 48,
+      "midi": 52,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10613,7 +10442,7 @@
       "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 43,
+      "midi": 48,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10622,7 +10451,16 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 52,
+      "midi": 55,
+      "vol": 0.691970705986023,
+      "source": "guitar"
+    },
+    {
+      "time": 217.3619954648526,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
       "vol": 1.0,
       "source": "guitar"
     },
@@ -10645,12 +10483,12 @@
       "source": "guitar"
     },
     {
-      "time": 220.380589569161,
-      "lane": 2,
+      "time": 219.90809977324264,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.37216895818710327,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -10672,30 +10510,12 @@
       "source": "guitar"
     },
     {
-      "time": 220.380589569161,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
-      "source": "guitar"
-    },
-    {
       "time": 220.77532879818594,
       "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
       "vol": 0.8013883233070374,
-      "source": "guitar"
-    },
-    {
-      "time": 220.77532879818594,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.4010755717754364,
       "source": "guitar"
     },
     {
@@ -10735,15 +10555,6 @@
       "source": "guitar"
     },
     {
-      "time": 221.42548752834466,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.6037721633911133,
-      "source": "guitar"
-    },
-    {
       "time": 221.77378684807258,
       "lane": 1,
       "dur": 0.0,
@@ -10771,15 +10582,6 @@
       "source": "guitar"
     },
     {
-      "time": 222.0756462585034,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.3785090744495392,
-      "source": "guitar"
-    },
-    {
       "time": 222.74902494331064,
       "lane": 2,
       "dur": 0.0,
@@ -10790,20 +10592,11 @@
     },
     {
       "time": 222.74902494331064,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
       "vol": 1.0,
-      "source": "guitar"
-    },
-    {
-      "time": 222.74902494331064,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 45,
-      "vol": 0.7793994545936584,
       "source": "guitar"
     },
     {
@@ -10822,24 +10615,6 @@
       "type": "tap",
       "midi": 81,
       "vol": 0.4567949175834656,
-      "source": "guitar"
-    },
-    {
-      "time": 223.4224036281179,
-      "lane": 2,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.8134085536003113,
-      "source": "guitar"
-    },
-    {
-      "time": 223.4224036281179,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.39614543318748474,
       "source": "guitar"
     },
     {
@@ -10874,8 +10649,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 79,
-      "vol": 0.40398678183555603,
+      "midi": 81,
+      "vol": 0.5190956592559814,
       "source": "guitar"
     },
     {
@@ -10901,8 +10676,8 @@
       "lane": 3,
       "dur": 0.0,
       "type": "tap",
-      "midi": 74,
-      "vol": 0.3622167706489563,
+      "midi": 81,
+      "vol": 0.47854191064834595,
       "source": "guitar"
     },
     {
@@ -10915,17 +10690,8 @@
       "source": "guitar"
     },
     {
-      "time": 225.20610113378686,
-      "lane": 3,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 79,
-      "vol": 0.39988407492637634,
-      "source": "guitar"
-    },
-    {
       "time": 225.3728798185941,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -10933,8 +10699,17 @@
       "source": "guitar"
     },
     {
+      "time": 225.3728798185941,
+      "lane": 0,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 43,
+      "vol": 1.0,
+      "source": "guitar"
+    },
+    {
       "time": 225.74439909297053,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 62,
@@ -10948,15 +10723,6 @@
       "type": "tap",
       "midi": 81,
       "vol": 0.5308141112327576,
-      "source": "guitar"
-    },
-    {
-      "time": 225.74439909297053,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 50,
-      "vol": 0.9128814339637756,
       "source": "guitar"
     },
     {
@@ -10984,15 +10750,6 @@
       "type": "tap",
       "midi": 79,
       "vol": 0.4288254380226135,
-      "source": "guitar"
-    },
-    {
-      "time": 226.33226893424037,
-      "lane": 0,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 43,
-      "vol": 1.0,
       "source": "guitar"
     },
     {
@@ -11077,8 +10834,26 @@
       "source": "guitar"
     },
     {
-      "time": 228.43791383219954,
-      "lane": 0,
+      "time": 228.76299319727892,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.38218140602111816,
+      "source": "guitar"
+    },
+    {
+      "time": 229.1112925170068,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 62,
+      "vol": 0.4994279146194458,
+      "source": "guitar"
+    },
+    {
+      "time": 229.38993197278913,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 50,
@@ -11104,17 +10879,17 @@
       "source": "guitar"
     },
     {
-      "time": 229.58563038548752,
-      "lane": 2,
+      "time": 229.53919047619047,
+      "lane": 1,
       "dur": 0.0,
       "type": "tap",
-      "midi": 67,
-      "vol": 0.37835440039634705,
+      "midi": 43,
+      "vol": 1.0,
       "source": "guitar"
     },
     {
       "time": 229.82943990929707,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.0,
       "type": "tap",
       "midi": 55,
@@ -11123,20 +10898,11 @@
     },
     {
       "time": 229.89909977324263,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.0,
       "type": "tap",
       "midi": 67,
       "vol": 0.42749863862991333,
-      "source": "guitar"
-    },
-    {
-      "time": 230.36349886621315,
-      "lane": 1,
-      "dur": 0.0,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.6971828937530518,
       "source": "guitar"
     },
     {
@@ -11146,6 +10912,15 @@
       "type": "tap",
       "midi": 67,
       "vol": 0.4717405140399933,
+      "source": "guitar"
+    },
+    {
+      "time": 231.24714104308393,
+      "lane": 1,
+      "dur": 0.0,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.6971828937530518,
       "source": "guitar"
     },
     {
