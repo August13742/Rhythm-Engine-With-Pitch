@@ -123,9 +123,8 @@ class BasicPitchTranscriber:
                 pass_minus12 = run_pass(-12)
                 
                 # Voting Consensus (2 out of 3)
-                # We iterate through Base notes (Pass 0) and check for support.
+                # We iterate through Base notes (Pass 0).
                 # If a note has support from EITHER +12 or -12, we keep it.
-                # (We prioritize Base notes to keep timing accuracy)
                 
                 consensus_notes = []
                 note_events.sort(key=lambda x: x.time)

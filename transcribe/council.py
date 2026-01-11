@@ -65,8 +65,7 @@ class CouncilV2:
              if "basic_pitch" not in self.models:
                  self.models["basic_pitch"] = BasicPitchTranscriber()
              
-             # Relaxed threshold for vocals (softer attacks) but gated for noise
-             # Update: "lowest acceptable parameters" (High Recall) -> 0.35/0.30
+             # Tuned high-recall thresholds for vocals
              return self.models["basic_pitch"].transcribe(
                  audio_path, 
                  instrument_name="vocals",

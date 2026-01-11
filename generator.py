@@ -17,10 +17,10 @@ from transcribe.council import CouncilV2
 
 # Configuration for Visualizer compatibility & Generator Logic
 DIFF_CONFIGS = {
-    "EASY":   {"lanes": 4, "nps": 4.0}, # Was NORMAL
-    "NORMAL": {"lanes": 4, "nps": 6.0}, # Was HARD
-    "HARD":   {"lanes": 4, "nps": 8.0}, # Was INSANE
-    "ALT_HARD": {"lanes": 4, "nps": 8.0}  # New "ALT HARD" (Complimentary)
+    "EASY":   {"lanes": 4, "nps": 4.0},
+    "NORMAL": {"lanes": 4, "nps": 6.0},
+    "HARD":   {"lanes": 4, "nps": 8.0},
+    "ALT_HARD": {"lanes": 4, "nps": 8.0}
 }
 # Removed hardcoded primary/support from DIFF_CONFIGS because it is now dynamic
 
@@ -57,8 +57,8 @@ GENERATOR_CONFIG = {
     },
     "holds": {
         "allowed_stems": ["vocals", "vocals_lead", "other"],
-        "min_duration": 0.5, # seconds
-        "max_vocal_duration": 3.5 # Break long vocals to prevent stale SFX pitch
+        "min_duration": 0.75, # seconds
+        "max_vocal_duration": 5.5 # Break long vocals to prevent stale SFX pitch
     },
     "scoring": {
         "weights": {
@@ -99,6 +99,41 @@ GENERATOR_CONFIG = {
         "percussive_stems": ["drums", "bass"] # Stems EXEMPT from sifting
     }
 }
+
+# Configuration for Transcription (Per Stem)
+# Tuned for high precision and musicality
+STEM_TRANSCRIBE_CONFIG = {
+    "vocals": {
+        "onset": 0.35, "frame": 0.30, 
+        "smoothing": 0.7, "multipass": False, # Vocals rely on FCPE/ConsensusEngine
+        "min_len": 58.0
+    },
+    "piano": {
+        "onset": 0.40, "frame": 0.30, # Slightly stricter onset
+        "smoothing": 0.0, # NO SMOOTHING (Preserve fast runs)
+        "multipass": True, # Fix pitch leaks
+        "min_len": 30.0 # Allow shorter notes
+    },
+    "guitar": {
+        "onset": 0.40, "frame": 0.30,
+        "smoothing": 0.0, # NO SMOOTHING (Plucks are sharp)
+        "multipass": True,
+        "min_len": 40.0
+    },
+    "bass": {
+        "onset": 0.50, "frame": 0.40, # Stricter (Bass is often muddy)
+        "smoothing": 0.5, # Some smoothing for sustained bass
+        "multipass": True,
+        "min_len": 80.0
+    },
+    "other": {
+        "onset": 0.40, "frame": 0.30,
+        "smoothing": 0.0,
+        "multipass": False, # 'Other' is chaotic, consensus might fail
+        "min_len": 58.0
+    }
+}
+
 
 class StemSelector:
     @staticmethod
@@ -158,8 +193,7 @@ class StemSelector:
                 elif "vocals" in active_stems: primary.append("vocals")
                 
                 # In Main/Easy-Hard, Instruments are Backing Tracks.
-                # User Requirement: "it is vocal + drum for this song in particular, there should be no other cases"
-                # So we DO NOT add guitar/piano to support.
+                # Only add vocals/lead to primary. Support will handle rhythm.
                 pass
             
             else:
@@ -168,8 +202,7 @@ class StemSelector:
                 candidates = [s for s in active_stems if s not in ["drums", "bass"]]
                 if candidates:
                     # Dynamic Sort using Energy (RMS/Peak) + Note Velocity Sum (stem_weights)
-                    # Combined Score = (Manifest Energy * 0.5) + (Note Velocity Sum * 0.5) normalized?
-                    # actually stem_weights (velocity sum) is a good proxy for "musical activity"
+                    # stem_weights (velocity sum) serves as a proxy for "musical activity"
                     if stem_weights:
                         candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
                         print(f"    > Instrumental Main Sort: {candidates}")
@@ -195,27 +228,12 @@ class StemSelector:
             if candidates:
                 if stem_weights:
                     # Sort by weight desc (Total Note Velocity)
-                    # We REMOVED the hardcoded penalties. Trust the data.
-                    # Use a hybrid score? 
-                    # Let's trust stem_weights (Sum of Vel). 
-                    # Example: Solo Guitar (High Sum) vs Quiet Strings (Low Sum).
-                    
-                    # Logic Update: "logic is 'most dynamic / dominant (that is not just volume)'"
-                    # stem_weights = Sum(Velocity) which IS dynamic density.
-                    
-                    def get_selection_score(s):
-                        return stem_weights.get(s, 0)
-                        
                     candidates.sort(key=get_selection_score, reverse=True)
-                    print(f"    > Dynamic Sort: {candidates} (Scores: {[f'{stem_weights.get(s,0):.3f}' for s in candidates]})")
-                    
-                    # Logic Update: Instrumental Songs (No Vocals)
-                    # If Main picked #1, Alt picks #2.
-                    # If Vocals exist, Main picked Vocals, so Alt picks #1 (Best Instrument).
+                    # print(f"    > Dynamic Sort: {candidates} (Scores: {[f'{stem_weights.get(s,0):.3f}' for s in candidates]})")
                     
                     selected_idx = 0
                     if not has_vocals and len(candidates) > 1:
-                        print("    > Instrumental Mode: Selecting 2nd best track for ALT diversity.")
+                        # Instrumental Mode: Select 2nd best track for ALT diversity
                         selected_idx = 1
                         
                     primary.append(candidates[selected_idx])
@@ -293,11 +311,9 @@ class ChartGenerator:
         
         # Define Stems that require Strict Grids (Backbone)
         # Even on Insane, a Bass/Drum backing track feels better if locked to standard grooves
-        # User Update: "turn off grid snapping for piano notes too... only drums benefit"
         strict_stems = ["drums"]
-        # User Update: "maybe grid snapping it is a good idea... just need to do it more strictly"
         # Restricting drums to 1/4 and 1/8 only (Beat Feel)
-        strict_grids = [4, 8] # Removed [16] append for Hard/Insane
+        strict_grids = [4, 8]
         
         # Split events
         group_strict = []
@@ -308,8 +324,7 @@ class ChartGenerator:
             if e.source in strict_stems:
                 group_strict.append(e)
             else:
-                # User Request: "turn off grid snapping for piano... only drums benefit"
-                # Decision: Vocals, Piano, Guitar, Bass, Other -> ALL UNSNAPPED (High Fidelity)
+                # Vocals, Piano, Guitar, Bass, Other -> ALL UNSNAPPED (High Fidelity)
                 # We rely on DSP Grounding in Stage 0 for timing accuracy.
                 group_unsnapped.append(e)
                 
@@ -327,7 +342,7 @@ class ChartGenerator:
         print(f"  [Sieve] Selected {len(final_events)} notes (NPS Limit: {target_nps})")
         
         # --- STAGE 2.5: MACRO HOLDS (Visual Consolidation) ---
-        # Feature Removed: User request "remove shadow notes... leads to confusion"
+        # Consolidated events skipped for now to avoid confusion
         # consolidated_events = self._consolidate_visuals(final_events)
         consolidated_events = final_events
         
@@ -490,9 +505,7 @@ class ChartGenerator:
                      base_score *= l_cfg["support_multiplier"]
                      is_valid = True
                 elif is_percussive:
-                 # User Feedback: "drum should be grid snapped"
                  # The Quantizer (Stage 2) has ALREADY snapped these to [4, 8, 16].
-                 # So we don't need to double-check here, or we risk floating point errors rejecting valid notes.
                  base_score *= 2.5 
                  is_valid = True
                 else:
@@ -1099,30 +1112,30 @@ class RhythmEngine:
                 print(f"Processing {stem}...")
                 
                 # TUNING:
-                # Melody -> BasicPitch (High Precision)
+                # Use STEM_TRANSCRIBE_CONFIG
                 # Drums -> Librosa Onset (High Sensitivity, ignore pitch)
                 
                 if stem == "drums":
-                    print(f"Processing {stem} with Librosa Onset Detection (High Sensitivity)...")
+                    print(f"Processing {stem} with Librosa Onset Detection (Beat Feel)...")
                     notes = self._transcribe_drums_onset(path)
                 else:
                     # BasicPitch for melodic instruments
-                    print(f"Processing {stem} with BasicPitch...")
+                    cfg = STEM_TRANSCRIBE_CONFIG.get(stem, STEM_TRANSCRIBE_CONFIG["other"])
+                    print(f"Processing {stem} with BasicPitch (Config: {cfg})...")
                     
-                    # User Request: "Revert Consensus for Instruments to fix pitch degradation"
-                    # Default multipass_consensus=False for instruments logic.
                     params = {
-                        "onset_threshold": 0.35, 
-                        "frame_threshold": 0.30,
-                        "multipass_consensus": False # REVERTED: False for instruments
+                        "onset_threshold": cfg["onset"], 
+                        "frame_threshold": cfg["frame"],
+                        "multipass_consensus": cfg["multipass"],
+                        "minimum_note_length": cfg["min_len"]
                     }
                     
                     notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
                     
-                    # Apply Smoothing (Level 0.7)
-                    # Use Same Smoother as Vocals for high fidelity feel
-                    from transcribe.smoother import VocalSmoother
-                    notes = VocalSmoother.smooth(notes, level=0.7)
+                    # Apply Smoothing if configured
+                    if cfg["smoothing"] > 0:
+                        from transcribe.smoother import VocalSmoother
+                        notes = VocalSmoother.smooth(notes, level=cfg["smoothing"])
                 
                 # Drum Fix: Force Fixed Pitch (e.g., C4 = 60)
                 if stem == "drums":
@@ -1234,7 +1247,6 @@ class RhythmEngine:
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
         # 2. Pick Peaks (Adaptive threshold)
-        # User Request: "limit cap its note counts to strictly provide beat feel only"
         # Increased delta (0.35 -> 0.45) for stricter picking
         # Increased wait (4 -> 6) to reduce rolls
         peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.45, wait=6)
@@ -1251,16 +1263,22 @@ class RhythmEngine:
         events = []
         
         # --- GRID DECIMATOR ---
-        # Cap density to 1 hit per 1/8th note approx. (120BPM -> 250ms)
-        # Actually let's use a time window (e.g. 0.1s)
-        # If multiple hits in window, pick loudest.
-        decim_window = 0.12 # approx 1/8 at high bpm
+        # Goal: STRICT 1/4 note (or 1/2 note) feel.
+        
+        bpm = self.bpm if self.bpm > 0 else 120.0
+        quarter_note_dur = 60.0 / bpm
+        
+        # Window: Decimate anything closer than a quarter note?
+        # Target 80% of a quarter note to allow some breathing room but kill rolls.
+        decim_window = quarter_note_dur * 0.85 
+        
+        print(f"[Onset] Decimating Drums closer than {decim_window:.3f}s (Targeting 1/4 notes at {bpm} BPM)")
         
         last_t = -1.0
-        pending_candidates = [] # list of (t, energy)
+        events_raw = []
         
         for t, e in zip(times, energies):
-             events.append(NoteEvent(
+             events_raw.append(NoteEvent(
                 time=float(t),
                 duration=0.1, 
                 pitch=60, 
@@ -1268,31 +1286,42 @@ class RhythmEngine:
                 source="drums"
             ))
             
-        # Run Decimation Pass on raw events?
-        # Actually doing it here in loop is cleaner.
-        # But simplistic approach: just filter by delta time.
-        
+        # Run Decimation Pass
         final_events = []
-        if events:
-            # Sort by time just in case
-            events.sort(key=lambda x: x.time)
+        if events_raw:
+            events_raw.sort(key=lambda x: x.time)
             
-            # Group into 1/8th windows?
-            # Or simplified: if next note is too close, keep loudest.
+            curr = events_raw[0]
+            # Initialize with first note
             
-            curr = events[0]
-            for i in range(1, len(events)):
-                next_e = events[i]
+            for i in range(1, len(events_raw)):
+                next_e = events_raw[i]
+                
+                # Check distance from current 'accepted' note start?
+                # No, we need to compare against the *last retained* note, not just the previous candidate.
+                # Wait, the logic below compares 'curr' vs 'next_e' in a chain.
+                # If we accepted 'curr', we then check if 'next_e' is too close to 'curr'.
+                
+                # Logic:
+                # 1. We have a 'current candidate' (curr).
+                # 2. We look at 'next_e'.
+                # 3. If next_e is too close to curr, we look at who is louder.
+                #    If next_e is louder, it becomes the new candidate (curr = next_e).
+                #    If curr is louder, we ignore next_e.
+                # 4. If next_e is FAR enough, we commit 'curr' to final, and 'next_e' becomes new candidate.
+                
                 if next_e.time - curr.time < decim_window:
                     # Conflict! Keep louder.
                     if next_e.velocity > curr.velocity:
                         curr = next_e
                 else:
+                    # 'curr' is safe, push it.
                     final_events.append(curr)
                     curr = next_e
+                    
             final_events.append(curr)
             
-        print(f"[Onset] Found {len(events)} -> Decimated {len(final_events)} drum hits.")
+        print(f"[Onset] Found {len(events_raw)} -> Decimated {len(final_events)} drum hits.")
         return final_events
 
 
