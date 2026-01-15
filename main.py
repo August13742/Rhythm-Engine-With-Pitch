@@ -22,78 +22,75 @@ def main():
         print(f"[ERROR] Audio file not found: {args.audio_file}")
         sys.exit(1)
     
-    # Step 1: Separate audio into stems (unless skipped or already exists)
+    # --- PATH DEFINITIONS ---
     base_name = os.path.splitext(os.path.basename(args.audio_file))[0]
-    folder_path = os.path.join("stems", base_name)
     
-    # Check if stem files already exist
+    # 1. Stems Path: stems/{base_name}
+    stems_dir = os.path.join("stems", base_name)
+    
+    # 2. Beatmaps Path: Beatmaps/{base_name}/
+    beatmap_root = os.path.join("Beatmaps", base_name)
+    
+    # Ensure roots exist
+    os.makedirs("stems", exist_ok=True)
+    os.makedirs(beatmap_root, exist_ok=True)
+    
+    print(f"[Main] Processing: {base_name}")
+    print(f"  > Stems: {stems_dir}")
+    print(f"  > Beatmaps: {beatmap_root}")
+    
+    # --- STEP 1: SEPARATION ---
+    # Check if stems exist
     required_stems = [
-        os.path.join(folder_path, "vocals.wav"),
-        os.path.join(folder_path, "other.wav"),
-        os.path.join(folder_path, "bass.wav"),
-        os.path.join(folder_path, "drums.wav"),
-        os.path.join(folder_path, "piano.wav"),
-        os.path.join(folder_path, "guitar.wav")
+        os.path.join(stems_dir, "vocals.wav"),
+        os.path.join(stems_dir, "other.wav"),
+        os.path.join(stems_dir, "bass.wav"),
+        os.path.join(stems_dir, "drums.wav"),
+        # Piano/Guitar might be silent/missing, but check core 4 or logic from before
     ]
-    
-    stems_exist = all(os.path.exists(stem) for stem in required_stems)
+    # Simple check: Does directory exist and have some wavs
+    stems_exist = os.path.isdir(stems_dir) and any(f.endswith(".wav") for f in os.listdir(stems_dir))
     
     if args.skip_separation:
         if not stems_exist:
-            print("[ERROR] Folder or stems not found. Run without --skip-separation first.")
-            sys.exit(1)
-        print("[VIS] Using existing stems...")
+             print("[ERROR] --skip-separation set but stems not found.")
+             sys.exit(1)
+        print("[Main] Skipping separation (User Requested)...")
     elif stems_exist:
-        print("[VIS] Stems already exist, skipping separation...")
+        print("[Main] Stems already exist, skipping separation...")
     else:
-        folder_path = separate_audio(args.audio_file)
-    
-    # Step 2: Check for generated beatmaps (unless rebake flag is set)
-    if not args.rebake:
-        # Check V300 Path: stems/base_name/beatmap/*.json
-        v300_dir = os.path.join(folder_path, "beatmap")
-        has_v300 = os.path.isdir(v300_dir) and any(f.endswith(".json") for f in os.listdir(v300_dir))
+        print("[Main] Separating audio...")
+        separate_audio(args.audio_file, output_path=stems_dir)
         
-        # Check Legacy Path: stems/base_name/base_name_DIFF.json
-        legacy_diffs = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
-        has_legacy = any(os.path.exists(os.path.join(folder_path, f"{base_name}_{d}.json")) for d in legacy_diffs)
-        
-        if has_v300 or has_legacy:
-            print("[VIS] Existing beatmaps found, skipping generation...")
-            if args.generate_only:
-                print("[VIS] Generate-only mode, exiting...")
-                return
-            print("[VIS] Launching visualizer...")
-            visualizer = Visualizer(args.audio_file, folder_path)
-            visualizer.run()
-            return
+    # --- STEP 2: BEATMAP GENERATION ---
+    # Check if beatmaps exist
+    difficulties = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
+    items = os.listdir(beatmap_root) if os.path.exists(beatmap_root) else []
+    beatmaps_exist = all(f"{d}.json" in items for d in difficulties)
     
+    should_generate = False
     if args.rebake:
-        print("[VIS] Rebake flag set, forcing beatmap regeneration...")
-    
-    # Step 3: Generate beatmaps
-    print("\n[VIS] Generating beatmaps...")
-    stems_dict = {
-        "vocals": os.path.join(folder_path, "vocals.wav"),
-        "other":  os.path.join(folder_path, "other.wav"),
-        "bass":   os.path.join(folder_path, "bass.wav"),
-        "drums":  os.path.join(folder_path, "drums.wav"),
-        "piano":  os.path.join(folder_path, "piano.wav"),
-        "guitar": os.path.join(folder_path, "guitar.wav")
-    }
-    
-    # V300 Update: Use new RhythmEngine
-    # The new engine handles transcribing stems and generating charts internally
-    engine = RhythmEngine(folder_path)
-    engine.run()
-    print("[VIS] Beatmaps generated and saved!")
-    
+        print("[Main] Rebake requested. Forcing generation.")
+        should_generate = True
+    elif not beatmaps_exist:
+        print("[Main] Beatmaps missing. Generating...")
+        should_generate = True
+    else:
+        print("[Main] Beatmaps already exist.")
+        
+    if should_generate:
+        print(f"[Main] Launching RhythmEngine -> {beatmap_root}")
+        engine = RhythmEngine(stems_dir, beatmap_root)
+        engine.run()
+        print("[Main] Generation Complete.")
+        
     if args.generate_only:
+        print("[Main] Generate-only mode. Exiting.")
         return
-    
-    # Step 4: Launch visualizer (reads from generated files)
-    print("\n[VIS] Launching visualizer...")
-    visualizer = Visualizer(args.audio_file, folder_path)
+
+    # --- STEP 3: VISUALIZER ---
+    print("[Main] Launching Visualizer...")
+    visualizer = Visualizer(args.audio_file, stems_dir, beatmap_root)
     visualizer.run()
 
 if __name__ == "__main__":

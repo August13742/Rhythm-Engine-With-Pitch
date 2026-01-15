@@ -25,7 +25,7 @@ STEM_COLORS = {
 }
 
 class Visualizer:
-    def __init__(self, audio_path, folder_path):
+    def __init__(self, audio_path, folder_path, beatmap_folder):
         # Initialize Mixer
         pygame.mixer.pre_init(44100, -16, 2, 1024)
         pygame.init()
@@ -75,11 +75,8 @@ class Visualizer:
         from generator import DIFF_CONFIGS
         for d in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
             # V300 Path: beatmap/DIFF.json
-            v300_path = os.path.join(folder_path, "beatmap", f"{d}.json")
-            # Legacy Path: base_name_DIFF.json
-            legacy_path = os.path.join(folder_path, f"{base_name}_{d}.json")
-            
-            target_file = v300_path if os.path.exists(v300_path) else legacy_path
+            # NOW: we use explicit beatmap_folder
+            target_file = os.path.join(beatmap_folder, f"{d}.json")
             
             try:
                 with open(target_file, 'r') as f:
@@ -219,7 +216,6 @@ class Visualizer:
                         dur = n.get("dur", 0)
                         bucket = SynthBank.get_bucket(dur)
                         
-                        # --- SYNTH MODES ---
                         # --- SYNTH MODES ---
                         if self.mode == "classic":
                             # All square wave (pure 8-bit) - EXCEPT DRUMS
@@ -454,5 +450,7 @@ if __name__ == "__main__":
         print(f"[ERROR] Stems folder not found: {folder_path}")
         sys.exit(1)
     
-    app = Visualizer(audio_file, folder_path)
-    app.run()
+    # Standalone usage not fully supported with new path logic without main.py
+    # But let's try to infer if run directly
+    print("[ERROR] Please run via main.py")
+    sys.exit(1)

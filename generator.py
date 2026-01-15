@@ -2031,14 +2031,18 @@ class ConsensusEngine:
         return final_events
         
 class RhythmEngine:
-    def __init__(self, stems_folder: str):
+    def __init__(self, stems_folder: str, beatmap_folder: str):
         self.stems_folder = stems_folder
+        self.beatmap_folder = beatmap_folder
         self.base_name = os.path.basename(os.path.dirname(stems_folder)) if os.path.basename(stems_folder) in ["stems", "beatmap"] else os.path.basename(stems_folder)
         # Actually stems_folder is usually ".../stems/songname"
         if os.path.dirname(stems_folder).endswith("stems"):
              self.base_name = os.path.basename(stems_folder)
         
-        self._ensure_paths()
+        # Ensure paths exist
+        if not os.path.isdir(self.stems_folder):
+            raise ValueError(f"Stems folder does not exist: {self.stems_folder}")
+        os.makedirs(self.beatmap_folder, exist_ok=True)
         
         # Initialize Transcribers
         self.bp_transcriber = BasicPitchTranscriber()
@@ -2165,9 +2169,8 @@ class RhythmEngine:
             print(f"  [BPM] Sanity Check: {original:.2f} -> {bpm:.2f}")
         return bpm
 
-    def _ensure_paths(self):
-        if not os.path.isdir(self.stems_folder):
-            raise ValueError(f"Stems folder does not exist: {self.stems_folder}")
+
+    # _ensure_paths removed - handled in __init__ with explicit paths
 
     def _load_manifest(self):
         m_path = os.path.join(self.stems_folder, "stems_manifest.json")
@@ -2319,13 +2322,12 @@ class RhythmEngine:
         print(f"Total collected events: {len(all_events)}")
         
         # 3. Generate Charts
-        output_dir = os.path.join(self.stems_folder, "beatmap")
-        os.makedirs(output_dir, exist_ok=True)
+        print(f"[RhythmEngine] Saving beatmaps to: {self.beatmap_folder}")
         
         for diff in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
             chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest) # Pass copy & manifest
             
-            out_file = os.path.join(output_dir, f"{diff}.json")
+            out_file = os.path.join(self.beatmap_folder, f"{diff}.json")
             with open(out_file, "w") as f:
                 json.dump(chart_data, f, indent=2)
             print(f"Saved {out_file}")

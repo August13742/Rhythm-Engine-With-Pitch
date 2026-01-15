@@ -94,13 +94,21 @@ def _prepare_audio(input_path: str, temp_dir: Path) -> str:
         print(f"  [WARN] Normalization failed: {e}. Using original file.")
         return input_path
 
-def separate_audio(audio_path: str):
+def separate_audio(audio_path: str, output_path: str = None):
     base_name = Path(audio_path).stem
-    root_dir = Path("stems") / base_name
+    
+    if output_path:
+        root_dir = Path(output_path)
+    else:
+        root_dir = Path("stems") / base_name
+
     s1_dir = root_dir / "stage1_temp"
     s2_dir = root_dir / "stage2_temp"
     model_dir = Path(os.getcwd()) / "models"
     
+    # If using default path, clear it first (fresh start)
+    # If using custom path, maybe preservation is desired? 
+    # Current logic: Always wipe for clean separation
     if root_dir.exists(): shutil.rmtree(root_dir)
     for d in [root_dir, s1_dir, s2_dir]: d.mkdir(parents=True, exist_ok=True)
 

@@ -6,9 +6,8 @@ import argparse
 import os
 import sys
 import time
+import subprocess
 from pathlib import Path
-from generator import RhythmEngine
-from separator import separate_audio
 
 # Suppress CUDA compatibility warnings for newer GPUs
 import warnings
@@ -29,44 +28,30 @@ def get_audio_files(directory):
     return sorted(audio_files)
 
 def process_song(audio_file, rebake=False):
-    """Process a single song through the V300 pipeline"""
+    """Process a single song by calling main.py"""
     base_name = os.path.splitext(os.path.basename(audio_file))[0]
-    folder_path = os.path.join("stems", base_name)
     
     print(f"\n{'='*80}")
     print(f"[BATCH] Processing: {base_name}")
     print(f"{'='*80}")
     
-    # 1. Stem Check
-    required_stems = ["vocals.wav", "other.wav", "bass.wav", "drums.wav", "piano.wav", "guitar.wav"]
-    stems_exist = all(os.path.exists(os.path.join(folder_path, s)) for s in required_stems)
-    
-    if stems_exist:
-        print("[BATCH] Stems already exist, skipping separation.")
-    else:
-        print("[BATCH] Separating audio into stems...")
-        try:
-            folder_path = separate_audio(audio_file)
-        except Exception as e:
-            print(f"[BATCH] ERROR during separation: {e}")
+    cmd = [sys.executable, "main.py", audio_file, "--generate-only"]
+    if rebake:
+        cmd.append("--rebake")
+        
+    try:
+        # Run main.py as a separate process to keep memory clean and rely on its logic
+        result = subprocess.run(cmd, capture_output=False, text=True)
+        
+        if result.returncode == 0:
+            print(f"[BATCH] Success: {base_name}")
+            return True
+        else:
+            print(f"[BATCH] Failed: {base_name} (Exit Code: {result.returncode})")
             return False
             
-    # 2. Beatmap Check
-    if not rebake:
-        difficulties = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
-        bm_exist = all(os.path.exists(os.path.join(folder_path, "beatmap", f"{d}.json")) for d in difficulties)
-        if bm_exist:
-            print("[BATCH] All beatmaps already exist. Skipping generation (use --rebake to force).")
-            return True
-            
-    # 3. V300 Engine Run
-    print("[BATCH] Running Rhythm Engine V300...")
-    try:
-        engine = RhythmEngine(folder_path)
-        engine.run()
-        return True
     except Exception as e:
-        print(f"[BATCH] ERROR during generation: {e}")
+        print(f"[BATCH] Execution Error: {e}")
         return False
 
 def main():
