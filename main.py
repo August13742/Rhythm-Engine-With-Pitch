@@ -3,7 +3,7 @@ import argparse
 import os
 import sys
 from visualizer import Visualizer
-from generator import RhythmEngine # V300 Engine
+from engine import RhythmEngine
 from separator import separate_audio
 
 # Suppress CUDA compatibility warnings for newer GPUs

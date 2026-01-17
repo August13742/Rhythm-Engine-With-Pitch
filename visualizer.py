@@ -72,7 +72,7 @@ class Visualizer:
             duration_track = "drums"  # Fallback to drums
         
         duration = librosa.get_duration(path=os.path.join(folder_path, f"{duration_track}.wav"))
-        from generator import DIFF_CONFIGS
+        from chart_generator import DIFF_CONFIGS
         for d in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
             # V300 Path: beatmap/DIFF.json
             # NOW: we use explicit beatmap_folder
