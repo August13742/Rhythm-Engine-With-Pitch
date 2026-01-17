@@ -1,0 +1,67 @@
+# Rhythm Engine
+
+Automated beatmap generation pipeline that transforms audio files into playable rhythm game charts.
+
+## Quick Start
+
+```bash
+uv sync
+uv run python main.py path/to/song.mp3
+```
+
+**Options:**
+- `--skip-separation` - Skip stem separation if already processed
+- `--rebake` - Force regenerate beatmaps
+- `--generate-only` - Generate maps without launching visualizer
+
+## Pipeline Overview
+
+1. **Audio Separation** - Splits audio into 7 stems (vocals, drums, bass, guitar, piano, other, vocals_lead)
+2. **Transcription** - Converts each stem to note events using ML pitch detection
+3. **Chart Generation** - Transforms notes into playable beatmaps with lane allocation
+
+Output: `Beatmaps/{song_name}/EASY.json`, `NORMAL.json`, `HARD.json`, `ALT_HARD.json`
+
+For detailed flowcharts and technical analysis, see:
+- [PIPELINE_TECHNICAL_ANALYSIS.html](PIPELINE_TECHNICAL_ANALYSIS.html)
+- [MODEL_EVOLUTION_DEEP_DIVE.html](MODEL_EVOLUTION_DEEP_DIVE.html)
+
+## Models Used
+
+| Model | Purpose | Source |
+|-------|---------|--------|
+| BS-Roformer | 6-stem audio separation | [model_bs_roformer_ep_317_sdr_12.9755](https://huggingface.co/) |
+| Mel-Roformer-Viperx | Lead/backing vocal split | [model_mel_band_roformer_ep_3005_sdr_11.4360](https://huggingface.co/) |
+| FCPE | Monophonic vocal pitch | [torchfcpe](https://pypi.org/project/torchfcpe/) |
+| RMVPE | Robust vocal pitch (fallback) | Custom weights |
+| BasicPitch | Polyphonic transcription | [basic-pitch-torch](https://github.com/spotify/basic-pitch)(https://github.com/gudgud96/basic-pitch-torch) | 
+
+## Project Structure
+
+```
+rhythm_engine/
+├── main.py              # Entry point
+├── separator.py         # Audio stem separation
+├── engine.py            # Core transcription logic
+├── chart_generator.py   # Beatmap generation
+├── beatmap.py           # Data structures
+├── transcribe/
+│   ├── council.py       # Multi-model vocal transcription
+│   ├── basic_pitch.py   # BasicPitch wrapper
+│   ├── segmenter.py     # F0-to-note conversion
+│   └── smoother.py      # Note cleanup
+└── benchmarks/          # Accuracy evaluation scripts
+```
+
+## Dependencies
+
+see `pyproject.toml`
+
+## Difficulty System
+
+| Difficulty | NPS | Polyphony | Focus |
+|------------|-----|-----------|-------|
+| EASY | 2.5 | 1 | Vocals only |
+| NORMAL | 4.0 | 2 | Vocals + drums |
+| HARD | 6.0 | 2 | Vocals + drums |
+| ALT_HARD | 6.0 | 2 | Lead instrument |

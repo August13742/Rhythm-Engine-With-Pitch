@@ -5,7 +5,7 @@ requires-python = "==3.13.*"
 dependencies = [
     "demucs>=4.0.1",
     "librosa>=0.11.0",
-    "numpy<2.1",
+    "numpy>=2.1",
     "pygame>=2.6.1",
     "soundfile>=0.13.1",
     "scipy>=1.13.0",

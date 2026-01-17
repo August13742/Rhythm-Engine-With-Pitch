@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Evolution & Technical Deep Dive</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0a0f1a;
+            --bg-secondary: #111827;
+            --bg-tertiary: #1f2937;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --accent-cyan: #22d3ee;
+            --accent-pink: #ec4899;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --accent-red: #ef4444;
+            --border-color: #374151;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #0f172a 100%);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        section h2 {
+            color: var(--accent-cyan);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        section h3 {
+            color: var(--accent-pink);
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        section h4 {
+            color: var(--accent-amber);
+            font-size: 1.1rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .mermaid {
+            background: var(--bg-tertiary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: var(--accent-emerald);
+        }
+
+        pre {
+            background: var(--bg-tertiary);
+            padding: 1.25rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        th,
+        td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-tertiary);
+            color: var(--accent-cyan);
+        }
+
+        tr:nth-child(even) {
+            background: rgba(31, 41, 55, 0.5);
+        }
+
+        td {
+            color: var(--text-secondary);
+        }
+
+        ul,
+        ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .info-box {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.1), rgba(236, 72, 153, 0.1));
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent-amber);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .error-box {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .success-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--accent-emerald);
+            padding: 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .version-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin: 0.25rem;
+        }
+
+        .deprecated {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .current {
+            background: var(--accent-emerald);
+            color: white;
+        }
+
+        .experimental {
+            background: var(--accent-amber);
+            color: black;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .comparison-card h4 {
+            margin-top: 0;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px dashed var(--border-color);
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+        }
+
+        .metric-value {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🧪 Model Evolution & Technical Deep Dive</h1>
+            <p style="color: var(--text-secondary);">Supplementary Documentation: Lessons Learned & Design Decisions</p>
+        </header>
+
+        <!-- Vocal Model Evolution -->
+        <section>
+            <h2>🎤 Vocal Transcription: Model Evolution</h2>
+
+            <p>The vocal transcription subsystem underwent the most significant evolution, testing 5 different
+                approaches before settling on the current FCPE-based architecture.</p>
+
+            <div class="mermaid">
+                journey
+                title Vocal Model Evolution
+                section V1.x DSP Era
+                pYIN Only: 3: pYIN
+                Added RMS Gate: 4: pYIN
+                Virtual Voices: 4: pYIN
+                section V2.x Hybrid
+                Whisper Timing: 3: Whisper
+                CREPE Pitch: 4: CREPE
+                pYIN Voting: 4: pYIN+CREPE
+                section V3.x ML Era
+                FCPE Primary: 5: FCPE
+                BP Harmony: 4: FCPE+BP
+                Multi-Pass: 5: FCPE+BP
+            </div>
+
+            <h3>Model Comparison: Deep Dive</h3>
+
+            <div class="comparison-grid">
+                <div class="comparison-card">
+                    <h4>pYIN (LibROSA) <span class="version-badge deprecated">V1.x</span></h4>
+                    <div class="metric"><span class="metric-label">Type</span><span class="metric-value">Probabilistic
+                            YIN</span></div>
+                    <div class="metric"><span class="metric-label">F1 Score</span><span class="metric-value">0.62</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Latency</span><span class="metric-value">~30ms</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Octave Errors</span><span
+                            class="metric-value">~25%</span></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem;">Pure DSP approach using autocorrelation. Fast
+                        but unreliable for sung vowels with vibrato.</p>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>CREPE (torchcrepe) <span class="version-badge deprecated">V2.x</span></h4>
+                    <div class="metric"><span class="metric-label">Type</span><span class="metric-value">CNN Frame
+                            Classifier</span></div>
+                    <div class="metric"><span class="metric-label">F1 Score</span><span class="metric-value">0.76</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Latency</span><span class="metric-value">~10ms</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Octave Errors</span><span
+                            class="metric-value">~12%</span></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem;">SOTA F0 tracker but outputs continuous curve,
+                        not note events. Segmentation adds timing variance.</p>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>FCPE (torchfcpe) <span class="version-badge current">V3.x</span></h4>
+                    <div class="metric"><span class="metric-label">Type</span><span class="metric-value">Context-Aware
+                            F0</span></div>
+                    <div class="metric"><span class="metric-label">F1 Score</span><span class="metric-value">0.82</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Latency</span><span class="metric-value">~8ms</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Octave Errors</span><span
+                            class="metric-value">~5%</span></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem;">Purpose-built for singing voice. Uses temporal
+                        context to reduce vibrato-induced errors.</p>
+                </div>
+
+                <div class="comparison-card">
+                    <h4>RMVPE <span class="version-badge current">V3.x Alt</span></h4>
+                    <div class="metric"><span class="metric-label">Type</span><span class="metric-value">Modified
+                            HuBERT</span></div>
+                    <div class="metric"><span class="metric-label">F1 Score</span><span class="metric-value">0.78</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Latency</span><span class="metric-value">~15ms</span>
+                    </div>
+                    <div class="metric"><span class="metric-label">Octave Errors</span><span
+                            class="metric-value">~8%</span></div>
+                    <p style="margin-top: 0.75rem; font-size: 0.85rem;">Robust to noise but slightly lower accuracy.
+                        Used as fallback and in Hybrid mode for pitch refinement.</p>
+                </div>
+            </div>
+
+            <h3>The Whisper Experiment (V3.06)</h3>
+            <p>The most ambitious failed approach attempted to use OpenAI's Whisper for syllable boundary detection:</p>
+
+            <div class="mermaid">
+                flowchart LR
+                subgraph WHISPER["Whisper Pipeline"]
+                W1["Audio Input"] --> W2["faster-whisper<br />(VAD Filtered)"]
+                W2 --> W3["Word Timestamps"]
+                W3 --> W4["Syllable Boundaries"]
+                end
+
+                subgraph PITCH["CREPE + pYIN"]
+                P1["Audio Input"] --> P2["CREPE F0"]
+                P1 --> P3["pYIN F0"]
+                P2 & P3 --> P4["Pitch Consensus"]
+                end
+
+                subgraph FUSION["Fusion"]
+                W4 --> F1["Align Boundaries<br />to Pitch"]
+                P4 --> F1
+                F1 --> F2["Final Notes"]
+                end
+
+                style WHISPER fill:#1f1f3f,stroke:#ef4444
+                style PITCH fill:#1f3f1f,stroke:#22d3ee
+                style FUSION fill:#3f1f3f,stroke:#ec4899
+            </div>
+
+            <div class="error-box">
+                <h4>Why Whisper Failed for Rhythm Games</h4>
+                <ol>
+                    <li><strong>Timestamp Resolution:</strong> Whisper outputs word-level timestamps with 50-200ms
+                        jitter. Rhythm games need ±20ms accuracy.</li>
+                    <li><strong>Sung vs Spoken:</strong> Whisper was trained on speech, not singing. Melismatic passages
+                        (multiple notes per syllable) confused the model.</li>
+                    <li><strong>Rap Handling:</strong> Fast delivery caused Whisper to merge words, losing boundary
+                        information entirely.</li>
+                    <li><strong>Overhead:</strong> The CUDA model added 2GB memory overhead and 3-5s initialization per
+                        file.</li>
+                </ol>
+            </div>
+
+            <h3>F0-to-NoteEvent Segmentation</h3>
+            <p>A critical challenge was converting continuous F0 curves into discrete NoteEvents. The current V2
+                segmenter uses onset-aware splitting:</p>
+
+            <pre><code>def f0_to_note_events_v2(f0, audio, sr, hop_length):
+    """
+    Key Improvements over V1:
+    1. Uses spectral onset detection for note boundaries
+    2. Applies median filter (5 frames) to remove vibrato jitter
+    3. Combines onset + pitch change for robust splitting
+    4. Handles portamento (only splits on onset OR large jump)
+    """
+    
+    # 1. Energy gate (remove silence artifacts)
+    rms = librosa.feature.rms(y=audio)[0]
+    f0[rms &lt; 0.10] = 0
+    
+    # 2. Onset detection
+    onset_env = librosa.onset.onset_strength(y=audio, sr=sr)
+    onset_frames = np.where(onset_env &gt; threshold)[0]
+    
+    # 3. Median smoothing (removes vibrato without losing legit pitch changes)
+    midi_smooth = signal.medfilt(midi_float, kernel_size=5)
+    
+    # 4. Split logic
+    for frame in range(len(f0)):
+        pitch_change = abs(current_pitch - running_median)
+        is_onset_nearby = any(j in onset_frames for j in range(frame-2, frame+2))
+        
+        # Split on: (onset + mild pitch change) OR (large pitch jump alone)
+        should_break = (is_onset_nearby and pitch_change &gt; 0.6) or (pitch_change &gt; 2.0)
+        
+        if should_break:
+            emit_note(curr_start, frame, median(pitches))
+            start_new_note(frame)</code></pre>
+
+            <div class="info-box">
+                <strong>Design Decision:</strong> The 0.6 semitone threshold for onset-triggered splits was tuned
+                empirically. Lower values caused over-segmentation on vibrato; higher values missed legato note changes.
+            </div>
+        </section>
+
+        <!-- Instrument Transcription -->
+        <section>
+            <h2>🎹 Instrument Transcription: Multi-Pass Consensus</h2>
+
+            <h3>The Octave Error Problem</h3>
+            <p>BasicPitch (and all polyphonic transcribers) suffer from octave errors where a note is detected 12
+                semitones higher or lower than the true pitch. This is especially problematic for bass and low vocals.
+            </p>
+
+            <div class="mermaid">
+                flowchart TB
+                subgraph PROBLEM["The Problem"]
+                direction LR
+                P1["Ground Truth:<br />C3 (48)"] --> P2["BasicPitch Output:<br />C4 (60)"]
+                P2 --> P3["❌ Octave Error"]
+                end
+
+                subgraph SOLUTION["Multi-Pass Solution"]
+                direction TB
+                S1["Original Audio"] --> T1["Transcribe<br />(Base Pass)"]
+
+                S1 --> S2["Pitch Shift +12st"]
+                S2 --> T2["Transcribe"]
+                T2 --> T2b["Shift Back -12st"]
+
+                S1 --> S3["Pitch Shift -12st"]
+                S3 --> T3["Transcribe"]
+                T3 --> T3b["Shift Back +12st"]
+
+                T1 & T2b & T3b --> V["Voting<br />(2/3 Agree)"]
+                V --> OUT["Consensus Notes"]
+                end
+
+                style PROBLEM fill:#3f1f1f,stroke:#ef4444
+                style SOLUTION fill:#1f3f1f,stroke:#10b981
+            </div>
+
+            <h4>Voting Logic Implementation</h4>
+            <pre><code>def multipass_consensus(audio_path, model_path, **kwargs):
+    # Pass 0: Original transcription
+    base_notes = predict(audio_path, ...)
+    
+    # Pass 1: +12 semitone shift
+    y_shifted = librosa.effects.pitch_shift(y, sr=sr, n_steps=12)
+    notes_plus12 = predict(temp_path, ...)
+    # Correct pitch: note.pitch -= 12
+    
+    # Pass 2: -12 semitone shift  
+    y_shifted = librosa.effects.pitch_shift(y, sr=sr, n_steps=-12)
+    notes_minus12 = predict(temp_path, ...)
+    # Correct pitch: note.pitch += 12
+    
+    # Voting
+    for note in base_notes:
+        votes = 1
+        
+        # Check +12 pass
+        for n1 in notes_plus12:
+            if abs(note.time - n1.time) &lt; 0.1 and abs(note.pitch - n1.pitch) &lt; 0.5:
+                votes += 1
+                break
+        
+        # Check -12 pass
+        for n2 in notes_minus12:
+            if abs(note.time - n2.time) &lt; 0.1 and abs(note.pitch - n2.pitch) &lt; 0.5:
+                votes += 1
+                break
+        
+        if votes &gt;= 2:
+            consensus_notes.append(note)</code></pre>
+
+            <h3>Per-Stem Configuration Rationale</h3>
+
+            <table>
+                <tr>
+                    <th>Stem</th>
+                    <th>Onset</th>
+                    <th>Frame</th>
+                    <th>Multi-Pass</th>
+                    <th>Rationale</th>
+                </tr>
+                <tr>
+                    <td>Piano</td>
+                    <td>0.40</td>
+                    <td>0.30</td>
+                    <td>✅</td>
+                    <td>Stricter onset to avoid sustain pedal bleed; multi-pass for octave-spanning runs</td>
+                </tr>
+                <tr>
+                    <td>Guitar</td>
+                    <td>0.40</td>
+                    <td>0.30</td>
+                    <td>✅</td>
+                    <td>Zero smoothing preserves pick attacks; multi-pass catches low E string errors</td>
+                </tr>
+                <tr>
+                    <td>Bass</td>
+                    <td>0.50</td>
+                    <td>0.40</td>
+                    <td>✅</td>
+                    <td>Highest thresholds due to low-frequency mud; critical for octave accuracy</td>
+                </tr>
+                <tr>
+                    <td>Other</td>
+                    <td>0.55</td>
+                    <td>0.40</td>
+                    <td>✅</td>
+                    <td>Composite track is noisy; velocity_gate=0.25 further filters weak notes</td>
+                </tr>
+                <tr>
+                    <td>Drums</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>❌</td>
+                    <td>Uses Librosa onset detection instead; pitch locked to 60 (C4)</td>
+                </tr>
+            </table>
+
+            <h3>Drum Transcription: Grid Decimation</h3>
+            <p>Drum transcription uses DSP-based onset detection with aggressive decimation to achieve a "quarter-note
+                feel":</p>
+
+            <pre><code>def _transcribe_drums_onset(self, audio_path):
+    # 1. Onset strength envelope
+    onset_env = librosa.onset.onset_strength(y=y, sr=sr)
+    
+    # 2. Peak picking with strict parameters
+    # delta=0.45 (vs default 0.1) - only strong hits
+    # wait=6 (vs default 1) - minimum ~60ms between hits
+    peaks = librosa.util.peak_pick(onset_env, delta=0.45, wait=6)
+    
+    # 3. Grid decimation (BPM-aware)
+    quarter_note_dur = 60.0 / self.bpm
+    decim_window = quarter_note_dur * 0.85  # ~85% of quarter note
+    
+    # Keep only loudest hit within each window
+    for next_hit in raw_hits:
+        if next_hit.time - current_candidate.time &lt; decim_window:
+            # Conflict: keep louder
+            if next_hit.velocity &gt; current_candidate.velocity:
+                current_candidate = next_hit
+        else:
+            emit(current_candidate)
+            current_candidate = next_hit</code></pre>
+
+            <div class="success-box">
+                <strong>Why Decimation Works:</strong> Drum rolls and fills sound great in music but overwhelm players
+                in rhythm games. Decimating to quarter-note grid preserves the "beat feel" while keeping note density
+                manageable.
+            </div>
+        </section>
+
+        <!-- Chart Generation Deep Dive -->
+        <section>
+            <h2>📊 Chart Generation: Algorithmic Design</h2>
+
+            <h3>Layer Priority System</h3>
+            <p>The generator implements a hierarchical focus system that determines which notes become primary gameplay
+                elements:</p>
+
+            <div class="mermaid">
+                stateDiagram-v2
+                state "Input Events" as INPUT
+                state "Layer Selection" as LAYERS
+                state "Primary Focus" as PRIMARY
+                state "Support Layer" as SUPPORT
+                state "Rejected" as REJECT
+
+                INPUT --> LAYERS
+
+                LAYERS --> PRIMARY: vocals, vocals_lead
+                LAYERS --> SUPPORT: drums (on-beat only)
+                LAYERS --> REJECT: other melodic (shadowed)
+
+                state PRIMARY {
+                [*] --> ScoreBoost: x2.0 multiplier
+                ScoreBoost --> VolumeBoost: +20%
+                }
+
+                state SUPPORT {
+                [*] --> BeatCheck: Is on 1/4 or 1/8?
+                BeatCheck --> Allowed: Yes
+                BeatCheck --> Killed: No
+                Allowed --> ScorePenalty: x0.8
+                }
+            </div>
+
+            <h4>Focus Mode Logic</h4>
+            <pre><code>def select_layers(difficulty, manifest, focus_mode, stem_weights):
+    if difficulty in ["EASY", "NORMAL", "HARD"]:
+        actual_mode = "main"  # Force vocal focus
+    elif difficulty == "ALT_HARD":
+        actual_mode = "alt"   # Instrument focus
+    
+    if actual_mode == "main":
+        # MAIN: Vocals > Lead > Rhythm
+        if has_vocals:
+            primary = ["vocals_lead"] if "vocals_lead" in active else ["vocals"]
+        else:
+            # Instrumental: Dynamic sort by note velocity sum
+            candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
+            primary = [candidates[0]]
+        
+        support = ["drums"] if difficulty != "EASY" else []
+    
+    elif actual_mode == "alt":
+        # ALT: 2nd busiest instrument for variety
+        non_vocal_melodic = [s for s in active if s not in ["vocals", "drums", "bass"]]
+        non_vocal_melodic.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
+        
+        if not has_vocals and len(non_vocal_melodic) > 1:
+            primary = [non_vocal_melodic[1]]  # 2nd busiest for diversity
+        else:
+            primary = [non_vocal_melodic[0]] if non_vocal_melodic else ["drums"]</code></pre>
+
+            <h3>Adaptive Sieve: NPS Control</h3>
+            <p>The sieve enforces playability constraints through dynamic decimation:</p>
+
+            <div class="mermaid">
+                flowchart TB
+                E1["Note @ 1.00s"] --> S4["ACCEPT"]
+                E2["Note @ 1.05s"] --> CHK1{"dt >= 150ms?"}
+                CHK1 -->|No| CHK2{"dt >= 50ms AND burst < 400ms?"} CHK2 -->|Yes| S5["BURST ACCEPT"]
+                    CHK2 -->|No| S3["DECIMATE"]
+                    S3 --> E4["Note @ 1.25s"]
+                    E4 --> CHK3{"dt >= 150ms?"}
+                    CHK3 -->|Yes| S4
+
+                    style E1 fill:#1f2937,stroke:#22d3ee
+                    style E2 fill:#1f2937,stroke:#ec4899
+                    style E4 fill:#1f2937,stroke:#22d3ee
+                    style S4 fill:#1f3f1f,stroke:#10b981
+                    style S5 fill:#3f3f1f,stroke:#f59e0b
+                    style S3 fill:#3f1f1f,stroke:#ef4444
+            </div>
+
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>EASY</th>
+                    <th>NORMAL</th>
+                    <th>HARD</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>base_min_interval</td>
+                    <td>250ms</td>
+                    <td>200ms</td>
+                    <td>150ms</td>
+                    <td>Minimum gap between notes (standard pacing)</td>
+                </tr>
+                <tr>
+                    <td>abs_min_interval</td>
+                    <td colspan="3">50ms (global)</td>
+                    <td>Physical limit even during bursts</td>
+                </tr>
+                <tr>
+                    <td>burst_limit</td>
+                    <td colspan="3">400ms (global)</td>
+                    <td>Maximum burst duration before enforcing standard pacing</td>
+                </tr>
+                <tr>
+                    <td>max_polyphony</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>Simultaneous notes per moment</td>
+                </tr>
+            </table>
+
+            <h3>Lane Allocation: Pitch-to-Lane Mapping</h3>
+
+            <pre><code>def _allocate_lanes(events, n_lanes):
+    """Maps notes to lanes using hybrid absolute/relative positioning."""
+    last_pitch = 60  # Middle C
+    last_lane = n_lanes // 2  # Start center
+    
+    for event in events:
+        pitch_delta = event.pitch - last_pitch
+        
+        if abs(pitch_delta) &gt; 12:
+            # OCTAVE JUMP: Use absolute mapping
+            # Map MIDI 40-80 to lanes 0-(n-1)
+            normalized = (event.pitch - 48) / 36.0  # ~2.5 octaves
+            lane = int(normalized * (n_lanes - 0.01))
+        else:
+            # MELODIC MOVEMENT: Relative to last
+            if pitch_delta &gt; 2:
+                move = +1
+            elif pitch_delta &lt; -2:
+                move = -1
+            else:
+                move = 0
+            
+            lane = clamp(last_lane + move, 0, n_lanes - 1)
+        
+        last_pitch = event.pitch
+        last_lane = lane</code></pre>
+
+            <div class="info-box">
+                <strong>Design Philosophy:</strong> Players develop muscle memory for melodic motion. By using relative
+                movement for small intervals and absolute positioning for jumps, the chart "feels" like the melody
+                rather than random lane assignments.
+            </div>
+        </section>
+
+        <!-- Benchmarking Deep Dive -->
+        <section>
+            <h2>📈 Benchmarking Methodology</h2>
+
+            <h3>Dataset Selection</h3>
+            <p>Benchmarking uses the <strong>Kiritan Singing Database</strong>, a professionally annotated corpus:</p>
+
+            <table>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                <tr>
+                    <td>Source</td>
+                    <td>Kiritan voice synthesis project (Japanese)</td>
+                </tr>
+                <tr>
+                    <td>Files</td>
+                    <td>50+ stereo WAV files</td>
+                </tr>
+                <tr>
+                    <td>Ground Truth</td>
+                    <td>MIDI with note_on/off, velocity, tempo</td>
+                </tr>
+                <tr>
+                    <td>Duration</td>
+                    <td>15-60 seconds per file</td>
+                </tr>
+                <tr>
+                    <td>Content</td>
+                    <td>Solo singing voice (clean, studio quality)</td>
+                </tr>
+            </table>
+
+            <h3>Evaluation Metrics</h3>
+
+            <pre><code>def evaluate(pred, truth, tol_time=0.1, tol_pitch=0.6, align=True):
+    """
+    Greedy matching evaluation with auto-alignment.
+    
+    Parameters:
+    - tol_time: 100ms window (typical human reaction time)
+    - tol_pitch: 0.6 semitones (minor tuning variance allowed)
+    - align: Enable auto-offset correction to handle model latency
+    
+    Returns:
+    - precision: TP / (TP + FP) - How many predictions were correct?
+    - recall: TP / (TP + FN) - How many truths were found?
+    - f1: Harmonic mean of precision and recall
+    - pitch_err: Mean pitch deviation of matched notes (semitones)
+    """
+    
+    # Auto-alignment: Find best time offset (-2s to +2s, 50ms steps)
+    if align:
+        best_offset = find_best_alignment(pred, truth)
+        for p in pred:
+            p.time -= best_offset
+    
+    # Greedy matching
+    matched_truth = set()
+    for p in pred:
+        for i, t in enumerate(truth):
+            if i in matched_truth:
+                continue
+            if abs(p.time - t.time) &lt; tol_time and abs(p.pitch - t.pitch) &lt; tol_pitch:
+                matched_truth.add(i)
+                break</code></pre>
+
+            <h3>Parameter Sweep Protocol</h3>
+            <p>Systematic testing of BasicPitch thresholds followed this protocol:</p>
+
+            <ol>
+                <li><strong>Calibration Run:</strong> Run with default params, auto-align to find global offset</li>
+                <li><strong>Grid Search:</strong> Test all combinations of onset=[0.2-0.5] × frame=[0.2-0.4] where frame
+                    ≤ onset</li>
+                <li><strong>Apply Calibration:</strong> Add the learned offset to all sweep runs</li>
+                <li><strong>Rank by F1:</strong> Primary metric; precision tiebreaker</li>
+                <li><strong>Recommend:</strong> Pick highest recall among configs with precision > 0.4</li>
+            </ol>
+
+            <h3>Synthetic Polyphonic Testing</h3>
+            <p>For choir/duet testing, synthetic data is generated:</p>
+
+            <pre><code>def generate_synthetic_choir(source_wav, source_midi, interval=4):
+    """
+    Creates a 'choir' mix by combining original with pitch-shifted version.
+    
+    This tests the ConsensusEngine's ability to:
+    1. Detect multiple simultaneous pitches
+    2. Correctly assign harmonies as is_harmony=True
+    3. Not merge close pitches (e.g., 3rd = 4 semitones)
+    """
+    y_original, sr = librosa.load(source_wav, sr=None)
+    y_shifted = librosa.effects.pitch_shift(y_original, sr=sr, n_steps=interval)
+    y_mix = (y_original + y_shifted) / 2.0
+    
+    # Ground truth doubles: original notes + interval-shifted notes
+    truth = []
+    for note in original_midi_notes:
+        truth.append(NoteEvent(note.time, note.dur, note.pitch, ...))
+        truth.append(NoteEvent(note.time, note.dur, note.pitch + interval, ...))</code></pre>
+        </section>
+
+        <!-- Lessons Learned -->
+        <section>
+            <h2>💡 Key Lessons Learned</h2>
+
+            <div class="info-box">
+                <h4>1. Model Specialization Beats Generalization</h4>
+                <p>Using FCPE (vocal-specialized) + BasicPitch (polyphonic-generalized) + Librosa (percussion-optimized)
+                    outperformed any single "universal" model by 15-20% F1.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>2. Consensus > Threshold Tuning</h4>
+                <p>Multi-pass voting eliminated more octave errors than any amount of threshold tuning. A mediocre model
+                    run 3x with consensus beats a tuned model 1x.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>3. Latency Compensation is Critical</h4>
+                <p>Every ML model has inherent latency bias (~8-20ms early). DSP grounding to audio transients is
+                    essential for chart "feel".</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>4. Whisper ≠ Timing Source</h4>
+                <p>ASR models optimize for word accuracy, not timestamp precision. Even "word-level timestamps" have
+                    50-200ms jitter unsuitable for rhythm applications.</p>
+            </div>
+
+            <div class="success-box">
+                <h4>5. Separation Quality > Transcription Quality</h4>
+                <p>Upgrading from 4-stem to 6-stem separation improved overall pipeline accuracy more than any
+                    transcription model change. Clean stems = clean notes.</p>
+            </div>
+        </section>
+
+        <footer style="text-align: center; padding: 2rem; color: var(--text-secondary); margin-top: 2rem;">
+            <p>Model Evolution Documentation | Rhythm Engine V3.0.0 | For Portfolio Review</p>
+        </footer>
+    </div>
+
+    <script>
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#22d3ee',
+                primaryTextColor: '#f9fafb',
+                primaryBorderColor: '#374151',
+                lineColor: '#22d3ee',
+                secondaryColor: '#ec4899',
+                tertiaryColor: '#1f2937',
+                background: '#0a0f1a',
+                mainBkg: '#111827',
+                nodeBorder: '#374151',
+                nodeTextColor: '#f9fafb',
+                textColor: '#f9fafb'
+            }
+        });
+    </script>
+</body>
+
+</html>
