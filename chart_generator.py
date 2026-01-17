@@ -325,8 +325,16 @@ class ChartGenerator:
         
         quantized_events = snapped_strict + snapped_soft
         
+        # --- STAGE 2.5: MERGE FRAGMENTED NOTES ---
+        # Merge short consecutive notes of similar pitch into longer notes
+        # This happens BEFORE sieving so merged notes can become holds
+        merged_events = self._merge_fragmented_notes(quantized_events)
+        merge_count = len(quantized_events) - len(merged_events)
+        if merge_count > 0:
+            print(f"  [Merge] Merged {merge_count} fragmented notes")
+        
         # --- STAGE 3: THE SIEVE (Scoring & Selection) ---
-        ranked_events = self._rank_events_layered(quantized_events, primary_src, support_src)
+        ranked_events = self._rank_events_layered(merged_events, primary_src, support_src)
         
         # Using New Adaptive Sieve (V300)
         final_events = self._filter_adaptive_sieve(ranked_events, difficulty)
@@ -355,7 +363,6 @@ class ChartGenerator:
         return {
             "metadata": {
                 "difficulty": difficulty, 
-                "version": "V300", 
                 "bpm": self.bpm,
                 "focus": focus_mode  # Export Focus Mode for Visualizer
             },
@@ -888,13 +895,19 @@ class ChartGenerator:
                     if can_hold and is_same_pitch:
                          # Extend current duration to cover next note
                          new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
-                         curr["dur"] = max(0.1, new_end - curr["time"]) # Make it a hold if merged
-                         curr["type"] = "hold"
+                         new_dur = new_end - curr["time"]
+                         
+                         # Only make it a hold if merged duration is meaningful (>= 0.25s)
+                         if new_dur >= 0.25:
+                             curr["dur"] = new_dur
+                             curr["type"] = "hold"
+                         else:
+                             # Too short - just keep as tap
+                             curr["dur"] = 0.0
+                             curr["type"] = "tap"
                     else:
                          # Cannot hold (e.g. guitar/drums) OR Trill glitch
                          # Absorb the next note.
-                         # If it was a trill glitch (<40ms), we just delete the second note.
-                         # If it was a jack, we keep the first one.
                          curr["dur"] = 0.0
                          curr["type"] = "tap"
                          
@@ -921,8 +934,9 @@ class ChartGenerator:
                             new_dur = max(0.0, limit - current["time"])
                             current["dur"] = new_dur
                             
-                            # If too short, convert back to tap
-                            if new_dur < 0.05:
+                            # If too short for a hold, convert back to tap
+                            # Use 0.25s as minimum visible hold
+                            if new_dur < 0.25:
                                 current["dur"] = 0.0
                                 current["type"] = "tap"
                 
@@ -957,6 +971,113 @@ class ChartGenerator:
             
         return safe_final
 
+
+    def _merge_fragmented_notes(self, events: List[NoteEvent]) -> List[NoteEvent]:
+        """
+        Merges fragmented consecutive notes of similar pitch into single longer notes.
+        
+        This catches cases where a sustained vocal gets split by the transcriber:
+        - Short onset artifact + long sustained note → single hold
+        - Vibrato causing multiple short notes → single hold
+        
+        Conservative criteria to avoid breaking intentional staccato:
+        - Same source (stem)
+        - Similar pitch (within 1.5 semitones)
+        - Very small gap (< 50ms)
+        - Leading note is short (< 200ms) - if first note is long, it's probably intentional
+        """
+        if not events:
+            return []
+        
+        # Only apply to melodic stems (not drums/bass)
+        melodic_stems = {"vocals", "vocals_lead", "piano", "guitar", "other"}
+        
+        # Separate melodic and non-melodic
+        melodic = [e for e in events if e.source in melodic_stems]
+        non_melodic = [e for e in events if e.source not in melodic_stems]
+        
+        if not melodic:
+            return events
+        
+        # Group by source for independent processing
+        from collections import defaultdict
+        by_source = defaultdict(list)
+        for e in melodic:
+            by_source[e.source].append(e)
+        
+        merged_all = []
+        
+        for source, notes in by_source.items():
+            notes.sort(key=lambda x: x.time)
+            
+            merged = []
+            i = 0
+            
+            while i < len(notes):
+                curr = notes[i]
+                
+                # Look ahead for merge candidates
+                chain = [curr]
+                j = i + 1
+                
+                while j < len(notes):
+                    next_n = notes[j]
+                    prev = chain[-1]
+                    
+                    # Gap between end of previous and start of next
+                    gap = next_n.time - (prev.time + prev.duration)
+                    
+                    # Pitch difference
+                    pitch_diff = abs(next_n.pitch - curr.pitch)  # Compare to FIRST note's pitch
+                    
+                    # Merge criteria (conservative)
+                    should_merge = (
+                        gap < 0.05 and  # Very small gap (< 50ms)
+                        pitch_diff < 1.5 and  # Similar pitch
+                        prev.duration < 0.20  # Previous note is short (likely artifact)
+                    )
+                    
+                    if should_merge:
+                        chain.append(next_n)
+                        j += 1
+                    else:
+                        break
+                
+                if len(chain) > 1:
+                    # Merge the chain into a single note
+                    start_time = chain[0].time
+                    end_time = chain[-1].time + chain[-1].duration
+                    
+                    # Pitch: duration-weighted average (biased toward longer notes)
+                    total_dur = sum(n.duration for n in chain)
+                    if total_dur > 0:
+                        weighted_pitch = sum(n.pitch * n.duration for n in chain) / total_dur
+                    else:
+                        weighted_pitch = chain[0].pitch
+                    
+                    # Velocity: max of chain
+                    max_vel = max(n.velocity for n in chain)
+                    
+                    merged_note = NoteEvent(
+                        time=start_time,
+                        duration=end_time - start_time,
+                        pitch=weighted_pitch,
+                        velocity=max_vel,
+                        source=source
+                    )
+                    merged.append(merged_note)
+                else:
+                    merged.append(curr)
+                
+                i = j if len(chain) > 1 else i + 1
+            
+            merged_all.extend(merged)
+        
+        # Combine with non-melodic
+        result = merged_all + non_melodic
+        result.sort(key=lambda x: x.time)
+        
+        return result
 
     def _deduplicate_same_pitch(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
