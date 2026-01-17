@@ -4,10 +4,10 @@ from beatmap import NoteEvent, EventFilter, Quantizer
 
 # Configuration for Visualizer compatibility & Generator Logic
 DIFF_CONFIGS = {
-    "EASY":   {"lanes": 4, "nps": 2.5},
-    "NORMAL": {"lanes": 4, "nps": 4.5},
-    "HARD":   {"lanes": 4, "nps": 6.0},
-    "ALT_HARD": {"lanes": 4, "nps": 6.0}
+    "EASY":   {"lanes": 4, "nps": 2.5, "poly": 1, "min_interval": 0.25},
+    "NORMAL": {"lanes": 4, "nps": 4.0, "poly": 2, "min_interval": 0.20},
+    "HARD":   {"lanes": 4, "nps": 6.0, "poly": 2, "min_interval": 0.15},
+    "ALT_HARD": {"lanes": 4, "nps": 6.0, "poly": 2, "min_interval": 0.15}
 }
 
 GENERATOR_CONFIG = {
@@ -571,14 +571,8 @@ class ChartGenerator:
         """
         if not events: return []
         
-        # Difficulty Tuning
-        diff_limits = {
-            "EASY":   {"nps": 4.0, "poly": 1, "min_interval": 0.25},
-            "NORMAL": {"nps": 6.0, "poly": 2, "min_interval": 0.16},
-            "HARD":   {"nps": 12.0, "poly": 2, "min_interval": 0.08}, # 12.5 NPS = 0.08s
-            "ALT_HARD": {"nps": 10.0, "poly": 2, "min_interval": 0.09}  # Reduced density for playability
-        }
-        cfg = diff_limits.get(difficulty, diff_limits["NORMAL"])
+        # Use centralized difficulty config
+        cfg = DIFF_CONFIGS.get(difficulty, DIFF_CONFIGS["NORMAL"])
         
         target_nps = cfg["nps"]
         max_poly = cfg["poly"]
@@ -795,7 +789,10 @@ class ChartGenerator:
             })
         
         # Post-process: Resolve conflicts (Hold overlaps)
-        return self._resolve_conflicts(processed)
+        conflict_resolved = self._resolve_conflicts(processed)
+        
+        # Cross-stem anti-spam: Remove secondary notes too close to primary notes
+        return self._resolve_cross_stem_conflicts(conflict_resolved)
 
     def _sanitize_holds(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
@@ -971,6 +968,86 @@ class ChartGenerator:
             
         return safe_final
 
+    def _resolve_cross_stem_conflicts(self, notes: List[dict]) -> List[dict]:
+        """
+        Anti-spam filter for cross-stem conflicts.
+        Removes secondary layer notes that are too close to primary layer notes.
+        
+        Priority hierarchy (highest to lowest):
+        1. vocals, vocals_lead (primary melodic)
+        2. bass (primary rhythm)
+        3. drums (secondary rhythm)
+        4. guitar, piano (melodic support)
+        5. other (composite/backup)
+        
+        Logic:
+        - If a lower-priority note is within 'proximity_window' of a higher-priority note,
+          remove the lower-priority note to avoid double-note jacks.
+        """
+        if not notes:
+            return notes
+            
+        # Define stem priority (higher = more important)
+        stem_priority = {
+            "vocals": 100,
+            "vocals_lead": 100,
+            "bass": 80,
+            "drums": 60,
+            "guitar": 50,
+            "piano": 50,
+            "other": 20
+        }
+        
+        # Proximity window: if notes are closer than this, lower priority forfeits
+        proximity_window = 0.08  # 80ms - about a 32nd note at 150 BPM
+        
+        # Sort by time for efficient scanning
+        sorted_notes = sorted(notes, key=lambda x: x["time"])
+        
+        # Track which notes to keep
+        keep_indices = set(range(len(sorted_notes)))
+        
+        # For each note, check if any nearby note has higher priority
+        for i in range(len(sorted_notes)):
+            if i not in keep_indices:
+                continue  # Already marked for removal
+                
+            current = sorted_notes[i]
+            current_priority = stem_priority.get(current["source"], 0)
+            current_time = current["time"]
+            
+            # Look at nearby notes (within proximity window)
+            # Check backwards and forwards
+            for j in range(len(sorted_notes)):
+                if i == j or j not in keep_indices:
+                    continue
+                    
+                other = sorted_notes[j]
+                other_time = other["time"]
+                
+                # Check if within proximity window
+                time_diff = abs(other_time - current_time)
+                if time_diff > proximity_window:
+                    # If j > i and we're past the window, no need to check further forward
+                    if j > i:
+                        break
+                    continue
+                
+                other_priority = stem_priority.get(other["source"], 0)
+                
+                # If other note has higher priority, remove current note
+                if other_priority > current_priority:
+                    keep_indices.discard(i)
+                    break  # No need to check further for this note
+        
+        # Filter to only kept notes
+        filtered = [sorted_notes[i] for i in sorted(keep_indices)]
+        
+        removed_count = len(notes) - len(filtered)
+        if removed_count > 0:
+            print(f"    [Cross-Stem Filter] Removed {removed_count} secondary notes too close to primary notes")
+        
+        return filtered
 
     def _merge_fragmented_notes(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
