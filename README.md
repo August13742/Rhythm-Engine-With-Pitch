@@ -4,7 +4,8 @@ Automated beatmap generation pipeline that transforms audio files into playable 
 
 A Vibe Coding Project.
 
-https://github.com/user-attachments/assets/87034d4e-1968-4015-b654-03110216722e
+https://github.com/user-attachments/assets/ddae465c-f751-416a-84ba-18d1e98a3334
+
 
 
 ## Quick Start
