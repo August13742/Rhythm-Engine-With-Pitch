@@ -1,6 +1,9 @@
-# Rhythm Engine
+# Rhythm Engine with Pitch Estimation
 
-Automated beatmap generation pipeline that transforms audio files into playable rhythm game charts.
+Automated beatmap generation pipeline that transforms audio files into playable rhythm game charts with MIDI pitch estimation (to produce SFX that act as stylisied audio compressor).
+
+https://github.com/user-attachments/assets/87034d4e-1968-4015-b654-03110216722e
+
 
 ## Quick Start
 
