@@ -3,7 +3,8 @@ import sys
 import json
 import librosa
 import numpy as np
-from typing import List
+import pickle
+from typing import List, Dict
 
 from beatmap import NoteEvent, EventFilter
 from transcribe.basic_pitch import BasicPitchTranscriber
@@ -286,15 +287,24 @@ class RhythmEngine:
                 return {}
         return {}
 
-    def run(self):
-        print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: Dynamic)")
+    def _extract_raw_events(self, rechart: bool) -> List[NoteEvent]:
+        """
+        Performs the Heavy Transcription Phase (Model Inference).
+        Returns raw events (unfiltered, unsmoothed, ungrounded).
+        Saves/Resumes from `stems/raw_events_cache.pkl`.
+        """
+        cache_path = os.path.join(self.stems_folder, "raw_events_cache.pkl")
         
-        # 0. BPM Detection (Already done in __init__)
-        print(f"[RhythmEngine] Using BPM: {self.bpm}")
-        # self.generator.bpm = self.bpm # Already set during init
-        # self.generator.quantizer.bpm = self.bpm # Already set during init
+        # Resume Check
+        if rechart and os.path.exists(cache_path):
+            print(f"[RhythmEngine] Loading RAW events from {cache_path}...")
+            try:
+                with open(cache_path, 'rb') as f:
+                    return pickle.load(f)
+            except Exception as e:
+                print(f"[ERROR] Failed to load cache: {e}. Re-running extraction.")
         
-        
+        print("[RhythmEngine] Starting Extraction Phase...")
         all_events: List[NoteEvent] = []
         
         # 1. Transcribe Instruments
@@ -331,47 +341,12 @@ class RhythmEngine:
                     
                     notes = self.bp_transcriber.transcribe(path, instrument_name=stem, **params)
                     
-                    # Velocity Gate: Remove low-confidence notes (especially for 'other')
-                    vel_gate = cfg.get("velocity_gate", 0)
-                    if vel_gate > 0 and notes:
-                        import numpy as np
-                        velocities = [n.velocity for n in notes]
-                        thresh = np.percentile(velocities, vel_gate * 100)
-                        before_count = len(notes)
-                        notes = [n for n in notes if n.velocity >= thresh]
-                        print(f"  [VelGate] {stem}: {before_count} -> {len(notes)} notes (thresh={thresh:.3f})")
-                    
-                    # Apply Smoothing if configured
-                    if cfg["smoothing"] > 0:
-                        from transcribe.smoother import VocalSmoother
-                        notes = VocalSmoother.smooth(notes, level=cfg["smoothing"])
-                
                 # Drum Fix: Force Fixed Pitch (e.g., C4 = 60)
                 if stem == "drums":
                     for n in notes: n.pitch = 60
                 
-                # DSP Grounding (New)
-                # Ground instrument notes to audio transients
-                # APPLY OFFSET BEFORE GROUNDING to help it find the right transient
-                
-                # Manual Offset Correction
-                if hasattr(self, "audio_engine_latency_offset") and self.audio_engine_latency_offset != 0:
-                     for n in notes: n.time += self.audio_engine_latency_offset
-                
-                # Skip grounding for Onset detected drums? 
-                # Librosa Onset IS the ground truth. Grounding again might shift it to *neighboring* onset.
-                # But TimingCorrector uses backtracking.
-                # Let's Skip Grounding for drums if we used Onset Detection, as it IS onset detection.
-                if stem != "drums":
-                     notes = TimingCorrector.ground_events(notes, path, window=0.1)
-                
-                # Silence Gate (New)
-                # Remove notes in silent sections (Hallucination removal)
-                # Threshold 0.01 (~-40dB)
-                notes = EventFilter.gate_silence(notes, path, threshold=0.01)
-                    
                 all_events.extend(notes)
-                
+        
         # 2. Transcribe Vocals
         # Prefer Lead > Mixed
         v_sources = ["vocals_lead", "vocals"]
@@ -410,37 +385,101 @@ class RhythmEngine:
                     # Returning to FCPE (High Fidelity Frame-based)
                     # Note: We rely on "Smart Snapping" in ChartGenerator to fix the timing.
                     v_notes = self.council.transcribe(v_path, model_type="fcpe")
-
-                print(f"DEBUG: Vocals BEFORE Smoothing: {len(v_notes)}")
-                
-                # Vocal Smoothing (Tunable)
-                from transcribe.smoother import VocalSmoother
-                # Lower level to 0.4 (Gentle) to preserve short notes (60ms)
-                print(f"[Generator] Applying Vocal Smoothing (Level=0.4)...")
-                v_notes = VocalSmoother.smooth(v_notes, level=0.4)
-                
-                print(f"DEBUG: Vocals AFTER Smoothing: {len(v_notes)}")
                 
                 # Patch source name (Force match to stem name for Layer Selector)
                 for n in v_notes:
                     n.source = v_name 
                 
-                # DSP Grounding? 
-                # Be careful grounding harmonies, they might shift onto lead transients.
-                # But we have offset now. Let's ground them.
                 all_events.extend(v_notes)
                 found_vocals = True
                 break
-            
-        # --- CACHE INJECTION ---
-        cache_path = os.path.join(self.stems_folder, "events_cache.pkl")
-        import pickle
+        
+        # Save Cache
         with open(cache_path, 'wb') as f:
             pickle.dump(all_events, f)
-        print(f"[Debug] Cached {len(all_events)} events to {cache_path}")
-        # -----------------------
+        print(f"[Debug] Cached {len(all_events)} RAW events to {cache_path}")
+        
+        return all_events
+
+    def _refine_events(self, raw_events: List[NoteEvent]) -> List[NoteEvent]:
+        """
+        Applies cleaning, smoothing, and grounding to raw events.
+        FAST phase - runs every time (even on rechart).
+        """
+        print("[RhythmEngine] Refinement Phase (Smoothing, Gating, Grounding)...")
+        refined_events = []
+        
+        # Group by Source
+        events_by_source: Dict[str, List[NoteEvent]] = {}
+        for n in raw_events:
+            s = n.source
+            if s not in events_by_source: events_by_source[s] = []
+            events_by_source[s].append(n)
             
-        print(f"Total collected events: {len(all_events)}")
+        for source, notes in events_by_source.items():
+            # Get Config
+            # Handle vocals_lead mapping to vocals config
+            cfg_key = "vocals" if "vocals" in source else source
+            cfg = STEM_TRANSCRIBE_CONFIG.get(cfg_key, STEM_TRANSCRIBE_CONFIG["other"])
+            
+            path = os.path.join(self.stems_folder, f"{source}.wav")
+            # If explicit file missing (e.g. vocals_lead might map to vocals.wav if separate file doesn't exist? 
+            # Actually _extract ensures valid source only if file exists or manifest says so.
+            # But let's check existence for Grounding/Gating.
+            if not os.path.exists(path) and source == "vocals_lead":
+                 # Fallback to vocals.wav
+                 path = os.path.join(self.stems_folder, "vocals.wav")
+            
+            # 1. Velocity Gate (Remove low-confidence)
+            vel_gate = cfg.get("velocity_gate", 0)
+            if vel_gate > 0 and notes:
+                velocities = [n.velocity for n in notes]
+                thresh = np.percentile(velocities, vel_gate * 100)
+                before_count = len(notes)
+                notes = [n for n in notes if n.velocity >= thresh]
+                # print(f"  [VelGate] {source}: {before_count} -> {len(notes)} notes (thresh={thresh:.3f})")
+            
+            # 2. Smoothing
+            if cfg.get("smoothing", 0) > 0:
+                from transcribe.smoother import VocalSmoother
+                notes = VocalSmoother.smooth(notes, level=cfg["smoothing"])
+            elif "vocals" in source: # Explicit Vocal Smoothing defaults
+                # The old logic applied hardcoded smoothing 0.4 to vocals
+                from transcribe.smoother import VocalSmoother
+                # print(f"  [Smoothing] Vocals 0.4")
+                notes = VocalSmoother.smooth(notes, level=0.4)
+
+            # 3. Latency Compensation (Manual Offset)
+            if hasattr(self, "audio_engine_latency_offset") and self.audio_engine_latency_offset != 0:
+                 for n in notes: n.time += self.audio_engine_latency_offset
+            
+            # 4. Grounding (TimingCorrector)
+            # Skip for Drums (Onset Detected)
+            if source != "drums" and os.path.exists(path):
+                 notes = TimingCorrector.ground_events(notes, path, window=0.1)
+
+            # 5. Silence Gate
+            if os.path.exists(path):
+                 notes = EventFilter.gate_silence(notes, path, threshold=0.01)
+
+            refined_events.extend(notes)
+            
+        print(f"Total refined events: {len(refined_events)}")
+        return refined_events
+
+    def run(self, rechart: bool = False):
+        print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: Dynamic)")
+        if rechart:
+            print("[RhythmEngine] Rechart Mode: Skipping Inference if possible.")
+        
+        # 0. BPM Detection (Already done in __init__)
+        print(f"[RhythmEngine] Using BPM: {self.bpm}")
+        
+        # 1. Extract (Or Load Raw Cache)
+        raw_events = self._extract_raw_events(rechart)
+        
+        # 2. Refine (Fast Processing)
+        all_events = self._refine_events(raw_events)
         
         # 3. Generate Charts
         print(f"[RhythmEngine] Saving beatmaps to: {self.beatmap_folder}")

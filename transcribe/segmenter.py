@@ -1,12 +1,8 @@
 import numpy as np
 import librosa
 from scipy import signal
+from beatmap import NoteEvent
 
-try:
-    from beatmap import NoteEvent
-except ImportError:
-    # Fallback if running from proper package context
-    from ..beatmap import NoteEvent
 
 
 def f0_to_note_events_v2(

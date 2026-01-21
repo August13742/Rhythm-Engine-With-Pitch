@@ -16,6 +16,7 @@ def main():
     parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation (use existing folder)")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
     parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
+    parser.add_argument("--rechart", action="store_true", help="Skip extraction and only re-run charting (requires previous run)")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -72,6 +73,9 @@ def main():
     if args.rebake:
         print("[Main] Rebake requested. Forcing generation.")
         should_generate = True
+    elif args.rechart:
+        print("[Main] Rechart requested. Regenerating charts from cached events.")
+        should_generate = True
     elif not beatmaps_exist:
         print("[Main] Beatmaps missing. Generating...")
         should_generate = True
@@ -81,7 +85,7 @@ def main():
     if should_generate:
         print(f"[Main] Launching RhythmEngine -> {beatmap_root}")
         engine = RhythmEngine(stems_dir, beatmap_root)
-        engine.run()
+        engine.run(rechart=args.rechart)
         print("[Main] Generation Complete.")
         
     if args.generate_only:
