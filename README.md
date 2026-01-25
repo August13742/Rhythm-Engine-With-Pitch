@@ -2,7 +2,9 @@
 
 Automated beatmap generation pipeline that transforms audio files into playable rhythm game charts with MIDI pitch estimation (to produce SFX that act as stylisied audio compressor).
 
-A Vibe Coding Project.
+A Vibe Coding Project. 
+
+Intended to be used with My [Godot Map Editor(WIP)](https://github.com/August13742/RhythmBeatmapEditor)
 
 https://github.com/user-attachments/assets/ddae465c-f751-416a-84ba-18d1e98a3334
 
