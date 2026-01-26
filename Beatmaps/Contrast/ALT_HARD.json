@@ -11,7 +11,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 92,
-      "vol": 0.87,
+      "vol": 0.85,
       "source": "piano"
     },
     {
@@ -38,7 +38,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 87,
-      "vol": 0.86,
+      "vol": 0.85,
       "source": "piano"
     },
     {
@@ -56,13 +56,13 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 65,
-      "vol": 0.55,
+      "vol": 0.56,
       "source": "piano"
     },
     {
       "time": 2.078,
       "lane": 0,
-      "dur": 0.3,
+      "dur": 0.15,
       "type": "tap",
       "midi": 53,
       "vol": 0.9,
@@ -74,7 +74,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 85,
-      "vol": 0.68,
+      "vol": 0.7,
       "source": "piano"
     },
     {
@@ -89,28 +89,19 @@
     {
       "time": 2.251,
       "lane": 3,
-      "dur": 0.15,
+      "dur": 0.1,
       "type": "tap",
       "midi": 87,
       "vol": 0.74,
       "source": "piano"
     },
     {
-      "time": 2.597,
-      "lane": 0,
-      "dur": 0.35,
+      "time": 2.468,
+      "lane": 3,
+      "dur": 0.42,
       "type": "tap",
-      "midi": 54,
-      "vol": 0.71,
-      "source": "piano"
-    },
-    {
-      "time": 2.597,
-      "lane": 1,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.72,
+      "midi": 85,
+      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -128,7 +119,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 80,
-      "vol": 0.52,
+      "vol": 0.53,
       "source": "piano"
     },
     {
@@ -173,7 +164,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 92,
-      "vol": 0.72,
+      "vol": 0.71,
       "source": "piano"
     },
     {
@@ -188,10 +179,19 @@
     {
       "time": 3.896,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.42,
       "type": "tap",
       "midi": 61,
       "vol": 0.69,
+      "source": "piano"
+    },
+    {
+      "time": 4.113,
+      "lane": 2,
+      "dur": 0.3,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -200,15 +200,6 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 87,
-      "vol": 0.77,
-      "source": "piano"
-    },
-    {
-      "time": 4.286,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 65,
       "vol": 0.76,
       "source": "piano"
     },
@@ -233,7 +224,7 @@
     {
       "time": 4.675,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.35,
       "type": "tap",
       "midi": 53,
       "vol": 0.77,
@@ -245,16 +236,16 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 85,
-      "vol": 0.73,
+      "vol": 0.72,
       "source": "piano"
     },
     {
       "time": 4.935,
       "lane": 3,
-      "dur": 0.15,
+      "dur": 0.1,
       "type": "tap",
       "midi": 87,
-      "vol": 0.64,
+      "vol": 0.65,
       "source": "piano"
     },
     {
@@ -413,7 +404,7 @@
     {
       "time": 7.273,
       "lane": 0,
-      "dur": 0.3,
+      "dur": 0.2,
       "type": "tap",
       "midi": 53,
       "vol": 0.8,
@@ -425,7 +416,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 68,
-      "vol": 0.8,
+      "vol": 0.81,
       "source": "piano"
     },
     {
@@ -434,7 +425,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 87,
-      "vol": 0.53,
+      "vol": 0.56,
       "source": "piano"
     },
     {
@@ -443,7 +434,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 84,
-      "vol": 0.73,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -461,7 +452,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 66,
-      "vol": 0.77,
+      "vol": 0.78,
       "source": "piano"
     },
     {
@@ -566,7 +557,7 @@
     {
       "time": 9.221,
       "lane": 2,
-      "dur": 0.55,
+      "dur": 0.42,
       "type": "tap",
       "midi": 65,
       "vol": 0.73,
@@ -575,7 +566,7 @@
     {
       "time": 9.481,
       "lane": 3,
-      "dur": 0.4,
+      "dur": 0.29,
       "type": "tap",
       "midi": 70,
       "vol": 0.76,
@@ -600,9 +591,9 @@
       "source": "piano"
     },
     {
-      "time": 9.87,
+      "time": 9.74,
       "lane": 2,
-      "dur": 0.29,
+      "dur": 0.42,
       "type": "tap",
       "midi": 68,
       "vol": 0.74,
@@ -615,6 +606,15 @@
       "type": "tap",
       "midi": 53,
       "vol": 0.79,
+      "source": "piano"
+    },
+    {
+      "time": 9.87,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 85,
+      "vol": 0.68,
       "source": "piano"
     },
     {
@@ -641,7 +641,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 84,
-      "vol": 0.78,
+      "vol": 0.79,
       "source": "piano"
     },
     {
@@ -695,7 +695,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 92,
-      "vol": 0.47,
+      "vol": 0.48,
       "source": "piano"
     },
     {
@@ -719,10 +719,10 @@
     {
       "time": 11.753,
       "lane": 1,
-      "dur": 0.36,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 65,
-      "vol": 0.72,
+      "midi": 66,
+      "vol": 0.56,
       "source": "piano"
     },
     {
@@ -746,19 +746,10 @@
     {
       "time": 12.208,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.25,
       "type": "tap",
       "midi": 61,
       "vol": 0.69,
-      "source": "piano"
-    },
-    {
-      "time": 12.338,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.58,
       "source": "piano"
     },
     {
@@ -772,7 +763,7 @@
     },
     {
       "time": 12.468,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.15,
       "type": "tap",
       "midi": 53,
@@ -884,13 +875,13 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 92,
-      "vol": 0.74,
+      "vol": 0.72,
       "source": "piano"
     },
     {
       "time": 14.286,
       "lane": 2,
-      "dur": 0.05,
+      "dur": 0.68,
       "type": "tap",
       "midi": 70,
       "vol": 0.8,
@@ -898,26 +889,35 @@
     },
     {
       "time": 14.286,
-      "lane": 1,
-      "dur": 0.7,
+      "lane": 0,
+      "dur": 0.68,
       "type": "tap",
-      "midi": 61,
+      "midi": 54,
       "vol": 0.76,
       "source": "piano"
     },
     {
-      "time": 14.416,
-      "lane": 2,
-      "dur": 0.1,
+      "time": 14.545,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.55,
+      "midi": 65,
+      "vol": 0.76,
+      "source": "piano"
+    },
+    {
+      "time": 14.545,
+      "lane": 3,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 87,
+      "vol": 0.74,
       "source": "piano"
     },
     {
       "time": 14.805,
-      "lane": 2,
-      "dur": 0.15,
+      "lane": 1,
+      "dur": 0.45,
       "type": "tap",
       "midi": 65,
       "vol": 0.57,
@@ -947,7 +947,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 87,
-      "vol": 0.53,
+      "vol": 0.54,
       "source": "piano"
     },
     {
@@ -956,13 +956,13 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 84,
-      "vol": 0.69,
+      "vol": 0.68,
       "source": "piano"
     },
     {
       "time": 15.541,
       "lane": 1,
-      "dur": 0.4,
+      "dur": 0.45,
       "type": "tap",
       "midi": 58,
       "vol": 0.79,
@@ -992,7 +992,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 72,
-      "vol": 0.63,
+      "vol": 0.62,
       "source": "piano"
     },
     {
@@ -1028,7 +1028,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 92,
-      "vol": 0.56,
+      "vol": 0.55,
       "source": "piano"
     },
     {
@@ -1037,7 +1037,7 @@
       "dur": 0.2,
       "type": "tap",
       "midi": 70,
-      "vol": 0.86,
+      "vol": 0.85,
       "source": "piano"
     },
     {
@@ -1079,7 +1079,7 @@
     {
       "time": 17.403,
       "lane": 1,
-      "dur": 0.1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 66,
       "vol": 0.74,
@@ -1091,7 +1091,7 @@
       "dur": 0.2,
       "type": "tap",
       "midi": 53,
-      "vol": 0.78,
+      "vol": 0.77,
       "source": "piano"
     },
     {
@@ -1109,7 +1109,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 65,
-      "vol": 0.56,
+      "vol": 0.57,
       "source": "piano"
     },
     {
@@ -1172,7 +1172,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 70,
-      "vol": 0.66,
+      "vol": 0.65,
       "source": "piano"
     },
     {
@@ -1304,7 +1304,7 @@
     {
       "time": 20.779,
       "lane": 2,
-      "dur": 0.68,
+      "dur": 0.75,
       "type": "tap",
       "midi": 73,
       "vol": 0.74,
@@ -1313,28 +1313,46 @@
     {
       "time": 20.779,
       "lane": 1,
-      "dur": 0.68,
+      "dur": 0.25,
       "type": "tap",
       "midi": 58,
       "vol": 0.77,
       "source": "piano"
     },
     {
-      "time": 21.558,
-      "lane": 2,
-      "dur": 0.3,
+      "time": 21.126,
+      "lane": 1,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 70,
+      "vol": 0.35,
+      "source": "piano"
+    },
+    {
+      "time": 21.429,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
       "midi": 72,
-      "vol": 0.91,
+      "vol": 0.72,
+      "source": "piano"
+    },
+    {
+      "time": 21.558,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.87,
       "source": "piano"
     },
     {
       "time": 21.558,
       "lane": 1,
-      "dur": 0.48,
+      "dur": 0.3,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.87,
+      "midi": 72,
+      "vol": 0.91,
       "source": "piano"
     },
     {
@@ -1352,7 +1370,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 72,
-      "vol": 0.5,
+      "vol": 0.49,
       "source": "piano"
     },
     {
@@ -1406,7 +1424,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 68,
-      "vol": 0.45,
+      "vol": 0.44,
       "source": "piano"
     },
     {
@@ -1439,7 +1457,7 @@
     {
       "time": 24.935,
       "lane": 0,
-      "dur": 0.2,
+      "dur": 0.05,
       "type": "tap",
       "midi": 53,
       "vol": 0.96,
@@ -1448,16 +1466,16 @@
     {
       "time": 24.935,
       "lane": 1,
-      "dur": 0.25,
+      "dur": 0.29,
       "type": "tap",
       "midi": 58,
       "vol": 0.73,
       "source": "piano"
     },
     {
-      "time": 25.238,
+      "time": 25.108,
       "lane": 0,
-      "dur": 0.4,
+      "dur": 0.1,
       "type": "tap",
       "midi": 39,
       "vol": 0.85,
@@ -1465,16 +1483,25 @@
     },
     {
       "time": 25.325,
-      "lane": 1,
-      "dur": 0.3,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 58,
-      "vol": 0.52,
+      "midi": 56,
+      "vol": 0.51,
+      "source": "piano"
+    },
+    {
+      "time": 25.325,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.44,
       "source": "piano"
     },
     {
       "time": 25.455,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.2,
       "type": "tap",
       "midi": 60,
@@ -1483,7 +1510,7 @@
     },
     {
       "time": 25.844,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 56,
@@ -1492,7 +1519,7 @@
     },
     {
       "time": 25.974,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
@@ -1501,11 +1528,11 @@
     },
     {
       "time": 26.494,
-      "lane": 2,
-      "dur": 0.65,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.76,
+      "midi": 58,
+      "vol": 0.67,
       "source": "piano"
     },
     {
@@ -1513,8 +1540,8 @@
       "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 58,
-      "vol": 0.67,
+      "midi": 61,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -1532,7 +1559,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 65,
-      "vol": 0.56,
+      "vol": 0.55,
       "source": "piano"
     },
     {
@@ -1673,19 +1700,28 @@
     {
       "time": 29.221,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.05,
       "type": "tap",
       "midi": 62,
       "vol": 0.73,
       "source": "piano"
     },
     {
-      "time": 29.61,
-      "lane": 0,
+      "time": 29.351,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.73,
+      "midi": 67,
+      "vol": 0.46,
+      "source": "piano"
+    },
+    {
+      "time": 29.61,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.62,
       "source": "piano"
     },
     {
@@ -1698,9 +1734,9 @@
       "source": "piano"
     },
     {
-      "time": 29.87,
+      "time": 29.74,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 43,
       "vol": 0.99,
@@ -1709,7 +1745,7 @@
     {
       "time": 29.87,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.05,
       "type": "tap",
       "midi": 65,
       "vol": 0.65,
@@ -1718,20 +1754,20 @@
     {
       "time": 30.0,
       "lane": 0,
-      "dur": 1.0,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.56,
+      "source": "piano"
+    },
+    {
+      "time": 30.0,
+      "lane": 1,
+      "dur": 0.29,
       "type": "tap",
       "midi": 58,
       "vol": 0.72,
       "source": "piano"
-    },
-    {
-      "time": 30.13,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.68,
-      "source": "drums"
     },
     {
       "time": 30.26,
@@ -1743,12 +1779,21 @@
       "source": "piano"
     },
     {
-      "time": 30.476,
+      "time": 30.39,
+      "lane": 0,
+      "dur": 0.35,
+      "type": "tap",
+      "midi": 44,
+      "vol": 0.73,
+      "source": "piano"
+    },
+    {
+      "time": 30.39,
       "lane": 1,
-      "dur": 0.3,
+      "dur": 0.05,
       "type": "tap",
       "midi": 54,
-      "vol": 0.83,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -1775,7 +1820,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 70,
-      "vol": 0.47,
+      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -1824,17 +1869,8 @@
       "source": "piano"
     },
     {
-      "time": 31.818,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 54,
-      "vol": 0.7,
-      "source": "piano"
-    },
-    {
       "time": 32.208,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
@@ -1843,7 +1879,7 @@
     },
     {
       "time": 32.338,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.4,
       "type": "tap",
       "midi": 59,
@@ -1852,11 +1888,20 @@
     },
     {
       "time": 32.987,
-      "lane": 1,
-      "dur": 0.05,
+      "lane": 0,
+      "dur": 0.35,
       "type": "tap",
       "midi": 47,
       "vol": 0.87,
+      "source": "piano"
+    },
+    {
+      "time": 33.074,
+      "lane": 1,
+      "dur": 0.27,
+      "type": "tap",
+      "midi": 63,
+      "vol": 0.77,
       "source": "piano"
     },
     {
@@ -1928,7 +1973,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 95,
-      "vol": 0.46,
+      "vol": 0.45,
       "source": "piano"
     },
     {
@@ -2022,6 +2067,15 @@
       "source": "piano"
     },
     {
+      "time": 35.584,
+      "lane": 3,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 84,
+      "vol": 0.52,
+      "source": "piano"
+    },
+    {
       "time": 35.844,
       "lane": 0,
       "dur": 0.42,
@@ -2099,13 +2153,13 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 61,
-      "vol": 0.92,
+      "vol": 0.91,
       "source": "piano"
     },
     {
       "time": 37.532,
       "lane": 0,
-      "dur": 0.29,
+      "dur": 0.55,
       "type": "tap",
       "midi": 51,
       "vol": 0.84,
@@ -2131,17 +2185,8 @@
     },
     {
       "time": 37.922,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
-      "source": "piano"
-    },
-    {
-      "time": 37.922,
       "lane": 1,
-      "dur": 0.35,
+      "dur": 0.15,
       "type": "tap",
       "midi": 60,
       "vol": 0.74,
@@ -2153,21 +2198,30 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 73,
-      "vol": 0.41,
+      "vol": 0.4,
       "source": "piano"
     },
     {
       "time": 38.182,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.85,
       "type": "tap",
       "midi": 46,
       "vol": 0.82,
       "source": "piano"
     },
     {
-      "time": 38.442,
+      "time": 38.182,
       "lane": 1,
+      "dur": 0.42,
+      "type": "tap",
+      "midi": 53,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 38.442,
+      "lane": 2,
       "dur": 0.25,
       "type": "tap",
       "midi": 60,
@@ -2176,7 +2230,7 @@
     },
     {
       "time": 38.701,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.6,
       "type": "tap",
       "midi": 56,
@@ -2185,7 +2239,7 @@
     },
     {
       "time": 38.831,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.9,
       "type": "tap",
       "midi": 60,
@@ -2194,8 +2248,8 @@
     },
     {
       "time": 39.481,
-      "lane": 0,
-      "dur": 0.15,
+      "lane": 1,
+      "dur": 0.25,
       "type": "tap",
       "midi": 56,
       "vol": 0.72,
@@ -2252,7 +2306,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 87,
-      "vol": 0.55,
+      "vol": 0.57,
       "source": "piano"
     },
     {
@@ -2261,7 +2315,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 73,
-      "vol": 0.48,
+      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -2283,12 +2337,12 @@
       "source": "piano"
     },
     {
-      "time": 41.385,
+      "time": 41.299,
       "lane": 0,
-      "dur": 0.29,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 49,
-      "vol": 0.62,
+      "midi": 42,
+      "vol": 0.75,
       "source": "piano"
     },
     {
@@ -2299,15 +2353,6 @@
       "midi": 60,
       "vol": 0.5,
       "source": "drums"
-    },
-    {
-      "time": 41.775,
-      "lane": 0,
-      "dur": 0.65,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.74,
-      "source": "piano"
     },
     {
       "time": 41.948,
@@ -2373,26 +2418,26 @@
       "source": "drums"
     },
     {
-      "time": 43.377,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.42,
-      "source": "piano"
-    },
-    {
       "time": 43.506,
       "lane": 1,
-      "dur": 0.33,
+      "dur": 0.05,
       "type": "tap",
       "midi": 58,
       "vol": 0.88,
       "source": "piano"
     },
     {
+      "time": 43.506,
+      "lane": 3,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 92,
+      "vol": 0.39,
+      "source": "piano"
+    },
+    {
       "time": 43.636,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.45,
       "type": "tap",
       "midi": 65,
@@ -2401,7 +2446,7 @@
     },
     {
       "time": 43.939,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.38,
       "type": "tap",
       "midi": 53,
@@ -2477,7 +2522,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 95,
-      "vol": 0.35,
+      "vol": 0.39,
       "source": "piano"
     },
     {
@@ -2519,7 +2564,7 @@
     {
       "time": 46.234,
       "lane": 1,
-      "dur": 0.42,
+      "dur": 0.35,
       "type": "tap",
       "midi": 65,
       "vol": 0.82,
@@ -2555,7 +2600,7 @@
     {
       "time": 47.273,
       "lane": 0,
-      "dur": 0.55,
+      "dur": 0.68,
       "type": "tap",
       "midi": 42,
       "vol": 1.0,
@@ -2564,7 +2609,7 @@
     {
       "time": 47.273,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.35,
       "type": "tap",
       "midi": 58,
       "vol": 0.74,
@@ -2573,6 +2618,15 @@
     {
       "time": 47.489,
       "lane": 2,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.31,
+      "source": "piano"
+    },
+    {
+      "time": 47.489,
+      "lane": 3,
       "dur": 0.1,
       "type": "tap",
       "midi": 68,
@@ -2581,7 +2635,7 @@
     },
     {
       "time": 47.662,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.05,
       "type": "tap",
       "midi": 61,
@@ -2590,7 +2644,7 @@
     },
     {
       "time": 47.922,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 53,
@@ -2654,7 +2708,7 @@
     {
       "time": 48.831,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.2,
       "type": "tap",
       "midi": 60,
       "vol": 0.53,
@@ -2679,9 +2733,9 @@
       "source": "piano"
     },
     {
-      "time": 49.221,
+      "time": 49.134,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 46,
       "vol": 0.9,
@@ -2710,7 +2764,7 @@
       "lane": 0,
       "dur": 0.05,
       "type": "tap",
-      "midi": 56,
+      "midi": 55,
       "vol": 0.63,
       "source": "piano"
     },
@@ -2739,15 +2793,6 @@
       "type": "tap",
       "midi": 58,
       "vol": 0.7,
-      "source": "piano"
-    },
-    {
-      "time": 50.13,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.41,
       "source": "piano"
     },
     {
@@ -2852,7 +2897,7 @@
     {
       "time": 51.558,
       "lane": 2,
-      "dur": 0.35,
+      "dur": 0.29,
       "type": "tap",
       "midi": 65,
       "vol": 0.91,
@@ -2870,7 +2915,7 @@
     {
       "time": 51.818,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.2,
       "type": "tap",
       "midi": 46,
       "vol": 0.94,
@@ -2878,7 +2923,16 @@
     },
     {
       "time": 51.948,
-      "lane": 0,
+      "lane": 2,
+      "dur": 0.5,
+      "type": "tap",
+      "midi": 63,
+      "vol": 0.85,
+      "source": "piano"
+    },
+    {
+      "time": 51.948,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
       "midi": 60,
@@ -2886,18 +2940,9 @@
       "source": "piano"
     },
     {
-      "time": 51.948,
-      "lane": 1,
-      "dur": 0.42,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.85,
-      "source": "piano"
-    },
-    {
       "time": 52.208,
-      "lane": 0,
-      "dur": 0.05,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 56,
       "vol": 0.61,
@@ -2910,15 +2955,6 @@
       "type": "tap",
       "midi": 41,
       "vol": 0.78,
-      "source": "piano"
-    },
-    {
-      "time": 52.468,
-      "lane": 2,
-      "dur": 0.35,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.45,
       "source": "piano"
     },
     {
@@ -3067,6 +3103,15 @@
     },
     {
       "time": 54.805,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.38,
+      "source": "piano"
+    },
+    {
+      "time": 54.805,
       "lane": 0,
       "dur": 0.15,
       "type": "tap",
@@ -3203,10 +3248,10 @@
     {
       "time": 58.312,
       "lane": 2,
-      "dur": 0.81,
+      "dur": 0.25,
       "type": "tap",
       "midi": 65,
-      "vol": 0.81,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -3221,7 +3266,7 @@
     {
       "time": 58.615,
       "lane": 0,
-      "dur": 0.64,
+      "dur": 0.1,
       "type": "tap",
       "midi": 49,
       "vol": 0.85,
@@ -3229,7 +3274,7 @@
     },
     {
       "time": 58.831,
-      "lane": 1,
+      "lane": 0,
       "dur": 1.03,
       "type": "tap",
       "midi": 61,
@@ -3237,21 +3282,21 @@
       "source": "piano"
     },
     {
-      "time": 59.221,
-      "lane": 2,
-      "dur": 0.3,
+      "time": 58.831,
+      "lane": 1,
+      "dur": 0.29,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.37,
+      "midi": 65,
+      "vol": 0.81,
       "source": "piano"
     },
     {
-      "time": 59.351,
-      "lane": 0,
-      "dur": 0.65,
+      "time": 59.221,
+      "lane": 1,
+      "dur": 0.3,
       "type": "tap",
-      "midi": 44,
-      "vol": 0.73,
+      "midi": 68,
+      "vol": 0.36,
       "source": "piano"
     },
     {
@@ -3265,17 +3310,17 @@
     },
     {
       "time": 59.957,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 51,
-      "vol": 0.81,
+      "vol": 0.8,
       "source": "piano"
     },
     {
       "time": 60.13,
       "lane": 0,
-      "dur": 0.55,
+      "dur": 0.29,
       "type": "tap",
       "midi": 56,
       "vol": 0.84,
@@ -3292,6 +3337,15 @@
     },
     {
       "time": 60.519,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 46,
+      "vol": 0.75,
+      "source": "piano"
+    },
+    {
+      "time": 60.519,
       "lane": 1,
       "dur": 0.15,
       "type": "tap",
@@ -3302,7 +3356,7 @@
     {
       "time": 60.779,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.42,
       "type": "tap",
       "midi": 53,
       "vol": 0.94,
@@ -3327,21 +3381,12 @@
       "source": "piano"
     },
     {
-      "time": 60.909,
+      "time": 61.299,
       "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 46,
-      "vol": 0.75,
-      "source": "piano"
-    },
-    {
-      "time": 61.126,
-      "lane": 0,
-      "dur": 0.29,
+      "dur": 0.2,
       "type": "tap",
       "midi": 41,
-      "vol": 0.75,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -3354,12 +3399,12 @@
       "source": "piano"
     },
     {
-      "time": 61.515,
+      "time": 61.602,
       "lane": 0,
-      "dur": 0.3,
+      "dur": 0.25,
       "type": "tap",
       "midi": 41,
-      "vol": 0.85,
+      "vol": 0.7,
       "source": "piano"
     },
     {
@@ -3368,12 +3413,30 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 49,
-      "vol": 0.58,
+      "vol": 0.57,
+      "source": "piano"
+    },
+    {
+      "time": 61.818,
+      "lane": 3,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 92,
+      "vol": 0.33,
       "source": "piano"
     },
     {
       "time": 62.078,
-      "lane": 2,
+      "lane": 0,
+      "dur": 0.29,
+      "type": "tap",
+      "midi": 51,
+      "vol": 0.85,
+      "source": "piano"
+    },
+    {
+      "time": 62.078,
+      "lane": 1,
       "dur": 0.5,
       "type": "tap",
       "midi": 61,
@@ -3381,17 +3444,8 @@
       "source": "piano"
     },
     {
-      "time": 62.078,
-      "lane": 1,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 51,
-      "vol": 0.85,
-      "source": "piano"
-    },
-    {
       "time": 62.468,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 49,
@@ -3413,7 +3467,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 77,
-      "vol": 0.56,
+      "vol": 0.57,
       "source": "piano"
     },
     {
@@ -3427,11 +3481,20 @@
     },
     {
       "time": 62.987,
+      "lane": 2,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.38,
+      "source": "piano"
+    },
+    {
+      "time": 62.987,
       "lane": 1,
       "dur": 0.29,
       "type": "tap",
       "midi": 61,
-      "vol": 0.72,
+      "vol": 0.83,
       "source": "piano"
     },
     {
@@ -3458,7 +3521,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 70,
-      "vol": 0.43,
+      "vol": 0.42,
       "source": "piano"
     },
     {
@@ -3473,10 +3536,10 @@
     {
       "time": 64.286,
       "lane": 0,
-      "dur": 0.68,
+      "dur": 0.35,
       "type": "tap",
-      "midi": 56,
-      "vol": 0.84,
+      "midi": 51,
+      "vol": 0.72,
       "source": "piano"
     },
     {
@@ -3484,17 +3547,17 @@
       "lane": 1,
       "dur": 0.55,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.83,
+      "midi": 56,
+      "vol": 0.84,
       "source": "piano"
     },
     {
       "time": 64.416,
       "lane": 2,
-      "dur": 0.2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 70,
-      "vol": 0.35,
+      "vol": 0.36,
       "source": "piano"
     },
     {
@@ -3503,13 +3566,13 @@
       "dur": 0.25,
       "type": "tap",
       "midi": 95,
-      "vol": 0.42,
+      "vol": 0.43,
       "source": "piano"
     },
     {
       "time": 64.935,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.05,
       "type": "tap",
       "midi": 68,
       "vol": 0.39,
@@ -3526,25 +3589,16 @@
     },
     {
       "time": 65.065,
-      "lane": 0,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 46,
-      "vol": 0.63,
-      "source": "piano"
-    },
-    {
-      "time": 65.065,
-      "lane": 3,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 95,
+      "midi": 73,
       "vol": 0.39,
       "source": "piano"
     },
     {
       "time": 65.152,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.25,
       "type": "tap",
       "midi": 53,
@@ -3553,7 +3607,16 @@
     },
     {
       "time": 65.498,
-      "lane": 2,
+      "lane": 0,
+      "dur": 0.64,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.86,
+      "source": "piano"
+    },
+    {
+      "time": 65.498,
+      "lane": 1,
       "dur": 0.38,
       "type": "tap",
       "midi": 65,
@@ -3561,17 +3624,8 @@
       "source": "piano"
     },
     {
-      "time": 65.498,
-      "lane": 1,
-      "dur": 0.9,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.86,
-      "source": "piano"
-    },
-    {
       "time": 65.974,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 68,
@@ -3584,7 +3638,7 @@
       "dur": 0.2,
       "type": "tap",
       "midi": 95,
-      "vol": 0.47,
+      "vol": 0.44,
       "source": "piano"
     },
     {
@@ -3593,7 +3647,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 70,
-      "vol": 0.43,
+      "vol": 0.42,
       "source": "piano"
     },
     {
@@ -3608,10 +3662,10 @@
     {
       "time": 66.494,
       "lane": 0,
-      "dur": 0.1,
+      "dur": 0.2,
       "type": "tap",
       "midi": 51,
-      "vol": 0.5,
+      "vol": 0.57,
       "source": "piano"
     },
     {
@@ -3624,18 +3678,9 @@
       "source": "drums"
     },
     {
-      "time": 66.623,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.34,
-      "source": "piano"
-    },
-    {
       "time": 66.797,
       "lane": 2,
-      "dur": 0.64,
+      "dur": 0.2,
       "type": "tap",
       "midi": 68,
       "vol": 0.48,
@@ -3652,34 +3697,25 @@
     },
     {
       "time": 67.532,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.94,
-      "source": "piano"
-    },
-    {
-      "time": 67.532,
-      "lane": 1,
-      "dur": 1.2,
+      "lane": 0,
+      "dur": 0.81,
       "type": "tap",
       "midi": 61,
       "vol": 0.9,
       "source": "piano"
     },
     {
-      "time": 67.749,
-      "lane": 2,
-      "dur": 0.1,
+      "time": 67.532,
+      "lane": 1,
+      "dur": 0.42,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.39,
+      "midi": 65,
+      "vol": 0.94,
       "source": "piano"
     },
     {
       "time": 68.052,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
       "midi": 68,
@@ -3687,12 +3723,30 @@
       "source": "piano"
     },
     {
-      "time": 68.831,
-      "lane": 2,
+      "time": 68.052,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 95,
+      "vol": 0.36,
+      "source": "piano"
+    },
+    {
+      "time": 68.442,
+      "lane": 0,
       "dur": 0.29,
       "type": "tap",
-      "midi": 65,
-      "vol": 0.91,
+      "midi": 44,
+      "vol": 0.58,
+      "source": "piano"
+    },
+    {
+      "time": 68.831,
+      "lane": 0,
+      "dur": 0.42,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.9,
       "source": "piano"
     },
     {
@@ -3700,8 +3754,8 @@
       "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 56,
-      "vol": 0.9,
+      "midi": 65,
+      "vol": 0.91,
       "source": "piano"
     },
     {
@@ -3725,10 +3779,10 @@
     {
       "time": 69.221,
       "lane": 3,
-      "dur": 0.15,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 95,
-      "vol": 0.4,
+      "midi": 73,
+      "vol": 0.36,
       "source": "piano"
     },
     {
@@ -3737,16 +3791,25 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 53,
-      "vol": 0.87,
+      "vol": 0.88,
       "source": "piano"
     },
     {
       "time": 69.61,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.42,
       "type": "tap",
       "midi": 41,
-      "vol": 0.7,
+      "vol": 0.71,
+      "source": "piano"
+    },
+    {
+      "time": 69.61,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 95,
+      "vol": 0.36,
       "source": "piano"
     },
     {
@@ -3755,7 +3818,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 61,
-      "vol": 0.74,
+      "vol": 0.73,
       "source": "piano"
     },
     {
@@ -3773,7 +3836,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 70,
-      "vol": 0.33,
+      "vol": 0.34,
       "source": "piano"
     },
     {
@@ -3796,11 +3859,11 @@
     },
     {
       "time": 70.909,
-      "lane": 3,
-      "dur": 0.1,
+      "lane": 0,
+      "dur": 0.65,
       "type": "tap",
-      "midi": 95,
-      "vol": 0.41,
+      "midi": 42,
+      "vol": 0.68,
       "source": "piano"
     },
     {
@@ -3860,7 +3923,7 @@
     {
       "time": 72.987,
       "lane": 0,
-      "dur": 0.65,
+      "dur": 0.55,
       "type": "tap",
       "midi": 46,
       "vol": 1.0,
@@ -3904,20 +3967,20 @@
     },
     {
       "time": 73.636,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 41,
+      "vol": 0.51,
+      "source": "piano"
+    },
+    {
+      "time": 73.636,
       "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.66,
-      "source": "piano"
-    },
-    {
-      "time": 73.636,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 94,
-      "vol": 0.52,
       "source": "piano"
     },
     {
@@ -4007,7 +4070,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 41,
-      "vol": 0.71,
+      "vol": 0.72,
       "source": "piano"
     },
     {
@@ -4038,15 +4101,6 @@
       "source": "piano"
     },
     {
-      "time": 75.714,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 58,
-      "vol": 0.5,
-      "source": "piano"
-    },
-    {
       "time": 75.844,
       "lane": 2,
       "dur": 0.05,
@@ -4058,7 +4112,7 @@
     {
       "time": 75.844,
       "lane": 1,
-      "dur": 0.42,
+      "dur": 0.15,
       "type": "tap",
       "midi": 54,
       "vol": 0.8,
@@ -4074,15 +4128,6 @@
       "source": "piano"
     },
     {
-      "time": 75.974,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.43,
-      "source": "piano"
-    },
-    {
       "time": 76.104,
       "lane": 2,
       "dur": 0.25,
@@ -4092,26 +4137,26 @@
       "source": "piano"
     },
     {
-      "time": 76.364,
-      "lane": 0,
-      "dur": 0.15,
+      "time": 76.104,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 41,
-      "vol": 0.84,
+      "midi": 58,
+      "vol": 0.47,
       "source": "piano"
     },
     {
-      "time": 76.364,
-      "lane": 1,
-      "dur": 0.05,
+      "time": 76.234,
+      "lane": 3,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.55,
-      "source": "drums"
+      "midi": 66,
+      "vol": 0.42,
+      "source": "piano"
     },
     {
       "time": 76.494,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.45,
       "type": "tap",
       "midi": 60,
@@ -4119,18 +4164,9 @@
       "source": "piano"
     },
     {
-      "time": 76.494,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 91,
-      "vol": 0.37,
-      "source": "piano"
-    },
-    {
       "time": 76.623,
-      "lane": 0,
-      "dur": 0.05,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 56,
       "vol": 0.69,
@@ -4139,33 +4175,42 @@
     {
       "time": 76.753,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.25,
       "type": "tap",
       "midi": 53,
       "vol": 0.92,
       "source": "piano"
     },
     {
-      "time": 76.926,
-      "lane": 0,
+      "time": 76.883,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 42,
-      "vol": 0.71,
-      "source": "piano"
+      "midi": 60,
+      "vol": 0.36,
+      "source": "drums"
     },
     {
       "time": 77.143,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.15,
       "type": "tap",
       "midi": 56,
       "vol": 0.76,
       "source": "piano"
     },
     {
-      "time": 77.403,
+      "time": 77.273,
       "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.75,
+      "source": "piano"
+    },
+    {
+      "time": 77.403,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4174,7 +4219,7 @@
     },
     {
       "time": 77.532,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
       "midi": 68,
@@ -4182,26 +4227,8 @@
       "source": "piano"
     },
     {
-      "time": 77.662,
-      "lane": 0,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 44,
-      "vol": 0.83,
-      "source": "piano"
-    },
-    {
-      "time": 77.662,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.58,
-      "source": "piano"
-    },
-    {
       "time": 77.922,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
@@ -4223,7 +4250,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 68,
-      "vol": 0.5,
+      "vol": 0.49,
       "source": "piano"
     },
     {
@@ -4247,7 +4274,7 @@
     {
       "time": 78.312,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 60,
       "vol": 0.91,
@@ -4259,16 +4286,25 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 72,
-      "vol": 0.35,
+      "vol": 0.36,
       "source": "piano"
     },
     {
-      "time": 78.485,
+      "time": 78.571,
       "lane": 0,
-      "dur": 0.1,
+      "dur": 0.29,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.71,
+      "midi": 53,
+      "vol": 0.79,
+      "source": "piano"
+    },
+    {
+      "time": 78.571,
+      "lane": 1,
+      "dur": 0.55,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.66,
       "source": "piano"
     },
     {
@@ -4328,7 +4364,7 @@
     {
       "time": 79.87,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.29,
       "type": "tap",
       "midi": 49,
       "vol": 0.85,
@@ -4337,7 +4373,7 @@
     {
       "time": 79.87,
       "lane": 1,
-      "dur": 0.4,
+      "dur": 0.29,
       "type": "tap",
       "midi": 65,
       "vol": 0.79,
@@ -4353,7 +4389,7 @@
       "source": "piano"
     },
     {
-      "time": 80.216,
+      "time": 80.26,
       "lane": 0,
       "dur": 0.1,
       "type": "tap",
@@ -4362,8 +4398,17 @@
       "source": "piano"
     },
     {
-      "time": 80.39,
+      "time": 80.26,
       "lane": 1,
+      "dur": 0.29,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.89,
+      "source": "piano"
+    },
+    {
+      "time": 80.39,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 63,
@@ -4372,16 +4417,7 @@
     },
     {
       "time": 80.649,
-      "lane": 0,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 56,
-      "vol": 0.83,
-      "source": "piano"
-    },
-    {
-      "time": 80.649,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 68,
@@ -4389,8 +4425,17 @@
       "source": "piano"
     },
     {
+      "time": 80.649,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.83,
+      "source": "piano"
+    },
+    {
       "time": 80.779,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
       "midi": 58,
@@ -4399,7 +4444,7 @@
     },
     {
       "time": 80.909,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.25,
       "type": "tap",
       "midi": 67,
@@ -4408,7 +4453,7 @@
     },
     {
       "time": 81.039,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4425,21 +4470,12 @@
       "source": "piano"
     },
     {
-      "time": 81.299,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 58,
-      "vol": 0.37,
-      "source": "piano"
-    },
-    {
       "time": 81.429,
       "lane": 2,
       "dur": 0.05,
       "type": "tap",
       "midi": 72,
-      "vol": 0.36,
+      "vol": 0.37,
       "source": "piano"
     },
     {
@@ -4556,7 +4592,7 @@
       "dur": 0.3,
       "type": "tap",
       "midi": 60,
-      "vol": 0.79,
+      "vol": 0.81,
       "source": "piano"
     },
     {
@@ -4571,7 +4607,7 @@
     {
       "time": 83.636,
       "lane": 0,
-      "dur": 0.3,
+      "dur": 0.29,
       "type": "tap",
       "midi": 49,
       "vol": 0.71,
@@ -4579,20 +4615,20 @@
     },
     {
       "time": 84.026,
-      "lane": 2,
-      "dur": 0.15,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 65,
-      "vol": 0.74,
+      "midi": 61,
+      "vol": 0.69,
       "source": "piano"
     },
     {
       "time": 84.026,
       "lane": 1,
-      "dur": 0.2,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.69,
+      "midi": 65,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -4637,7 +4673,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 68,
-      "vol": 0.4,
+      "vol": 0.41,
       "source": "piano"
     },
     {
@@ -4679,7 +4715,7 @@
     {
       "time": 85.152,
       "lane": 2,
-      "dur": 0.2,
+      "dur": 0.15,
       "type": "tap",
       "midi": 68,
       "vol": 0.44,
@@ -4706,10 +4742,10 @@
     {
       "time": 85.584,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.2,
       "type": "tap",
       "midi": 68,
-      "vol": 0.47,
+      "vol": 0.48,
       "source": "piano"
     },
     {
@@ -4772,7 +4808,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 63,
-      "vol": 0.72,
+      "vol": 0.73,
       "source": "piano"
     },
     {
@@ -4880,7 +4916,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 70,
-      "vol": 0.38,
+      "vol": 0.37,
       "source": "piano"
     },
     {
@@ -4958,20 +4994,20 @@
     {
       "time": 90.13,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.15,
       "type": "tap",
       "midi": 65,
       "vol": 0.72,
       "source": "piano"
     },
     {
-      "time": 90.303,
-      "lane": 0,
-      "dur": 0.1,
+      "time": 90.39,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 42,
-      "vol": 0.74,
-      "source": "piano"
+      "midi": 60,
+      "vol": 0.56,
+      "source": "drums"
     },
     {
       "time": 90.519,
@@ -5006,7 +5042,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 41,
-      "vol": 0.66,
+      "vol": 0.64,
       "source": "piano"
     },
     {
@@ -5042,7 +5078,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 84,
-      "vol": 0.59,
+      "vol": 0.58,
       "source": "piano"
     },
     {
@@ -5057,7 +5093,16 @@
     {
       "time": 91.429,
       "lane": 1,
-      "dur": 0.55,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.69,
+      "source": "piano"
+    },
+    {
+      "time": 91.602,
+      "lane": 1,
+      "dur": 0.4,
       "type": "tap",
       "midi": 65,
       "vol": 0.71,
@@ -5147,7 +5192,7 @@
     {
       "time": 93.506,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.15,
       "type": "tap",
       "midi": 44,
       "vol": 0.86,
@@ -5156,7 +5201,7 @@
     {
       "time": 93.506,
       "lane": 1,
-      "dur": 0.4,
+      "dur": 0.15,
       "type": "tap",
       "midi": 51,
       "vol": 0.82,
@@ -5172,48 +5217,48 @@
       "source": "piano"
     },
     {
-      "time": 93.896,
-      "lane": 2,
+      "time": 93.766,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.39,
+      "midi": 51,
+      "vol": 0.5,
       "source": "piano"
     },
     {
       "time": 93.896,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 1,
+      "dur": 0.42,
       "type": "tap",
       "midi": 65,
       "vol": 0.81,
       "source": "piano"
     },
     {
-      "time": 94.026,
-      "lane": 3,
-      "dur": 0.05,
+      "time": 94.113,
+      "lane": 2,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.79,
+      "midi": 72,
+      "vol": 0.82,
       "source": "piano"
     },
     {
       "time": 94.416,
       "lane": 2,
-      "dur": 0.1,
+      "dur": 0.42,
       "type": "tap",
-      "midi": 63,
-      "vol": 0.43,
+      "midi": 73,
+      "vol": 0.88,
       "source": "piano"
     },
     {
       "time": 94.416,
-      "lane": 3,
-      "dur": 0.72,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 73,
-      "vol": 0.88,
+      "midi": 63,
+      "vol": 0.43,
       "source": "piano"
     },
     {
@@ -5240,25 +5285,25 @@
       "dur": 0.5,
       "type": "tap",
       "midi": 77,
-      "vol": 0.75,
+      "vol": 0.74,
       "source": "piano"
     },
     {
       "time": 95.714,
       "lane": 2,
-      "dur": 0.05,
+      "dur": 0.4,
       "type": "tap",
       "midi": 66,
       "vol": 0.72,
       "source": "piano"
     },
     {
-      "time": 95.844,
-      "lane": 2,
-      "dur": 0.68,
+      "time": 95.931,
+      "lane": 3,
+      "dur": 0.55,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.79,
+      "midi": 77,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -5268,15 +5313,6 @@
       "type": "tap",
       "midi": 51,
       "vol": 0.84,
-      "source": "piano"
-    },
-    {
-      "time": 96.061,
-      "lane": 3,
-      "dur": 0.45,
-      "type": "tap",
-      "midi": 77,
-      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -5300,10 +5336,10 @@
     {
       "time": 96.623,
       "lane": 2,
-      "dur": 1.13,
+      "dur": 1.42,
       "type": "tap",
       "midi": 68,
-      "vol": 0.85,
+      "vol": 0.86,
       "source": "piano"
     },
     {
@@ -5312,7 +5348,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 73,
-      "vol": 0.81,
+      "vol": 0.82,
       "source": "piano"
     },
     {
@@ -5321,7 +5357,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 77,
-      "vol": 0.67,
+      "vol": 0.68,
       "source": "piano"
     },
     {
@@ -5352,15 +5388,6 @@
       "source": "piano"
     },
     {
-      "time": 97.857,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.81,
-      "source": "piano"
-    },
-    {
       "time": 98.052,
       "lane": 1,
       "dur": 0.4,
@@ -5375,22 +5402,31 @@
       "dur": 0.59,
       "type": "tap",
       "midi": 68,
-      "vol": 0.85,
+      "vol": 0.59,
+      "source": "piano"
+    },
+    {
+      "time": 98.268,
+      "lane": 3,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 73,
+      "vol": 0.81,
       "source": "piano"
     },
     {
       "time": 98.442,
       "lane": 3,
-      "dur": 0.45,
+      "dur": 0.42,
       "type": "tap",
       "midi": 80,
-      "vol": 0.61,
+      "vol": 0.6,
       "source": "piano"
     },
     {
       "time": 98.701,
       "lane": 1,
-      "dur": 0.36,
+      "dur": 0.5,
       "type": "tap",
       "midi": 60,
       "vol": 0.64,
@@ -5406,18 +5442,27 @@
       "source": "piano"
     },
     {
+      "time": 98.961,
+      "lane": 3,
+      "dur": 0.7,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.86,
+      "source": "piano"
+    },
+    {
       "time": 99.156,
       "lane": 2,
       "dur": 0.3,
       "type": "tap",
       "midi": 75,
-      "vol": 0.43,
+      "vol": 0.42,
       "source": "piano"
     },
     {
       "time": 99.156,
-      "lane": 1,
-      "dur": 0.05,
+      "lane": 0,
+      "dur": 1.1,
       "type": "tap",
       "midi": 53,
       "vol": 0.92,
@@ -5425,8 +5470,8 @@
     },
     {
       "time": 99.567,
-      "lane": 2,
-      "dur": 0.72,
+      "lane": 1,
+      "dur": 0.75,
       "type": "tap",
       "midi": 63,
       "vol": 0.9,
@@ -5434,8 +5479,8 @@
     },
     {
       "time": 99.74,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 68,
       "vol": 0.77,
@@ -5491,7 +5536,7 @@
       "lane": 2,
       "dur": 1.2,
       "type": "tap",
-      "midi": 70,
+      "midi": 69,
       "vol": 0.91,
       "source": "piano"
     },
@@ -5528,7 +5573,7 @@
       "dur": 0.3,
       "type": "tap",
       "midi": 65,
-      "vol": 0.79,
+      "vol": 0.78,
       "source": "piano"
     },
     {
@@ -5546,7 +5591,7 @@
       "dur": 0.75,
       "type": "tap",
       "midi": 56,
-      "vol": 0.72,
+      "vol": 0.71,
       "source": "piano"
     },
     {
@@ -5591,7 +5636,7 @@
       "dur": 0.25,
       "type": "tap",
       "midi": 68,
-      "vol": 0.77,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -5678,16 +5723,25 @@
     {
       "time": 105.844,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.38,
       "type": "tap",
       "midi": 54,
       "vol": 0.81,
       "source": "piano"
     },
     {
-      "time": 105.974,
+      "time": 106.017,
+      "lane": 1,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.65,
+      "source": "piano"
+    },
+    {
+      "time": 106.32,
       "lane": 0,
-      "dur": 1.2,
+      "dur": 0.33,
       "type": "tap",
       "midi": 51,
       "vol": 0.83,
@@ -5695,7 +5749,7 @@
     },
     {
       "time": 106.32,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.59,
       "type": "tap",
       "midi": 63,
@@ -5703,17 +5757,8 @@
       "source": "piano"
     },
     {
-      "time": 106.32,
-      "lane": 1,
-      "dur": 0.3,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.44,
-      "source": "piano"
-    },
-    {
       "time": 106.753,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.15,
       "type": "tap",
       "midi": 56,
@@ -5722,16 +5767,7 @@
     },
     {
       "time": 107.013,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.44,
-      "source": "piano"
-    },
-    {
-      "time": 107.013,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -5739,8 +5775,17 @@
       "source": "drums"
     },
     {
+      "time": 107.013,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.43,
+      "source": "piano"
+    },
+    {
       "time": 107.143,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
       "midi": 65,
@@ -5749,20 +5794,20 @@
     },
     {
       "time": 107.273,
-      "lane": 2,
-      "dur": 0.15,
+      "lane": 0,
+      "dur": 0.77,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.75,
+      "midi": 42,
+      "vol": 0.73,
       "source": "piano"
     },
     {
       "time": 107.273,
-      "lane": 0,
-      "dur": 0.29,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 42,
-      "vol": 0.73,
+      "midi": 66,
+      "vol": 0.75,
       "source": "piano"
     },
     {
@@ -5772,15 +5817,6 @@
       "type": "tap",
       "midi": 65,
       "vol": 0.75,
-      "source": "piano"
-    },
-    {
-      "time": 107.662,
-      "lane": 0,
-      "dur": 0.38,
-      "type": "tap",
-      "midi": 54,
-      "vol": 0.64,
       "source": "piano"
     },
     {
@@ -5831,7 +5867,7 @@
     {
       "time": 108.701,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.42,
       "type": "tap",
       "midi": 60,
       "vol": 0.91,
@@ -5840,52 +5876,25 @@
     {
       "time": 109.091,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.81,
       "type": "tap",
       "midi": 52,
       "vol": 1.0,
       "source": "piano"
     },
     {
-      "time": 109.091,
+      "time": 109.221,
       "lane": 1,
       "dur": 0.1,
-      "type": "tap",
-      "midi": 64,
-      "vol": 0.52,
-      "source": "piano"
-    },
-    {
-      "time": 109.221,
-      "lane": 0,
-      "dur": 0.75,
       "type": "tap",
       "midi": 47,
       "vol": 0.86,
       "source": "piano"
     },
     {
-      "time": 109.481,
+      "time": 109.437,
       "lane": 1,
-      "dur": 0.42,
-      "type": "tap",
-      "midi": 55,
-      "vol": 0.77,
-      "source": "piano"
-    },
-    {
-      "time": 109.61,
-      "lane": 2,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.42,
-      "source": "piano"
-    },
-    {
-      "time": 109.697,
-      "lane": 3,
-      "dur": 0.25,
+      "dur": 0.5,
       "type": "tap",
       "midi": 62,
       "vol": 0.58,
@@ -5893,20 +5902,11 @@
     },
     {
       "time": 110.0,
-      "lane": 2,
-      "dur": 0.75,
+      "lane": 0,
+      "dur": 0.25,
       "type": "tap",
       "midi": 52,
       "vol": 0.89,
-      "source": "piano"
-    },
-    {
-      "time": 110.0,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.79,
       "source": "piano"
     },
     {
@@ -5921,10 +5921,10 @@
     {
       "time": 110.346,
       "lane": 0,
-      "dur": 0.2,
+      "dur": 0.46,
       "type": "tap",
       "midi": 57,
-      "vol": 0.66,
+      "vol": 0.73,
       "source": "piano"
     },
     {
@@ -5957,7 +5957,7 @@
     {
       "time": 111.169,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.48,
       "type": "tap",
       "midi": 50,
       "vol": 0.62,
@@ -5966,34 +5966,7 @@
     {
       "time": 111.169,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 62,
-      "vol": 0.52,
-      "source": "piano"
-    },
-    {
-      "time": 111.299,
-      "lane": 0,
-      "dur": 0.35,
-      "type": "tap",
-      "midi": 43,
-      "vol": 0.56,
-      "source": "piano"
-    },
-    {
-      "time": 111.385,
-      "lane": 2,
-      "dur": 0.4,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.79,
-      "source": "piano"
-    },
-    {
-      "time": 111.385,
-      "lane": 1,
-      "dur": 0.27,
+      "dur": 0.25,
       "type": "tap",
       "midi": 62,
       "vol": 0.63,
@@ -6001,11 +5974,20 @@
     },
     {
       "time": 111.515,
-      "lane": 3,
-      "dur": 0.1,
+      "lane": 2,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.38,
+      "midi": 66,
+      "vol": 0.79,
+      "source": "piano"
+    },
+    {
+      "time": 111.515,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 55,
+      "vol": 0.58,
       "source": "piano"
     },
     {
@@ -6068,7 +6050,7 @@
       "dur": 0.42,
       "type": "tap",
       "midi": 65,
-      "vol": 0.81,
+      "vol": 0.8,
       "source": "piano"
     },
     {
@@ -6123,6 +6105,15 @@
       "type": "tap",
       "midi": 42,
       "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 113.896,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -6281,10 +6272,19 @@
     {
       "time": 116.364,
       "lane": 1,
-      "dur": 0.42,
+      "dur": 0.1,
       "type": "tap",
       "midi": 51,
       "vol": 0.88,
+      "source": "piano"
+    },
+    {
+      "time": 116.58,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 49,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -6317,7 +6317,7 @@
     {
       "time": 117.229,
       "lane": 2,
-      "dur": 0.6,
+      "dur": 0.3,
       "type": "tap",
       "midi": 68,
       "vol": 0.69,
@@ -6360,30 +6360,12 @@
       "source": "piano"
     },
     {
-      "time": 118.052,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.59,
-      "source": "piano"
-    },
-    {
       "time": 118.225,
       "lane": 0,
       "dur": 0.25,
       "type": "tap",
       "midi": 51,
       "vol": 1.0,
-      "source": "piano"
-    },
-    {
-      "time": 118.312,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.44,
       "source": "piano"
     },
     {
@@ -6398,7 +6380,7 @@
     {
       "time": 118.571,
       "lane": 0,
-      "dur": 0.5,
+      "dur": 0.29,
       "type": "tap",
       "midi": 56,
       "vol": 0.62,
@@ -6407,7 +6389,7 @@
     {
       "time": 118.831,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.25,
       "type": "tap",
       "midi": 63,
       "vol": 0.58,
@@ -6424,12 +6406,12 @@
     },
     {
       "time": 118.961,
-      "lane": 1,
-      "dur": 0.1,
+      "lane": 0,
+      "dur": 0.59,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.26,
-      "source": "drums"
+      "midi": 44,
+      "vol": 0.78,
+      "source": "piano"
     },
     {
       "time": 119.156,
@@ -6464,43 +6446,43 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 73,
-      "vol": 0.51,
+      "vol": 0.5,
       "source": "piano"
     },
     {
       "time": 119.654,
       "lane": 0,
-      "dur": 0.75,
+      "dur": 0.05,
       "type": "tap",
       "midi": 51,
       "vol": 1.0,
       "source": "piano"
     },
     {
-      "time": 120.0,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.34,
-      "source": "drums"
-    },
-    {
-      "time": 120.26,
+      "time": 119.913,
       "lane": 2,
-      "dur": 0.55,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.52,
+      "midi": 73,
+      "vol": 0.59,
       "source": "piano"
     },
     {
       "time": 120.26,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.15,
       "type": "tap",
       "midi": 80,
       "vol": 0.67,
+      "source": "piano"
+    },
+    {
+      "time": 120.26,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.51,
       "source": "piano"
     },
     {
@@ -6509,7 +6491,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 87,
-      "vol": 0.62,
+      "vol": 0.61,
       "source": "piano"
     },
     {
@@ -6533,7 +6515,7 @@
     {
       "time": 120.736,
       "lane": 0,
-      "dur": 0.72,
+      "dur": 0.4,
       "type": "tap",
       "midi": 49,
       "vol": 0.81,
@@ -6560,10 +6542,10 @@
     {
       "time": 121.558,
       "lane": 0,
-      "dur": 0.6,
+      "dur": 0.51,
       "type": "tap",
       "midi": 49,
-      "vol": 0.65,
+      "vol": 0.66,
       "source": "piano"
     },
     {
@@ -6585,17 +6567,17 @@
       "source": "drums"
     },
     {
-      "time": 122.208,
+      "time": 122.338,
       "lane": 2,
-      "dur": 0.35,
+      "dur": 0.68,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.76,
+      "midi": 56,
+      "vol": 0.5,
       "source": "piano"
     },
     {
       "time": 122.338,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.94,
       "type": "tap",
       "midi": 51,
@@ -6604,8 +6586,8 @@
     },
     {
       "time": 122.597,
-      "lane": 1,
-      "dur": 0.25,
+      "lane": 3,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.51,
@@ -6613,7 +6595,7 @@
     },
     {
       "time": 122.727,
-      "lane": 2,
+      "lane": 3,
       "dur": 0.65,
       "type": "tap",
       "midi": 68,
@@ -6622,7 +6604,7 @@
     },
     {
       "time": 123.117,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.42,
       "type": "tap",
       "midi": 63,
@@ -6631,7 +6613,7 @@
     },
     {
       "time": 123.377,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.48,
       "type": "tap",
       "midi": 56,
@@ -6640,17 +6622,26 @@
     },
     {
       "time": 123.636,
-      "lane": 1,
-      "dur": 0.3,
+      "lane": 2,
+      "dur": 0.1,
       "type": "tap",
       "midi": 60,
       "vol": 0.84,
       "source": "piano"
     },
     {
+      "time": 123.831,
+      "lane": 2,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.65,
+      "source": "piano"
+    },
+    {
       "time": 123.961,
-      "lane": 0,
-      "dur": 0.61,
+      "lane": 1,
+      "dur": 1.13,
       "type": "tap",
       "midi": 51,
       "vol": 0.92,
@@ -6658,25 +6649,16 @@
     },
     {
       "time": 124.156,
-      "lane": 1,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 60,
       "vol": 0.47,
       "source": "drums"
     },
     {
-      "time": 124.286,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.79,
-      "source": "piano"
-    },
-    {
       "time": 124.545,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.1,
       "type": "tap",
       "midi": 63,
@@ -6685,7 +6667,7 @@
     },
     {
       "time": 124.675,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 60,
@@ -6694,7 +6676,7 @@
     },
     {
       "time": 124.935,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 61,
@@ -6703,25 +6685,34 @@
     },
     {
       "time": 125.195,
-      "lane": 0,
-      "dur": 0.15,
+      "lane": 2,
+      "dur": 1.75,
       "type": "tap",
       "midi": 63,
       "vol": 0.79,
       "source": "piano"
     },
     {
+      "time": 125.195,
+      "lane": 1,
+      "dur": 0.35,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.39,
+      "source": "drums"
+    },
+    {
       "time": 125.455,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 58,
-      "vol": 0.62,
+      "midi": 56,
+      "vol": 0.51,
       "source": "piano"
     },
     {
       "time": 125.714,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.25,
       "type": "tap",
       "midi": 60,
@@ -6729,12 +6720,12 @@
       "source": "drums"
     },
     {
-      "time": 125.974,
-      "lane": 0,
-      "dur": 0.15,
+      "time": 125.931,
+      "lane": 1,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 51,
-      "vol": 0.57,
+      "midi": 68,
+      "vol": 0.37,
       "source": "piano"
     },
     {
@@ -6767,7 +6758,7 @@
     {
       "time": 127.013,
       "lane": 0,
-      "dur": 0.8,
+      "dur": 0.35,
       "type": "tap",
       "midi": 49,
       "vol": 0.94,
@@ -6775,20 +6766,20 @@
     },
     {
       "time": 127.403,
-      "lane": 1,
-      "dur": 0.4,
+      "lane": 2,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.62,
+      "midi": 66,
+      "vol": 0.37,
       "source": "piano"
     },
     {
-      "time": 127.792,
-      "lane": 2,
-      "dur": 0.15,
+      "time": 127.403,
+      "lane": 1,
+      "dur": 0.68,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.66,
+      "midi": 61,
+      "vol": 0.77,
       "source": "piano"
     },
     {
@@ -6812,11 +6803,11 @@
     {
       "time": 128.312,
       "lane": 2,
-      "dur": 0.94,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.77,
-      "source": "piano"
+      "midi": 60,
+      "vol": 0.25,
+      "source": "drums"
     },
     {
       "time": 128.571,
@@ -6839,7 +6830,7 @@
     {
       "time": 129.351,
       "lane": 2,
-      "dur": 0.68,
+      "dur": 0.29,
       "type": "tap",
       "midi": 57,
       "vol": 0.68,
@@ -6848,42 +6839,33 @@
     {
       "time": 129.351,
       "lane": 3,
-      "dur": 0.05,
+      "dur": 0.35,
       "type": "tap",
       "midi": 63,
       "vol": 0.59,
       "source": "piano"
     },
     {
-      "time": 129.481,
-      "lane": 3,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.68,
-      "source": "piano"
-    },
-    {
-      "time": 129.87,
-      "lane": 3,
-      "dur": 0.15,
+      "time": 129.74,
+      "lane": 2,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.78,
       "source": "piano"
     },
     {
-      "time": 130.13,
+      "time": 129.87,
       "lane": 2,
-      "dur": 1.2,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 56,
-      "vol": 0.7,
-      "source": "piano"
+      "midi": 60,
+      "vol": 0.2,
+      "source": "drums"
     },
     {
       "time": 130.13,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 61,
@@ -6891,9 +6873,18 @@
       "source": "piano"
     },
     {
+      "time": 130.13,
+      "lane": 1,
+      "dur": 1.2,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.7,
+      "source": "piano"
+    },
+    {
       "time": 130.39,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 60,
       "vol": 0.44,
@@ -6901,7 +6892,7 @@
     },
     {
       "time": 130.909,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 60,
@@ -6910,7 +6901,7 @@
     },
     {
       "time": 131.169,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 61,
@@ -6920,7 +6911,7 @@
     {
       "time": 131.169,
       "lane": 3,
-      "dur": 0.1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 95,
       "vol": 0.38,
@@ -6929,10 +6920,10 @@
     {
       "time": 131.429,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.94,
       "type": "tap",
       "midi": 68,
-      "vol": 0.39,
+      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -6942,15 +6933,6 @@
       "type": "tap",
       "midi": 63,
       "vol": 0.89,
-      "source": "piano"
-    },
-    {
-      "time": 131.688,
-      "lane": 2,
-      "dur": 0.75,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -6973,26 +6955,35 @@
     },
     {
       "time": 132.468,
-      "lane": 0,
-      "dur": 0.1,
+      "lane": 2,
+      "dur": 0.29,
       "type": "tap",
-      "midi": 43,
-      "vol": 0.6,
+      "midi": 65,
+      "vol": 0.57,
       "source": "piano"
     },
     {
       "time": 132.468,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.1,
       "type": "tap",
       "midi": 58,
       "vol": 0.59,
       "source": "piano"
     },
     {
-      "time": 132.684,
+      "time": 132.597,
       "lane": 0,
-      "dur": 0.46,
+      "dur": 0.45,
+      "type": "tap",
+      "midi": 43,
+      "vol": 0.6,
+      "source": "piano"
+    },
+    {
+      "time": 132.684,
+      "lane": 1,
+      "dur": 0.5,
       "type": "tap",
       "midi": 53,
       "vol": 0.7,
@@ -7000,8 +6991,8 @@
     },
     {
       "time": 132.857,
-      "lane": 1,
-      "dur": 0.35,
+      "lane": 2,
+      "dur": 0.29,
       "type": "tap",
       "midi": 63,
       "vol": 0.74,
@@ -7040,7 +7031,7 @@
       "dur": 0.29,
       "type": "tap",
       "midi": 56,
-      "vol": 0.39,
+      "vol": 0.4,
       "source": "piano"
     },
     {
@@ -7055,7 +7046,7 @@
     {
       "time": 134.026,
       "lane": 1,
-      "dur": 0.68,
+      "dur": 0.15,
       "type": "tap",
       "midi": 56,
       "vol": 0.66,
@@ -7063,7 +7054,7 @@
     },
     {
       "time": 134.286,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.4,
       "type": "tap",
       "midi": 66,
@@ -7071,9 +7062,18 @@
       "source": "piano"
     },
     {
+      "time": 134.286,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.46,
+      "source": "piano"
+    },
+    {
       "time": 134.545,
-      "lane": 2,
-      "dur": 0.35,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 60,
       "vol": 0.31,
@@ -7091,7 +7091,7 @@
     {
       "time": 134.805,
       "lane": 1,
-      "dur": 0.75,
+      "dur": 0.85,
       "type": "tap",
       "midi": 51,
       "vol": 0.7,
@@ -7100,15 +7100,24 @@
     {
       "time": 135.541,
       "lane": 2,
-      "dur": 0.46,
+      "dur": 0.6,
       "type": "tap",
       "midi": 63,
       "vol": 0.67,
       "source": "piano"
     },
     {
+      "time": 135.541,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 73,
+      "vol": 0.41,
+      "source": "piano"
+    },
+    {
       "time": 135.844,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 56,
@@ -7117,7 +7126,7 @@
     },
     {
       "time": 136.104,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
       "midi": 60,
@@ -7126,16 +7135,7 @@
     },
     {
       "time": 136.364,
-      "lane": 2,
-      "dur": 0.75,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.74,
-      "source": "piano"
-    },
-    {
-      "time": 136.364,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.64,
       "type": "tap",
       "midi": 51,
@@ -7143,12 +7143,21 @@
       "source": "piano"
     },
     {
+      "time": 136.364,
+      "lane": 1,
+      "dur": 0.64,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.74,
+      "source": "piano"
+    },
+    {
       "time": 137.1,
       "lane": 0,
       "dur": 0.25,
       "type": "tap",
-      "midi": 41,
-      "vol": 0.7,
+      "midi": 51,
+      "vol": 0.5,
       "source": "piano"
     },
     {
@@ -7197,17 +7206,17 @@
       "source": "piano"
     },
     {
-      "time": 138.571,
+      "time": 138.701,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 58,
-      "vol": 0.58,
+      "midi": 43,
+      "vol": 0.7,
       "source": "piano"
     },
     {
       "time": 138.701,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.65,
       "type": "tap",
       "midi": 53,
@@ -7215,17 +7224,8 @@
       "source": "piano"
     },
     {
-      "time": 138.701,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.43,
-      "source": "piano"
-    },
-    {
       "time": 138.918,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 63,
@@ -7234,7 +7234,7 @@
     },
     {
       "time": 139.177,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.2,
       "type": "tap",
       "midi": 65,
@@ -7244,15 +7244,6 @@
     {
       "time": 139.481,
       "lane": 2,
-      "dur": 0.68,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.9,
-      "source": "piano"
-    },
-    {
-      "time": 139.481,
-      "lane": 1,
       "dur": 0.29,
       "type": "tap",
       "midi": 56,
@@ -7260,8 +7251,17 @@
       "source": "piano"
     },
     {
+      "time": 139.481,
+      "lane": 3,
+      "dur": 0.68,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.91,
+      "source": "piano"
+    },
+    {
       "time": 139.87,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.05,
       "type": "tap",
       "midi": 58,
@@ -7270,26 +7270,17 @@
     },
     {
       "time": 140.26,
-      "lane": 2,
-      "dur": 0.3,
+      "lane": 3,
+      "dur": 2.05,
       "type": "tap",
       "midi": 61,
       "vol": 0.81,
       "source": "piano"
     },
     {
-      "time": 140.26,
-      "lane": 3,
-      "dur": 1.95,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.76,
-      "source": "piano"
-    },
-    {
       "time": 140.519,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.15,
       "type": "tap",
       "midi": 51,
       "vol": 0.88,
@@ -7298,7 +7289,7 @@
     {
       "time": 140.519,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.35,
       "type": "tap",
       "midi": 63,
       "vol": 0.4,
@@ -7306,38 +7297,38 @@
     },
     {
       "time": 140.779,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.15,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.81,
-      "source": "piano"
+      "midi": 60,
+      "vol": 0.32,
+      "source": "drums"
     },
     {
       "time": 141.039,
       "lane": 0,
-      "dur": 0.51,
+      "dur": 0.55,
       "type": "tap",
       "midi": 41,
-      "vol": 0.51,
-      "source": "piano"
-    },
-    {
-      "time": 141.039,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.36,
+      "vol": 0.5,
       "source": "piano"
     },
     {
       "time": 141.645,
-      "lane": 0,
-      "dur": 0.59,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
       "midi": 51,
       "vol": 0.93,
+      "source": "piano"
+    },
+    {
+      "time": 141.818,
+      "lane": 0,
+      "dur": 0.42,
+      "type": "tap",
+      "midi": 41,
+      "vol": 0.48,
       "source": "piano"
     },
     {
@@ -7361,7 +7352,7 @@
     {
       "time": 142.597,
       "lane": 0,
-      "dur": 0.65,
+      "dur": 1.2,
       "type": "tap",
       "midi": 49,
       "vol": 0.82,
@@ -7436,7 +7427,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 70,
-      "vol": 0.42,
+      "vol": 0.43,
       "source": "piano"
     },
     {
@@ -7445,7 +7436,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 73,
-      "vol": 0.41,
+      "vol": 0.4,
       "source": "piano"
     },
     {
@@ -7463,7 +7454,7 @@
       "dur": 0.2,
       "type": "tap",
       "midi": 95,
-      "vol": 0.5,
+      "vol": 0.51,
       "source": "piano"
     },
     {
@@ -7499,7 +7490,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 53,
-      "vol": 0.62,
+      "vol": 0.61,
       "source": "piano"
     },
     {
@@ -7508,7 +7499,7 @@
       "dur": 0.4,
       "type": "tap",
       "midi": 75,
-      "vol": 0.69,
+      "vol": 0.68,
       "source": "piano"
     },
     {
@@ -7550,7 +7541,7 @@
     {
       "time": 147.792,
       "lane": 2,
-      "dur": 0.25,
+      "dur": 0.2,
       "type": "tap",
       "midi": 68,
       "vol": 0.76,
@@ -7639,20 +7630,29 @@
     },
     {
       "time": 149.957,
-      "lane": 2,
-      "dur": 0.33,
+      "lane": 0,
+      "dur": 0.35,
       "type": "tap",
-      "midi": 70,
-      "vol": 0.72,
+      "midi": 55,
+      "vol": 0.73,
       "source": "piano"
     },
     {
       "time": 149.957,
       "lane": 1,
-      "dur": 0.33,
+      "dur": 0.05,
       "type": "tap",
       "midi": 65,
       "vol": 0.8,
+      "source": "piano"
+    },
+    {
+      "time": 150.13,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 67,
+      "vol": 0.32,
       "source": "piano"
     },
     {
@@ -7719,15 +7719,6 @@
       "source": "piano"
     },
     {
-      "time": 151.429,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 46,
-      "vol": 0.59,
-      "source": "piano"
-    },
-    {
       "time": 151.688,
       "lane": 0,
       "dur": 0.4,
@@ -7766,10 +7757,10 @@
     {
       "time": 152.597,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.29,
       "type": "tap",
-      "midi": 70,
-      "vol": 0.58,
+      "midi": 68,
+      "vol": 0.72,
       "source": "piano"
     },
     {
@@ -7778,7 +7769,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 42,
-      "vol": 0.95,
+      "vol": 0.94,
       "source": "piano"
     },
     {
@@ -7796,7 +7787,7 @@
       "dur": 0.5,
       "type": "tap",
       "midi": 44,
-      "vol": 0.8,
+      "vol": 0.79,
       "source": "piano"
     },
     {
@@ -7827,13 +7818,13 @@
       "source": "piano"
     },
     {
-      "time": 153.766,
+      "time": 153.701,
       "lane": 1,
-      "dur": 0.25,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.63,
-      "source": "drums"
+      "midi": 58,
+      "vol": 0.4,
+      "source": "piano"
     },
     {
       "time": 154.242,
@@ -7910,7 +7901,7 @@
     {
       "time": 157.662,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.5,
       "type": "tap",
       "midi": 60,
       "vol": 0.9,
@@ -7932,15 +7923,6 @@
       "type": "tap",
       "midi": 65,
       "vol": 0.74,
-      "source": "piano"
-    },
-    {
-      "time": 158.052,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.51,
       "source": "piano"
     },
     {
@@ -7982,7 +7964,7 @@
     {
       "time": 158.961,
       "lane": 0,
-      "dur": 0.5,
+      "dur": 0.68,
       "type": "tap",
       "midi": 44,
       "vol": 0.85,
@@ -8000,7 +7982,7 @@
     {
       "time": 159.74,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.33,
       "type": "tap",
       "midi": 51,
       "vol": 0.93,
@@ -8012,7 +7994,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 63,
-      "vol": 0.46,
+      "vol": 0.47,
       "source": "piano"
     },
     {
@@ -8027,28 +8009,28 @@
     {
       "time": 159.87,
       "lane": 1,
-      "dur": 0.55,
+      "dur": 0.51,
       "type": "tap",
       "midi": 61,
       "vol": 0.82,
       "source": "piano"
     },
     {
-      "time": 160.26,
+      "time": 160.173,
       "lane": 0,
-      "dur": 0.35,
+      "dur": 0.45,
       "type": "tap",
       "midi": 46,
       "vol": 0.91,
       "source": "piano"
     },
     {
-      "time": 160.519,
+      "time": 160.476,
       "lane": 1,
-      "dur": 0.42,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 53,
-      "vol": 1.0,
+      "midi": 58,
+      "vol": 0.39,
       "source": "piano"
     },
     {
@@ -8066,7 +8048,7 @@
       "dur": 0.35,
       "type": "tap",
       "midi": 68,
-      "vol": 0.52,
+      "vol": 0.53,
       "source": "piano"
     },
     {
@@ -8178,30 +8160,21 @@
       "source": "piano"
     },
     {
-      "time": 163.593,
-      "lane": 2,
-      "dur": 0.15,
+      "time": 163.896,
+      "lane": 0,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.33,
+      "midi": 51,
+      "vol": 0.67,
       "source": "piano"
     },
     {
-      "time": 163.896,
+      "time": 164.156,
       "lane": 0,
-      "dur": 0.42,
+      "dur": 0.15,
       "type": "tap",
       "midi": 51,
       "vol": 0.78,
-      "source": "piano"
-    },
-    {
-      "time": 164.026,
-      "lane": 2,
-      "dur": 0.45,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.42,
       "source": "piano"
     },
     {
@@ -8232,26 +8205,8 @@
       "source": "piano"
     },
     {
-      "time": 165.0,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.44,
-      "source": "piano"
-    },
-    {
       "time": 165.195,
       "lane": 2,
-      "dur": 0.42,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.85,
-      "source": "piano"
-    },
-    {
-      "time": 165.195,
-      "lane": 1,
       "dur": 0.75,
       "type": "tap",
       "midi": 61,
@@ -8259,17 +8214,17 @@
       "source": "piano"
     },
     {
-      "time": 165.714,
-      "lane": 2,
-      "dur": 0.3,
+      "time": 165.195,
+      "lane": 3,
+      "dur": 1.55,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.41,
+      "midi": 65,
+      "vol": 0.85,
       "source": "piano"
     },
     {
       "time": 165.974,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
       "midi": 51,
@@ -8278,20 +8233,11 @@
     },
     {
       "time": 166.104,
-      "lane": 1,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.64,
       "type": "tap",
       "midi": 61,
       "vol": 0.77,
-      "source": "piano"
-    },
-    {
-      "time": 166.234,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 51,
-      "vol": 0.46,
       "source": "piano"
     },
     {
@@ -8306,7 +8252,7 @@
     {
       "time": 166.494,
       "lane": 0,
-      "dur": 0.64,
+      "dur": 0.35,
       "type": "tap",
       "midi": 42,
       "vol": 0.69,
@@ -8351,7 +8297,7 @@
     {
       "time": 168.139,
       "lane": 0,
-      "dur": 0.33,
+      "dur": 0.05,
       "type": "tap",
       "midi": 56,
       "vol": 0.83,
@@ -8367,8 +8313,26 @@
       "source": "piano"
     },
     {
-      "time": 168.571,
+      "time": 168.268,
       "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 44,
+      "vol": 0.58,
+      "source": "piano"
+    },
+    {
+      "time": 168.571,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.77,
+      "source": "piano"
+    },
+    {
+      "time": 168.571,
+      "lane": 1,
       "dur": 0.38,
       "type": "tap",
       "midi": 61,
@@ -8376,18 +8340,18 @@
       "source": "piano"
     },
     {
-      "time": 168.571,
-      "lane": 1,
-      "dur": 0.68,
+      "time": 168.961,
+      "lane": 2,
+      "dur": 0.15,
       "type": "tap",
       "midi": 65,
-      "vol": 0.83,
+      "vol": 0.78,
       "source": "piano"
     },
     {
       "time": 169.048,
-      "lane": 0,
-      "dur": 0.2,
+      "lane": 1,
+      "dur": 0.25,
       "type": "tap",
       "midi": 53,
       "vol": 0.79,
@@ -8405,28 +8369,19 @@
     {
       "time": 169.351,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 41,
       "vol": 0.96,
       "source": "piano"
     },
     {
-      "time": 169.351,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 49,
-      "vol": 0.46,
-      "source": "piano"
-    },
-    {
-      "time": 169.481,
+      "time": 169.61,
       "lane": 0,
-      "dur": 0.1,
+      "dur": 0.65,
       "type": "tap",
       "midi": 41,
-      "vol": 1.0,
+      "vol": 0.81,
       "source": "piano"
     },
     {
@@ -8479,8 +8434,8 @@
       "lane": 0,
       "dur": 0.25,
       "type": "tap",
-      "midi": 42,
-      "vol": 0.76,
+      "midi": 61,
+      "vol": 0.8,
       "source": "piano"
     },
     {
@@ -8585,7 +8540,7 @@
     {
       "time": 172.987,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 60,
       "vol": 0.18,
@@ -8597,22 +8552,13 @@
       "dur": 0.25,
       "type": "tap",
       "midi": 45,
-      "vol": 0.84,
-      "source": "piano"
-    },
-    {
-      "time": 173.117,
-      "lane": 1,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 57,
-      "vol": 0.53,
+      "vol": 0.85,
       "source": "piano"
     },
     {
       "time": 173.463,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.79,
       "type": "tap",
       "midi": 45,
       "vol": 0.93,
@@ -8642,7 +8588,7 @@
       "dur": 0.3,
       "type": "tap",
       "midi": 45,
-      "vol": 0.72,
+      "vol": 0.7,
       "source": "piano"
     },
     {
@@ -8657,7 +8603,7 @@
     {
       "time": 174.805,
       "lane": 0,
-      "dur": 0.2,
+      "dur": 0.05,
       "type": "tap",
       "midi": 56,
       "vol": 0.73,
@@ -8673,9 +8619,18 @@
       "source": "piano"
     },
     {
+      "time": 174.935,
+      "lane": 0,
+      "dur": 0.55,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.71,
+      "source": "piano"
+    },
+    {
       "time": 175.065,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 60,
       "vol": 0.28,
@@ -8683,20 +8638,20 @@
     },
     {
       "time": 175.584,
-      "lane": 0,
-      "dur": 0.4,
+      "lane": 2,
+      "dur": 0.42,
       "type": "tap",
-      "midi": 44,
-      "vol": 0.89,
+      "midi": 65,
+      "vol": 0.92,
       "source": "piano"
     },
     {
       "time": 175.584,
-      "lane": 1,
-      "dur": 1.46,
+      "lane": 0,
+      "dur": 1.2,
       "type": "tap",
-      "midi": 65,
-      "vol": 0.92,
+      "midi": 44,
+      "vol": 0.89,
       "source": "piano"
     },
     {
@@ -8706,6 +8661,24 @@
       "type": "tap",
       "midi": 68,
       "vol": 0.42,
+      "source": "piano"
+    },
+    {
+      "time": 176.883,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.34,
+      "source": "piano"
+    },
+    {
+      "time": 176.883,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.81,
       "source": "piano"
     },
     {
@@ -8777,7 +8750,7 @@
       "dur": 0.25,
       "type": "tap",
       "midi": 42,
-      "vol": 0.98,
+      "vol": 0.99,
       "source": "piano"
     },
     {
@@ -8810,7 +8783,7 @@
     {
       "time": 179.74,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.94,
       "type": "tap",
       "midi": 44,
       "vol": 1.0,
@@ -8819,25 +8792,34 @@
     {
       "time": 179.74,
       "lane": 1,
-      "dur": 0.94,
+      "dur": 1.2,
       "type": "tap",
       "midi": 61,
-      "vol": 0.82,
-      "source": "piano"
-    },
-    {
-      "time": 180.216,
-      "lane": 0,
-      "dur": 0.85,
-      "type": "tap",
-      "midi": 44,
-      "vol": 1.0,
+      "vol": 0.83,
       "source": "piano"
     },
     {
       "time": 180.779,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.41,
+      "source": "piano"
+    },
+    {
+      "time": 181.039,
+      "lane": 0,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 46,
+      "vol": 0.65,
+      "source": "piano"
+    },
+    {
+      "time": 181.039,
       "lane": 1,
-      "dur": 0.94,
+      "dur": 0.68,
       "type": "tap",
       "midi": 56,
       "vol": 0.77,
@@ -8858,34 +8840,52 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 68,
-      "vol": 0.42,
+      "vol": 0.41,
       "source": "piano"
     },
     {
       "time": 181.818,
       "lane": 2,
-      "dur": 0.94,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.85,
-      "source": "piano"
-    },
-    {
-      "time": 181.818,
-      "lane": 1,
-      "dur": 1.46,
+      "dur": 0.29,
       "type": "tap",
       "midi": 61,
       "vol": 0.82,
       "source": "piano"
     },
     {
-      "time": 182.165,
-      "lane": 0,
+      "time": 181.818,
+      "lane": 1,
+      "dur": 0.42,
+      "type": "tap",
+      "midi": 56,
+      "vol": 0.76,
+      "source": "piano"
+    },
+    {
+      "time": 182.208,
+      "lane": 2,
       "dur": 0.05,
       "type": "tap",
-      "midi": 58,
-      "vol": 0.41,
+      "midi": 68,
+      "vol": 0.45,
+      "source": "piano"
+    },
+    {
+      "time": 182.338,
+      "lane": 2,
+      "dur": 0.3,
+      "type": "tap",
+      "midi": 68,
+      "vol": 0.57,
+      "source": "piano"
+    },
+    {
+      "time": 182.338,
+      "lane": 1,
+      "dur": 0.94,
+      "type": "tap",
+      "midi": 65,
+      "vol": 0.85,
       "source": "piano"
     },
     {
@@ -8900,28 +8900,19 @@
     {
       "time": 182.857,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.55,
       "type": "tap",
       "midi": 68,
-      "vol": 0.45,
-      "source": "piano"
-    },
-    {
-      "time": 183.117,
-      "lane": 2,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.4,
+      "vol": 0.51,
       "source": "piano"
     },
     {
       "time": 183.117,
       "lane": 0,
-      "dur": 0.35,
+      "dur": 0.68,
       "type": "tap",
       "midi": 42,
-      "vol": 0.81,
+      "vol": 0.87,
       "source": "piano"
     },
     {
@@ -8940,15 +8931,6 @@
       "type": "tap",
       "midi": 68,
       "vol": 0.41,
-      "source": "piano"
-    },
-    {
-      "time": 183.68,
-      "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.77,
       "source": "piano"
     },
     {
@@ -8981,7 +8963,7 @@
     {
       "time": 184.805,
       "lane": 0,
-      "dur": 0.29,
+      "dur": 0.4,
       "type": "tap",
       "midi": 44,
       "vol": 1.0,
@@ -8997,30 +8979,30 @@
       "source": "piano"
     },
     {
-      "time": 185.195,
+      "time": 185.325,
       "lane": 0,
-      "dur": 0.2,
+      "dur": 0.45,
       "type": "tap",
       "midi": 46,
-      "vol": 0.79,
+      "vol": 0.98,
       "source": "piano"
     },
     {
       "time": 185.455,
       "lane": 1,
-      "dur": 0.1,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.38,
       "source": "drums"
     },
     {
-      "time": 185.671,
-      "lane": 0,
-      "dur": 0.2,
+      "time": 185.584,
+      "lane": 1,
+      "dur": 0.29,
       "type": "tap",
-      "midi": 46,
-      "vol": 0.98,
+      "midi": 61,
+      "vol": 0.86,
       "source": "piano"
     },
     {
@@ -9029,7 +9011,7 @@
       "dur": 1.2,
       "type": "tap",
       "midi": 41,
-      "vol": 0.88,
+      "vol": 0.87,
       "source": "piano"
     },
     {
@@ -9044,25 +9026,25 @@
     {
       "time": 186.71,
       "lane": 2,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 53,
       "vol": 0.48,
       "source": "piano"
     },
     {
-      "time": 186.84,
-      "lane": 2,
-      "dur": 0.1,
+      "time": 186.797,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.35,
+      "midi": 49,
+      "vol": 0.51,
       "source": "piano"
     },
     {
       "time": 187.013,
-      "lane": 1,
-      "dur": 0.15,
+      "lane": 2,
+      "dur": 0.35,
       "type": "tap",
       "midi": 60,
       "vol": 0.58,
@@ -9101,7 +9083,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 45,
-      "vol": 0.85,
+      "vol": 0.86,
       "source": "piano"
     },
     {
@@ -9119,7 +9101,7 @@
       "dur": 1.11,
       "type": "tap",
       "midi": 45,
-      "vol": 0.85,
+      "vol": 0.86,
       "source": "piano"
     },
     {
@@ -9137,7 +9119,7 @@
       "dur": 0.81,
       "type": "tap",
       "midi": 60,
-      "vol": 0.85,
+      "vol": 0.84,
       "source": "piano"
     },
     {
@@ -9164,7 +9146,7 @@
       "dur": 0.29,
       "type": "tap",
       "midi": 68,
-      "vol": 0.77,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -9227,13 +9209,13 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 68,
-      "vol": 0.46,
+      "vol": 0.47,
       "source": "piano"
     },
     {
       "time": 190.649,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.5,
       "type": "tap",
       "midi": 51,
       "vol": 0.61,
@@ -9242,7 +9224,7 @@
     {
       "time": 190.649,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 58,
       "vol": 0.46,
@@ -9250,16 +9232,7 @@
     },
     {
       "time": 190.779,
-      "lane": 0,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 39,
-      "vol": 0.72,
-      "source": "piano"
-    },
-    {
-      "time": 190.779,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 63,
@@ -9268,7 +9241,7 @@
     },
     {
       "time": 190.909,
-      "lane": 0,
+      "lane": 1,
       "dur": 0.42,
       "type": "tap",
       "midi": 54,
@@ -9277,7 +9250,7 @@
     },
     {
       "time": 191.082,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 58,
@@ -9287,7 +9260,16 @@
     {
       "time": 191.429,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.3,
+      "type": "tap",
+      "midi": 41,
+      "vol": 0.72,
+      "source": "piano"
+    },
+    {
+      "time": 191.429,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
       "midi": 53,
       "vol": 0.39,
@@ -9303,30 +9285,39 @@
       "source": "piano"
     },
     {
-      "time": 191.688,
+      "time": 191.818,
       "lane": 2,
-      "dur": 0.05,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 63,
-      "vol": 0.37,
+      "midi": 60,
+      "vol": 0.8,
       "source": "piano"
     },
     {
       "time": 191.818,
-      "lane": 1,
-      "dur": 0.25,
+      "lane": 3,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.79,
+      "midi": 70,
+      "vol": 0.36,
       "source": "piano"
     },
     {
-      "time": 192.078,
+      "time": 192.035,
       "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 51,
       "vol": 0.74,
+      "source": "piano"
+    },
+    {
+      "time": 192.035,
+      "lane": 1,
+      "dur": 0.33,
+      "type": "tap",
+      "midi": 58,
+      "vol": 0.5,
       "source": "piano"
     },
     {
@@ -9336,15 +9327,6 @@
       "type": "tap",
       "midi": 54,
       "vol": 0.81,
-      "source": "piano"
-    },
-    {
-      "time": 192.338,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.74,
       "source": "piano"
     },
     {
@@ -9366,9 +9348,18 @@
       "source": "piano"
     },
     {
+      "time": 192.597,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 66,
+      "vol": 0.42,
+      "source": "piano"
+    },
+    {
       "time": 192.727,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.29,
       "type": "tap",
       "midi": 41,
       "vol": 0.73,
@@ -9386,29 +9377,47 @@
     {
       "time": 192.857,
       "lane": 1,
-      "dur": 0.5,
+      "dur": 0.29,
       "type": "tap",
       "midi": 60,
       "vol": 0.67,
       "source": "piano"
     },
     {
-      "time": 192.987,
-      "lane": 0,
+      "time": 192.857,
+      "lane": 3,
       "dur": 0.05,
       "type": "tap",
-      "midi": 56,
-      "vol": 0.54,
+      "midi": 91,
+      "vol": 0.37,
       "source": "piano"
     },
     {
       "time": 193.117,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.05,
       "type": "tap",
       "midi": 53,
       "vol": 0.87,
       "source": "piano"
+    },
+    {
+      "time": 193.247,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.87,
+      "source": "piano"
+    },
+    {
+      "time": 193.247,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.24,
+      "source": "drums"
     },
     {
       "time": 193.377,
@@ -9431,19 +9440,10 @@
     {
       "time": 193.506,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.42,
       "type": "tap",
       "midi": 56,
       "vol": 0.65,
-      "source": "piano"
-    },
-    {
-      "time": 193.636,
-      "lane": 1,
-      "dur": 0.29,
-      "type": "tap",
-      "midi": 65,
-      "vol": 0.83,
       "source": "piano"
     },
     {
@@ -9503,7 +9503,7 @@
     {
       "time": 194.545,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.25,
       "type": "tap",
       "midi": 46,
       "vol": 0.92,
@@ -9519,21 +9519,21 @@
       "source": "piano"
     },
     {
-      "time": 194.805,
-      "lane": 0,
-      "dur": 0.05,
+      "time": 194.892,
+      "lane": 2,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 61,
-      "vol": 0.61,
+      "midi": 68,
+      "vol": 0.76,
       "source": "piano"
     },
     {
       "time": 194.892,
-      "lane": 2,
-      "dur": 0.35,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.76,
+      "midi": 53,
+      "vol": 0.8,
       "source": "piano"
     },
     {
@@ -9557,11 +9557,20 @@
     {
       "time": 195.195,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.6,
       "source": "piano"
+    },
+    {
+      "time": 195.325,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.55,
+      "source": "drums"
     },
     {
       "time": 195.541,
@@ -9575,7 +9584,7 @@
     {
       "time": 195.541,
       "lane": 1,
-      "dur": 0.2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 68,
       "vol": 0.55,
@@ -9584,29 +9593,11 @@
     {
       "time": 195.714,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 51,
-      "vol": 0.73,
+      "vol": 0.74,
       "source": "piano"
-    },
-    {
-      "time": 195.844,
-      "lane": 0,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 42,
-      "vol": 0.8,
-      "source": "piano"
-    },
-    {
-      "time": 195.844,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.26,
-      "source": "drums"
     },
     {
       "time": 195.974,
@@ -9629,7 +9620,7 @@
     {
       "time": 196.104,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.05,
       "type": "tap",
       "midi": 56,
       "vol": 0.58,
@@ -9645,18 +9636,9 @@
       "source": "piano"
     },
     {
-      "time": 196.494,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 56,
-      "vol": 0.46,
-      "source": "piano"
-    },
-    {
       "time": 196.558,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 53,
       "vol": 0.56,
@@ -9668,7 +9650,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 63,
-      "vol": 0.89,
+      "vol": 0.88,
       "source": "piano"
     },
     {
@@ -9683,9 +9665,9 @@
     {
       "time": 197.013,
       "lane": 2,
-      "dur": 0.1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 68,
+      "midi": 67,
       "vol": 0.52,
       "source": "piano"
     },
@@ -9791,7 +9773,7 @@
     {
       "time": 198.442,
       "lane": 0,
-      "dur": 0.85,
+      "dur": 0.2,
       "type": "tap",
       "midi": 42,
       "vol": 0.91,
@@ -9830,7 +9812,7 @@
       "dur": 0.3,
       "type": "tap",
       "midi": 51,
-      "vol": 0.87,
+      "vol": 0.86,
       "source": "piano"
     },
     {
@@ -9845,25 +9827,25 @@
     {
       "time": 199.61,
       "lane": 3,
-      "dur": 0.15,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.95,
       "source": "piano"
     },
     {
-      "time": 199.87,
+      "time": 199.74,
       "lane": 3,
       "dur": 0.05,
       "type": "tap",
-      "midi": 63,
-      "vol": 0.8,
+      "midi": 95,
+      "vol": 0.37,
       "source": "piano"
     },
     {
       "time": 200.0,
-      "lane": 2,
-      "dur": 0.1,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.17,
@@ -9871,8 +9853,8 @@
     },
     {
       "time": 200.0,
-      "lane": 3,
-      "dur": 0.85,
+      "lane": 1,
+      "dur": 0.25,
       "type": "tap",
       "midi": 65,
       "vol": 0.88,
@@ -9880,8 +9862,8 @@
     },
     {
       "time": 200.13,
-      "lane": 1,
-      "dur": 0.25,
+      "lane": 0,
+      "dur": 0.4,
       "type": "tap",
       "midi": 56,
       "vol": 0.87,
@@ -9889,7 +9871,7 @@
     },
     {
       "time": 200.346,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.2,
       "type": "tap",
       "midi": 68,
@@ -9898,16 +9880,7 @@
     },
     {
       "time": 200.866,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 70,
-      "vol": 0.55,
-      "source": "piano"
-    },
-    {
-      "time": 200.866,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 65,
@@ -9915,17 +9888,17 @@
       "source": "piano"
     },
     {
-      "time": 201.039,
-      "lane": 0,
+      "time": 200.866,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 54,
-      "vol": 0.67,
+      "midi": 70,
+      "vol": 0.55,
       "source": "piano"
     },
     {
       "time": 201.039,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.15,
       "type": "tap",
       "midi": 61,
@@ -9965,7 +9938,7 @@
       "dur": 0.2,
       "type": "tap",
       "midi": 68,
-      "vol": 0.71,
+      "vol": 0.7,
       "source": "piano"
     },
     {
@@ -10091,7 +10064,7 @@
       "dur": 0.05,
       "type": "tap",
       "midi": 73,
-      "vol": 0.36,
+      "vol": 0.37,
       "source": "piano"
     },
     {
@@ -10151,7 +10124,7 @@
     {
       "time": 205.195,
       "lane": 2,
-      "dur": 0.42,
+      "dur": 0.5,
       "type": "tap",
       "midi": 72,
       "vol": 0.9,
@@ -10168,15 +10141,6 @@
     },
     {
       "time": 205.714,
-      "lane": 2,
-      "dur": 0.75,
-      "type": "tap",
-      "midi": 70,
-      "vol": 0.76,
-      "source": "piano"
-    },
-    {
-      "time": 205.714,
       "lane": 0,
       "dur": 0.65,
       "type": "tap",
@@ -10185,12 +10149,30 @@
       "source": "piano"
     },
     {
-      "time": 206.104,
+      "time": 205.714,
       "lane": 1,
-      "dur": 0.29,
+      "dur": 0.42,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.73,
+      "source": "piano"
+    },
+    {
+      "time": 206.104,
+      "lane": 2,
+      "dur": 0.4,
+      "type": "tap",
+      "midi": 70,
+      "vol": 0.76,
+      "source": "piano"
+    },
+    {
+      "time": 206.234,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 65,
-      "vol": 0.78,
+      "vol": 0.73,
       "source": "piano"
     },
     {
@@ -10232,7 +10214,7 @@
     {
       "time": 207.013,
       "lane": 0,
-      "dur": 0.68,
+      "dur": 0.7,
       "type": "tap",
       "midi": 54,
       "vol": 0.8,
@@ -10241,7 +10223,7 @@
     {
       "time": 207.013,
       "lane": 1,
-      "dur": 0.55,
+      "dur": 0.15,
       "type": "tap",
       "midi": 61,
       "vol": 0.74,
@@ -10255,6 +10237,15 @@
       "midi": 65,
       "vol": 0.8,
       "source": "piano"
+    },
+    {
+      "time": 207.273,
+      "lane": 1,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.5,
+      "source": "drums"
     },
     {
       "time": 207.489,
@@ -10277,28 +10268,10 @@
     {
       "time": 207.662,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.49,
       "type": "tap",
       "midi": 65,
       "vol": 0.67,
-      "source": "piano"
-    },
-    {
-      "time": 207.792,
-      "lane": 0,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 53,
-      "vol": 0.85,
-      "source": "piano"
-    },
-    {
-      "time": 207.792,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 63,
-      "vol": 0.48,
       "source": "piano"
     },
     {
@@ -10397,7 +10370,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 73,
-      "vol": 0.77,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -10424,7 +10397,7 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 73,
-      "vol": 0.75,
+      "vol": 0.76,
       "source": "piano"
     },
     {
@@ -10442,7 +10415,7 @@
       "dur": 0.15,
       "type": "tap",
       "midi": 80,
-      "vol": 0.86,
+      "vol": 0.85,
       "source": "piano"
     },
     {

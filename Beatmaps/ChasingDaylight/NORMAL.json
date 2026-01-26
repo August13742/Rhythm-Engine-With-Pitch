@@ -6,90 +6,36 @@
   },
   "notes": [
     {
-      "time": 3.072,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 39,
-      "vol": 0.67,
-      "source": "other"
-    },
-    {
       "time": 5.273,
-      "lane": 3,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 51,
-      "vol": 0.67,
+      "vol": 0.66,
       "source": "other"
     },
     {
-      "time": 8.191,
-      "lane": 2,
-      "dur": 0.48,
-      "type": "hold",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 8.771,
-      "lane": 2,
-      "dur": 0.65,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 9.454,
-      "lane": 3,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 9.625,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 9.863,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 10.102,
-      "lane": 3,
-      "dur": 0.34,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.62,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 10.546,
-      "lane": 3,
-      "dur": 0.95,
-      "type": "hold",
-      "midi": 90,
-      "vol": 0.66,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 12.389,
+      "time": 7.884,
       "lane": 1,
-      "dur": 0.5,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 8.123,
+      "lane": 2,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 70,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 12.491,
+      "lane": 1,
+      "dur": 0.45,
       "type": "hold",
       "midi": 66,
       "vol": 1.0,
@@ -98,9 +44,18 @@
     {
       "time": 12.901,
       "lane": 0,
-      "dur": 0.65,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 13.038,
+      "lane": 0,
+      "dur": 0.63,
       "type": "hold",
-      "midi": 61,
+      "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -132,28 +87,28 @@
       "source": "drums"
     },
     {
-      "time": 15.222,
+      "time": 15.154,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 59,
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 15.392,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 15.563,
-      "lane": 0,
-      "dur": 0.05,
+      "lane": 1,
+      "dur": 0.85,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.29,
-      "source": "drums"
-    },
-    {
-      "time": 15.666,
-      "lane": 0,
-      "dur": 0.8,
-      "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
@@ -213,24 +168,6 @@
       "source": "drums"
     },
     {
-      "time": 18.123,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.44,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 18.123,
-      "lane": 0,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
       "time": 18.43,
       "lane": 0,
       "dur": 0.05,
@@ -242,25 +179,16 @@
     {
       "time": 18.703,
       "lane": 1,
-      "dur": 0.25,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.5,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 18.976,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 57,
+      "midi": 65,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 20.068,
-      "lane": 1,
-      "dur": 0.3,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.38,
@@ -269,9 +197,9 @@
     {
       "time": 20.239,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 1.7,
       "type": "hold",
-      "midi": 57,
+      "midi": 55,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -283,15 +211,6 @@
       "midi": 60,
       "vol": 0.38,
       "source": "drums"
-    },
-    {
-      "time": 20.683,
-      "lane": 0,
-      "dur": 1.45,
-      "type": "hold",
-      "midi": 56,
-      "vol": 1.0,
-      "source": "vocals_lead"
     },
     {
       "time": 20.887,
@@ -322,15 +241,6 @@
     },
     {
       "time": 22.082,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.47,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 22.082,
       "lane": 1,
       "dur": 0.6,
       "type": "hold",
@@ -339,9 +249,9 @@
       "source": "vocals_lead"
     },
     {
-      "time": 23.038,
+      "time": 22.833,
       "lane": 0,
-      "dur": 0.45,
+      "dur": 0.55,
       "type": "hold",
       "midi": 56,
       "vol": 1.0,
@@ -395,41 +305,23 @@
     {
       "time": 24.642,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
+      "dur": 0.35,
+      "type": "hold",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 24.744,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.38,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 24.983,
+      "time": 25.085,
       "lane": 2,
-      "dur": 0.38,
+      "dur": 0.26,
       "type": "hold",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 25.358,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 25.461,
+      "time": 25.444,
       "lane": 2,
       "dur": 0.45,
       "type": "hold",
@@ -438,9 +330,9 @@
       "source": "vocals_lead"
     },
     {
-      "time": 25.87,
+      "time": 25.904,
       "lane": 3,
-      "dur": 0.2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 69,
       "vol": 1.0,
@@ -449,25 +341,16 @@
     {
       "time": 26.28,
       "lane": 3,
-      "dur": 0.34,
+      "dur": 0.7,
       "type": "hold",
       "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 26.724,
+      "time": 27.133,
       "lane": 3,
-      "dur": 0.27,
-      "type": "hold",
-      "midi": 68,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 27.099,
-      "lane": 3,
-      "dur": 0.29,
+      "dur": 0.26,
       "type": "hold",
       "midi": 66,
       "vol": 1.0,
@@ -476,7 +359,7 @@
     {
       "time": 27.491,
       "lane": 3,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
@@ -485,36 +368,27 @@
     {
       "time": 27.611,
       "lane": 2,
-      "dur": 1.35,
+      "dur": 1.1,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 27.611,
+      "time": 28.771,
       "lane": 3,
       "dur": 0.25,
       "type": "tap",
-      "midi": 66,
-      "vol": 0.56,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 28.737,
-      "lane": 3,
-      "dur": 0.4,
-      "type": "hold",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 29.147,
-      "lane": 2,
-      "dur": 0.2,
+      "lane": 3,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 61,
+      "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -523,16 +397,7 @@
       "lane": 3,
       "dur": 0.1,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.46,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 29.454,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 61,
+      "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -542,102 +407,75 @@
       "dur": 0.1,
       "type": "tap",
       "midi": 73,
-      "vol": 0.64,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 29.744,
       "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
+      "dur": 0.26,
+      "type": "hold",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 29.949,
+      "time": 30.102,
       "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 30.973,
-      "lane": 3,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.5,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 31.587,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 74,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 31.689,
-      "lane": 3,
-      "dur": 0.46,
-      "type": "hold",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 32.184,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 32.253,
-      "lane": 3,
-      "dur": 0.58,
-      "type": "hold",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 32.799,
-      "lane": 2,
       "dur": 0.2,
       "type": "tap",
+      "midi": 69,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 30.41,
+      "lane": 3,
+      "dur": 1.05,
+      "type": "hold",
       "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 32.935,
-      "lane": 3,
+      "time": 31.587,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
-      "midi": 80,
-      "vol": 0.6,
+      "midi": 62,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 33.106,
+      "time": 31.894,
       "lane": 2,
-      "dur": 0.3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 32.355,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 32.816,
+      "lane": 3,
+      "dur": 0.7,
       "type": "hold",
-      "midi": 76,
-      "vol": 0.66,
+      "midi": 68,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 33.686,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.4,
       "type": "hold",
       "midi": 66,
@@ -645,26 +483,35 @@
       "source": "vocals_lead"
     },
     {
-      "time": 34.096,
-      "lane": 0,
-      "dur": 0.99,
-      "type": "hold",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 35.188,
-      "lane": 0,
-      "dur": 0.25,
+      "time": 34.044,
+      "lane": 2,
+      "dur": 0.1,
       "type": "tap",
       "midi": 63,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 36.041,
-      "lane": 0,
+      "time": 34.232,
+      "lane": 2,
+      "dur": 0.89,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 35.29,
+      "lane": 3,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 63,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 35.939,
+      "lane": 3,
       "dur": 0.45,
       "type": "hold",
       "midi": 61,
@@ -673,7 +520,7 @@
     },
     {
       "time": 36.485,
-      "lane": 1,
+      "lane": 3,
       "dur": 0.1,
       "type": "tap",
       "midi": 66,
@@ -681,8 +528,8 @@
       "source": "vocals_lead"
     },
     {
-      "time": 36.706,
-      "lane": 0,
+      "time": 36.689,
+      "lane": 2,
       "dur": 0.05,
       "type": "tap",
       "midi": 61,
@@ -691,7 +538,7 @@
     },
     {
       "time": 36.86,
-      "lane": 0,
+      "lane": 2,
       "dur": 0.15,
       "type": "tap",
       "midi": 60,
@@ -700,47 +547,47 @@
     },
     {
       "time": 37.526,
-      "lane": 1,
-      "dur": 0.1,
+      "lane": 3,
+      "dur": 0.15,
       "type": "tap",
       "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 37.713,
-      "lane": 1,
-      "dur": 2.15,
-      "type": "hold",
-      "midi": 71,
+      "time": 37.645,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 62,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 40.034,
+      "time": 40.102,
       "lane": 1,
       "dur": 0.25,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.79,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 40.137,
-      "lane": 0,
-      "dur": 0.1,
+      "time": 40.495,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.79,
-      "source": "drums"
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
     },
     {
-      "time": 40.375,
-      "lane": 1,
-      "dur": 0.25,
+      "time": 40.648,
+      "lane": 2,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.65,
+      "midi": 69,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
@@ -748,48 +595,57 @@
       "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 40.887,
-      "lane": 2,
-      "dur": 0.52,
-      "type": "hold",
-      "midi": 74,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 41.502,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 41.638,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 41.706,
-      "lane": 2,
-      "dur": 0.85,
-      "type": "hold",
-      "midi": 76,
+      "time": 41.775,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.76,
+      "source": "drums"
+    },
+    {
+      "time": 42.031,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 42.628,
+      "time": 42.747,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 42.901,
+      "lane": 2,
+      "dur": 0.5,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 43.481,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 43.788,
       "lane": 0,
       "dur": 0.1,
       "type": "tap",
@@ -798,169 +654,106 @@
       "source": "vocals_lead"
     },
     {
-      "time": 42.747,
-      "lane": 2,
-      "dur": 0.63,
+      "time": 44.642,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 44.846,
+      "lane": 0,
+      "dur": 0.38,
       "type": "hold",
-      "midi": 68,
+      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 42.747,
-      "lane": 1,
-      "dur": 0.05,
+      "time": 45.324,
+      "lane": 0,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 62,
+      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 43.481,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 69,
-      "vol": 0.53,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 43.618,
+      "time": 45.461,
       "lane": 2,
       "dur": 0.1,
       "type": "tap",
-      "midi": 76,
-      "vol": 0.4,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 43.618,
-      "lane": 3,
-      "dur": 0.65,
-      "type": "hold",
-      "midi": 81,
-      "vol": 0.59,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 44.403,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 69,
+      "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 46.382,
+      "time": 45.87,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 68,
+      "midi": 60,
       "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 46.587,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.7,
       "source": "vocals_lead"
     },
     {
       "time": 46.826,
       "lane": 2,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 47.27,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 47.372,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.87,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 47.372,
-      "lane": 1,
-      "dur": 0.9,
-      "type": "hold",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 47.509,
-      "lane": 2,
-      "dur": 0.34,
-      "type": "hold",
-      "midi": 74,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 47.952,
-      "lane": 2,
       "dur": 0.15,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.45,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 48.225,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.88,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 48.43,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 48.908,
-      "lane": 1,
-      "dur": 0.1,
       "type": "tap",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 49.01,
+      "time": 47.048,
       "lane": 0,
-      "dur": 0.15,
+      "dur": 0.3,
+      "type": "hold",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.372,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.747,
+      "lane": 2,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 47.747,
+      "lane": 1,
+      "dur": 0.3,
+      "type": "hold",
+      "midi": 62,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 48.874,
+      "lane": 1,
+      "dur": 0.3,
+      "type": "hold",
       "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 49.283,
+      "time": 49.215,
       "lane": 0,
       "dur": 0.4,
       "type": "hold",
@@ -980,68 +773,32 @@
     {
       "time": 50.41,
       "lane": 1,
-      "dur": 0.6,
+      "dur": 0.7,
       "type": "hold",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 50.99,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 74,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 51.229,
-      "lane": 2,
-      "dur": 0.85,
-      "type": "hold",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 52.116,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
       "time": 52.218,
-      "lane": 1,
-      "dur": 0.25,
+      "lane": 0,
+      "dur": 0.15,
       "type": "tap",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 52.577,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.63,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 52.73,
-      "lane": 1,
+      "time": 52.457,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
-      "midi": 69,
-      "vol": 0.55,
+      "midi": 56,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 52.73,
+      "time": 52.696,
       "lane": 0,
       "dur": 0.35,
       "type": "hold",
@@ -1051,83 +808,65 @@
     },
     {
       "time": 53.003,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.05,
       "type": "tap",
-      "midi": 72,
+      "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 53.242,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 53.447,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.25,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 53.925,
-      "lane": 2,
-      "dur": 0.31,
       "type": "hold",
-      "midi": 71,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 53.925,
-      "lane": 1,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 54.334,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 54.71,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 54.71,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 54.829,
+      "time": 53.413,
       "lane": 2,
       "dur": 0.15,
       "type": "tap",
-      "midi": 73,
-      "vol": 0.54,
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 53.686,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.164,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.403,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 80,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 54.71,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
@@ -1135,25 +874,16 @@
       "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 55.085,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 72,
+      "midi": 63,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 55.29,
-      "lane": 3,
-      "dur": 0.2,
+      "lane": 2,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 78,
+      "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -1167,9 +897,9 @@
       "source": "drums"
     },
     {
-      "time": 55.495,
+      "time": 55.529,
       "lane": 2,
-      "dur": 0.35,
+      "dur": 0.3,
       "type": "hold",
       "midi": 71,
       "vol": 1.0,
@@ -1177,66 +907,39 @@
     },
     {
       "time": 55.904,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 78,
-      "vol": 0.63,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 56.058,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 80,
-      "vol": 0.51,
+      "lane": 1,
+      "dur": 0.3,
+      "type": "hold",
+      "midi": 67,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 56.314,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 56.587,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.54,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 56.792,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
+      "lane": 0,
+      "dur": 0.38,
+      "type": "hold",
+      "midi": 60,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 56.792,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 56.928,
       "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 58,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 57.133,
-      "lane": 2,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.19,
+      "source": "drums"
     },
     {
       "time": 57.133,
@@ -1248,30 +951,30 @@
       "source": "vocals_lead"
     },
     {
-      "time": 57.543,
-      "lane": 3,
-      "dur": 0.25,
+      "time": 57.474,
+      "lane": 0,
+      "dur": 0.35,
       "type": "hold",
-      "midi": 81,
-      "vol": 0.68,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 57.696,
-      "lane": 2,
-      "dur": 0.55,
-      "type": "hold",
-      "midi": 68,
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 57.952,
-      "lane": 3,
-      "dur": 0.4,
+      "time": 57.747,
+      "lane": 1,
+      "dur": 0.31,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.3,
+      "source": "drums"
+    },
+    {
+      "time": 57.918,
+      "lane": 2,
+      "dur": 0.45,
       "type": "hold",
-      "midi": 80,
-      "vol": 0.78,
+      "midi": 68,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
@@ -1293,16 +996,16 @@
       "source": "drums"
     },
     {
-      "time": 58.942,
+      "time": 58.925,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 70,
-      "vol": 0.94,
+      "midi": 69,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 58.942,
+      "time": 58.925,
       "lane": 1,
       "dur": 0.45,
       "type": "hold",
@@ -1311,99 +1014,90 @@
       "source": "vocals_lead"
     },
     {
-      "time": 59.215,
+      "time": 59.522,
       "lane": 2,
-      "dur": 0.34,
-      "type": "hold",
+      "dur": 0.15,
+      "type": "tap",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 59.42,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.56,
-      "source": "vocals_lead"
-    },
-    {
       "time": 59.659,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 59.659,
-      "lane": 3,
-      "dur": 0.65,
-      "type": "hold",
-      "midi": 85,
-      "vol": 0.64,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 59.829,
       "lane": 1,
-      "dur": 1.09,
-      "type": "hold",
+      "dur": 0.1,
+      "type": "tap",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 60.068,
+      "time": 59.829,
       "lane": 2,
-      "dur": 1.35,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.9,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 69,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 60.768,
-      "lane": 3,
-      "dur": 0.29,
-      "type": "hold",
-      "midi": 85,
-      "vol": 0.55,
+      "time": 60.102,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 61.024,
+      "time": 60.546,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.648,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 60.853,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 61.126,
       "lane": 1,
       "dur": 0.2,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.22,
-      "source": "drums"
-    },
-    {
-      "time": 61.16,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 80,
-      "vol": 0.35,
+      "midi": 61,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 61.433,
-      "lane": 1,
-      "dur": 0.1,
+      "time": 61.485,
+      "lane": 2,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.21,
-      "source": "drums"
+      "midi": 73,
+      "vol": 1.0,
+      "source": "vocals_lead"
     },
     {
       "time": 61.911,
-      "lane": 2,
-      "dur": 0.55,
+      "lane": 1,
+      "dur": 0.65,
       "type": "hold",
       "midi": 68,
       "vol": 1.0,
@@ -1411,7 +1105,7 @@
     },
     {
       "time": 62.253,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -1419,18 +1113,9 @@
       "source": "drums"
     },
     {
-      "time": 62.56,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 62.696,
+      "time": 62.765,
       "lane": 1,
-      "dur": 0.65,
+      "dur": 0.6,
       "type": "hold",
       "midi": 69,
       "vol": 1.0,
@@ -1446,26 +1131,26 @@
       "source": "drums"
     },
     {
-      "time": 63.447,
+      "time": 63.515,
       "lane": 2,
-      "dur": 0.15,
+      "dur": 0.2,
       "type": "tap",
       "midi": 74,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 63.72,
-      "lane": 2,
-      "dur": 0.45,
-      "type": "hold",
-      "midi": 76,
+      "time": 63.686,
+      "lane": 1,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 63.891,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -1473,17 +1158,17 @@
       "source": "drums"
     },
     {
-      "time": 64.266,
-      "lane": 2,
-      "dur": 2.6,
-      "type": "hold",
-      "midi": 71,
+      "time": 64.232,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 72,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 64.71,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -1492,21 +1177,12 @@
     },
     {
       "time": 65.529,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
       "vol": 0.23,
       "source": "drums"
-    },
-    {
-      "time": 67.133,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
     },
     {
       "time": 67.406,
@@ -1518,190 +1194,424 @@
       "source": "vocals_lead"
     },
     {
-      "time": 67.645,
+      "time": 67.628,
       "lane": 1,
-      "dur": 2.7,
+      "dur": 1.59,
       "type": "hold",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 73.447,
+      "time": 69.317,
+      "lane": 1,
+      "dur": 0.35,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.54,
+      "source": "piano"
+    },
+    {
+      "time": 69.317,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 38,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 69.556,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.48,
+      "source": "piano"
+    },
+    {
+      "time": 69.693,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.52,
+      "source": "piano"
+    },
+    {
+      "time": 69.693,
+      "lane": 3,
+      "dur": 0.72,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.71,
+      "source": "piano"
+    },
+    {
+      "time": 69.829,
       "lane": 1,
       "dur": 0.55,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.47,
+      "source": "piano"
+    },
+    {
+      "time": 70.512,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 69,
+      "vol": 0.37,
+      "source": "piano"
+    },
+    {
+      "time": 70.512,
+      "lane": 3,
+      "dur": 3.8,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.78,
+      "source": "piano"
+    },
+    {
+      "time": 71.775,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 71.877,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 72.184,
+      "lane": 0,
+      "dur": 0.31,
+      "type": "tap",
+      "midi": 40,
+      "vol": 0.97,
+      "source": "piano"
+    },
+    {
+      "time": 72.594,
+      "lane": 0,
+      "dur": 1.08,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.81,
+      "source": "piano"
+    },
+    {
+      "time": 72.969,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 69,
+      "vol": 0.43,
+      "source": "piano"
+    },
+    {
+      "time": 73.174,
+      "lane": 2,
+      "dur": 2.1,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.77,
+      "source": "piano"
+    },
+    {
+      "time": 73.771,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 33,
+      "vol": 0.48,
+      "source": "piano"
+    },
+    {
+      "time": 74.608,
+      "lane": 1,
+      "dur": 1.03,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.79,
+      "source": "piano"
+    },
+    {
+      "time": 74.608,
+      "lane": 3,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.82,
+      "source": "piano"
+    },
+    {
+      "time": 75.29,
+      "lane": 3,
+      "dur": 0.7,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.45,
+      "source": "piano"
+    },
+    {
+      "time": 75.427,
+      "lane": 2,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.49,
+      "source": "piano"
+    },
+    {
+      "time": 75.734,
+      "lane": 1,
+      "dur": 0.5,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.58,
+      "source": "piano"
+    },
+    {
+      "time": 75.734,
+      "lane": 0,
+      "dur": 0.34,
+      "type": "tap",
+      "midi": 38,
+      "vol": 0.97,
+      "source": "piano"
+    },
+    {
+      "time": 76.177,
+      "lane": 0,
+      "dur": 0.75,
+      "type": "tap",
+      "midi": 57,
+      "vol": 0.4,
+      "source": "piano"
+    },
+    {
+      "time": 76.177,
+      "lane": 3,
+      "dur": 0.69,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.58,
+      "source": "piano"
+    },
+    {
+      "time": 76.724,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.39,
+      "source": "piano"
+    },
+    {
+      "time": 76.962,
+      "lane": 3,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.46,
+      "source": "piano"
+    },
+    {
+      "time": 77.133,
+      "lane": 3,
+      "dur": 0.35,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.65,
+      "source": "piano"
+    },
+    {
+      "time": 77.816,
+      "lane": 2,
+      "dur": 0.45,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.48,
+      "source": "piano"
+    },
+    {
+      "time": 77.816,
+      "lane": 3,
+      "dur": 0.72,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.79,
+      "source": "piano"
+    },
+    {
+      "time": 78.259,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 61,
+      "vol": 0.53,
+      "source": "piano"
+    },
+    {
+      "time": 78.259,
+      "lane": 0,
+      "dur": 0.69,
+      "type": "tap",
+      "midi": 40,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 78.464,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.45,
+      "source": "piano"
+    },
+    {
+      "time": 78.635,
+      "lane": 3,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.72,
+      "source": "piano"
+    },
+    {
+      "time": 79.044,
+      "lane": 0,
+      "dur": 1.54,
+      "type": "tap",
+      "midi": 42,
+      "vol": 1.0,
+      "source": "piano"
+    },
+    {
+      "time": 79.42,
+      "lane": 1,
+      "dur": 0.5,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.63,
+      "source": "piano"
+    },
+    {
+      "time": 79.42,
+      "lane": 3,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 82,
+      "vol": 0.42,
+      "source": "piano"
+    },
+    {
+      "time": 79.71,
+      "lane": 3,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 81,
+      "vol": 0.43,
+      "source": "piano"
+    },
+    {
+      "time": 80.273,
+      "lane": 3,
+      "dur": 0.3,
+      "type": "tap",
+      "midi": 82,
+      "vol": 0.39,
+      "source": "piano"
+    },
+    {
+      "time": 80.683,
+      "lane": 1,
+      "dur": 0.85,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.56,
+      "source": "piano"
+    },
+    {
+      "time": 80.683,
+      "lane": 0,
+      "dur": 1.95,
+      "type": "tap",
+      "midi": 45,
+      "vol": 0.89,
+      "source": "piano"
+    },
+    {
+      "time": 81.092,
+      "lane": 3,
+      "dur": 0.6,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.55,
+      "source": "piano"
+    },
+    {
+      "time": 81.263,
+      "lane": 2,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 83,
+      "vol": 0.39,
+      "source": "piano"
+    },
+    {
+      "time": 81.809,
+      "lane": 3,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 88,
+      "vol": 0.38,
+      "source": "piano"
+    },
+    {
+      "time": 82.491,
+      "lane": 2,
+      "dur": 0.3,
       "type": "hold",
-      "midi": 66,
+      "midi": 83,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 73.515,
-      "lane": 2,
-      "dur": 0.58,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 74.096,
+      "time": 82.782,
       "lane": 1,
       "dur": 0.35,
       "type": "hold",
       "midi": 59,
-      "vol": 0.56,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 74.198,
-      "lane": 2,
-      "dur": 0.25,
-      "type": "hold",
-      "midi": 71,
-      "vol": 0.51,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 74.59,
-      "lane": 2,
-      "dur": 0.85,
-      "type": "hold",
-      "midi": 71,
-      "vol": 0.55,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 77.85,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.59,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 78.328,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 80,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 78.396,
-      "lane": 2,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.75,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 78.498,
+      "time": 83.106,
       "lane": 3,
-      "dur": 0.58,
-      "type": "hold",
-      "midi": 80,
-      "vol": 0.92,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 78.908,
-      "lane": 2,
       "dur": 0.25,
       "type": "tap",
-      "midi": 73,
-      "vol": 0.43,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 78.908,
-      "lane": 1,
-      "dur": 1.9,
-      "type": "hold",
-      "midi": 61,
+      "midi": 83,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 79.181,
-      "lane": 3,
-      "dur": 1.06,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.85,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 79.795,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.36,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 80.137,
-      "lane": 2,
-      "dur": 0.25,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.46,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 80.341,
-      "lane": 3,
-      "dur": 1.65,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.86,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 80.529,
-      "lane": 2,
-      "dur": 1.4,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.76,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 82.184,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.57,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 82.526,
-      "lane": 2,
-      "dur": 1.0,
-      "type": "hold",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 83.14,
+      "time": 83.754,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 60,
-      "vol": 0.76,
-      "source": "drums"
-    },
-    {
-      "time": 84.061,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
+      "dur": 0.5,
+      "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
@@ -1709,15 +1619,6 @@
     {
       "time": 84.71,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.4,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 84.71,
-      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 59,
@@ -1726,25 +1627,16 @@
     },
     {
       "time": 85.154,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.8,
+      "lane": 2,
+      "dur": 0.3,
+      "type": "hold",
+      "midi": 67,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 85.256,
+      "time": 85.529,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.78,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 85.495,
-      "lane": 0,
       "dur": 0.45,
       "type": "hold",
       "midi": 64,
@@ -1752,29 +1644,38 @@
       "source": "vocals_lead"
     },
     {
-      "time": 86.041,
-      "lane": 0,
-      "dur": 0.05,
+      "time": 86.109,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 86.382,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.4,
+      "time": 86.109,
+      "lane": 0,
+      "dur": 0.45,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 86.587,
-      "lane": 0,
-      "dur": 0.15,
+      "lane": 3,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 64,
+      "midi": 83,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 86.724,
+      "lane": 0,
+      "dur": 0.31,
+      "type": "hold",
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -1790,108 +1691,63 @@
     {
       "time": 87.747,
       "lane": 1,
-      "dur": 0.25,
-      "type": "tap",
+      "dur": 0.55,
+      "type": "hold",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 87.816,
-      "lane": 2,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 71,
-      "vol": 0.69,
-      "source": "vocals_lead"
-    },
-    {
       "time": 88.311,
-      "lane": 1,
-      "dur": 1.0,
+      "lane": 0,
+      "dur": 0.35,
       "type": "hold",
-      "midi": 68,
+      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 88.874,
       "lane": 0,
-      "dur": 1.23,
+      "dur": 0.45,
       "type": "hold",
       "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 89.42,
+      "time": 90.683,
       "lane": 1,
-      "dur": 0.45,
-      "type": "hold",
-      "midi": 68,
-      "vol": 0.55,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 90.205,
-      "lane": 0,
-      "dur": 0.36,
+      "dur": 0.25,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 90.666,
+      "time": 91.075,
       "lane": 0,
       "dur": 0.2,
       "type": "tap",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 90.956,
-      "lane": 0,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 91.126,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
       "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 91.229,
+      "time": 91.297,
       "lane": 1,
-      "dur": 0.26,
-      "type": "hold",
+      "dur": 0.2,
+      "type": "tap",
       "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 91.587,
+      "time": 91.604,
       "lane": 1,
       "dur": 0.3,
       "type": "hold",
       "midi": 68,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 91.587,
-      "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -1905,7 +1761,7 @@
       "source": "vocals_lead"
     },
     {
-      "time": 92.457,
+      "time": 92.56,
       "lane": 0,
       "dur": 0.4,
       "type": "hold",
@@ -1914,25 +1770,25 @@
       "source": "vocals_lead"
     },
     {
-      "time": 92.628,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.38,
-      "source": "vocals_lead"
-    },
-    {
       "time": 93.038,
-      "lane": 0,
-      "dur": 0.1,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 93.242,
+      "time": 93.447,
+      "lane": 1,
+      "dur": 0.5,
+      "type": "hold",
+      "midi": 66,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 94.232,
       "lane": 0,
       "dur": 0.1,
       "type": "tap",
@@ -1941,44 +1797,17 @@
       "source": "vocals_lead"
     },
     {
-      "time": 93.481,
+      "time": 94.454,
       "lane": 1,
-      "dur": 1.27,
+      "dur": 0.7,
       "type": "hold",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 94.232,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.64,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 94.846,
-      "lane": 2,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.6,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 94.846,
-      "lane": 1,
-      "dur": 0.28,
-      "type": "hold",
-      "midi": 69,
+      "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 95.222,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 62,
@@ -1986,9 +1815,9 @@
       "source": "vocals_lead"
     },
     {
-      "time": 95.29,
-      "lane": 2,
-      "dur": 0.3,
+      "time": 95.324,
+      "lane": 1,
+      "dur": 0.35,
       "type": "hold",
       "midi": 66,
       "vol": 1.0,
@@ -1996,16 +1825,16 @@
     },
     {
       "time": 95.427,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
-      "vol": 0.92,
+      "vol": 0.91,
       "source": "drums"
     },
     {
       "time": 95.529,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.2,
       "type": "tap",
       "midi": 61,
@@ -2014,7 +1843,7 @@
     },
     {
       "time": 95.836,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 60,
@@ -2023,16 +1852,7 @@
     },
     {
       "time": 95.939,
-      "lane": 2,
-      "dur": 0.31,
-      "type": "hold",
-      "midi": 66,
-      "vol": 0.41,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 95.939,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.62,
       "type": "hold",
       "midi": 61,
@@ -2040,17 +1860,8 @@
       "source": "vocals_lead"
     },
     {
-      "time": 96.348,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.41,
-      "source": "vocals_lead"
-    },
-    {
       "time": 96.655,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -2059,7 +1870,7 @@
     },
     {
       "time": 96.894,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.05,
       "type": "tap",
       "midi": 61,
@@ -2068,8 +1879,8 @@
     },
     {
       "time": 97.065,
-      "lane": 1,
-      "dur": 0.3,
+      "lane": 0,
+      "dur": 0.05,
       "type": "tap",
       "midi": 60,
       "vol": 0.79,
@@ -2077,118 +1888,91 @@
     },
     {
       "time": 97.235,
-      "lane": 2,
-      "dur": 0.2,
+      "lane": 0,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 73,
+      "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 97.474,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 61,
-      "vol": 0.55,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 97.85,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 72,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 98.02,
-      "lane": 1,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 98.294,
       "lane": 0,
-      "dur": 0.1,
+      "dur": 0.25,
       "type": "tap",
       "midi": 60,
-      "vol": 0.47,
+      "vol": 0.71,
       "source": "drums"
     },
     {
-      "time": 98.549,
+      "time": 97.816,
       "lane": 0,
-      "dur": 0.65,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 98.123,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 98.225,
+      "lane": 1,
+      "dur": 0.55,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 98.703,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.9,
+      "source": "drums"
+    },
+    {
+      "time": 98.84,
+      "lane": 0,
+      "dur": 0.45,
       "type": "hold",
       "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 98.857,
+      "time": 99.113,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.48,
       "type": "tap",
-      "midi": 64,
-      "vol": 0.53,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.89,
+      "source": "drums"
     },
     {
-      "time": 99.061,
-      "lane": 2,
-      "dur": 0.05,
+      "time": 99.693,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 69,
-      "vol": 0.98,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 99.061,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 78,
-      "vol": 0.58,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 99.215,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 99.676,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.74,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 99.898,
-      "lane": 2,
-      "dur": 0.7,
-      "type": "hold",
-      "midi": 64,
+      "midi": 62,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 99.898,
-      "lane": 3,
-      "dur": 0.9,
-      "type": "hold",
-      "midi": 76,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -2211,15 +1995,6 @@
       "source": "drums"
     },
     {
-      "time": 100.956,
-      "lane": 2,
-      "dur": 0.26,
-      "type": "hold",
-      "midi": 68,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
       "time": 101.314,
       "lane": 2,
       "dur": 0.4,
@@ -2240,24 +2015,24 @@
     {
       "time": 101.809,
       "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
+      "dur": 0.3,
+      "type": "hold",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 101.911,
-      "lane": 3,
-      "dur": 0.1,
+      "time": 101.98,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.42,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.8,
+      "source": "drums"
     },
     {
       "time": 102.082,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.2,
       "type": "tap",
       "midi": 61,
@@ -2266,7 +2041,7 @@
     },
     {
       "time": 102.389,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.5,
       "type": "tap",
       "midi": 60,
@@ -2274,26 +2049,8 @@
       "source": "drums"
     },
     {
-      "time": 102.389,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.39,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 102.747,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.44,
-      "source": "vocals_lead"
-    },
-    {
       "time": 103.208,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -2302,7 +2059,7 @@
     },
     {
       "time": 103.618,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.3,
       "type": "tap",
       "midi": 60,
@@ -2311,24 +2068,15 @@
     },
     {
       "time": 103.959,
-      "lane": 3,
-      "dur": 0.2,
+      "lane": 2,
+      "dur": 0.05,
       "type": "tap",
       "midi": 71,
-      "vol": 0.84,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 104.13,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.7,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 104.437,
       "lane": 2,
       "dur": 0.1,
       "type": "tap",
@@ -2337,10 +2085,37 @@
       "source": "vocals_lead"
     },
     {
-      "time": 104.642,
+      "time": 104.13,
+      "lane": 1,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 104.369,
       "lane": 2,
-      "dur": 0.25,
+      "dur": 0.3,
       "type": "hold",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 104.693,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 104.795,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
       "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
@@ -2348,177 +2123,51 @@
     {
       "time": 105.0,
       "lane": 2,
-      "dur": 0.55,
+      "dur": 0.4,
       "type": "hold",
       "midi": 76,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 105.0,
+      "time": 105.563,
       "lane": 1,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 64,
-      "vol": 0.52,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 59,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 105.631,
-      "lane": 1,
-      "dur": 0.69,
+      "lane": 2,
+      "dur": 0.3,
       "type": "hold",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 106.416,
-      "lane": 2,
-      "dur": 0.74,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.6,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 106.416,
+      "time": 106.143,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 106.86,
-      "lane": 1,
-      "dur": 0.29,
-      "type": "hold",
-      "midi": 66,
-      "vol": 0.54,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 107.253,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 107.253,
-      "lane": 1,
-      "dur": 0.1,
+      "dur": 0.25,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 107.406,
-      "lane": 3,
-      "dur": 0.6,
-      "type": "hold",
-      "midi": 76,
-      "vol": 0.62,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 107.457,
-      "lane": 2,
-      "dur": 0.25,
+      "time": 106.143,
+      "lane": 0,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 107.782,
-      "lane": 2,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 71,
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 108.123,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 75,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 108.259,
       "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.29,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 108.379,
-      "lane": 2,
-      "dur": 2.2,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 108.379,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 83,
-      "vol": 0.35,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 108.601,
-      "lane": 3,
-      "dur": 0.7,
-      "type": "hold",
-      "midi": 85,
-      "vol": 0.53,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 109.454,
-      "lane": 3,
-      "dur": 0.65,
-      "type": "hold",
-      "midi": 85,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 110.341,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.43,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 110.683,
-      "lane": 2,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 110.887,
-      "lane": 3,
       "dur": 0.1,
       "type": "tap",
       "midi": 74,
@@ -2526,165 +2175,138 @@
       "source": "vocals_lead"
     },
     {
-      "time": 111.092,
-      "lane": 3,
+      "time": 108.686,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
-      "midi": 73,
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 111.502,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 73,
+      "time": 109.249,
+      "lane": 2,
+      "dur": 0.25,
+      "type": "hold",
+      "midi": 70,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 111.843,
-      "lane": 3,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 112.15,
-      "lane": 3,
+      "time": 109.488,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
-      "midi": 73,
+      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 112.355,
-      "lane": 3,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 72,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 113.14,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 1,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 71,
+      "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 113.191,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 113.584,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.53,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 113.686,
+      "time": 112.56,
       "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 52,
-      "vol": 0.33,
+      "midi": 60,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 113.686,
+      "time": 112.56,
       "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 113.106,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 40,
-      "vol": 0.61,
+      "midi": 59,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 113.823,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.59,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 114.027,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 76,
-      "vol": 0.69,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 114.608,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 92,
-      "vol": 0.5,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 114.949,
-      "lane": 2,
-      "dur": 0.99,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 115.034,
-      "lane": 3,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 92,
-      "vol": 0.41,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 116.041,
-      "lane": 2,
-      "dur": 1.2,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 116.041,
-      "lane": 3,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.33,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 116.416,
-      "lane": 3,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
-      "midi": 85,
-      "vol": 0.36,
+      "midi": 40,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.317,
+      "lane": 1,
+      "dur": 0.26,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 114.676,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.28,
+      "source": "drums"
+    },
+    {
+      "time": 114.812,
+      "lane": 1,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.154,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 58,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.597,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 69,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 115.768,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 60,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 116.058,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 56,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
@@ -2697,15 +2319,6 @@
       "source": "drums"
     },
     {
-      "time": 116.997,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.36,
-      "source": "vocals_lead"
-    },
-    {
       "time": 117.133,
       "lane": 1,
       "dur": 0.1,
@@ -2713,15 +2326,6 @@
       "midi": 60,
       "vol": 0.52,
       "source": "drums"
-    },
-    {
-      "time": 117.338,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.6,
-      "source": "vocals_lead"
     },
     {
       "time": 117.543,
@@ -2742,156 +2346,93 @@
       "source": "drums"
     },
     {
-      "time": 118.208,
-      "lane": 2,
-      "dur": 0.1,
+      "time": 118.191,
+      "lane": 1,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 70,
+      "midi": 58,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 118.208,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 74,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 118.413,
-      "lane": 3,
+      "time": 118.362,
+      "lane": 1,
       "dur": 0.2,
       "type": "tap",
-      "midi": 80,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 118.635,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 118.84,
-      "lane": 2,
-      "dur": 0.25,
-      "type": "hold",
-      "midi": 74,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 119.181,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
       "midi": 60,
-      "vol": 0.39,
+      "vol": 0.3,
       "source": "drums"
     },
     {
-      "time": 119.454,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 51,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 119.522,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.43,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 119.795,
+      "time": 118.771,
       "lane": 1,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
+      "vol": 0.24,
+      "source": "drums"
+    },
+    {
+      "time": 119.113,
+      "lane": 0,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 120.546,
+      "time": 119.59,
       "lane": 1,
-      "dur": 0.15,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.31,
+      "source": "drums"
     },
     {
       "time": 120.819,
       "lane": 1,
-      "dur": 0.2,
+      "dur": 0.25,
       "type": "tap",
       "midi": 60,
       "vol": 0.39,
       "source": "drums"
     },
     {
-      "time": 121.126,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 121.126,
+      "time": 121.229,
       "lane": 0,
-      "dur": 0.45,
+      "dur": 0.6,
       "type": "hold",
       "midi": 54,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 121.843,
-      "lane": 2,
-      "dur": 2.1,
-      "type": "hold",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 123.925,
+      "time": 121.911,
       "lane": 1,
-      "dur": 0.1,
+      "dur": 0.2,
       "type": "tap",
-      "midi": 56,
+      "midi": 62,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 124.198,
+      "time": 122.116,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 54,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 124.369,
       "lane": 2,
-      "dur": 0.41,
+      "dur": 0.5,
       "type": "hold",
       "midi": 68,
       "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 124.71,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.49,
       "source": "vocals_lead"
     },
     {
@@ -2906,61 +2447,34 @@
     {
       "time": 125.529,
       "lane": 1,
-      "dur": 2.15,
+      "dur": 1.44,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 126.314,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.41,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 127.73,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 67,
-      "vol": 0.9,
+      "time": 127.065,
+      "lane": 1,
+      "dur": 0.65,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 127.986,
       "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
+      "dur": 1.35,
+      "type": "hold",
       "midi": 68,
       "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 128.191,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.38,
       "source": "vocals_lead"
     },
     {
       "time": 129.42,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 129.573,
-      "lane": 1,
-      "dur": 0.9,
+      "dur": 1.05,
       "type": "hold",
       "midi": 64,
       "vol": 1.0,
@@ -2969,25 +2483,25 @@
     {
       "time": 130.41,
       "lane": 0,
-      "dur": 0.25,
+      "dur": 0.3,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 130.614,
-      "lane": 1,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 64,
+      "time": 130.819,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 130.802,
+      "time": 131.126,
       "lane": 0,
-      "dur": 0.75,
+      "dur": 0.45,
       "type": "hold",
       "midi": 59,
       "vol": 1.0,
@@ -2996,43 +2510,25 @@
     {
       "time": 131.672,
       "lane": 0,
-      "dur": 1.4,
+      "dur": 0.6,
       "type": "hold",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 133.447,
-      "lane": 0,
-      "dur": 0.33,
-      "type": "hold",
-      "midi": 57,
-      "vol": 0.89,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 133.874,
+      "time": 133.925,
       "lane": 0,
       "dur": 0.05,
       "type": "tap",
-      "midi": 59,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 134.778,
-      "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.28,
+      "source": "drums"
     },
     {
       "time": 135.0,
       "lane": 0,
-      "dur": 0.35,
+      "dur": 0.4,
       "type": "hold",
       "midi": 59,
       "vol": 1.0,
@@ -3041,7 +2537,7 @@
     {
       "time": 135.427,
       "lane": 1,
-      "dur": 0.05,
+      "dur": 0.15,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
@@ -3049,30 +2545,12 @@
     },
     {
       "time": 135.563,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 135.563,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.2,
       "type": "tap",
       "midi": 60,
       "vol": 0.64,
       "source": "drums"
-    },
-    {
-      "time": 135.7,
-      "lane": 0,
-      "dur": 0.58,
-      "type": "hold",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
     },
     {
       "time": 136.382,
@@ -3102,30 +2580,12 @@
       "source": "drums"
     },
     {
-      "time": 136.945,
+      "time": 136.962,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
+      "dur": 0.45,
+      "type": "hold",
       "midi": 68,
       "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 137.099,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.66,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 137.474,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.41,
       "source": "vocals_lead"
     },
     {
@@ -3138,39 +2598,48 @@
       "source": "vocals_lead"
     },
     {
-      "time": 137.952,
-      "lane": 1,
-      "dur": 0.2,
+      "time": 138.02,
+      "lane": 0,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 68,
-      "vol": 0.52,
+      "midi": 60,
+      "vol": 0.7,
+      "source": "drums"
+    },
+    {
+      "time": 138.276,
+      "lane": 0,
+      "dur": 0.4,
+      "type": "hold",
+      "midi": 59,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 138.686,
       "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
+      "dur": 0.29,
+      "type": "hold",
       "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 138.788,
-      "lane": 1,
-      "dur": 0.1,
+      "time": 138.84,
+      "lane": 0,
+      "dur": 0.25,
       "type": "tap",
-      "midi": 69,
-      "vol": 0.36,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.8,
+      "source": "drums"
     },
     {
       "time": 139.078,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.59,
+      "dur": 0.4,
+      "type": "hold",
+      "midi": 68,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
@@ -3183,15 +2652,6 @@
       "source": "vocals_lead"
     },
     {
-      "time": 139.556,
-      "lane": 1,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.71,
-      "source": "vocals_lead"
-    },
-    {
       "time": 139.659,
       "lane": 0,
       "dur": 0.1,
@@ -3201,80 +2661,17 @@
       "source": "drums"
     },
     {
-      "time": 140.068,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.57,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 140.171,
+      "time": 140.137,
       "lane": 0,
-      "dur": 3.3,
+      "dur": 2.35,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 141.809,
-      "lane": 1,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 68,
-      "vol": 0.69,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 142.389,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.76,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 142.56,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.67,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 142.867,
-      "lane": 2,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 73,
-      "vol": 0.72,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 143.413,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 143.584,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.43,
-      "source": "vocals_lead"
-    },
-    {
       "time": 144.164,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -3282,36 +2679,27 @@
       "source": "drums"
     },
     {
-      "time": 145.051,
-      "lane": 2,
-      "dur": 0.15,
+      "time": 144.983,
+      "lane": 0,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.42,
+      "source": "drums"
     },
     {
-      "time": 145.324,
-      "lane": 2,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "time": 145.392,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 60,
+      "vol": 0.62,
+      "source": "drums"
     },
     {
       "time": 145.87,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 145.973,
-      "lane": 2,
-      "dur": 0.15,
+      "lane": 1,
+      "dur": 0.2,
       "type": "tap",
       "midi": 69,
       "vol": 1.0,
@@ -3319,7 +2707,7 @@
     },
     {
       "time": 146.263,
-      "lane": 2,
+      "lane": 1,
       "dur": 0.25,
       "type": "tap",
       "midi": 68,
@@ -3327,127 +2715,64 @@
       "source": "vocals_lead"
     },
     {
-      "time": 146.553,
-      "lane": 1,
-      "dur": 0.3,
-      "type": "hold",
+      "time": 146.587,
+      "lane": 0,
+      "dur": 0.2,
+      "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 146.877,
+      "time": 146.894,
       "lane": 0,
-      "dur": 0.05,
+      "dur": 0.1,
       "type": "tap",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 147.082,
+      "time": 146.997,
       "lane": 1,
-      "dur": 0.2,
+      "dur": 0.15,
       "type": "tap",
       "midi": 64,
-      "vol": 0.58,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 147.816,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.53,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 147.816,
       "lane": 0,
-      "dur": 0.5,
+      "dur": 0.55,
       "type": "hold",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 148.02,
+      "time": 148.294,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.48,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 148.362,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 148.413,
-      "lane": 0,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.49,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 148.515,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
+      "dur": 0.4,
+      "type": "hold",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 148.84,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.44,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 148.84,
       "lane": 0,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 59,
-      "vol": 0.55,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 148.976,
-      "lane": 0,
-      "dur": 0.2,
-      "type": "tap",
+      "dur": 0.4,
+      "type": "hold",
       "midi": 61,
-      "vol": 0.82,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 149.215,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 149.642,
+      "time": 149.556,
       "lane": 0,
-      "dur": 0.2,
-      "type": "tap",
+      "dur": 0.4,
+      "type": "hold",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
@@ -3455,99 +2780,45 @@
     {
       "time": 149.949,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.88,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 149.949,
-      "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 58,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.137,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.256,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 0.48,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.256,
-      "lane": 0,
-      "dur": 1.3,
-      "type": "hold",
-      "midi": 61,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.461,
-      "lane": 1,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.47,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.751,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.4,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 150.956,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 68,
-      "vol": 0.42,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 151.28,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.32,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 151.638,
-      "lane": 1,
-      "dur": 1.15,
+      "dur": 0.35,
       "type": "hold",
       "midi": 67,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 152.696,
+      "time": 150.256,
       "lane": 0,
-      "dur": 0.1,
+      "dur": 1.15,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 151.604,
+      "lane": 1,
+      "dur": 0.9,
+      "type": "hold",
+      "midi": 67,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 152.457,
+      "lane": 2,
+      "dur": 0.05,
       "type": "tap",
-      "midi": 63,
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 152.696,
+      "lane": 1,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
@@ -3572,47 +2843,65 @@
     {
       "time": 153.379,
       "lane": 1,
-      "dur": 1.74,
-      "type": "hold",
+      "dur": 0.1,
+      "type": "tap",
       "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 153.618,
-      "lane": 2,
+      "time": 153.481,
+      "lane": 0,
+      "dur": 0.46,
+      "type": "hold",
+      "midi": 61,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 154.044,
+      "lane": 0,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 49,
+      "vol": 0.82,
+      "source": "other"
+    },
+    {
+      "time": 154.198,
+      "lane": 0,
       "dur": 0.15,
       "type": "tap",
-      "midi": 78,
-      "vol": 0.34,
-      "source": "vocals_lead"
+      "midi": 46,
+      "vol": 0.76,
+      "source": "other"
     },
     {
-      "time": 153.942,
-      "lane": 2,
-      "dur": 0.2,
+      "time": 154.71,
+      "lane": 0,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 78,
-      "vol": 0.48,
-      "source": "vocals_lead"
+      "midi": 46,
+      "vol": 0.73,
+      "source": "other"
     },
     {
-      "time": 154.403,
-      "lane": 2,
-      "dur": 0.35,
-      "type": "hold",
-      "midi": 78,
-      "vol": 0.42,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 154.915,
-      "lane": 2,
+      "time": 154.846,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 78,
-      "vol": 0.47,
-      "source": "vocals_lead"
+      "midi": 49,
+      "vol": 0.83,
+      "source": "other"
+    },
+    {
+      "time": 154.983,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 46,
+      "vol": 0.72,
+      "source": "other"
     },
     {
       "time": 155.222,
@@ -3624,35 +2913,44 @@
       "source": "drums"
     },
     {
-      "time": 155.324,
-      "lane": 3,
-      "dur": 0.1,
+      "time": 155.427,
+      "lane": 0,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 78,
-      "vol": 0.38,
-      "source": "vocals_lead"
+      "midi": 42,
+      "vol": 0.79,
+      "source": "other"
     },
     {
-      "time": 156.246,
-      "lane": 2,
-      "dur": 0.1,
+      "time": 155.666,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 70,
-      "vol": 0.69,
-      "source": "vocals_lead"
+      "midi": 49,
+      "vol": 0.91,
+      "source": "other"
     },
     {
-      "time": 156.246,
-      "lane": 3,
-      "dur": 0.31,
-      "type": "hold",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "time": 155.939,
+      "lane": 0,
+      "dur": 0.3,
+      "type": "tap",
+      "midi": 42,
+      "vol": 0.83,
+      "source": "other"
+    },
+    {
+      "time": 156.212,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 54,
+      "vol": 0.6,
+      "source": "other"
     },
     {
       "time": 156.451,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -3660,17 +2958,8 @@
       "source": "drums"
     },
     {
-      "time": 156.655,
-      "lane": 3,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 92,
-      "vol": 0.47,
-      "source": "vocals_lead"
-    },
-    {
       "time": 156.86,
-      "lane": 1,
+      "lane": 2,
       "dur": 1.3,
       "type": "tap",
       "midi": 60,
@@ -3678,90 +2967,108 @@
       "source": "drums"
     },
     {
-      "time": 157.73,
-      "lane": 3,
-      "dur": 1.23,
-      "type": "hold",
-      "midi": 79,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 159.061,
-      "lane": 2,
-      "dur": 0.94,
-      "type": "hold",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 159.061,
-      "lane": 3,
-      "dur": 0.2,
+      "time": 156.86,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 78,
-      "vol": 0.39,
-      "source": "vocals_lead"
+      "midi": 55,
+      "vol": 0.53,
+      "source": "other"
+    },
+    {
+      "time": 157.014,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 43,
+      "vol": 0.67,
+      "source": "other"
+    },
+    {
+      "time": 157.133,
+      "lane": 1,
+      "dur": 0.4,
+      "type": "hold",
+      "midi": 59,
+      "vol": 0.57,
+      "source": "other"
+    },
+    {
+      "time": 157.44,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 47,
+      "vol": 0.74,
+      "source": "other"
+    },
+    {
+      "time": 157.85,
+      "lane": 0,
+      "dur": 0.1,
+      "type": "tap",
+      "midi": 48,
+      "vol": 0.73,
+      "source": "other"
+    },
+    {
+      "time": 158.362,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 48,
+      "vol": 0.81,
+      "source": "other"
     },
     {
       "time": 159.352,
-      "lane": 3,
-      "dur": 0.45,
-      "type": "hold",
-      "midi": 83,
-      "vol": 0.47,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 159.966,
       "lane": 1,
-      "dur": 0.75,
-      "type": "hold",
+      "dur": 0.05,
+      "type": "tap",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 160.102,
-      "lane": 2,
-      "dur": 0.2,
+      "time": 160.137,
+      "lane": 1,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 71,
-      "vol": 0.79,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.94,
+      "source": "drums"
     },
     {
-      "time": 160.41,
-      "lane": 2,
-      "dur": 0.05,
+      "time": 160.392,
+      "lane": 0,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 73,
-      "vol": 0.4,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 160.41,
-      "lane": 3,
-      "dur": 0.25,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.63,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 160.751,
-      "lane": 3,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 74,
+      "midi": 56,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 161.058,
-      "lane": 2,
-      "dur": 0.45,
+      "time": 160.751,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 67,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 160.887,
+      "lane": 0,
+      "dur": 0.38,
       "type": "hold",
       "midi": 62,
       "vol": 1.0,
@@ -3769,16 +3076,7 @@
     },
     {
       "time": 161.365,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.51,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 161.365,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -3786,17 +3084,8 @@
       "source": "drums"
     },
     {
-      "time": 161.502,
-      "lane": 3,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 88,
-      "vol": 0.48,
-      "source": "vocals_lead"
-    },
-    {
       "time": 161.775,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.5,
       "type": "tap",
       "midi": 60,
@@ -3804,270 +3093,81 @@
       "source": "drums"
     },
     {
-      "time": 162.014,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.36,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 162.218,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.58,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 162.56,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 70,
+      "time": 163.14,
+      "lane": 1,
+      "dur": 0.31,
+      "type": "hold",
+      "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 162.747,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 162.901,
-      "lane": 2,
-      "dur": 0.4,
+      "time": 163.549,
+      "lane": 1,
+      "dur": 0.3,
       "type": "hold",
       "midi": 68,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 163.311,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.49,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 163.311,
-      "lane": 1,
-      "dur": 1.23,
-      "type": "hold",
-      "midi": 57,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 163.515,
-      "lane": 2,
-      "dur": 1.65,
-      "type": "hold",
-      "midi": 69,
-      "vol": 0.84,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 163.584,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.39,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 164.437,
-      "lane": 3,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 81,
-      "vol": 0.56,
-      "source": "vocals_lead"
-    },
-    {
       "time": 164.642,
-      "lane": 1,
-      "dur": 0.31,
+      "lane": 0,
+      "dur": 2.1,
       "type": "tap",
       "midi": 60,
       "vol": 0.78,
       "source": "drums"
     },
     {
-      "time": 164.846,
-      "lane": 0,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 57,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 165.051,
+      "time": 166.382,
       "lane": 1,
-      "dur": 0.45,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 167.44,
+      "lane": 2,
+      "dur": 0.25,
       "type": "hold",
-      "midi": 68,
+      "midi": 76,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 165.358,
-      "lane": 2,
+      "time": 168.396,
+      "lane": 1,
       "dur": 0.05,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.35,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 165.512,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 80,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 165.631,
-      "lane": 2,
-      "dur": 0.15,
       "type": "tap",
       "midi": 73,
-      "vol": 0.54,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 165.631,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.73,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 165.904,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 92,
-      "vol": 0.46,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 166.416,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 166.553,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.3,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 166.724,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 166.962,
-      "lane": 2,
-      "dur": 0.28,
-      "type": "hold",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 167.338,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 167.338,
-      "lane": 3,
-      "dur": 1.09,
-      "type": "hold",
-      "midi": 76,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 168.532,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.63,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 168.686,
-      "lane": 2,
-      "dur": 0.05,
+      "time": 168.498,
+      "lane": 0,
+      "dur": 0.2,
       "type": "tap",
       "midi": 68,
-      "vol": 0.44,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 168.686,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.65,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 168.908,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 76,
-      "vol": 0.58,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 169.249,
-      "lane": 2,
-      "dur": 0.8,
+      "time": 169.42,
+      "lane": 0,
+      "dur": 0.45,
       "type": "hold",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 169.863,
-      "lane": 3,
-      "dur": 0.52,
+      "time": 169.812,
+      "lane": 1,
+      "dur": 0.57,
       "type": "hold",
       "midi": 69,
       "vol": 1.0,
@@ -4075,8 +3175,8 @@
     },
     {
       "time": 170.478,
-      "lane": 3,
-      "dur": 0.45,
+      "lane": 1,
+      "dur": 0.4,
       "type": "hold",
       "midi": 71,
       "vol": 1.0,
@@ -4084,16 +3184,43 @@
     },
     {
       "time": 171.041,
-      "lane": 3,
-      "dur": 0.95,
-      "type": "hold",
-      "midi": 76,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 78,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 172.014,
-      "lane": 2,
+      "time": 171.263,
+      "lane": 1,
+      "dur": 0.3,
+      "type": "hold",
+      "midi": 71,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 171.98,
+      "lane": 1,
+      "dur": 0.35,
+      "type": "hold",
+      "midi": 69,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 173.447,
+      "lane": 0,
+      "dur": 0.45,
+      "type": "hold",
+      "midi": 65,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 174.505,
+      "lane": 1,
       "dur": 0.3,
       "type": "hold",
       "midi": 69,
@@ -4101,117 +3228,18 @@
       "source": "vocals_lead"
     },
     {
-      "time": 172.27,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.48,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 172.765,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 83,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 173.038,
-      "lane": 3,
+      "time": 174.932,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 85,
-      "vol": 0.77,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 173.174,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.47,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 173.413,
-      "lane": 3,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 83,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 173.652,
-      "lane": 1,
-      "dur": 0.51,
-      "type": "hold",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 173.959,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 80,
-      "vol": 0.29,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 174.266,
-      "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 174.505,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
       "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 174.505,
+      "time": 175.188,
       "lane": 1,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 174.71,
-      "lane": 2,
-      "dur": 0.28,
-      "type": "hold",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 175.085,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 175.239,
-      "lane": 2,
-      "dur": 0.1,
+      "dur": 0.15,
       "type": "tap",
       "midi": 71,
       "vol": 1.0,
@@ -4219,66 +3247,39 @@
     },
     {
       "time": 175.461,
-      "lane": 2,
-      "dur": 0.3,
-      "type": "hold",
+      "lane": 1,
+      "dur": 0.25,
+      "type": "tap",
       "midi": 69,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 175.904,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 74,
-      "vol": 0.49,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 175.904,
-      "lane": 1,
-      "dur": 0.45,
-      "type": "hold",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 176.058,
-      "lane": 2,
+      "lane": 0,
       "dur": 0.4,
       "type": "hold",
-      "midi": 76,
+      "midi": 63,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 176.485,
-      "lane": 1,
-      "dur": 0.34,
-      "type": "hold",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 176.928,
+      "time": 176.758,
       "lane": 1,
       "dur": 0.05,
       "type": "tap",
-      "midi": 64,
+      "midi": 66,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 176.928,
-      "lane": 0,
-      "dur": 0.1,
+      "time": 176.86,
+      "lane": 1,
+      "dur": 0.15,
       "type": "tap",
-      "midi": 60,
-      "vol": 0.18,
-      "source": "drums"
+      "midi": 64,
+      "vol": 1.0,
+      "source": "vocals_lead"
     },
     {
       "time": 177.099,
@@ -4309,15 +3310,6 @@
     },
     {
       "time": 178.089,
-      "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 69,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 178.089,
       "lane": 0,
       "dur": 0.05,
       "type": "tap",
@@ -4327,25 +3319,16 @@
     },
     {
       "time": 178.328,
-      "lane": 2,
-      "dur": 0.5,
-      "type": "hold",
-      "midi": 76,
-      "vol": 0.5,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 178.328,
       "lane": 1,
-      "dur": 0.15,
-      "type": "tap",
+      "dur": 0.25,
+      "type": "hold",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 178.567,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4353,35 +3336,26 @@
       "source": "drums"
     },
     {
-      "time": 179.352,
-      "lane": 2,
-      "dur": 0.95,
+      "time": 178.805,
+      "lane": 0,
+      "dur": 0.5,
       "type": "hold",
-      "midi": 66,
+      "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 179.352,
-      "lane": 3,
+      "lane": 1,
       "dur": 0.15,
       "type": "tap",
-      "midi": 76,
-      "vol": 0.77,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 179.625,
-      "lane": 3,
-      "dur": 0.72,
-      "type": "hold",
-      "midi": 78,
+      "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 180.205,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4389,35 +3363,8 @@
       "source": "drums"
     },
     {
-      "time": 180.444,
-      "lane": 3,
-      "dur": 0.38,
-      "type": "hold",
-      "midi": 81,
-      "vol": 0.66,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 180.922,
-      "lane": 2,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 78,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 180.922,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.52,
-      "source": "vocals_lead"
-    },
-    {
       "time": 181.024,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.2,
       "type": "tap",
       "midi": 60,
@@ -4425,17 +3372,8 @@
       "source": "drums"
     },
     {
-      "time": 181.16,
-      "lane": 3,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 78,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
       "time": 181.433,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4443,62 +3381,26 @@
       "source": "drums"
     },
     {
-      "time": 181.792,
-      "lane": 2,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 64,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 181.792,
-      "lane": 3,
+      "time": 181.843,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
-      "midi": 85,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "midi": 60,
+      "vol": 0.19,
+      "source": "drums"
     },
     {
-      "time": 181.997,
-      "lane": 2,
-      "dur": 1.55,
+      "time": 182.901,
+      "lane": 1,
+      "dur": 0.55,
       "type": "hold",
-      "midi": 68,
+      "midi": 69,
       "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 181.997,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 71,
-      "vol": 0.61,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 182.628,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 80,
-      "vol": 0.39,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 182.969,
-      "lane": 3,
-      "dur": 0.4,
-      "type": "hold",
-      "midi": 81,
-      "vol": 0.62,
       "source": "vocals_lead"
     },
     {
       "time": 183.072,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4507,34 +3409,34 @@
     },
     {
       "time": 183.549,
-      "lane": 3,
+      "lane": 1,
       "dur": 0.1,
       "type": "tap",
-      "midi": 76,
-      "vol": 0.67,
+      "midi": 69,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 183.652,
+      "time": 183.635,
       "lane": 2,
-      "dur": 2.66,
-      "type": "hold",
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 74,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 183.857,
+      "lane": 1,
+      "dur": 0.1,
+      "type": "tap",
       "midi": 71,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 184.676,
-      "lane": 3,
-      "dur": 1.23,
-      "type": "hold",
-      "midi": 83,
-      "vol": 0.52,
-      "source": "vocals_lead"
-    },
-    {
       "time": 185.119,
-      "lane": 1,
+      "lane": 0,
       "dur": 0.2,
       "type": "tap",
       "midi": 60,
@@ -4542,82 +3444,37 @@
       "source": "drums"
     },
     {
-      "time": 186.007,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 83,
-      "vol": 0.45,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 186.416,
-      "lane": 2,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 73,
-      "vol": 0.46,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 186.826,
-      "lane": 2,
-      "dur": 0.2,
-      "type": "tap",
-      "midi": 71,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 187.065,
+      "time": 187.235,
       "lane": 0,
-      "dur": 1.0,
+      "dur": 0.65,
       "type": "hold",
       "midi": 57,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 187.474,
-      "lane": 3,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.4,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 187.611,
+      "time": 187.952,
       "lane": 3,
       "dur": 0.1,
       "type": "tap",
-      "midi": 93,
-      "vol": 0.45,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 188.055,
-      "lane": 1,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 60,
+      "midi": 81,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 188.549,
+      "time": 188.703,
       "lane": 1,
-      "dur": 0.4,
-      "type": "hold",
+      "dur": 0.15,
+      "type": "tap",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 189.044,
+      "time": 189.249,
       "lane": 1,
-      "dur": 0.3,
-      "type": "hold",
+      "dur": 0.1,
+      "type": "tap",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
@@ -4625,7 +3482,7 @@
     {
       "time": 189.761,
       "lane": 2,
-      "dur": 0.6,
+      "dur": 0.48,
       "type": "hold",
       "midi": 69,
       "vol": 1.0,
@@ -4633,17 +3490,26 @@
     },
     {
       "time": 190.341,
-      "lane": 3,
-      "dur": 0.05,
+      "lane": 2,
+      "dur": 0.1,
       "type": "tap",
-      "midi": 85,
-      "vol": 0.4,
+      "midi": 69,
+      "vol": 1.0,
       "source": "vocals_lead"
     },
     {
       "time": 190.341,
       "lane": 1,
-      "dur": 0.28,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 57,
+      "vol": 1.0,
+      "source": "vocals_lead"
+    },
+    {
+      "time": 190.512,
+      "lane": 1,
+      "dur": 0.3,
       "type": "hold",
       "midi": 57,
       "vol": 1.0,
@@ -4651,97 +3517,43 @@
     },
     {
       "time": 190.717,
-      "lane": 1,
-      "dur": 0.58,
+      "lane": 2,
+      "dur": 0.55,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 191.399,
-      "lane": 1,
-      "dur": 0.35,
+      "time": 191.365,
+      "lane": 2,
+      "dur": 0.31,
       "type": "hold",
       "midi": 59,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 191.877,
-      "lane": 1,
-      "dur": 1.1,
+      "time": 191.775,
+      "lane": 2,
+      "dur": 1.15,
       "type": "hold",
       "midi": 61,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 193.003,
-      "lane": 0,
-      "dur": 1.15,
-      "type": "hold",
-      "midi": 57,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 193.652,
+      "time": 194.266,
       "lane": 3,
       "dur": 0.1,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.44,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 194.164,
-      "lane": 1,
-      "dur": 0.05,
       "type": "tap",
       "midi": 64,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 194.334,
-      "lane": 1,
-      "dur": 0.3,
-      "type": "hold",
-      "midi": 66,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 194.539,
-      "lane": 3,
-      "dur": 0.15,
-      "type": "tap",
-      "midi": 85,
-      "vol": 0.41,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 194.846,
-      "lane": 3,
-      "dur": 0.1,
-      "type": "tap",
-      "midi": 81,
-      "vol": 0.47,
-      "source": "vocals_lead"
-    },
-    {
-      "time": 194.846,
-      "lane": 1,
-      "dur": 0.05,
-      "type": "tap",
-      "midi": 62,
-      "vol": 1.0,
-      "source": "vocals_lead"
-    },
-    {
       "time": 194.949,
-      "lane": 1,
+      "lane": 2,
       "dur": 0.1,
       "type": "tap",
       "midi": 60,
@@ -4749,22 +3561,103 @@
       "source": "drums"
     },
     {
-      "time": 195.324,
-      "lane": 1,
-      "dur": 0.75,
-      "type": "hold",
-      "midi": 61,
+      "time": 195.358,
+      "lane": 2,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 62,
       "vol": 1.0,
       "source": "vocals_lead"
     },
     {
-      "time": 196.143,
+      "time": 196.075,
+      "lane": 2,
+      "dur": 0.28,
+      "type": "tap",
+      "midi": 63,
+      "vol": 0.54,
+      "source": "piano"
+    },
+    {
+      "time": 196.075,
+      "lane": 1,
+      "dur": 0.05,
+      "type": "tap",
+      "midi": 59,
+      "vol": 0.82,
+      "source": "piano"
+    },
+    {
+      "time": 196.212,
+      "lane": 1,
+      "dur": 0.95,
+      "type": "tap",
+      "midi": 52,
+      "vol": 0.54,
+      "source": "piano"
+    },
+    {
+      "time": 196.451,
+      "lane": 2,
+      "dur": 0.25,
+      "type": "tap",
+      "midi": 64,
+      "vol": 0.38,
+      "source": "piano"
+    },
+    {
+      "time": 196.451,
       "lane": 3,
-      "dur": 1.5,
-      "type": "hold",
-      "midi": 80,
-      "vol": 1.0,
-      "source": "vocals_lead"
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 76,
+      "vol": 0.67,
+      "source": "piano"
+    },
+    {
+      "time": 196.792,
+      "lane": 3,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 76,
+      "vol": 0.4,
+      "source": "piano"
+    },
+    {
+      "time": 197.201,
+      "lane": 2,
+      "dur": 0.2,
+      "type": "tap",
+      "midi": 71,
+      "vol": 0.44,
+      "source": "piano"
+    },
+    {
+      "time": 197.201,
+      "lane": 0,
+      "dur": 0.45,
+      "type": "tap",
+      "midi": 52,
+      "vol": 0.58,
+      "source": "piano"
+    },
+    {
+      "time": 197.645,
+      "lane": 3,
+      "dur": 1.9,
+      "type": "tap",
+      "midi": 83,
+      "vol": 0.73,
+      "source": "piano"
+    },
+    {
+      "time": 197.747,
+      "lane": 0,
+      "dur": 0.15,
+      "type": "tap",
+      "midi": 52,
+      "vol": 0.47,
+      "source": "piano"
     }
   ]
 }
