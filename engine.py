@@ -328,7 +328,7 @@ class RhythmEngine:
         v_sources = ["vocals_lead", "vocals"]
         found_vocals = False
         for v_name in v_sources:
-             # Check manifest
+             # Check manifest for silence
              if v_name in self.manifest:
                  if self.manifest[v_name].get("is_silent", False):
                      continue
@@ -338,16 +338,15 @@ class RhythmEngine:
                 print(f"Processing vocals ({v_name})...")
                 
                 # CHECK POLYPHONY MODE
-                # If "choir" or "duet" in filename (heuristic) OR manifest flag
-                # FORCE POLYPHONY
-                use_polyphony = True
-                # if "choir" in self.base_name.lower() or "duet" in self.base_name.lower() or "poly" in self.base_name.lower():
-                #    use_polyphony = True
+                # Explicitly check manifest. Only enable if vocal_type is "polyphonic".
+                use_polyphony = False
+                if v_name in self.manifest and self.manifest[v_name].get("vocal_type", "") == "polyphonic":
+                    use_polyphony = True
                 
                 v_notes = []
                 
                 if use_polyphony:
-                    print(f"[Generator] Polyphonic Mode Enabled for {self.base_name}")
+                    print(f"[Generator] Polyphonic Mode Enabled for {v_name} (Manifest Triggered)")
                     # 1. Get Lead (FCPE)
                     lead_events = self.council.transcribe(v_path, model_type="fcpe")
                     
@@ -358,6 +357,8 @@ class RhythmEngine:
                     # 3. Fuse
                     v_notes = ConsensusEngine.fuse_vocals(lead_events, poly_events)
                 else:
+                    # Monophonic / Default Mode
+                    print(f"[Generator] Standard Monophonic Mode for {v_name}")
                     # REVERT: Hybrid (BasicPitch) was "terrible/sparse". 
                     # Returning to FCPE (High Fidelity Frame-based)
                     # Note: We rely on "Smart Snapping" in ChartGenerator to fix the timing.
