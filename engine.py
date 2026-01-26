@@ -160,9 +160,17 @@ class RhythmEngine:
         self.bp_transcriber = BasicPitchTranscriber()
         self.council = CouncilV2()
         
+        self.manifest = self._load_manifest()
+
         # Estimate BPM or default
-        self.bpm = self._detect_bpm() 
-        print(f"[RhythmEngine] BPM set to: {self.bpm}")
+        # Check manifest first to avoid duplicated work
+        if self.manifest.get("bpm"):
+            self.bpm = float(self.manifest["bpm"])
+            print(f"[RhythmEngine] Using BPM from manifest: {self.bpm}")
+        else:
+            self.bpm = self._detect_bpm() 
+            print(f"[RhythmEngine] Detected BPM: {self.bpm}")
+            # We'll save it to manifest during the run() phase
 
         # Model Latency Compensation
         # Benchmark says BasicPitch is ~8ms EARLY (-0.008s).
@@ -176,7 +184,6 @@ class RhythmEngine:
         print(f"[RhythmEngine] Latency Compensation: {self.audio_engine_latency_offset*1000:.1f}ms")
         
         self.generator = ChartGenerator(bpm=self.bpm)
-        self.manifest = self._load_manifest()
 
 
     def _detect_bpm(self) -> float:
@@ -275,6 +282,9 @@ class RhythmEngine:
             
         if bpm != original:
             print(f"  [BPM] Sanity Check: {original:.2f} -> {bpm:.2f}")
+            
+        # Snap to nearest 0.5 to prevent floating point drift in quantization
+        bpm = round(bpm * 2) / 2
         return bpm
 
     def _load_manifest(self):
@@ -492,6 +502,14 @@ class RhythmEngine:
                 json.dump(chart_data, f, indent=2)
             print(f"Saved {out_file}")
 
+        # Update Manifest with BPM if not already there
+        if "bpm" not in self.manifest or self.manifest["bpm"] != self.bpm:
+            self.manifest["bpm"] = self.bpm
+            m_path = os.path.join(self.stems_folder, "stems_manifest.json")
+            with open(m_path, "w") as f:
+                json.dump(self.manifest, f, indent=2)
+            print(f"[RhythmEngine] Persistent BPM {self.bpm} baked into: {m_path}")
+
     def _transcribe_drums_onset(self, audio_path: str) -> List[NoteEvent]:
         import librosa
         # print(f"[Onset] Analyzing {os.path.basename(audio_path)} for transients...")
@@ -514,23 +532,7 @@ class RhythmEngine:
             max_e = energies.max()
             if max_e > 0: energies /= max_e
             
-        events = []
-        
-        # --- GRID DECIMATOR ---
-        # Goal: STRICT 1/4 note (or 1/2 note) feel.
-        
-        bpm = self.bpm if self.bpm > 0 else 120.0
-        quarter_note_dur = 60.0 / bpm
-        
-        # Window: Decimate anything closer than a quarter note?
-        # Target 80% of a quarter note to allow some breathing room but kill rolls.
-        decim_window = quarter_note_dur * 0.85 
-        
-        print(f"[Onset] Decimating Drums closer than {decim_window:.3f}s (Targeting 1/4 notes at {bpm} BPM)")
-        
-        last_t = -1.0
         events_raw = []
-        
         for t, e in zip(times, energies):
              events_raw.append(NoteEvent(
                 time=float(t),
@@ -540,35 +542,5 @@ class RhythmEngine:
                 source="drums"
             ))
             
-        # Run Decimation Pass
-        final_events = []
-        if events_raw:
-            events_raw.sort(key=lambda x: x.time)
-            
-            curr = events_raw[0]
-            # Initialize with first note
-            
-            for i in range(1, len(events_raw)):
-                next_e = events_raw[i]
-                
-                # Logic:
-                # 1. We have a 'current candidate' (curr).
-                # 2. We look at 'next_e'.
-                # 3. If next_e is too close to curr, we look at who is louder.
-                #    If next_e is louder, it becomes the new candidate (curr = next_e).
-                #    If curr is louder, we ignore next_e.
-                # 4. If next_e is FAR enough, we commit 'curr' to final, and 'next_e' becomes new candidate.
-                
-                if next_e.time - curr.time < decim_window:
-                    # Conflict! Keep louder.
-                    if next_e.velocity > curr.velocity:
-                        curr = next_e
-                else:
-                    # 'curr' is safe, push it.
-                    final_events.append(curr)
-                    curr = next_e
-                    
-            final_events.append(curr)
-            
-        print(f"[Onset] Found {len(events_raw)} -> Decimated {len(final_events)} drum hits.")
-        return final_events
+        print(f"[Onset] Found {len(events_raw)} drum hits. (Filtering moved to Charter)")
+        return events_raw

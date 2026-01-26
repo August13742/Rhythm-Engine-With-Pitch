@@ -25,6 +25,7 @@ GENERATOR_CONFIG = {
     "sieving": {
         "burst_limit": 0.4, 
         "min_global_interval": 0.05, 
+        "support_grid": 8  # Strict denominator for Support Grid selection (e.g. 8 = 1/8 notes)
     },
     "scoring": {
         "weights": {
@@ -32,6 +33,12 @@ GENERATOR_CONFIG = {
             "piano": 1.2, "guitar": 1.2,
             "drums": 1.1, "bass": 1.0,
             "other": 0.6  # Lower weight for noisy composite track
+        },
+        "rhythm_weights": {
+            "quarter": 1.30,   # Strong bias for downbeats (Red)
+            "eighth": 1.15,    # Moderate bias for upbeats (Blue)
+            "sixteenth": 1.0,  # Neutral (Yellow)
+            "complex": 0.9    # Slight penalty for off-grid/triplets (Purple)
         },
         "coincidence_bonus": 0.2,
         "min_score_threshold": 0.25
@@ -295,13 +302,13 @@ class ChartGenerator:
         )
         print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
         
-        # --- STAGE 2: ADAPTIVE GRID (Smart Snapping) ---
-        # Define Grids per Difficulty
-        # 4=Quarter, 8=Eighth, 12=Triplet Eighth, 16=Sixteenth, 24=Triplet Sixteenth, 32=32nd, 48=Triplet 32nd
-        # 48 is high fidelity enough to sound "unsnapped" but is mathematically snapped.
+        # --- STAGE 2: ADAPTIVE GRID (High Fidelity Snapping - Artifact Correction) ---
+        # NOTE: This stage is for timing correction, not selection.
+        # We snap notes to a high-fidelity grid to clean up transcription "wobble"
+        # before the Sieve decides which notes are actually playable.
         
         # Strict (Drums/Bass/Backing)
-        strict_grids = [4, 8]
+        strict_grids = [4, 8, 16] # Standardized for rhythmic stems
         
         # Soft (Vocals/Lead) - High Fidelity Snapping
         # 1/12, 1/16, 1/24, 1/32, 1/48
@@ -325,16 +332,23 @@ class ChartGenerator:
         
         quantized_events = snapped_strict + snapped_soft
         
-        # --- STAGE 2.5: MERGE FRAGMENTED NOTES ---
-        # Merge short consecutive notes of similar pitch into longer notes
-        # This happens BEFORE sieving so merged notes can become holds
-        merged_events = self._merge_fragmented_notes(quantized_events)
-        merge_count = len(quantized_events) - len(merged_events)
-        if merge_count > 0:
-            print(f"  [Merge] Merged {merge_count} fragmented notes")
+        # --- STAGE 2.5: SCRIPTING CLEANUP (Merge & Dedupe) ---
+        # CLEANUP before Sieve: We merge/dedupe notes to clean the "physical" data candidates.
+        # This ensures the Sieve budget isn't wasted on artifacts that would be deleted later.
         
-        # --- STAGE 3: THE SIEVE (Scoring & Selection) ---
-        ranked_events = self._rank_events_layered(merged_events, primary_src, support_src)
+        # Merge short consecutive notes of similar pitch into longer notes
+        merged_events = self._merge_fragmented_notes(quantized_events)
+        
+        # Deduplicate Same-Pitch (Vibrato/Glitch Fix) - Move EARLIER to fix Sieve budget
+        cleaned_candidates = self._deduplicate_same_pitch(merged_events)
+        
+        merge_count = len(quantized_events) - len(cleaned_candidates)
+        if merge_count > 0:
+            print(f"  [Cleanup] Merged/Deduped {merge_count} notes before selection")
+        
+        # --- STAGE 3: THE SIEVE (Selection & Musicality) ---
+        # This is where we actully "chart" the song by picking the most important notes.
+        ranked_events = self._rank_events_layered(cleaned_candidates, primary_src, support_src)
         
         # Using New Adaptive Sieve (V300)
         final_events = self._filter_adaptive_sieve(ranked_events, difficulty)
@@ -351,14 +365,11 @@ class ChartGenerator:
         sanitized_events = self._sanitize_holds(consolidated_events)
         
         # 6.5 Vocal Correction (Octave Sieve)
-        # Apply AFTER sanitization logic but BEFORE Dedupe/Lanes
+        # Apply AFTER sanitization logic but BEFORE Lanes
         corrected_events = VocalCorrector.apply(sanitized_events, difficulty)
         
-        # 7. Deduplicate Same-Pitch (Vibrato/Glitch Fix) - PRE-LANE ALLOCATION
-        deduped_events = self._deduplicate_same_pitch(corrected_events)
-        
         # --- STAGE 5: THE MAPPER (Lane Allocation) ---
-        chart_notes = self._allocate_lanes(deduped_events, n_lanes)
+        chart_notes = self._allocate_lanes(corrected_events, n_lanes)
         
         return {
             "metadata": {
@@ -460,6 +471,24 @@ class ChartGenerator:
         for n in events:
             # Base Score = Velocity
             base_score = n.velocity
+
+            # --- RHYTHM WEIGHTING (Soft Snap) ---
+            time_in_beats = n.time / beat_dur
+            beat_fraction = time_in_beats % 1.0
+            
+            # Use small epsilon (0.01) to check alignment
+            r_weights = s_cfg.get("rhythm_weights", {})
+            r_multiplier = r_weights.get("complex", 0.85) # Default to complex
+            
+            if abs(beat_fraction) < 0.01 or abs(beat_fraction - 1.0) < 0.01:
+                r_multiplier = r_weights.get("quarter", 1.30)
+            elif abs(beat_fraction - 0.5) < 0.01:
+                r_multiplier = r_weights.get("eighth", 1.15)
+            elif abs(beat_fraction - 0.25) < 0.01 or abs(beat_fraction - 0.75) < 0.01:
+                r_multiplier = r_weights.get("sixteenth", 1.0)
+            
+            base_score *= r_multiplier
+
             is_valid = False
             
             # --- VOLUME COMPENSATION START ---
@@ -500,27 +529,35 @@ class ChartGenerator:
                          # 2. Weight: Deprioritize
                          base_score *= sf_cfg.get("melodic_support_weight", 0.5)
                 
-                # Only allow support notes on main beats (1/4, 1/8) UNLESS it's Percussion
-                time_in_beats = n.time / beat_dur
-                beat_fraction = time_in_beats % 1.0
-                is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
-                is_eighth = abs(beat_fraction - 0.5) < 0.1
+                # --- STRICT SUPPORT GRID SEIVE ---
+                # Only allow support notes on a specific grid (e.g. 1/4 notes)
+                # This helps secondary layers (like drums) feel more "rhythmic" and less "noisy"
+                # Tuning parameter: sieving.support_grid (Default: 4 leads to 1/4 note alignment)
                 
+                grid_val = GENERATOR_CONFIG["sieving"].get("support_grid", 4)
+                # grid_step: 4.0 / 4 = 1.0 beat (Quarter), 4.0 / 8 = 0.5 beat (Eighth), etc.
+                grid_step = 4.0 / grid_val if grid_val > 0 else 1.0
+                
+                is_on_grid = abs(round(time_in_beats / grid_step) * grid_step - time_in_beats) < 0.05
                 is_percussive = n.source in sf_cfg.get("percussive_stems", [])
                 
-                if is_quarter:
-                     base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
-                     is_valid = True 
-                elif is_eighth:
-                     base_score *= l_cfg["support_multiplier"]
-                     is_valid = True
+                if is_on_grid:
+                    # Bonus for perfectly on-beat notes
+                    is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
+                    if is_quarter:
+                        base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
+                    else:
+                        base_score *= l_cfg["support_multiplier"]
+                    is_valid = True
                 elif is_percussive:
-                 # The Quantizer (Stage 2) has ALREADY snapped these to [4, 8, 16].
-                 base_score *= 2.5 
-                 is_valid = True
+                    # Percussion is slightly more lenient? 
+                    # Actually, the user specifically mentioned drums should be gridded.
+                    # We'll allow them ONLY if on grid as per support_grid.
+                    base_score = 0.0
+                    is_valid = False
                 else:
-                     base_score = 0.0
-                     is_valid = False
+                    base_score = 0.0
+                    is_valid = False
             else:
                 # KILL NON-FOCUS
                 base_score = 0.0
@@ -594,7 +631,7 @@ class ChartGenerator:
         
         for i in range(1, len(events)):
             evt = events[i]
-            if abs(evt.time - curr_t) < 0.005: # 5ms chord window
+            if abs(evt.time - curr_t) < 0.01: # 10ms chord window
                 curr_notes.append(evt)
             else:
                 # Push previous cluster
@@ -791,8 +828,9 @@ class ChartGenerator:
         # Post-process: Resolve conflicts (Hold overlaps)
         conflict_resolved = self._resolve_conflicts(processed)
         
-        # Cross-stem anti-spam: Remove secondary notes too close to primary notes
-        return self._resolve_cross_stem_conflicts(conflict_resolved)
+        # Cross-stem anti-spam: DISABLED (User request to let Sieve handle density)
+        # return self._resolve_cross_stem_conflicts(conflict_resolved)
+        return conflict_resolved
 
     def _sanitize_holds(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
@@ -819,6 +857,11 @@ class ChartGenerator:
             j = i + 1
             while j < len(events):
                 next_n = events[j]
+                
+                # 5s Lookahead Max
+                if next_n.time > curr.time + 5.0:
+                    break
+                    
                 if next_n.time > curr.time + 0.01:
                     # Found next sequential note
                     curr_end = curr.time + curr.duration
@@ -1101,6 +1144,10 @@ class ChartGenerator:
                     next_n = notes[j]
                     prev = chain[-1]
                     
+                    # 200ms Lookahead Max (Limit search to immediate neighbors)
+                    if next_n.time > prev.time + prev.duration + 0.2:
+                        break
+                        
                     # Gap between end of previous and start of next
                     gap = next_n.time - (prev.time + prev.duration)
                     
@@ -1109,7 +1156,7 @@ class ChartGenerator:
                     
                     # Merge criteria (conservative)
                     should_merge = (
-                        gap < 0.05 and  # Very small gap (< 50ms)
+                        gap < 0.1 and  # Very small gap (< 100ms)
                         pitch_diff < 1.5 and  # Similar pitch
                         prev.duration < 0.20  # Previous note is short (likely artifact)
                     )

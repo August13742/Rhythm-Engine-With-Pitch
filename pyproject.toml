@@ -21,6 +21,7 @@ dependencies = [
     "nnAudio>=0.3.2",
     "pretty-midi>=0.2.10",
     "mir_eval>=0.7",
+    "madmom",
 ]
 
 [[tool.uv.index]]
@@ -33,3 +34,5 @@ torch = { index = "pytorch-cu128" }
 torchaudio = { index = "pytorch-cu128" }
 torchvision = { index = "pytorch-cu128" }
 
+[tool.uv.extra-build-dependencies]
+madmom = ["Cython", "numpy"]

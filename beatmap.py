@@ -129,7 +129,7 @@ class Quantizer:
     def __init__(self, bpm: float):
         self.bpm = bpm if bpm > 0 else 120.0
         
-    def snap_to_grid(self, events: List[NoteEvent], grids: List[int] = [4, 8, 16]) -> List[NoteEvent]:
+    def snap_to_grid(self, events: List[NoteEvent], grids: List[int] = [12, 16]) -> List[NoteEvent]:
         """
         Snaps events to the nearest grid lines defined by `grids`.
         Grids are denominators (4 = quarter note, 8 = eighth, 12 = eighth triplet).
