@@ -22,13 +22,18 @@ GENERATOR_CONFIG = {
     "holds": {
         "allowed_stems": ["vocals", "vocals_lead", "other"],
         "min_duration": 0.35,
-        "max_vocal_duration": 5.5,
+        "max_vocal_duration": 10.0,
         "min_reaction_time": 0.10 
     },
     "sieving": {
         "burst_limit": 0.4, 
         "min_global_interval": 0.05, 
-        "support_grid": 8  # Strict denominator for Support Grid selection (e.g. 8 = 1/8 notes)
+        "support_grid": 4  # Strict denominator for Support Grid selection (e.g. 8 = 1/8 notes)
+    },
+    "strict_grids": {
+        "enforce_pick_from_grid": False,
+        "main_layer_grid": [24,32],
+        "support_layer_grid": [4]
     },
     "scoring": {
         "weights": {
@@ -73,7 +78,7 @@ GENERATOR_CONFIG = {
         "melodic_support_gate": 0.35,   # Min velocity for Melodic Support notes
         "melodic_support_weight": 0.5,  # Score penalty (Deprioritize in density)
         "percussive_stems": ["drums", "bass"], # Stems EXEMPT from sifting
-        "smoothing_window": 3.0
+        "smoothing_window": 3.0 # if x second silent: enable alternative stem to takeover
     },
     "transcription_filters": {
         "vocals": {
@@ -112,6 +117,13 @@ GENERATOR_CONFIG = {
             "smoothing": 0.0,
             "silence_threshold": 0.00 # Drums often sharp
         }
+    },
+    "transcription_params": {
+        "vocals": {"onset": 0.35, "frame": 0.30, "multipass": False, "min_len": 58.0},
+        "piano": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 30.0},
+        "guitar": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 40.0},
+        "bass": {"onset": 0.50, "frame": 0.40, "multipass": True, "min_len": 80.0},
+        "other": {"onset": 0.55, "frame": 0.40, "multipass": True, "min_len": 58.0}
     }
 }
 
@@ -374,64 +386,7 @@ class StemSelector:
         info = manifest[stem_name]
         return info.get("peak_energy", 0.0)
 
-    @staticmethod
-    def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main", stem_weights: dict = None) -> dict:
-        """Static version for backward compatibility or simple logic."""
-        # 1. Analyze Manifest (What exists?)
-        active_stems = []
-        has_vocals = False
-        
-        if manifest:
-            for k, v in manifest.items():
-                if isinstance(v, dict) and not v.get("is_silent", True):
-                    active_stems.append(k)
-                    if k in ["vocals", "vocals_lead"]: has_vocals = True
-        else:
-             active_stems = ["vocals", "drums", "bass", "other"]
-             has_vocals = True
 
-        primary = []
-        support = []
-        
-        actual_mode = focus_mode
-        if difficulty in ["EASY", "NORMAL", "HARD"]:
-            actual_mode = "main"
-        elif difficulty == "ALT_HARD":
-            actual_mode = "alt"
-            
-        if actual_mode == "main":
-            if has_vocals:
-                if "vocals_lead" in active_stems: primary.append("vocals_lead")
-                elif "vocals" in active_stems: primary.append("vocals")
-            else:
-                candidates = [s for s in active_stems if s not in ["drums", "bass"]]
-                if candidates:
-                    if stem_weights:
-                        candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
-                        primary.append(candidates[0])
-                    else:
-                        if "guitar" in active_stems: primary.append("guitar")
-                        elif "piano" in active_stems: primary.append("piano")
-                        elif "other" in active_stems: primary.append("other")
-            if difficulty != "EASY":
-                 if "drums" in active_stems: support.append("drums")
-        elif actual_mode == "alt":
-            candidates = [s for s in active_stems if s not in ["vocals", "vocals_lead", "drums", "bass"]]
-            if candidates:
-                if stem_weights:
-                    candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
-                    selected_idx = 1 if not has_vocals and len(candidates) > 1 else 0
-                    primary.append(candidates[selected_idx])
-                else:
-                    if "guitar" in candidates: primary.append("guitar")
-                    elif "piano" in candidates: primary.append("piano")
-                    elif "other" in candidates: primary.append("other")
-            if not primary and "drums" in active_stems:
-                primary.append("drums")
-            elif "drums" in active_stems:
-                support.append("drums")
-        
-        return {"primary": primary, "support": support}
 
 class VocalCorrector:
     """
@@ -574,15 +529,20 @@ class ChartGenerator:
         # CLEANUP before Sieve: We merge/dedupe notes to clean the "physical" data candidates.
         # This ensures the Sieve budget isn't wasted on artifacts that would be deleted later.
         
+        # 6.5 Vocal Correction (Octave Sieve) - MOVED UP BEFORE MERGE
+        # Fix pitch data first, then glue fragments.
+        corrected_events = VocalCorrector.apply(quantized_events, difficulty)
+
         # Merge short consecutive notes of similar pitch into longer notes
-        merged_events = self._merge_fragmented_notes(quantized_events)
+        merged_events = self._merge_fragmented_notes(corrected_events)
         
-        # Deduplicate Same-Pitch (Vibrato/Glitch Fix) - Move EARLIER to fix Sieve budget
-        cleaned_candidates = self._deduplicate_same_pitch(merged_events)
+        # Deduplicate Same-Pitch - REMOVED (Redundant with _merge_fragmented_notes)
+        # cleaned_candidates = self._deduplicate_same_pitch(merged_events)
+        cleaned_candidates = merged_events
         
         merge_count = len(quantized_events) - len(cleaned_candidates)
         if merge_count > 0:
-            print(f"  [Cleanup] Merged/Deduped {merge_count} notes before selection")
+            print(f"  [Cleanup] Merged {merge_count} notes before selection")
         
         # --- STAGE 3: THE SIEVE (Selection & Musicality) ---
         # This is where we actully "chart" the song by picking the most important notes.
@@ -599,15 +559,12 @@ class ChartGenerator:
         consolidated_events = final_events
         
         # --- STAGE 4: PRE-MAPPING CLEANUP ---
-        # 6. Sanitize Holds (Uniform Rule)
-        sanitized_events = self._sanitize_holds(consolidated_events)
+        # 6. Sanitize Holds - ELIMINATED (Redundant with _resolve_conflicts)
+        # sanitized_events = self._sanitize_holds(consolidated_events)
+        sanitized_events = consolidated_events
         
-        # 6.5 Vocal Correction (Octave Sieve)
-        # Apply AFTER sanitization logic but BEFORE Lanes
-        corrected_events = VocalCorrector.apply(sanitized_events, difficulty)
-        
-        # --- STAGE 5: THE MAPPER (Lane Allocation) ---
-        chart_notes = self._allocate_lanes(corrected_events, n_lanes)
+        # --- STAGE 5: THE MapPER (Lane Allocation) ---
+        chart_notes = self._allocate_lanes(sanitized_events, n_lanes)
         
         return {
             "metadata": {
@@ -760,6 +717,18 @@ class ChartGenerator:
                 
         return final_list
 
+    def _is_on_any_grid(self, time_in_beats: float, grids: List[int]) -> bool:
+        """Checks if time aligns with any of the provided grid denominators."""
+        if not grids: return True
+        for g in grids:
+            if g <= 0: continue
+            step = 4.0 / float(g)
+            # Check alignment (Tolerance: 0.05 beats)
+            # Note: We use a tighter tolerance here than the quantizer to ensure "clean" picks
+            if abs(round(time_in_beats / step) * step - time_in_beats) < 0.05:
+                return True
+        return False
+
     def _rank_events_layered(self, events: List[NoteEvent], timeline: LayerTimeline) -> List[NoteEvent]:
         """
         Rank events based on their Layer Assignment.
@@ -774,6 +743,12 @@ class ChartGenerator:
         v_cfg = GENERATOR_CONFIG.get("volume", {})
         sf_cfg = GENERATOR_CONFIG.get("layer_sifting", {})
         
+        # Strict Grid Config
+        strict_cfg = GENERATOR_CONFIG.get("strict_grids", {})
+        enforce_grid = strict_cfg.get("enforce_pick_from_grid", False)
+        main_grids = strict_cfg.get("main_layer_grid", [4, 8, 12, 16, 24, 32])
+        support_grids = strict_cfg.get("support_layer_grid", [4, 8])
+
         beat_dur = 60.0 / self.bpm if self.bpm > 0 else 0.5
         
         for n in events:
@@ -813,14 +788,33 @@ class ChartGenerator:
                  n.velocity *= 1.2
             
             # Layer Logic
-            if n.source in primary_src:
+            is_primary = n.source in primary_src
+            is_support = n.source in support_src
+            
+            # --- STRICT GRID ENFORCEMENT ---
+            if enforce_grid:
+                grid_check_pass = False
+                if is_primary:
+                    grid_check_pass = self._is_on_any_grid(time_in_beats, main_grids)
+                elif is_support:
+                    grid_check_pass = self._is_on_any_grid(time_in_beats, support_grids)
+                
+                if not grid_check_pass:
+                    # STRICT FAIL: Kill it immediately
+                    base_score = 0.0
+                    is_valid = False
+                    # Skip further checks
+                    setattr(n, "_score", base_score) 
+                    continue
+
+            if is_primary:
                 base_score *= l_cfg["primary_multiplier"]
                 is_valid = True
                 
                 # Active Layer Volume Boost
                 n.velocity *= v_cfg.get("primary_boost", 1.2)
                 
-            elif n.source in support_src:
+            elif is_support:
                 # Support: GRID LIMIT CHECK
                 # Active Layer Volume Penalty
                 n.velocity *= v_cfg.get("support_penalty", 0.9)
@@ -845,30 +839,32 @@ class ChartGenerator:
                 # This helps secondary layers (like drums) feel more "rhythmic" and less "noisy"
                 # Tuning parameter: sieving.support_grid (Default: 4 leads to 1/4 note alignment)
                 
-                grid_val = GENERATOR_CONFIG["sieving"].get("support_grid", 4)
-                # grid_step: 4.0 / 4 = 1.0 beat (Quarter), 4.0 / 8 = 0.5 beat (Eighth), etc.
-                grid_step = 4.0 / grid_val if grid_val > 0 else 1.0
-                
-                is_on_grid = abs(round(time_in_beats / grid_step) * grid_step - time_in_beats) < 0.05
-                is_percussive = n.source in sf_cfg.get("percussive_stems", [])
-                
-                if is_on_grid:
-                    # Bonus for perfectly on-beat notes
-                    is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
-                    if is_quarter:
-                        base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
-                    else:
-                        base_score *= l_cfg["support_multiplier"]
-                    is_valid = True
-                elif is_percussive:
-                    # Percussion is slightly more lenient? 
-                    # Actually, the user specifically mentioned drums should be gridded.
-                    # We'll allow them ONLY if on grid as per support_grid.
-                    base_score = 0.0
-                    is_valid = False
+                if not enforce_grid:
+                     grid_val = GENERATOR_CONFIG["sieving"].get("support_grid", 4)
+                     grid_step = 4.0 / grid_val if grid_val > 0 else 1.0
+                     is_on_grid = abs(round(time_in_beats / grid_step) * grid_step - time_in_beats) < 0.05
+                     is_percussive = n.source in sf_cfg.get("percussive_stems", [])
+                     
+                     if is_on_grid:
+                         # Bonus for perfectly on-beat notes
+                         is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
+                         if is_quarter:
+                             base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
+                         else:
+                             base_score *= l_cfg["support_multiplier"]
+                         is_valid = True
+                     elif is_percussive:
+                         base_score = 0.0
+                         is_valid = False
+                     else:
+                         base_score = 0.0
+                         is_valid = False
                 else:
-                    base_score = 0.0
-                    is_valid = False
+                    # If enforce_grid is True, we already validated support_grids.
+                    # Just apply multipliers.
+                    base_score *= l_cfg["support_multiplier"]
+                    is_valid = True
+
             else:
                 # KILL NON-FOCUS
                 base_score = 0.0
@@ -1148,62 +1144,13 @@ class ChartGenerator:
             })
         
         # Post-process: Resolve conflicts (Hold overlaps)
+        # Includes reaction time logic (moved from _sanitize_holds)
         conflict_resolved = self._resolve_conflicts(processed)
         
         # Cross-stem anti-spam: Re-enabled with Smart Fuse (Chord creation)
         return self._resolve_cross_stem_conflicts(conflict_resolved)
 
-    def _sanitize_holds(self, events: List[NoteEvent]) -> List[NoteEvent]:
-        """
-        Ensures holds don't overlap with next note (reaction time).
-        Does NOT enforce minimum duration - that's done in _allocate_lanes
-        which has source-specific thresholds (vocals get lower threshold).
-        
-        Logic: If a hold would end too close to the next note, trim it.
-        """
-        if not events: return []
-        events.sort(key=lambda x: x.time)
-        
-        min_reaction = GENERATOR_CONFIG["holds"]["min_reaction_time"]  # 0.1s
-        abs_min_tail = 0.08  # Below this, just make it a tap
-        
-        for i in range(len(events)):
-            curr = events[i]
-            
-            # Skip notes that are already short (will be taps anyway)
-            if curr.duration < abs_min_tail:
-                continue
-                
-            # Gap Check (Lookahead) - find next sequential note
-            j = i + 1
-            while j < len(events):
-                next_n = events[j]
-                
-                # 5s Lookahead Max
-                if next_n.time > curr.time + 5.0:
-                    break
-                    
-                if next_n.time > curr.time + 0.01:
-                    # Found next sequential note
-                    curr_end = curr.time + curr.duration
-                    gap = next_n.time - curr_end
-                    
-                    if gap < min_reaction:
-                        # Hold ends too close to next note - trim it
-                        # New end should be: next_n.time - min_reaction
-                        new_end = next_n.time - min_reaction
-                        new_dur = new_end - curr.time
-                        
-                        if new_dur >= abs_min_tail:
-                            curr.duration = new_dur
-                        else:
-                            # Would be too short - keep original and let it become a tap
-                            # (don't zero it here, _allocate_lanes will handle threshold)
-                            pass
-                    break
-                j += 1
-                
-        return events
+
 
     def _resolve_conflicts(self, notes: List[dict]) -> List[dict]:
         """
@@ -1219,9 +1166,11 @@ class ChartGenerator:
             lanes_dict[l].append(n)
             
         final = []
-        gap = 0.05 # 50ms gap
-        minijack_thresh = 0.1 # 100ms threshold for merging close notes (approx 1/16 at 150BPM)
+        gap = GENERATOR_CONFIG["holds"]["min_reaction_time"] # 0.1s (Unified from _sanitize_holds)
+        minijack_thresh = 0.05 # 50ms (20NPS cap for same-lane jacks) - Loosened from 0.1 to allow bursts
         allowed_holds = GENERATOR_CONFIG["holds"]["allowed_stems"]
+        
+        merged_count = 0
 
         for l in lanes_dict:
             # Sort by time
@@ -1237,19 +1186,21 @@ class ChartGenerator:
                 next_n = stack[i]
                 
                 # Check proximity
-                gap = next_n["time"] - curr["time"]
+                gap_val = next_n["time"] - curr["time"]
                 
                 # Logic: Only merge if strictly a "Jack" (Same Pitch + Close Time)
                 # If pitch is different, it's a trill/stream -> Allow it (unless very fast glitch)
                 is_same_pitch =  abs(next_n["midi"] - curr["midi"]) < 1.0
                 
                 # Thresholds
-                # Same Pitch: 100ms (standard jack removal)
-                # Different Pitch: 40ms (glitch removal, very fast trills allowed > 40ms)
+                # Same Pitch: minijack_thresh
+                # Different Pitch: 0.04 (glitch removal, very fast trills allowed > 40ms)
                 thresh = minijack_thresh if is_same_pitch else 0.04
                 
-                if gap < thresh:
+                if gap_val < thresh:
                     # Merge!
+                    merged_count += 1
+                    
                     # Only create hold if allowed
                     can_hold = curr["source"] in allowed_holds
                     
@@ -1286,22 +1237,26 @@ class ChartGenerator:
                 if i + 1 < len(merged_stack):
                     next_note = merged_stack[i+1]
                     
-                    if current["type"] == "hold":
-                        limit = next_note["time"] - gap
-                        end_t = current["time"] + current["dur"]
+                    # Limit = next note time - reaction gap
+                    # Use the configured gap (0.1s usually)
+                    limit = next_note["time"] - gap
+                    end_t = current["time"] + current["dur"]
+                    
+                    if end_t > limit:
+                        # Trim duration
+                        new_dur = max(0.0, limit - current["time"])
+                        current["dur"] = round(new_dur, 2)
                         
-                        if end_t > limit:
-                            # Trim duration
-                            new_dur = max(0.0, limit - current["time"])
-                            current["dur"] = round(new_dur, 2)
-                            
-                            # If too short for a hold, convert back to tap
-                            # Use 0.25s as minimum visible hold
-                            if new_dur < 0.25:
-                                current["dur"] = round(max(0.05, round(new_dur / 0.05) * 0.05), 2)
-                                current["type"] = "tap"
+                        # If too short for a hold, convert back to tap
+                        # Use 0.25s as minimum visible hold
+                        if new_dur < 0.25:
+                            current["dur"] = round(max(0.05, round(new_dur / 0.05) * 0.05), 2)
+                            current["type"] = "tap"
                 
                 final.append(current)
+        
+        if merged_count > 0:
+            print(f"    [LaneResolver] Merged {merged_count} minijacks (<{minijack_thresh*1000}ms)")
 
         # Re-sort all by time
         final_sorted = sorted(final, key=lambda x: x["time"])
@@ -1315,6 +1270,7 @@ class ChartGenerator:
         last_times_lane = {} # lane_idx -> last_note_end_time
         
         strict_gap = GENERATOR_CONFIG["sieving"]["min_global_interval"]
+        strict_drops = 0
         
         for n in final_sorted:
             l = n["lane"]
@@ -1325,10 +1281,14 @@ class ChartGenerator:
             # (Note: prev_end includes duration)
             if start < prev_end + strict_gap:
                 # VIOLATION!
+                strict_drops += 1
                 continue
                 
             safe_final.append(n)
             last_times_lane[l] = start + n["dur"]
+
+        if strict_drops > 0:
+             print(f"    [LaneResolver] Dropped {strict_drops} unsafe notes (Overlaps < {strict_gap}s)")
             
         return safe_final
 
@@ -1540,20 +1500,7 @@ class ChartGenerator:
         
         return result
 
-    def _deduplicate_same_pitch(self, events: List[NoteEvent]) -> List[NoteEvent]:
-        """
-        Merges or removes sequential notes of the same pitch that are too close (Vibrato/Detection Errors).
-        Must run BEFORE lane allocation to ensure they are seen as conflicts.
-        """
-        if not events: return []
-        
-        events.sort(key=lambda x: x.time)
-        cleaned = []
-        last_note_by_pitch = {} # {midi_int: NoteEvent}
-        
-        # Config
-        minijack_thresh = 0.18 # Melodic Vibrato Threshold
-        percussive_stems = GENERATOR_CONFIG["layer_sifting"]["percussive_stems"]
+
         
         for n in events:
             # Determine threshold

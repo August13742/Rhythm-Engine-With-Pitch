@@ -10,7 +10,7 @@ from beatmap import NoteEvent, EventFilter
 from transcribe.basic_pitch import BasicPitchTranscriber
 from transcribe.council import CouncilV2
 from utils import AudioCache, TimingCorrector
-from chart_generator import ChartGenerator
+from chart_generator import ChartGenerator, GENERATOR_CONFIG
 
 # Configuration for Transcription (Per Stem)
 # Tuned for high precision and musicality
@@ -73,11 +73,6 @@ class ConsensusEngine:
                      print(f"[Consensus] Discarding FCPE note at {l.time:.2f}s (Pitch {l.pitch:.1f}) in favor of BP Chord.")
                      for idx in overlap_indices:
                          if idx not in used_poly_indices:
-                             # Use BP note. Should it be Harmony? One should be lead.
-                             # Let's keep them as is (source='vocals') or set is_harmony?
-                             # Set closest to original lead as lead? Or just all harmony?
-                             # Let's mark all as "is_harmony=False" (Lead) to ensure at least one is charted?
-                             # Actually simplest is just append them.
                              final_events.append(poly_notes[idx])
                              used_poly_indices.add(idx)
                      continue # Skip adding the Lead 'l'
@@ -309,18 +304,7 @@ class RhythmEngine:
                     notes = self._transcribe_drums_onset(path)
                 else:
                     # BasicPitch for melodic instruments
-                    cfg = {} # STEM_TRANSCRIBE_CONFIG REMOVED
-                    # We only need config for extraction params (onset/frame) which were also in STEM_TRANSCRIBE_CONFIG
-                    # We need to HARDCODE them now or KEEP them for Extraction Only.
-                    # Plan: I removed STEM_TRANSCRIBE_CONFIG but I need it here for BasicPitch params!
-                    # I should have kept it or moved it. I will restore a local dict here.
-                    cfg = {
-                        "vocals": {"onset": 0.35, "frame": 0.30, "multipass": False, "min_len": 58.0},
-                        "piano": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 30.0},
-                        "guitar": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 40.0},
-                        "bass": {"onset": 0.50, "frame": 0.40, "multipass": True, "min_len": 80.0},
-                        "other": {"onset": 0.55, "frame": 0.40, "multipass": True, "min_len": 58.0}
-                    }.get(stem, {"onset": 0.55, "frame": 0.40, "multipass": True, "min_len": 58.0})
+                    cfg = GENERATOR_CONFIG["transcription_params"].get(stem, GENERATOR_CONFIG["transcription_params"]["other"])
 
                     print(f"Processing {stem} with BasicPitch (Config: {cfg})...")
                     
@@ -479,6 +463,18 @@ class RhythmEngine:
         # 3. Convert to times
         times = librosa.frames_to_time(peaks, sr=sr)
         
+        # 3.5 Rudimentary Quantization (Snap to 1/48)
+        # Prevents tiny jitter from confusing the Charter's Quantizer later.
+        # 1/48 grid at 120bpm is ~0.01s (very fine, keeps human feel but removes float noise)
+        
+        if self.bpm > 0:
+            beat_dur = 60.0 / self.bpm
+            snap_grid = beat_dur / 48.0 # 1/48 note
+            times = [round(t / snap_grid) * snap_grid for t in times]
+        else:
+             # Fallback to 10ms generic snap if BPM read failed (unlikely)
+             times = [round(t, 2) for t in times]
+        
         # 4. Get Energies (Velocity)
         energies = onset_env[peaks]
         if len(energies) > 0:
@@ -495,5 +491,5 @@ class RhythmEngine:
                 source="drums"
             ))
             
-        print(f"[Onset] Found {len(events_raw)} drum hits. (Filtering moved to Charter)")
+        print(f"[Onset] Found {len(events_raw)} drum hits. (Snapped to 1/48 grid)")
         return events_raw
