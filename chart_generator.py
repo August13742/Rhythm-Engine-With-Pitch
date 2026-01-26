@@ -1,6 +1,9 @@
 import copy
 from typing import List
 from beatmap import NoteEvent, EventFilter, Quantizer
+from transcribe.smoother import VocalSmoother
+import numpy as np
+import os
 
 # Configuration for Visualizer compatibility & Generator Logic
 DIFF_CONFIGS = {
@@ -71,6 +74,44 @@ GENERATOR_CONFIG = {
         "melodic_support_weight": 0.5,  # Score penalty (Deprioritize in density)
         "percussive_stems": ["drums", "bass"], # Stems EXEMPT from sifting
         "smoothing_window": 3.0
+    },
+    "transcription_filters": {
+        "vocals": {
+            "source_match": ["vocals", "vocals_lead"],
+            "velocity_gate": 0.0, # Handled by Council/FCPE usually
+            "smoothing": 0.7,
+            "silence_threshold": 0.01 
+        },
+        "piano": {
+            "source_match": ["piano"],
+            "velocity_gate": 0.0,
+            "smoothing": 0.0,
+            "silence_threshold": 0.01
+        },
+        "guitar": {
+            "source_match": ["guitar"],
+            "velocity_gate": 0.0,
+            "smoothing": 0.0,
+            "silence_threshold": 0.01
+        },
+        "bass": {
+            "source_match": ["bass"],
+            "velocity_gate": 0.0,
+            "smoothing": 0.5,
+            "silence_threshold": 0.01
+        },
+        "other": {
+            "source_match": ["other"],
+            "velocity_gate": 0.25, # Remove low-confidence notes
+            "smoothing": 0.0,
+            "silence_threshold": 0.01
+        },
+        "drums": {
+            "source_match": ["drums"],
+            "velocity_gate": 0.0, # Onset detection handles this?
+            "smoothing": 0.0,
+            "silence_threshold": 0.00 # Drums often sharp
+        }
     }
 }
 
@@ -460,7 +501,7 @@ class ChartGenerator:
         self.quantizer = Quantizer(bpm)
         self.bpm = bpm
         
-    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main") -> dict:
+    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main", stems_folder: str = None) -> dict:
         """
         Converts raw events into a playable chart using V300 pipeline.
         focus_mode: "main" or "alt"
@@ -478,12 +519,20 @@ class ChartGenerator:
         # Generate a dynamic timeline of which stems are Primary vs Support
         timeline = StemSelector.get_dynamic_timeline(events, difficulty, focus_mode)
         
-        # --- STAGE 1: THE CLEANER ---
+        # --- STAGE 1: THE CLEANER (Gameplay Filtering) ---
+        # Moved from Engine to Charter for flexibility
+        events = self._apply_gameplay_filtering(events, stems_folder)
+        
         c_cfg = GENERATOR_CONFIG["cleaning"]
+        # Note: EventFilter.filter_ghost_notes was doing duration/velocity checks.
+        # We integrated velocity gate above. Duration check is handled below?
+        # Actually filter_ghost_notes does "Min Duration" check.
+        # Let's keep it but relax velocity if needed? No, use the filtered events.
+        
         clean_events = EventFilter.filter_ghost_notes(
             events, 
             min_dur=c_cfg["min_duration"], 
-            min_vel=c_cfg["min_velocity"]
+            min_vel=c_cfg["min_velocity"] # Enforce noise floor (e.g. 0.15)
         )
         clean_events = EventFilter.consolidate_rolls(
             clean_events, 
@@ -568,6 +617,76 @@ class ChartGenerator:
             },
             "notes": chart_notes
         }
+
+    def _apply_gameplay_filtering(self, events: List[NoteEvent], stems_folder: str) -> List[NoteEvent]:
+        """
+        Applies Velocity Gating, Silence Gating, and Smoothing based on Difficulty/Config.
+        Previously in Engine._refine_events.
+        """
+        if not events: return []
+        
+        print("[ChartGenerator] Applying Gameplay Filtering...")
+        
+        # Group by Source
+        # We match source to CONFIG keys
+        filtered_events = []
+        
+        # Helper to find config
+        def get_cfg(src):
+            filters = GENERATOR_CONFIG["transcription_filters"]
+            # 1. Exact match
+            if src in filters: return filters[src]
+            # 2. Source match list
+            for k, val in filters.items():
+                if src in val.get("source_match", []):
+                    return val
+            # 3. Default to 'other'
+            return filters["other"]
+            
+        # Optimize: Batch by source
+        by_source = {}
+        for n in events:
+            if n.source not in by_source: by_source[n.source] = []
+            by_source[n.source].append(n)
+            
+        for source, notes in by_source.items():
+            cfg = get_cfg(source)
+            
+            # 1. Velocity Gate (Percentile based logic logic from Engine)
+            # engine.py: if vel_gate > 0: thresh = percent(gate*100)
+            vel_gate = cfg.get("velocity_gate", 0.0)
+            if vel_gate > 0 and notes:
+                velocities = [n.velocity for n in notes]
+                thresh = np.percentile(velocities, vel_gate * 100)
+                # print(f"  [Filter] {source} VelGate {vel_gate} -> Thresh {thresh:.3f}")
+                notes = [n for n in notes if n.velocity >= thresh]
+                
+            # 2. Smoothing (VocalSmoother)
+            smoothing = cfg.get("smoothing", 0.0)
+            if smoothing > 0 and notes:
+                # print(f"  [Filter] {source} Smoothing {smoothing}")
+                notes = VocalSmoother.smooth(notes, level=smoothing)
+                
+            # 3. Silence Gating
+            silence_thresh = cfg.get("silence_threshold", 0.0)
+            if silence_thresh > 0 and stems_folder:
+                # Find audio file
+                # Try source.wav, or fallback to mapped name
+                # engine.py did: path = os.path.join(stems, f"{source}.wav")
+                # if not exist and source=="vocals_lead", try "vocals.wav"
+                
+                path = os.path.join(stems_folder, f"{source}.wav")
+                if not os.path.exists(path):
+                    if source == "vocals_lead": path = os.path.join(stems_folder, "vocals.wav")
+                    elif source == "vocals_fcpe": path = os.path.join(stems_folder, "vocals.wav")
+                
+                if os.path.exists(path):
+                    # print(f"  [Filter] {source} Silence Gating ({silence_thresh})")
+                    notes = EventFilter.gate_silence(notes, path, threshold=silence_thresh)
+            
+            filtered_events.extend(notes)
+            
+        return filtered_events
 
     def _consolidate_visuals(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
@@ -969,12 +1088,12 @@ class ChartGenerator:
             # GHOST NOTE HANDLING (Audio Only, No Visuals)
             if getattr(ev, "ghost", False):
                 processed.append({
-                    "time": float(ev.time),
+                    "time": round(float(ev.time), 3),
                     "lane": -1, # HIDDEN
-                    "dur": float(ev.duration), # Keep duration for audio synth bucket?
+                    "dur": round(float(ev.duration), 2), # Keep duration for audio synth bucket?
                     "type": "ghost",
                     "midi": int(ev.pitch),
-                    "vol": float(getattr(ev, "velocity", 0.8)),
+                    "vol": round(float(getattr(ev, "velocity", 0.8)), 2),
                     "source": str(ev.source),
                     "ghost": True
                 })
@@ -1000,6 +1119,14 @@ class ChartGenerator:
             last_pitch = ev.pitch
             last_lane = lane
             
+            # Helper to round duration to nearest 0.05 (preserving original intention but aligning to grid)
+            def snap_dur(d):
+                return round(max(0.05, round(d / 0.05) * 0.05), 2)
+            
+            snapped_duration = snap_dur(float(ev.duration))
+            normalized_time = round(float(ev.time), 3)
+            normalized_vol = round(float(getattr(ev, "velocity", 0.8)), 2)
+            
             # Check hold type
             # 1. Must be allowed stem
             # 2. Must exceed threshold (vocal-specific for sung notes)
@@ -1011,12 +1138,12 @@ class ChartGenerator:
                     is_hold = True
             
             processed.append({
-                "time": float(ev.time),
+                "time": normalized_time,
                 "lane": int(lane),
-                "dur": float(ev.duration) if is_hold else 0.0, # Taps = 0.0 dur
+                "dur": snapped_duration, # Always use snapped duration (never 0.0)
                 "type": "hold" if is_hold else "tap",
                 "midi": int(ev.pitch),
-                "vol": float(getattr(ev, "velocity", 0.8)), # Default vol if missing
+                "vol": normalized_vol, # Default vol if missing
                 "source": str(ev.source)
             })
         
@@ -1133,16 +1260,16 @@ class ChartGenerator:
                          
                          # Only make it a hold if merged duration is meaningful (>= 0.25s)
                          if new_dur >= 0.25:
-                             curr["dur"] = new_dur
+                             curr["dur"] = round(new_dur, 2)
                              curr["type"] = "hold"
                          else:
                              # Too short - just keep as tap
-                             curr["dur"] = 0.0
+                             curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
                              curr["type"] = "tap"
                     else:
                          # Cannot hold (e.g. guitar/drums) OR Trill glitch
                          # Absorb the next note.
-                         curr["dur"] = 0.0
+                         curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
                          curr["type"] = "tap"
                          
                     # Skip next_n (it's absorbed)
@@ -1166,12 +1293,12 @@ class ChartGenerator:
                         if end_t > limit:
                             # Trim duration
                             new_dur = max(0.0, limit - current["time"])
-                            current["dur"] = new_dur
+                            current["dur"] = round(new_dur, 2)
                             
                             # If too short for a hold, convert back to tap
                             # Use 0.25s as minimum visible hold
                             if new_dur < 0.25:
-                                current["dur"] = 0.0
+                                current["dur"] = round(max(0.05, round(new_dur / 0.05) * 0.05), 2)
                                 current["type"] = "tap"
                 
                 final.append(current)
@@ -1283,7 +1410,7 @@ class ChartGenerator:
                 # Apply Logic to the lower priority note
                 if delta < fuse_window:
                     # FUSE: Snap lower note to higher note's time
-                    sorted_notes[lower_idx]["time"] = higher_note["time"]
+                    sorted_notes[lower_idx]["time"] = round(higher_note["time"], 3)
                     # print(f"    [SmartFuse] Fused {sorted_notes[lower_idx]['source']} into {higher_note['source']} at {higher_note['time']:.3f}s")
                 else:
                     # CONFLICT: Delete lower priority note

@@ -214,6 +214,9 @@ class Visualizer:
                         source = n.get("source", "other")
                         midi = n["midi"]
                         dur = n.get("dur", 0)
+                        if n.get("type") == "tap":
+                            dur = 0.0
+                            
                         bucket = SynthBank.get_bucket(dur)
                         
                         # --- SYNTH MODES ---
@@ -397,7 +400,12 @@ class Visualizer:
                 
                 base_c = col if is_selected else (col[0]//2, col[1]//2, col[2]//2)
                 
-                if n.get("dur", 0) > 0:
+                # Render Hold Body (Slider)
+                # V300 uses 'type' field to distinguish between Taps and Holds.
+                # Threshold fallback for legacy map support.
+                is_hold = n.get("type") == "hold" or (n.get("type") is None and n.get("dur", 0) > 0.25)
+                
+                if is_hold and n.get("dur", 0) > 0:
                     h = n["dur"] * self.scroll_speed
                     pygame.draw.rect(self.screen, (base_c[0]//3, base_c[1]//3, base_c[2]//3), (x+4, y-h, lane_w-8, h))
                 

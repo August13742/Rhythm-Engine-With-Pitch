@@ -14,38 +14,8 @@ from chart_generator import ChartGenerator
 
 # Configuration for Transcription (Per Stem)
 # Tuned for high precision and musicality
-STEM_TRANSCRIBE_CONFIG = {
-    "vocals": {
-        "onset": 0.35, "frame": 0.30, 
-        "smoothing": 0.7, "multipass": False, # Vocals rely on FCPE/ConsensusEngine
-        "min_len": 58.0
-    },
-    "piano": {
-        "onset": 0.40, "frame": 0.30, # Slightly stricter onset
-        "smoothing": 0.0, # NO SMOOTHING (Preserve fast runs)
-        "multipass": True, # Fix pitch leaks
-        "min_len": 30.0 # Allow shorter notes
-    },
-    "guitar": {
-        "onset": 0.40, "frame": 0.30,
-        "smoothing": 0.0, # NO SMOOTHING (Plucks are sharp)
-        "multipass": True,
-        "min_len": 40.0
-    },
-    "bass": {
-        "onset": 0.50, "frame": 0.40, # Stricter (Bass is often muddy)
-        "smoothing": 0.5, # Some smoothing for sustained bass
-        "multipass": True,
-        "min_len": 80.0
-    },
-    "other": {
-        "onset": 0.55, "frame": 0.40,  # Stricter for composite tracks
-        "smoothing": 0.0,
-        "multipass": True,  # Enable consensus to reduce noise
-        "min_len": 58.0,
-        "velocity_gate": 0.25  # Remove low-confidence notes
-    }
-}
+# Configuration for Transcription (Per Stem)
+# Moved to chart_generator.py as GENERATOR_CONFIG["transcription_filters"]
 
 class ConsensusEngine:
     @staticmethod
@@ -339,7 +309,19 @@ class RhythmEngine:
                     notes = self._transcribe_drums_onset(path)
                 else:
                     # BasicPitch for melodic instruments
-                    cfg = STEM_TRANSCRIBE_CONFIG.get(stem, STEM_TRANSCRIBE_CONFIG["other"])
+                    cfg = {} # STEM_TRANSCRIBE_CONFIG REMOVED
+                    # We only need config for extraction params (onset/frame) which were also in STEM_TRANSCRIBE_CONFIG
+                    # We need to HARDCODE them now or KEEP them for Extraction Only.
+                    # Plan: I removed STEM_TRANSCRIBE_CONFIG but I need it here for BasicPitch params!
+                    # I should have kept it or moved it. I will restore a local dict here.
+                    cfg = {
+                        "vocals": {"onset": 0.35, "frame": 0.30, "multipass": False, "min_len": 58.0},
+                        "piano": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 30.0},
+                        "guitar": {"onset": 0.40, "frame": 0.30, "multipass": True, "min_len": 40.0},
+                        "bass": {"onset": 0.50, "frame": 0.40, "multipass": True, "min_len": 80.0},
+                        "other": {"onset": 0.55, "frame": 0.40, "multipass": True, "min_len": 58.0}
+                    }.get(stem, {"onset": 0.55, "frame": 0.40, "multipass": True, "min_len": 58.0})
+
                     print(f"Processing {stem} with BasicPitch (Config: {cfg})...")
                     
                     params = {
@@ -373,9 +355,10 @@ class RhythmEngine:
                 
                 # CHECK POLYPHONY MODE
                 # If "choir" or "duet" in filename (heuristic) OR manifest flag
-                use_polyphony = False
-                if "choir" in self.base_name.lower() or "duet" in self.base_name.lower() or "poly" in self.base_name.lower():
-                    use_polyphony = True
+                # FORCE POLYPHONY
+                use_polyphony = True
+                # if "choir" in self.base_name.lower() or "duet" in self.base_name.lower() or "poly" in self.base_name.lower():
+                #    use_polyphony = True
                 
                 v_notes = []
                 
@@ -416,7 +399,7 @@ class RhythmEngine:
         Applies cleaning, smoothing, and grounding to raw events.
         FAST phase - runs every time (even on rechart).
         """
-        print("[RhythmEngine] Refinement Phase (Smoothing, Gating, Grounding)...")
+        print("[RhythmEngine] Refinement Phase (Latency & Grounding)...")
         refined_events = []
         
         # Group by Source
@@ -427,50 +410,20 @@ class RhythmEngine:
             events_by_source[s].append(n)
             
         for source, notes in events_by_source.items():
-            # Get Config
-            # Handle vocals_lead mapping to vocals config
-            cfg_key = "vocals" if "vocals" in source else source
-            cfg = STEM_TRANSCRIBE_CONFIG.get(cfg_key, STEM_TRANSCRIBE_CONFIG["other"])
-            
             path = os.path.join(self.stems_folder, f"{source}.wav")
-            # If explicit file missing (e.g. vocals_lead might map to vocals.wav if separate file doesn't exist? 
-            # Actually _extract ensures valid source only if file exists or manifest says so.
-            # But let's check existence for Grounding/Gating.
             if not os.path.exists(path) and source == "vocals_lead":
-                 # Fallback to vocals.wav
                  path = os.path.join(self.stems_folder, "vocals.wav")
             
-            # 1. Velocity Gate (Remove low-confidence)
-            vel_gate = cfg.get("velocity_gate", 0)
-            if vel_gate > 0 and notes:
-                velocities = [n.velocity for n in notes]
-                thresh = np.percentile(velocities, vel_gate * 100)
-                before_count = len(notes)
-                notes = [n for n in notes if n.velocity >= thresh]
-                # print(f"  [VelGate] {source}: {before_count} -> {len(notes)} notes (thresh={thresh:.3f})")
-            
-            # 2. Smoothing
-            if cfg.get("smoothing", 0) > 0:
-                from transcribe.smoother import VocalSmoother
-                notes = VocalSmoother.smooth(notes, level=cfg["smoothing"])
-            elif "vocals" in source: # Explicit Vocal Smoothing defaults
-                # The old logic applied hardcoded smoothing 0.4 to vocals
-                from transcribe.smoother import VocalSmoother
-                # print(f"  [Smoothing] Vocals 0.4")
-                notes = VocalSmoother.smooth(notes, level=0.4)
-
-            # 3. Latency Compensation (Manual Offset)
+            # 1. Latency Compensation (Manual Offset)
             if hasattr(self, "audio_engine_latency_offset") and self.audio_engine_latency_offset != 0:
                  for n in notes: n.time += self.audio_engine_latency_offset
             
-            # 4. Grounding (TimingCorrector)
+            # 2. Grounding (TimingCorrector)
             # Skip for Drums (Onset Detected)
             if source != "drums" and os.path.exists(path):
                  notes = TimingCorrector.ground_events(notes, path, window=0.1)
 
-            # 5. Silence Gate
-            if os.path.exists(path):
-                 notes = EventFilter.gate_silence(notes, path, threshold=0.01)
+            # Filtering (Velocity/Silence/Smoothing) MOVED TO CHART GENERATOR (Stage 1)
 
             refined_events.extend(notes)
             
@@ -495,7 +448,7 @@ class RhythmEngine:
         print(f"[RhythmEngine] Saving beatmaps to: {self.beatmap_folder}")
         
         for diff in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
-            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest) # Pass copy & manifest
+            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest, stems_folder=self.stems_folder) # Pass copy & manifest
             
             out_file = os.path.join(self.beatmap_folder, f"{diff}.json")
             with open(out_file, "w") as f:
@@ -518,10 +471,10 @@ class RhythmEngine:
         # 1. Onset Envelope
         onset_env = librosa.onset.onset_strength(y=y, sr=sr)
         
-        # 2. Pick Peaks (Adaptive threshold)
-        # Increased delta (0.35 -> 0.45) for stricter picking
-        # Increased wait (4 -> 6) to reduce rolls
-        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.45, wait=6)
+        # Pick Peaks (Adaptive threshold)
+        # LOOSENED for Stage 1 Charter Sifting
+        # Captured more staccato/rolls, Charter will sieve based on difficulty budget.
+        peaks = librosa.util.peak_pick(onset_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.20, wait=3)
         
         # 3. Convert to times
         times = librosa.frames_to_time(peaks, sr=sr)
