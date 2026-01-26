@@ -69,11 +69,261 @@ GENERATOR_CONFIG = {
     "layer_sifting": {
         "melodic_support_gate": 0.35,   # Min velocity for Melodic Support notes
         "melodic_support_weight": 0.5,  # Score penalty (Deprioritize in density)
-        "percussive_stems": ["drums", "bass"] # Stems EXEMPT from sifting
+        "percussive_stems": ["drums", "bass"], # Stems EXEMPT from sifting
+        "smoothing_window": 3.0
     }
 }
 
+class ActivityAnalyzer:
+    """Calculates stem activity density over time to drive dynamic selection."""
+    @staticmethod
+    def get_activity_map(events: List[NoteEvent], window_size: float = 5.0, resolution: float = 1.0) -> dict:
+        """
+        Creates a map of {stem: activity_curve} where activity_curve is a list of scores.
+        resolution: Step size in seconds for the activity timeline.
+        window_size: Period in seconds for the smoothing window.
+        """
+        if not events: return {}
+        
+        max_time = max(e.time + e.duration for e in events)
+        num_steps = int(max_time / resolution) + 2
+        
+        # 1. Initialize buckets
+        activity = {} # stem -> [sum_velocity]
+        stems = set(e.source for e in events)
+        for s in stems:
+            activity[s] = [0.0] * num_steps
+            
+        # 2. Fill atomic buckets
+        for e in events:
+            step = int(e.time / resolution)
+            if step < num_steps:
+                # Use velocity * duration (energy) as activity metric
+                # For drums (dur=0.1), velocity is usually enough.
+                energy = e.velocity * (e.duration if e.duration > 0.1 else 0.5)
+                activity[e.source][step] += energy
+                
+        # 3. Apply Sliding Window Smoothing (Forward & Backward)
+        # This provides the "Long Context" hysteresis.
+        smoothed = {}
+        half_win = int(window_size / (2 * resolution))
+        
+        for s, curve in activity.items():
+            s_curve = [0.0] * num_steps
+            for i in range(num_steps):
+                start = max(0, i - half_win)
+                end = min(num_steps, i + half_win + 1)
+                window = curve[start:end]
+                s_curve[i] = sum(window) / len(window) if window else 0.0
+            smoothed[s] = s_curve
+            
+        return {
+            "resolution": resolution,
+            "max_time": max_time,
+            "activity": smoothed
+        }
+
+class LayerTimeline:
+    """Queryable object for dynamic primary/support layers."""
+    def __init__(self, timeline: List[dict], resolution: float):
+        self.timeline = timeline # list of {"primary": set, "support": set}
+        self.resolution = resolution
+        
+    def get_layers(self, time: float) -> tuple:
+        idx = int(time / self.resolution)
+        if idx < 0: idx = 0
+        if idx >= len(self.timeline):
+            idx = len(self.timeline) - 1
+            
+        return self.timeline[idx]["primary"], self.timeline[idx]["support"]
+
 class StemSelector:
+    PRIORITY_HIERARCHY = [
+        ["vocals_lead", "vocals"],
+        ["guitar", "piano", "synth", "other"],
+        ["bass"],
+        ["drums"]
+    ]
+
+    @staticmethod
+    def get_dynamic_timeline(events: List[NoteEvent], difficulty: str, focus_mode: str = "main") -> LayerTimeline:
+        """Determines layers for every second of the song based on activity and hierarchy."""
+        resolution = 1.0
+        
+        # Pull smoothing window from config
+        smoothing_window = GENERATOR_CONFIG["layer_sifting"].get("smoothing_window", 5.0)
+        
+        analyzer = ActivityAnalyzer()
+        act_map = analyzer.get_activity_map(events, window_size=smoothing_window, resolution=resolution)
+        
+        activity = act_map["activity"]
+        num_steps = len(next(iter(activity.values()))) if activity else 0
+        
+        timeline_data = []
+        
+        # Fixed Mode Override
+        actual_mode = focus_mode
+        if difficulty in ["EASY", "NORMAL", "HARD"]:
+            actual_mode = "main"
+        elif difficulty == "ALT_HARD":
+            actual_mode = "alt"
+            
+        # Sticky Selection State / Thresholds
+        activity_threshold = 0.1 # Minimum activity to be considered "active"
+
+        # 1. Identify "Ideal" Primary (Focus Stem)
+        focus_stem = None
+        if actual_mode == "main":
+             # Use Vocals if they exist anywhere
+             vocal_stems = ["vocals_lead", "vocals"]
+             for s in vocal_stems:
+                 if s in activity:
+                     focus_stem = s
+                     break
+        else: # alt
+             # Top melodic non-vocal
+             melodic = ["guitar", "piano", "synth", "other"]
+             candidates = [s for s in melodic if s in activity]
+             if candidates:
+                 # Pick busiest overall melodic
+                 candidates.sort(key=lambda s: sum(activity[s]), reverse=True)
+                 focus_stem = candidates[0]
+
+        # Use Vocals as fallback if no melodic in Alt mode? 
+        # Actually user said "vocal is playing when main instrument stops"
+        
+        # 2. Analyze Gaps in Focus Stem (Raw Activity vs Smoothed)
+        # We use RAW activity to find the start/end of true silence gaps.
+        # But we use SMOOTHED activity for fallback selection to avoid flicker.
+        raw_map = ActivityAnalyzer.get_activity_map(events, window_size=0, resolution=resolution)
+        raw_activity = raw_map["activity"]
+        
+        min_gap = GENERATOR_CONFIG["layer_sifting"].get("min_switch_gap", 5.0)
+        gap_steps = int(min_gap / resolution)
+        
+        is_focus_silent_raw = [True] * num_steps
+        if focus_stem and focus_stem in raw_activity:
+            is_focus_silent_raw = [raw_activity[focus_stem][i] <= 0.05 for i in range(num_steps)]
+            
+        # Identify 5s+ Gaps
+        fallback_allowed = [False] * num_steps
+        i = 0
+        while i < num_steps:
+            if is_focus_silent_raw[i]:
+                start = i
+                while i < num_steps and is_focus_silent_raw[i]:
+                    i += 1
+                end = i
+                if (end - start) >= gap_steps:
+                    # Sustained Gap! Allow fallback in this entire range.
+                    for j in range(start, end):
+                        fallback_allowed[j] = True
+            else:
+                i += 1
+                
+        # 3. Fill Gaps with Best Candidate (Window-Aggregated)
+        # For each gap, find the stem with the highest TOTAL activity within that gap.
+        final_primary_timeline = [None] * num_steps
+        
+        # Default: Fill with focus stem
+        for i in range(num_steps):
+            final_primary_timeline[i] = focus_stem
+            
+        # Overwrite Gaps
+        # We need to reconstruct the gaps from fallback_allowed
+        i = 0
+        while i < num_steps:
+            if fallback_allowed[i]:
+                start = i
+                while i < num_steps and fallback_allowed[i]:
+                    i += 1
+                end = i
+                
+                # Analyze this gap [start, end]
+                best_stem = None
+                best_score = -1.0
+                
+                # Candidates: All melodic/harmonic stems + Vocals (for Alt mode fallback)
+                candidates = ["vocals", "vocals_lead", "guitar", "piano", "synth", "other", "bass"] 
+                
+                # Calculate Global Activity for Bias
+                global_activity_sum = {s: sum(curve) for s, curve in activity.items()}
+                max_global = max(global_activity_sum.values()) if global_activity_sum else 1.0
+                
+                scores = {}
+                for s in candidates:
+                    if s in activity:
+                        # Sum activity in this window
+                        window_sum = sum(activity[s][start:end])
+                        
+                        # Apply Global Dominance Bias
+                        # Bonus: Up to +100% score for being the most dominant stem in the song
+                        global_score = global_activity_sum.get(s, 0.0)
+                        dominance_factor = global_score / max_global if max_global > 0 else 0.0
+                        bias_multiplier = 1.0 + (1.0 * dominance_factor)
+                        
+                        final_score = window_sum * bias_multiplier
+                        
+                        scores[s] = final_score
+                        if final_score > best_score and window_sum > 0.1:
+                            best_score = final_score
+                            best_stem = s
+                            
+                # Summary of scores for this window
+                if best_stem:
+                    score_strs = [f"{s}:{scr:.2f}" for s, scr in scores.items() if scr > 0]
+                    print(f"    [GapFiller] Range {start*resolution:.1f}-{end*resolution:.1f}s | Winner: {best_stem} | Scores: {', '.join(score_strs)}")
+                
+                # If we found a good fallback, use it for the WHOLE gap
+                # This ensures stability (Sticky for the window duration)
+                if best_stem:
+                    for k in range(start, end):
+                        final_primary_timeline[k] = best_stem
+            else:
+                i += 1
+
+        # 4. Build Final Timeline Objects
+        for i in range(num_steps):
+            primary = []
+            support = []
+            
+            p_stem = final_primary_timeline[i]
+            if p_stem:  
+               # Check if it's active at this specific step?
+               # User request: "active instrument of the specific absent window"
+               # We selected based on sum, but maybe it has a quiet moment inside the window.
+               # Should we silence it? No, "fill it in".
+               primary.append(p_stem)
+                
+            # Support
+            if difficulty != "EASY":
+                 active_at_step = [s for s, curve in activity.items() if curve[i] > activity_threshold]
+                 drums_active = "drums" in active_at_step
+                 
+                 # Logic: Blacklist support if it's primary
+                 # If primary is drums (unlikely), don't add drums.
+                 if "drums" not in primary and drums_active:
+                     support.append("drums")
+                 else:
+                     # Fallback support
+                     if "bass" in active_at_step and "bass" not in primary:
+                         support.append("bass")
+                            
+            timeline_data.append({"primary": set(primary), "support": set(support)})
+        
+        # Summary logging
+        if timeline_data:
+            switches = []
+            last_p = None
+            for idx, entry in enumerate(timeline_data):
+                p = list(entry["primary"])[0] if entry["primary"] else "None"
+                if p != last_p:
+                    switches.append(f"{idx*resolution}s:{p}")
+                    last_p = p
+            print(f"    [Layers] Dynamic Timeline ({difficulty}): {' -> '.join(switches[:10])}{'...' if len(switches)>10 else ''}")
+            
+        return LayerTimeline(timeline_data, resolution)
+
     @staticmethod
     def get_stem_energy(stem_name: str, manifest: dict) -> float:
         """Returns the peak energy or RMS from manifest."""
@@ -81,19 +331,11 @@ class StemSelector:
             return 0.0
         
         info = manifest[stem_name]
-        # Prefer RMS (avg power) over Peak (transients) for "dominance"
-        # manifest currently stores 'peak_energy'. Let's assume we might have 'rms' or use peak.
-        # Original separator also keys 'vocals_lead' rms into a stats dict but manifest saves peak.
-        # Fallback to peak if RMS missing.
         return info.get("peak_energy", 0.0)
 
     @staticmethod
     def select_layers(difficulty: str, manifest: dict, focus_mode: str = "main", stem_weights: dict = None) -> dict:
-        """
-        Determines Primary/Support stems based on Difficulty and Focus Mode.
-        focus_mode: "main" (Vocals/Melody) or "alt" (Instruments/Rhythm)
-        stem_weights: dict of {source: total_velocity} for dynamic selection.
-        """
+        """Static version for backward compatibility or simple logic."""
         # 1. Analyze Manifest (What exists?)
         active_stems = []
         has_vocals = False
@@ -110,87 +352,43 @@ class StemSelector:
         primary = []
         support = []
         
-        # Difficulty Logic (Generalized)
-        # Force specific modes for specific difficulties based on new user mapping:
-        # EASY/NORMAL/HARD -> MAIN Focus
-        # ALT_HARD -> ALT Focus (Alternative Hard/Complimentary)
-        
         actual_mode = focus_mode
         if difficulty in ["EASY", "NORMAL", "HARD"]:
             actual_mode = "main"
         elif difficulty == "ALT_HARD":
             actual_mode = "alt"
             
-        print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
-
         if actual_mode == "main":
-            # MAIN FOCUS: Vocals > Lead > Rhythm
             if has_vocals:
-                # Prefer Lead
                 if "vocals_lead" in active_stems: primary.append("vocals_lead")
                 elif "vocals" in active_stems: primary.append("vocals")
-                
-                # In Main/Easy-Hard, Instruments are Backing Tracks.
-                # Only add vocals/lead to primary. Support will handle rhythm.
-                pass
-            
             else:
-                # Instrumental Song: Leads are Primary
-                # Dynamic Rule: Primary = Most Dynamic Stem
                 candidates = [s for s in active_stems if s not in ["drums", "bass"]]
                 if candidates:
-                    # Dynamic Sort using Energy (RMS/Peak) + Note Velocity Sum (stem_weights)
-                    # stem_weights (velocity sum) serves as a proxy for "musical activity"
                     if stem_weights:
                         candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
-                        print(f"    > Instrumental Main Sort: {candidates}")
                         primary.append(candidates[0])
                     else:
-                        # Fallback
                         if "guitar" in active_stems: primary.append("guitar")
                         elif "piano" in active_stems: primary.append("piano")
                         elif "other" in active_stems: primary.append("other")
-
-            # Support: Rhythm (Drums)
             if difficulty != "EASY":
                  if "drums" in active_stems: support.append("drums")
-            
         elif actual_mode == "alt":
-            # ALT FOCUS: Instruments (2nd Busiest) > Rhythm
-            # Dynamic Rule: Pick highest energy non-vocal instrument.
-            # Order of preference: PURELY DYNAMIC.
-            
-            # Filter candidates: All melodic instruments (No Vocals, No Drums, No Bass)
             candidates = [s for s in active_stems if s not in ["vocals", "vocals_lead", "drums", "bass"]]
-            
             if candidates:
                 if stem_weights:
-                    # Sort by weight desc (Total Note Velocity)
                     candidates.sort(key=lambda s: stem_weights.get(s, 0), reverse=True)
-                    # print(f"    > Dynamic Sort: {candidates} (Scores: {[f'{stem_weights.get(s,0):.3f}' for s in candidates]})")
-                    
-                    selected_idx = 0
-                    if not has_vocals and len(candidates) > 1:
-                        # Instrumental Mode: Select 2nd best track for ALT diversity
-                        selected_idx = 1
-                        
+                    selected_idx = 1 if not has_vocals and len(candidates) > 1 else 0
                     primary.append(candidates[selected_idx])
                 else:
-                    # Fallback Priority
                     if "guitar" in candidates: primary.append("guitar")
                     elif "piano" in candidates: primary.append("piano")
                     elif "other" in candidates: primary.append("other")
-            
-            # If no melody instruments, Drums become primary (Drum Chart)
             if not primary and "drums" in active_stems:
                 primary.append("drums")
             elif "drums" in active_stems:
-                # Drums are strictly support in ALT mode (unless it's a drum chart)
                 support.append("drums")
-                    
-        print(f"  [Layers] Difficulty: {difficulty} (Mode: {actual_mode})")
-        print(f"    > Primary: {primary}")
-        print(f"    > Support: {support}")
         
         return {"primary": primary, "support": support}
 
@@ -249,7 +447,7 @@ class VocalCorrector:
                     shift = -12 if diff > 0 else 12
                     
                     # Log it?
-                    # print(f"  [VocalCorrector] Fixed Octave Jump at {curr.time:.2f}s ({curr.pitch} -> {curr.pitch + shift})")
+                    print(f"  [VocalCorrector] Fixed Octave Jump at {curr.time:.2f}s ({curr.pitch} -> {curr.pitch + shift})")
                     
                     curr.pitch += shift
             
@@ -276,18 +474,9 @@ class ChartGenerator:
         target_nps = cfg["nps"]
         n_lanes = cfg["lanes"]
         
-        # --- STAGE 0: LAYER SELECTION ---
-        # Calculate Stem Weights (Energy = Sum of Velocity)
-        # This helps ALT mode pick the most dominant instrument dynamically.
-        stem_weights = {}
-        for e in events:
-            s = getattr(e, "source", "other")
-            v = getattr(e, "velocity", 0.5)
-            stem_weights[s] = stem_weights.get(s, 0.0) + v
-            
-        layers = StemSelector.select_layers(difficulty, manifest, focus_mode, stem_weights)
-        primary_src = set(layers["primary"])
-        support_src = set(layers["support"])
+        # --- STAGE 0: LAYER SELECTION (Dynamic) ---
+        # Generate a dynamic timeline of which stems are Primary vs Support
+        timeline = StemSelector.get_dynamic_timeline(events, difficulty, focus_mode)
         
         # --- STAGE 1: THE CLEANER ---
         c_cfg = GENERATOR_CONFIG["cleaning"]
@@ -348,7 +537,7 @@ class ChartGenerator:
         
         # --- STAGE 3: THE SIEVE (Selection & Musicality) ---
         # This is where we actully "chart" the song by picking the most important notes.
-        ranked_events = self._rank_events_layered(cleaned_candidates, primary_src, support_src)
+        ranked_events = self._rank_events_layered(cleaned_candidates, timeline)
         
         # Using New Adaptive Sieve (V300)
         final_events = self._filter_adaptive_sieve(ranked_events, difficulty)
@@ -452,7 +641,7 @@ class ChartGenerator:
                 
         return final_list
 
-    def _rank_events_layered(self, events: List[NoteEvent], primary_src: set, support_src: set) -> List[NoteEvent]:
+    def _rank_events_layered(self, events: List[NoteEvent], timeline: LayerTimeline) -> List[NoteEvent]:
         """
         Rank events based on their Layer Assignment.
         Strict Mode: Non-Focus notes get 0 score.
@@ -469,6 +658,9 @@ class ChartGenerator:
         beat_dur = 60.0 / self.bpm if self.bpm > 0 else 0.5
         
         for n in events:
+            # Query the dynamic timeline for current layers
+            primary_src, support_src = timeline.get_layers(n.time)
+            
             # Base Score = Velocity
             base_score = n.velocity
 
@@ -577,6 +769,9 @@ class ChartGenerator:
         coincidence_window = l_cfg["shadow_window"]
         
         for i, n in enumerate(scored_Events):
+            # Query layers for coincidence logic
+            primary_src, support_src = timeline.get_layers(n.time)
+            
             # Check neighbors
             for j in range(max(0, i-5), min(len(scored_Events), i+5)):
                 if i == j: continue
@@ -828,9 +1023,8 @@ class ChartGenerator:
         # Post-process: Resolve conflicts (Hold overlaps)
         conflict_resolved = self._resolve_conflicts(processed)
         
-        # Cross-stem anti-spam: DISABLED (User request to let Sieve handle density)
-        # return self._resolve_cross_stem_conflicts(conflict_resolved)
-        return conflict_resolved
+        # Cross-stem anti-spam: Re-enabled with Smart Fuse (Chord creation)
+        return self._resolve_cross_stem_conflicts(conflict_resolved)
 
     def _sanitize_holds(self, events: List[NoteEvent]) -> List[NoteEvent]:
         """
@@ -1014,7 +1208,7 @@ class ChartGenerator:
     def _resolve_cross_stem_conflicts(self, notes: List[dict]) -> List[dict]:
         """
         Anti-spam filter for cross-stem conflicts.
-        Removes secondary layer notes that are too close to primary layer notes.
+        Fuses or removes secondary layer notes that are too close to primary layer notes.
         
         Priority hierarchy (highest to lowest):
         1. vocals, vocals_lead (primary melodic)
@@ -1024,8 +1218,10 @@ class ChartGenerator:
         5. other (composite/backup)
         
         Logic:
-        - If a lower-priority note is within 'proximity_window' of a higher-priority note,
-          remove the lower-priority note to avoid double-note jacks.
+        - FUSE Window (50ms): If a lower-priority note is extremely close, snap it to the 
+                             higher-priority note's time to create a perfect chord.
+        - CONFLICT Window (90ms): If it's close but not fuse-able, delete the lower-priority 
+                                 note to avoid muddy "double taps".
         """
         if not notes:
             return notes
@@ -1041,54 +1237,68 @@ class ChartGenerator:
             "other": 20
         }
         
-        # Proximity window: if notes are closer than this, lower priority forfeits
-        proximity_window = 0.08  # 80ms - about a 32nd note at 150 BPM
+        fuse_window = 0.05      # 50ms - Snap to chord
+        conflict_window = 0.09  # 90ms - Delete conflict
         
         # Sort by time for efficient scanning
         sorted_notes = sorted(notes, key=lambda x: x["time"])
         
-        # Track which notes to keep
-        keep_indices = set(range(len(sorted_notes)))
+        # Track which notes to remove
+        remove_indices = set()
         
-        # For each note, check if any nearby note has higher priority
+        # Pass 1: Identification & Timing Adjustment
         for i in range(len(sorted_notes)):
-            if i not in keep_indices:
-                continue  # Already marked for removal
+            if i in remove_indices:
+                continue
                 
             current = sorted_notes[i]
             current_priority = stem_priority.get(current["source"], 0)
-            current_time = current["time"]
             
-            # Look at nearby notes (within proximity window)
-            # Check backwards and forwards
-            for j in range(len(sorted_notes)):
-                if i == j or j not in keep_indices:
-                    continue
-                    
+            # Check neighbors within the conflict window
+            # We look ahead to find conflicts with higher priority notes
+            for j in range(i + 1, len(sorted_notes)):
                 other = sorted_notes[j]
-                other_time = other["time"]
+                dt = other["time"] - current["time"]
                 
-                # Check if within proximity window
-                time_diff = abs(other_time - current_time)
-                if time_diff > proximity_window:
-                    # If j > i and we're past the window, no need to check further forward
-                    if j > i:
-                        break
-                    continue
-                
+                if dt > conflict_window:
+                    break
+                    
                 other_priority = stem_priority.get(other["source"], 0)
                 
-                # If other note has higher priority, remove current note
+                if other_priority == current_priority:
+                     continue # For same priority, we let the grid/polyphony handle it earlier
+                
+                # Identify lower and higher priority notes
                 if other_priority > current_priority:
-                    keep_indices.discard(i)
-                    break  # No need to check further for this note
-        
+                    # 'current' is lower priority
+                    lower_idx = i
+                    higher_note = other
+                    delta = dt
+                else:
+                    # 'other' is lower priority
+                    lower_idx = j
+                    higher_note = current
+                    delta = dt
+
+                # Apply Logic to the lower priority note
+                if delta < fuse_window:
+                    # FUSE: Snap lower note to higher note's time
+                    sorted_notes[lower_idx]["time"] = higher_note["time"]
+                    # print(f"    [SmartFuse] Fused {sorted_notes[lower_idx]['source']} into {higher_note['source']} at {higher_note['time']:.3f}s")
+                else:
+                    # CONFLICT: Delete lower priority note
+                    remove_indices.add(lower_idx)
+                    # print(f"    [SmartFuse] Removed {sorted_notes[lower_idx]['source']} (Conflict with {higher_note['source']} at {higher_note['time']:.3f}s)")
+
         # Filter to only kept notes
-        filtered = [sorted_notes[i] for i in sorted(keep_indices)]
+        filtered = [sorted_notes[i] for i in range(len(sorted_notes)) if i not in remove_indices]
+        
+        # Re-sort because Fusing changed some times
+        filtered.sort(key=lambda x: x["time"])
         
         removed_count = len(notes) - len(filtered)
         if removed_count > 0:
-            print(f"    [Cross-Stem Filter] Removed {removed_count} secondary notes too close to primary notes")
+            print(f"    [Cross-Stem Filter] Cleaned {removed_count} conflicts via SmartFuse (Windows: {fuse_window*1000}ms/{conflict_window*1000}ms)")
         
         return filtered
 
