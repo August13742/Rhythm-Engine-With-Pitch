@@ -25,7 +25,7 @@ STEM_COLORS = {
 }
 
 class Visualizer:
-    def __init__(self, audio_path, folder_path, beatmap_folder):
+    def __init__(self, audio_path, folder_path, beatmap_folder, target_lanes=4):
         # Initialize Mixer
         pygame.mixer.pre_init(44100, -16, 2, 1024)
         pygame.init()
@@ -74,36 +74,60 @@ class Visualizer:
         duration = librosa.get_duration(path=os.path.join(folder_path, f"{duration_track}.wav"))
         from chart_generator import DIFF_CONFIGS
         for d in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
-            # V300 Path: beatmap/DIFF.json
-            # NOW: we use explicit beatmap_folder
-            target_file = os.path.join(beatmap_folder, f"{d}.json")
+            # Logic: 
+            # 1. Try explicit target lanes: {d}_{target_lanes}k.json
+            # 2. Try generic search: {d}_*k.json (Pick first)
+            # 3. Try legacy: {d}.json
             
-            try:
-                with open(target_file, 'r') as f:
-                    data = json.load(f)
-                    # V300 Support: Extract notes from dict
-                    if isinstance(data, dict) and "notes" in data:
-                        self.beatmaps[d] = data["notes"]
-                        self.metadata[d] = data.get("metadata", {})
-                    else:
-                        # Legacy Support: List of notes
-                        self.beatmaps[d] = data
-                        self.metadata[d] = {}
-            except FileNotFoundError:
-                print(f"[VIS] Warning: Beatmap not found: {target_file}")
+            target_file = os.path.join(beatmap_folder, f"{d}_{target_lanes}k.json")
+            found_file = None
+            
+            if os.path.exists(target_file):
+                found_file = target_file
+            else:
+                # Search for any
+                candidates = [f for f in os.listdir(beatmap_folder) if f.startswith(f"{d}_") and f.endswith("k.json")]
+                if candidates:
+                    found_file = os.path.join(beatmap_folder, candidates[0])
+                else:
+                    # Legacy fallback
+                    legacy_file = os.path.join(beatmap_folder, f"{d}.json")
+                    if os.path.exists(legacy_file):
+                        found_file = legacy_file
+            
+            data = None
+            if found_file:
+                try:
+                    with open(found_file, 'r') as f:
+                        data = json.load(f)
+                        print(f"[VIS] Loaded {d} from {os.path.basename(found_file)}")
+                except Exception as e:
+                     print(f"[VIS] Error loading {found_file}: {e}")
+            
+            if data:
+                # V300 Support: Extract notes from dict
+                if isinstance(data, dict) and "notes" in data:
+                    self.beatmaps[d] = data["notes"]
+                    self.metadata[d] = data.get("metadata", {})
+                else:
+                    # Legacy Support: List of notes
+                    self.beatmaps[d] = data
+                    self.metadata[d] = {}
+            else:
+                print(f"[VIS] Warning: Beatmap not found for {d} (Target Lanes: {target_lanes})")
                 self.beatmaps[d] = []
             
             # Calculate Metadata if missing
             count = len(self.beatmaps[d])
             nps = count / duration if duration > 0 else 0
             # Legacy didn't have lanes in file, use config
-            lanes = DIFF_CONFIGS[d]["lanes"]
+            # Use metadata lanes if present, otherwise target, otherwise 4
+            lanes = self.metadata[d].get("lanes", target_lanes)
+            if not lanes: lanes = DIFF_CONFIGS[d]["lanes"]
             
             # Update metadata dict for internal use
             if "nps" not in self.metadata[d]:
                 self.metadata[d].update({"count": count, "lanes": lanes, "nps": nps})
-                
-            print(f"[VIS] Loaded {d}: {count} notes")
         
         # 2. SYNTHESIZE BANKS
         print("[VIS] Synthesizing Sound Banks...")

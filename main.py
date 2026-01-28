@@ -17,6 +17,7 @@ def main():
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps (skip loading from files)")
     parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
     parser.add_argument("--rechart", action="store_true", help="Skip extraction and only re-run charting (requires previous run)")
+    parser.add_argument("--lanes", type=int, default=4, help="Target lane count (Default: 4)")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -67,7 +68,16 @@ def main():
     # Check if beatmaps exist
     difficulties = ["EASY", "NORMAL", "HARD", "ALT_HARD"]
     items = os.listdir(beatmap_root) if os.path.exists(beatmap_root) else []
-    beatmaps_exist = all(f"{d}.json" in items for d in difficulties)
+    
+    def check_exists(diff):
+        # Check for ANY file starting with {diff} and ending with .json
+        # This covers {diff}.json and {diff}_4k.json etc.
+        for f in items:
+            if f.startswith(diff) and f.endswith(".json"):
+                return True
+        return False
+        
+    beatmaps_exist = all(check_exists(d) for d in difficulties)
     
     should_generate = False
     if args.rebake:
@@ -85,7 +95,7 @@ def main():
     if should_generate:
         print(f"[Main] Launching RhythmEngine -> {beatmap_root}")
         engine = RhythmEngine(stems_dir, beatmap_root)
-        engine.run(rechart=args.rechart)
+        engine.run(rechart=args.rechart, force_lanes=args.lanes)
         print("[Main] Generation Complete.")
         
     if args.generate_only:
@@ -94,7 +104,7 @@ def main():
 
     # --- STEP 3: VISUALIZER ---
     print("[Main] Launching Visualizer...")
-    visualizer = Visualizer(args.audio_file, stems_dir, beatmap_root)
+    visualizer = Visualizer(args.audio_file, stems_dir, beatmap_root, target_lanes=args.lanes)
     visualizer.run()
 
 if __name__ == "__main__":

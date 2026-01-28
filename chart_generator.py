@@ -456,7 +456,7 @@ class ChartGenerator:
         self.quantizer = Quantizer(bpm)
         self.bpm = bpm
         
-    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main", stems_folder: str = None) -> dict:
+    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main", stems_folder: str = None, override_lanes: int = None) -> dict:
         """
         Converts raw events into a playable chart using V300 pipeline.
         focus_mode: "main" or "alt"
@@ -469,6 +469,10 @@ class ChartGenerator:
         cfg = DIFF_CONFIGS.get(difficulty, DIFF_CONFIGS["NORMAL"])
         target_nps = cfg["nps"]
         n_lanes = cfg["lanes"]
+        
+        if override_lanes and override_lanes > 0:
+            n_lanes = override_lanes
+            print(f"  [Generator] Overriding lanes to: {n_lanes}")
         
         # --- STAGE 0: LAYER SELECTION (Dynamic) ---
         # Generate a dynamic timeline of which stems are Primary vs Support
@@ -570,7 +574,8 @@ class ChartGenerator:
             "metadata": {
                 "difficulty": difficulty, 
                 "bpm": self.bpm,
-                "focus": focus_mode  # Export Focus Mode for Visualizer
+                "focus": focus_mode,  # Export Focus Mode for Visualizer
+                "lanes": n_lanes
             },
             "notes": chart_notes
         }
