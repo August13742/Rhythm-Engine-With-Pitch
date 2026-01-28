@@ -456,15 +456,16 @@ class ChartGenerator:
         self.quantizer = Quantizer(bpm)
         self.bpm = bpm
         
-    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main", stems_folder: str = None, override_lanes: int = None) -> dict:
+    def generate(self, events: List[NoteEvent], difficulty: str, manifest: dict = None, focus_mode: str = "main", stems_folder: str = None, override_lanes: int = None, chart_profile: str = "STANDARD") -> dict:
         """
         Converts raw events into a playable chart using V300 pipeline.
         focus_mode: "main" or "alt"
+        chart_profile: "STANDARD", "DRAFT", or "RAW"
         """
         # Deepcopy events to prevent side effects (mutation) from affecting other difficulties
         events = copy.deepcopy(events)
         
-        print(f"[Generator] Starting {difficulty} chart generation (Mode: {focus_mode})...")
+        print(f"[Generator] Starting {difficulty} chart generation (Mode: {focus_mode}, Profile: {chart_profile})...")
         
         cfg = DIFF_CONFIGS.get(difficulty, DIFF_CONFIGS["NORMAL"])
         target_nps = cfg["nps"]
@@ -479,30 +480,28 @@ class ChartGenerator:
         timeline = StemSelector.get_dynamic_timeline(events, difficulty, focus_mode)
         
         # --- STAGE 1: THE CLEANER (Gameplay Filtering) ---
-        # Moved from Engine to Charter for flexibility
-        events = self._apply_gameplay_filtering(events, stems_folder)
+        # RAW Mode bypasses standard filtering (Use minimal filtering)
+        if chart_profile != "RAW":
+            events = self._apply_gameplay_filtering(events, stems_folder)
         
         c_cfg = GENERATOR_CONFIG["cleaning"]
-        # Note: EventFilter.filter_ghost_notes was doing duration/velocity checks.
-        # We integrated velocity gate above. Duration check is handled below?
-        # Actually filter_ghost_notes does "Min Duration" check.
-        # Let's keep it but relax velocity if needed? No, use the filtered events.
         
-        clean_events = EventFilter.filter_ghost_notes(
-            events, 
-            min_dur=c_cfg["min_duration"], 
-            min_vel=c_cfg["min_velocity"] # Enforce noise floor (e.g. 0.15)
-        )
-        clean_events = EventFilter.consolidate_rolls(
-            clean_events, 
-            gap_threshold=c_cfg["roll_consolidation_gap"]
-        )
-        print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
+        if chart_profile != "RAW":
+             clean_events = EventFilter.filter_ghost_notes(
+                events, 
+                min_dur=c_cfg["min_duration"], 
+                min_vel=c_cfg["min_velocity"]
+            )
+             clean_events = EventFilter.consolidate_rolls(
+                clean_events, 
+                gap_threshold=c_cfg["roll_consolidation_gap"]
+            )
+             print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
+        else:
+             print("  [Cleaner] RAW Mode: Bypassing Filters.")
+             clean_events = events
         
         # --- STAGE 2: ADAPTIVE GRID (High Fidelity Snapping - Artifact Correction) ---
-        # NOTE: This stage is for timing correction, not selection.
-        # We snap notes to a high-fidelity grid to clean up transcription "wobble"
-        # before the Sieve decides which notes are actually playable.
         
         # Strict (Drums/Bass/Backing)
         strict_grids = [4, 8, 16] # Standardized for rhythmic stems
@@ -529,42 +528,48 @@ class ChartGenerator:
         
         quantized_events = snapped_strict + snapped_soft
         
+        # --- RAW EXIT ---
+        if chart_profile == "RAW":
+            # For RAW, just return all quantized events mapped to lanes
+            print("  [Generator] RAW Profile: Returning early.")
+            # Skip sieving/ranking. Direct mapping.
+            sanitized_events = quantized_events
+            sanitized_events.sort(key=lambda x: x.time)
+            chart_notes = self._allocate_lanes(sanitized_events, n_lanes)
+            return {
+                "metadata": {
+                    "difficulty": difficulty, "bpm": self.bpm,
+                    "focus": focus_mode, "lanes": n_lanes, "profile": chart_profile
+                },
+                "notes": chart_notes
+            }
+        
         # --- STAGE 2.5: SCRIPTING CLEANUP (Merge & Dedupe) ---
-        # CLEANUP before Sieve: We merge/dedupe notes to clean the "physical" data candidates.
-        # This ensures the Sieve budget isn't wasted on artifacts that would be deleted later.
+        events_to_sieve = quantized_events
         
-        # 6.5 Vocal Correction (Octave Sieve) - MOVED UP BEFORE MERGE
-        # Fix pitch data first, then glue fragments.
-        corrected_events = VocalCorrector.apply(quantized_events, difficulty)
-
-        # Merge short consecutive notes of similar pitch into longer notes
-        merged_events = self._merge_fragmented_notes(corrected_events)
-        
-        # Deduplicate Same-Pitch - REMOVED (Redundant with _merge_fragmented_notes)
-        # cleaned_candidates = self._deduplicate_same_pitch(merged_events)
-        cleaned_candidates = merged_events
-        
-        merge_count = len(quantized_events) - len(cleaned_candidates)
-        if merge_count > 0:
-            print(f"  [Cleanup] Merged {merge_count} notes before selection")
+        if chart_profile == "STANDARD":
+            corrected_events = VocalCorrector.apply(quantized_events, difficulty)
+            merged_events = self._merge_fragmented_notes(corrected_events)
+            events_to_sieve = merged_events
+            
+            merge_count = len(quantized_events) - len(events_to_sieve)
+            if merge_count > 0:
+                print(f"  [Cleanup] Merged {merge_count} notes before selection")
         
         # --- STAGE 3: THE SIEVE (Selection & Musicality) ---
-        # This is where we actully "chart" the song by picking the most important notes.
-        ranked_events = self._rank_events_layered(cleaned_candidates, timeline)
+        ranked_events = self._rank_events_layered(events_to_sieve, timeline)
         
-        # Using New Adaptive Sieve (V300)
-        final_events = self._filter_adaptive_sieve(ranked_events, difficulty)
+        if chart_profile == "DRAFT":
+            # DRAFT Mode passes everything that survives Ranking (Quality check)
+            # but Bypasses the Budget Sieve.
+            final_events = ranked_events
+            print(f"  [Sieve] DRAFT Profile: Keeping {len(final_events)} notes (No NPS limit).")
+        else:
+            # STANDARD Mode (Buckets & Budgets)
+            final_events = self._filter_adaptive_sieve(ranked_events, difficulty)
+            print(f"  [Sieve] Selected {len(final_events)} notes (Target NPS: {target_nps})")
         
-        print(f"  [Sieve] Selected {len(final_events)} notes (Target NPS: {target_nps})")
-        
-        # --- STAGE 2.5: MACRO HOLDS (Visual Consolidation) ---
-        # Consolidated events skipped for now to avoid confusion
-        # consolidated_events = self._consolidate_visuals(final_events)
         consolidated_events = final_events
-        
-        # --- STAGE 4: PRE-MAPPING CLEANUP ---
-        # 6. Sanitize Holds - ELIMINATED (Redundant with _resolve_conflicts)
-        # sanitized_events = self._sanitize_holds(consolidated_events)
         sanitized_events = consolidated_events
         
         # --- STAGE 5: THE MapPER (Lane Allocation) ---
@@ -574,8 +579,9 @@ class ChartGenerator:
             "metadata": {
                 "difficulty": difficulty, 
                 "bpm": self.bpm,
-                "focus": focus_mode,  # Export Focus Mode for Visualizer
-                "lanes": n_lanes
+                "focus": focus_mode, 
+                "lanes": n_lanes,
+                "profile": chart_profile
             },
             "notes": chart_notes
         }
@@ -764,19 +770,35 @@ class ChartGenerator:
             base_score = n.velocity
 
             # --- RHYTHM WEIGHTING (Soft Snap) ---
+            # NEW Phase 3 Logic: Measure-based Phase Scoring
+            
+            # 1. Calculate Phase in Beats
             time_in_beats = n.time / beat_dur
+            beat_phase = time_in_beats % 4.0 # 0.0 to 3.999 (Assuming 4/4)
             beat_fraction = time_in_beats % 1.0
             
             # Use small epsilon (0.01) to check alignment
             r_weights = s_cfg.get("rhythm_weights", {})
-            r_multiplier = r_weights.get("complex", 0.85) # Default to complex
+            r_multiplier = r_weights.get("complex", 0.9) 
             
+            # Check alignment
             if abs(beat_fraction) < 0.01 or abs(beat_fraction - 1.0) < 0.01:
-                r_multiplier = r_weights.get("quarter", 1.30)
+                # It is ON A BEAT. Which one?
+                if abs(beat_phase - 0.0) < 0.01 or abs(beat_phase - 4.0) < 0.01:
+                    # Beat 1 (Downbeat)
+                    r_multiplier = 1.3
+                elif abs(beat_phase - 2.0) < 0.01:
+                     # Beat 3 (Backbeat)
+                    r_multiplier = 1.2
+                else:
+                    # Beats 2 & 4
+                    r_multiplier = 1.1
             elif abs(beat_fraction - 0.5) < 0.01:
-                r_multiplier = r_weights.get("eighth", 1.15)
+                # Eighth Note (Upbeat)
+                r_multiplier = 1.05 # Slightly better than off-beat
             elif abs(beat_fraction - 0.25) < 0.01 or abs(beat_fraction - 0.75) < 0.01:
-                r_multiplier = r_weights.get("sixteenth", 1.0)
+                # Sixteenth
+                r_multiplier = 1.0
             
             base_score *= r_multiplier
 
@@ -915,149 +937,142 @@ class ChartGenerator:
 
     def _filter_adaptive_sieve(self, events: List[NoteEvent], difficulty: str) -> List[NoteEvent]:
         """
-        New V300 "Game-Like" Sieve.
-        1. Clusters notes by Quantized Grid Time.
-        2. Enforces Polyphony Limit (Max simultaneous notes).
-        3. Enforces Max NPS Limit via Dynamic Grid Adaptation (Decimation) instead of random cuts.
-        4. Allows Bursts if budget permits.
+        New V301 "Bucket-Budget" Sieve.
+        1. Windowing: Slices song into fixed windows (e.g. 1.0s).
+        2. Budgeting: Selects top N notes per window based on NPS limit + Burst Allowance.
+        3. Coalescing: Fuses discarded notes into nearby survivors (Ghost Chords).
+        4. Physicality: Enforces strict speed limits post-selection.
         """
         if not events: return []
         
-        # Use centralized difficulty config
+        # Config
         cfg = DIFF_CONFIGS.get(difficulty, DIFF_CONFIGS["NORMAL"])
-        
         target_nps = cfg["nps"]
-        max_poly = cfg["poly"]
-        base_min_interval = cfg["min_interval"]
         
-        # Global burst limits
-        burst_limit_dur = GENERATOR_CONFIG["sieving"]["burst_limit"] # 0.4s
-        abs_min_interval = GENERATOR_CONFIG["sieving"]["min_global_interval"] # 0.05s
+        sieving_cfg = GENERATOR_CONFIG["sieving"]
+        min_global_interval = sieving_cfg["min_global_interval"]
+        burst_allowance = 2 # notes allowed to overflow if budget permits
         
-        # 1. Cluster by Time (Quantize slightly to group chords)
-        # We assume Stage 2 (Quantizer) has already run, so notes should be grid-aligned.
-        # But we group by very small epsilon to catch floating point drifts.
+        window_size = GENERATOR_CONFIG["windowing"].get("size", 1.0)
+        
+        # Sort by time
         events.sort(key=lambda x: x.time)
-        clusters = []
-        if not events: return []
         
-        curr_t = events[0].time
-        curr_notes = [events[0]]
-        
-        for i in range(1, len(events)):
-            evt = events[i]
-            if abs(evt.time - curr_t) < 0.01: # 10ms chord window
-                curr_notes.append(evt)
-            else:
-                # Push previous cluster
-                clusters.append({"time": curr_t, "notes": curr_notes})
-                curr_t = evt.time
-                curr_notes = [evt]
-        clusters.append({"time": curr_t, "notes": curr_notes})
-        
-        # 2. Polyphony Pass (Strict)
-        # If cluster > max_poly, keep top N highest velocity
-        pruned_clusters = []
-        for c in clusters:
-            notes = c["notes"]
-            if len(notes) > max_poly:
-                notes.sort(key=lambda x: x.velocity, reverse=True)
-                pruned_clusters.append({"time": c["time"], "notes": notes[:max_poly]})
-            else:
-                pruned_clusters.append(c)
-                
-        # 3. Dynamic Decimation Pass (The "Speed Limit")
-        final_clusters = []
-        last_time = -10.0
-        
-        # Burst State
-        burst_start_time = -1.0
-        in_burst = False
-        
-        # Sliding Window for NPS calculation (Token Bucket light version)
-        # We check local density in 1.0s window? 
-        # Actually user requested "Max possible note per second at any moment" -> Minimum Interval.
-        # So we stick to Interval checks.
-        
-        i = 0
-        while i < len(pruned_clusters):
-            curr = pruned_clusters[i]
-            t = curr["time"]
-            
-            dt = t - last_time
-            
-            # Check Interval
-            required_int = base_min_interval
-            
-            # Burst Logic
-            is_burst = False
-            if dt < base_min_interval:
-                # Potential Burst
-                # Check if we can allow it
-                # 1. Must be > abs_min_interval (Physical Limit)
-                if dt >= abs_min_interval:
-                    # 2. Check Burst Duration (Are we already bursting?)
-                    if not in_burst:
-                        in_burst = True
-                        burst_start_time = last_time # Start of burst
-                    
-                    burst_dur = t - burst_start_time
-                    if burst_dur < burst_limit_dur:
-                        # ALLOW BURST
-                        is_burst = True
-                        required_int = abs_min_interval # Use tighter limit
-                    else:
-                        # BURST EXHAUSTED
-                        is_burst = False
-                else:
-                    # Too fast even for burst
-                    is_burst = False
-            else:
-                # Reset burst if we had a nice gap
-                if dt > base_min_interval * 1.5:
-                    in_burst = False
-            
-            if dt >= required_int:
-                # Accept
-                final_clusters.append(curr)
-                last_time = t
-                i += 1
-            else:
-                # REJECT via Dynamic Decimation
-                # Instead of skipping 'curr', we try to find the NEXT event that satisfies the interval.
-                # This effectively downsamples the rhythm (e.g. 1/16 -> 1/8).
-                
-                # Scan ahead until we find a note >= required_int from last_time
-                found_next = False
-                j = i + 1
-                while j < len(pruned_clusters):
-                    next_cand = pruned_clusters[j]
-                    dist = next_cand["time"] - last_time
-                    
-                    # If we are decimating, we should aim for the 'base_min_interval' (Standard Speed)
-                    # to restore stability, rather than maintaining the burst speed.
-                    target_int = base_min_interval 
-                    
-                    if dist >= target_int:
-                        # Found valid next step
-                        # Skip everything between i and j
-                        # Wait, we need to re-evaluate 'j' as the new candidate in the main loop
-                        i = j
-                        found_next = True
-                        break
-                    j += 1
-                
-                if not found_next:
-                    # No more valid notes in song
-                    break
-                    
-        # Flatten
         final_events = []
-        for c in final_clusters:
-            final_events.extend(c["notes"])
+        
+        # Max time
+        max_t = events[-1].time + window_size
+        num_windows = int(max_t / window_size) + 1
+        
+        # State
+        budget_carryover = 0.0 # Unused budget from previous window
+        
+        for w in range(num_windows):
+            start_t = w * window_size
+            end_t = start_t + window_size
             
-        print(f"  [Sieve] Adaptive: {len(events)} -> {len(final_events)} notes (Diff: {difficulty})")
-        return final_events
+            # 1. Get Candidates in Window
+            candidates = [e for e in events if start_t <= e.time < end_t]
+            if not candidates:
+                # Accumulate some budget? (Decay over time to prevent huge bursts after silence)
+                budget_carryover = min(target_nps * 0.5, budget_carryover + (target_nps * window_size))
+                continue
+                
+            # 2. Calculate Budget
+            base_budget = int(target_nps * window_size)
+            
+            # Apply Carryover (Token Bucket)
+            extra = int(budget_carryover) if budget_carryover > 0 else 0
+            # Cap extra to avoid massive spam
+            extra = min(extra, burst_allowance)
+            
+            total_budget = base_budget + extra
+            
+            # 3. Selection (Score-based)
+            # Sort by Score Descending
+            candidates.sort(key=lambda x: getattr(x, "_score", 0), reverse=True)
+            
+            selected = clean_window_selected = []
+            rejected = []
+            
+            if len(candidates) <= total_budget:
+                selected = candidates
+                # Update carryover: We used fewer notes than allowed
+                unused = total_budget - len(candidates)
+                budget_carryover = min(target_nps, unused) # Cap carryover
+            else:
+                selected = candidates[:total_budget]
+                rejected = candidates[total_budget:]
+                budget_carryover = 0 # Budget exhausted
+            
+            # Sort selected by time for proximity checks
+            selected.sort(key=lambda x: x.time)
+            
+            # 4. Audio Coalescing (The Fix)
+            # Fuse rejected notes into nearest selected note
+            tolerance = 0.02 # 20ms window for chord fusion
+            
+            for r in rejected:
+                # Find nearest neighbor in selected
+                if not selected: break # Should not happen if budget > 0
+                
+                # Binary search or simple linear scan (Window is small ~ 5-10 notes)
+                nearest = min(selected, key=lambda x: abs(x.time - r.time))
+                gap = abs(nearest.time - r.time)
+                
+                if gap <= tolerance:
+                    # Fuse Pitch!
+                    # Ensure audio_coalesced_pitches exists
+                    if not hasattr(nearest, "audio_coalesced_pitches"):
+                        nearest.audio_coalesced_pitches = []
+                    
+                    # Add my pitch
+                    nearest.audio_coalesced_pitches.append(int(r.pitch))
+                    
+                    # If I had my own pool (from previous merges), add those too
+                    if hasattr(r, "audio_coalesced_pitches"):
+                        nearest.audio_coalesced_pitches.extend(r.audio_coalesced_pitches)
+                        
+                    # print(f"  [Sieve] Coalesced {r.pitch} into {nearest.pitch} (Gap {gap*1000:.1f}ms)")
+            
+            final_events.extend(selected)
+            
+        # 5. Global Physical Validity Pass (Post-Selection)
+        # Enforce Min Interval. If violation, coalesce into previous.
+        final_events.sort(key=lambda x: x.time)
+        physically_valid = []
+        
+        last_t = -1.0
+        
+        for i, curr in enumerate(final_events):
+            if i == 0:
+                physically_valid.append(curr)
+                last_t = curr.time
+                continue
+            
+            dt = curr.time - last_t
+            
+            if dt < min_global_interval:
+                # VIOLATION!
+                # Coalesce into previous note (the one that caused the interval constraint)
+                prev = physically_valid[-1]
+                
+                # Fuse
+                if not hasattr(prev, "audio_coalesced_pitches"):
+                        prev.audio_coalesced_pitches = []
+                
+                prev.audio_coalesced_pitches.append(int(curr.pitch))
+                if hasattr(curr, "audio_coalesced_pitches"):
+                    prev.audio_coalesced_pitches.extend(curr.audio_coalesced_pitches)
+
+                # print(f"  [Sieve] Speed Limit Coalesce {curr.pitch} -> {prev.pitch} (dt {dt:.3f}s)")
+                # Discard 'curr'
+            else:
+                physically_valid.append(curr)
+                last_t = curr.time
+        
+        print(f"  [Sieve] Bucket-Budget: {len(events)} -> {len(physically_valid)} notes (Diff: {difficulty})")
+        return physically_valid
 
     def _allocate_lanes(self, events: List[NoteEvent], n_lanes: int) -> List[dict]:
         """
@@ -1138,6 +1153,11 @@ class ChartGenerator:
                 if ev.duration > thresh:
                     is_hold = True
             
+            # Audio Pool (Coalesced Pitches for Polyphony)
+            audio_pool = getattr(ev, "audio_coalesced_pitches", [])
+            if not audio_pool:
+                audio_pool = [int(ev.pitch)]
+            
             processed.append({
                 "time": normalized_time,
                 "lane": int(lane),
@@ -1145,7 +1165,8 @@ class ChartGenerator:
                 "type": "hold" if is_hold else "tap",
                 "midi": int(ev.pitch),
                 "vol": normalized_vol, # Default vol if missing
-                "source": str(ev.source)
+                "source": str(ev.source),
+                "audio_pool": audio_pool
             })
         
         # Post-process: Resolve conflicts (Hold overlaps)

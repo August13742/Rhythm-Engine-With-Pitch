@@ -415,7 +415,7 @@ class RhythmEngine:
         print(f"Total refined events: {len(refined_events)}")
         return refined_events
 
-    def run(self, rechart: bool = False, force_lanes: int = None):
+    def run(self, rechart: bool = False, force_lanes: int = None, chart_profile: str = "STANDARD"):
         print(f"Starting Rhythm Engine V300 on: {self.stems_folder} (Focus: Dynamic)")
         if rechart:
             print("[RhythmEngine] Rechart Mode: Skipping Inference if possible.")
@@ -433,7 +433,7 @@ class RhythmEngine:
         print(f"[RhythmEngine] Saving beatmaps to: {self.beatmap_folder}")
         
         for diff in ["EASY", "NORMAL", "HARD", "ALT_HARD"]:
-            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest, stems_folder=self.stems_folder, override_lanes=force_lanes) # Pass copy & manifest
+            chart_data = self.generator.generate(list(all_events), diff, manifest=self.manifest, stems_folder=self.stems_folder, override_lanes=force_lanes, chart_profile=chart_profile) # Pass copy & manifest
             
             # Determine filename with lane suffix
             lanes = chart_data["metadata"]["lanes"]

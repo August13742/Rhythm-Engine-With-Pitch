@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Optional
 
 @dataclass
@@ -13,6 +13,11 @@ class NoteEvent:
     # Game-specific attributes (populated later)
     lane: int = 0
     is_slider: bool = False
+    
+    # Audio Engine attributes (Phase 1)
+    # List of MIDI pitches to trigger when this visual note is hit.
+    # Used to preserve harmony/chords when visual density is reduced.
+    audio_coalesced_pitches: List[int] = field(default_factory=list)
 
 @dataclass
 class Beatmap:

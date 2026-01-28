@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--generate-only", action="store_true", help="Generate beatmaps only, do not launch visualizer")
     parser.add_argument("--rechart", action="store_true", help="Skip extraction and only re-run charting (requires previous run)")
     parser.add_argument("--lanes", type=int, default=4, help="Target lane count (Default: 4)")
+    parser.add_argument("--profile", type=str, default="STANDARD", choices=["STANDARD", "DRAFT", "RAW"], help="Chart generation profile: STANDARD, DRAFT, or RAW")
     args = parser.parse_args()
     
     if not os.path.exists(args.audio_file):
@@ -95,7 +96,7 @@ def main():
     if should_generate:
         print(f"[Main] Launching RhythmEngine -> {beatmap_root}")
         engine = RhythmEngine(stems_dir, beatmap_root)
-        engine.run(rechart=args.rechart, force_lanes=args.lanes)
+        engine.run(rechart=args.rechart, force_lanes=args.lanes, chart_profile=args.profile)
         print("[Main] Generation Complete.")
         
     if args.generate_only:
