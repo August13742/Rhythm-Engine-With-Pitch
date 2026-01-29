@@ -2,9 +2,6 @@
 import argparse
 import os
 import sys
-from visualizer import Visualizer
-from engine import RhythmEngine
-from separator import separate_audio
 
 # Suppress CUDA compatibility warnings for newer GPUs
 import warnings
@@ -49,7 +46,6 @@ def main():
         os.path.join(stems_dir, "other.wav"),
         os.path.join(stems_dir, "bass.wav"),
         os.path.join(stems_dir, "drums.wav"),
-        # Piano/Guitar might be silent/missing, but check core 4 or logic from before
     ]
     # Simple check: Does directory exist and have some wavs
     stems_exist = os.path.isdir(stems_dir) and any(f.endswith(".wav") for f in os.listdir(stems_dir))
@@ -63,6 +59,8 @@ def main():
         print("[Main] Stems already exist, skipping separation...")
     else:
         print("[Main] Separating audio...")
+        # Lazy Import
+        from separator import separate_audio
         separate_audio(args.audio_file, output_path=stems_dir)
         
     # --- STEP 2: BEATMAP GENERATION ---
@@ -71,8 +69,6 @@ def main():
     items = os.listdir(beatmap_root) if os.path.exists(beatmap_root) else []
     
     def check_exists(diff):
-        # Check for ANY file starting with {diff} and ending with .json
-        # This covers {diff}.json and {diff}_4k.json etc.
         for f in items:
             if f.startswith(diff) and f.endswith(".json"):
                 return True
@@ -95,6 +91,8 @@ def main():
         
     if should_generate:
         print(f"[Main] Launching RhythmEngine -> {beatmap_root}")
+        # Lazy Import
+        from engine import RhythmEngine
         engine = RhythmEngine(stems_dir, beatmap_root)
         engine.run(rechart=args.rechart, force_lanes=args.lanes, chart_profile=args.profile)
         print("[Main] Generation Complete.")
@@ -105,6 +103,8 @@ def main():
 
     # --- STEP 3: VISUALIZER ---
     print("[Main] Launching Visualizer...")
+    # Lazy Import
+    from visualizer import Visualizer
     visualizer = Visualizer(args.audio_file, stems_dir, beatmap_root, target_lanes=args.lanes)
     visualizer.run()
 
