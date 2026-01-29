@@ -27,7 +27,7 @@ def get_audio_files(directory):
     
     return sorted(audio_files)
 
-def process_song(audio_file, rebake=False):
+def process_song(audio_file, rebake=False, rechart=False, lanes=4, profile="STANDARD", skip_separation=False):
     """Process a single song by calling main.py"""
     base_name = os.path.splitext(os.path.basename(audio_file))[0]
     
@@ -38,6 +38,14 @@ def process_song(audio_file, rebake=False):
     cmd = [sys.executable, "main.py", audio_file, "--generate-only"]
     if rebake:
         cmd.append("--rebake")
+    if rechart:
+        cmd.append("--rechart")
+    if skip_separation:
+        cmd.append("--skip-separation")
+    if lanes != 4:
+        cmd.extend(["--lanes", str(lanes)])
+    if profile != "STANDARD":
+        cmd.extend(["--profile", profile])
         
     try:
         # Run main.py as a separate process to keep memory clean and rely on its logic
@@ -58,6 +66,10 @@ def main():
     parser = argparse.ArgumentParser(description="Batch generate beatmaps for all songs in the Music folder")
     parser.add_argument("--music-dir", default="Music", help="Directory containing audio files")
     parser.add_argument("--rebake", action="store_true", help="Force regenerate beatmaps even if they exist")
+    parser.add_argument("--rechart", action="store_true", help="Skip extraction and only re-run charting")
+    parser.add_argument("--skip-separation", action="store_true", help="Skip audio separation")
+    parser.add_argument("--lanes", type=int, default=4, help="Target lane count")
+    parser.add_argument("--profile", type=str, default="STANDARD", choices=["STANDARD", "DRAFT", "RAW"], help="Chart profile")
     args = parser.parse_args()
     
     audio_files = get_audio_files(args.music_dir)
@@ -72,7 +84,14 @@ def main():
     
     for i, audio_path in enumerate(audio_files, 1):
         print(f"\n[BATCH] Song {i}/{len(audio_files)}")
-        if process_song(audio_path, rebake=args.rebake):
+        if process_song(
+            audio_path, 
+            rebake=args.rebake, 
+            rechart=args.rechart, 
+            lanes=args.lanes, 
+            profile=args.profile, 
+            skip_separation=args.skip_separation
+        ):
             success_count += 1
             
     duration = time.time() - start_all
