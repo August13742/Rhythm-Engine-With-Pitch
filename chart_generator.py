@@ -8,9 +8,9 @@ import os
 # Configuration for Visualizer compatibility & Generator Logic
 DIFF_CONFIGS = {
     "EASY":   {"lanes": 4, "nps": 2.5, "poly": 1, "min_interval": 0.25},
-    "NORMAL": {"lanes": 4, "nps": 4.0, "poly": 2, "min_interval": 0.20},
-    "HARD":   {"lanes": 4, "nps": 6.0, "poly": 2, "min_interval": 0.15},
-    "ALT_HARD": {"lanes": 4, "nps": 6.0, "poly": 2, "min_interval": 0.15}
+    "NORMAL": {"lanes": 4, "nps": 5.0, "poly": 2, "min_interval": 0.20},
+    "HARD":   {"lanes": 4, "nps": 8.0, "poly": 2, "min_interval": 0.15},
+    "ALT_HARD": {"lanes": 4, "nps": 8.0, "poly": 2, "min_interval": 0.15}
 }
 
 GENERATOR_CONFIG = {
@@ -240,7 +240,17 @@ class StemSelector:
              if candidates:
                  # Pick busiest overall melodic
                  candidates.sort(key=lambda s: sum(activity[s]), reverse=True)
-                 focus_stem = candidates[0]
+                 
+                 # Instrumental Divergence:
+                 # If song has no vocals, HARD defaults to Candidate[0] (Busiest).
+                 # To force ALT to be different, we pick Candidate[1] (2nd Busiest) if available.
+                 has_vocals = any(v in activity for v in ["vocals", "vocals_lead"])
+                 
+                 if not has_vocals and len(candidates) > 1:
+                     print(f"    [StemSelector] Instrumental detected (ALT Mode): Picking 2nd best stem ({candidates[1]}) to diverge from HARD.")
+                     focus_stem = candidates[1]
+                 else:
+                     focus_stem = candidates[0]
 
         # Use Vocals as fallback if no melodic in Alt mode? 
         # Actually user said "vocal is playing when main instrument stops"
@@ -1227,6 +1237,18 @@ class ChartGenerator:
                     # Merge!
                     merged_count += 1
                     
+                    # --- AUDIO PRESERVATION FIX ---
+                    # Ensure current note has a pool
+                    if "audio_pool" not in curr: 
+                        curr["audio_pool"] = [curr["midi"]]
+                    
+                    # Get next note's pool (safely)
+                    next_pool = next_n.get("audio_pool", [next_n["midi"]])
+                    
+                    # Extend current pool with next note's pool
+                    curr["audio_pool"].extend(next_pool)
+                    # ------------------------------
+                    
                     # Only create hold if allowed
                     can_hold = curr["source"] in allowed_holds
                     
@@ -1525,28 +1547,3 @@ class ChartGenerator:
         result.sort(key=lambda x: x.time)
         
         return result
-
-
-        
-        for n in events:
-            # Determine threshold
-            is_percussive = n.source in percussive_stems
-            thresh = 0.04 if is_percussive else minijack_thresh
-            
-            p_key = int(round(n.pitch))
-            
-            if p_key in last_note_by_pitch:
-                last_n = last_note_by_pitch[p_key]
-                dt = n.time - last_n.time
-                
-                if dt < thresh:
-                    # CONFLICT: Too close!
-                    # Logic: If 'last_n' was a hold, maybe extend it?
-                    # For now: Just SKIP 'n' (Swallow the vibrato tail)
-                    continue
-            
-            # Accepted
-            cleaned.append(n)
-            last_note_by_pitch[p_key] = n
-            
-        return cleaned
