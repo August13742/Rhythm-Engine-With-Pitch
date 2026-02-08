@@ -227,30 +227,30 @@ class StemSelector:
         # 1. Identify "Ideal" Primary (Focus Stem)
         focus_stem = None
         if actual_mode == "main":
-             # Use Vocals if they exist anywhere
-             vocal_stems = ["vocals_lead", "vocals"]
-             for s in vocal_stems:
-                 if s in activity:
-                     focus_stem = s
-                     break
+            # Use Vocals if they exist anywhere
+            vocal_stems = ["vocals_lead", "vocals"]
+            for s in vocal_stems:
+                if s in activity:
+                    focus_stem = s
+                    break
         else: # alt
-             # Top melodic non-vocal
-             melodic = ["guitar", "piano", "synth", "other"]
-             candidates = [s for s in melodic if s in activity]
-             if candidates:
-                 # Pick busiest overall melodic
-                 candidates.sort(key=lambda s: sum(activity[s]), reverse=True)
-                 
-                 # Instrumental Divergence:
-                 # If song has no vocals, HARD defaults to Candidate[0] (Busiest).
-                 # To force ALT to be different, we pick Candidate[1] (2nd Busiest) if available.
-                 has_vocals = any(v in activity for v in ["vocals", "vocals_lead"])
-                 
-                 if not has_vocals and len(candidates) > 1:
-                     print(f"    [StemSelector] Instrumental detected (ALT Mode): Picking 2nd best stem ({candidates[1]}) to diverge from HARD.")
-                     focus_stem = candidates[1]
-                 else:
-                     focus_stem = candidates[0]
+            # Top melodic non-vocal
+            melodic = ["guitar", "piano", "synth", "other"]
+            candidates = [s for s in melodic if s in activity]
+            if candidates:
+                # Pick busiest overall melodic
+                candidates.sort(key=lambda s: sum(activity[s]), reverse=True)
+                
+                # Instrumental Divergence:
+                # If song has no vocals, HARD defaults to Candidate[0] (Busiest).
+                # To force ALT to be different, we pick Candidate[1] (2nd Busiest) if available.
+                has_vocals = any(v in activity for v in ["vocals", "vocals_lead"])
+                
+                if not has_vocals and len(candidates) > 1:
+                    print(f"    [StemSelector] Instrumental detected (ALT Mode): Picking 2nd best stem ({candidates[1]}) to diverge from HARD.")
+                    focus_stem = candidates[1]
+                else:
+                    focus_stem = candidates[0]
 
         # Use Vocals as fallback if no melodic in Alt mode? 
         # Actually user said "vocal is playing when main instrument stops"
@@ -352,25 +352,25 @@ class StemSelector:
             
             p_stem = final_primary_timeline[i]
             if p_stem:  
-               # Check if it's active at this specific step?
-               # User request: "active instrument of the specific absent window"
-               # We selected based on sum, but maybe it has a quiet moment inside the window.
-               # Should we silence it? No, "fill it in".
-               primary.append(p_stem)
+                # Check if it's active at this specific step?
+                # User request: "active instrument of the specific absent window"
+                # We selected based on sum, but maybe it has a quiet moment inside the window.
+                # Should we silence it? No, "fill it in".
+                primary.append(p_stem)
                 
             # Support
             if difficulty != "EASY":
-                 active_at_step = [s for s, curve in activity.items() if curve[i] > activity_threshold]
-                 drums_active = "drums" in active_at_step
-                 
-                 # Logic: Blacklist support if it's primary
-                 # If primary is drums (unlikely), don't add drums.
-                 if "drums" not in primary and drums_active:
-                     support.append("drums")
-                 else:
-                     # Fallback support
-                     if "bass" in active_at_step and "bass" not in primary:
-                         support.append("bass")
+                active_at_step = [s for s, curve in activity.items() if curve[i] > activity_threshold]
+                drums_active = "drums" in active_at_step
+                
+                # Logic: Blacklist support if it's primary
+                # If primary is drums (unlikely), don't add drums.
+                if "drums" not in primary and drums_active:
+                    support.append("drums")
+                else:
+                    # Fallback support
+                    if "bass" in active_at_step and "bass" not in primary:
+                        support.append("bass")
                             
             timeline_data.append({"primary": set(primary), "support": set(support)})
         
@@ -497,19 +497,19 @@ class ChartGenerator:
         c_cfg = GENERATOR_CONFIG["cleaning"]
         
         if chart_profile != "RAW":
-             clean_events = EventFilter.filter_ghost_notes(
+            clean_events = EventFilter.filter_ghost_notes(
                 events, 
                 min_dur=c_cfg["min_duration"], 
                 min_vel=c_cfg["min_velocity"]
             )
-             clean_events = EventFilter.consolidate_rolls(
+            clean_events = EventFilter.consolidate_rolls(
                 clean_events, 
                 gap_threshold=c_cfg["roll_consolidation_gap"]
             )
-             print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
+            print(f"  [Cleaner] {len(events)} -> {len(clean_events)} events")
         else:
-             print("  [Cleaner] RAW Mode: Bypassing Filters.")
-             clean_events = events
+            print("  [Cleaner] RAW Mode: Bypassing Filters.")
+            clean_events = events
         
         # --- STAGE 2: ADAPTIVE GRID (High Fidelity Snapping - Artifact Correction) ---
         
@@ -798,7 +798,7 @@ class ChartGenerator:
                     # Beat 1 (Downbeat)
                     r_multiplier = 1.3
                 elif abs(beat_phase - 2.0) < 0.01:
-                     # Beat 3 (Backbeat)
+                    # Beat 3 (Backbeat)
                     r_multiplier = 1.2
                 else:
                     # Beats 2 & 4
@@ -859,16 +859,16 @@ class ChartGenerator:
                 # --- MELODIC SUPPORT GATING ---
                 # "Punish" melodic backing tracks (Guitar/Piano)
                 if n.source not in sf_cfg.get("percussive_stems", []):
-                     # 1. Gate: Check absolute velocity
-                     # BasicPitch output is often low (0.1-0.4).
-                     # Gate must be low enough to catch accents but high enough to filter noise.
-                     gate_thresh = sf_cfg.get("melodic_support_gate", 0.25)
-                     
-                     if n.velocity < gate_thresh:
-                         is_valid = False # Kill it
-                         base_score = 0.0
-                     else:
-                         # 2. Weight: Deprioritize
+                    # 1. Gate: Check absolute velocity
+                    # BasicPitch output is often low (0.1-0.4).
+                    # Gate must be low enough to catch accents but high enough to filter noise.
+                    gate_thresh = sf_cfg.get("melodic_support_gate", 0.25)
+                    
+                    if n.velocity < gate_thresh:
+                        is_valid = False # Kill it
+                        base_score = 0.0
+                    else:
+                        # 2. Weight: Deprioritize
                          base_score *= sf_cfg.get("melodic_support_weight", 0.5)
                 
                 # --- STRICT SUPPORT GRID SEIVE ---
@@ -877,25 +877,25 @@ class ChartGenerator:
                 # Tuning parameter: sieving.support_grid (Default: 4 leads to 1/4 note alignment)
                 
                 if not enforce_grid:
-                     grid_val = GENERATOR_CONFIG["sieving"].get("support_grid", 4)
-                     grid_step = 4.0 / grid_val if grid_val > 0 else 1.0
-                     is_on_grid = abs(round(time_in_beats / grid_step) * grid_step - time_in_beats) < 0.05
-                     is_percussive = n.source in sf_cfg.get("percussive_stems", [])
-                     
-                     if is_on_grid:
-                         # Bonus for perfectly on-beat notes
-                         is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
-                         if is_quarter:
-                             base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
-                         else:
-                             base_score *= l_cfg["support_multiplier"]
-                         is_valid = True
-                     elif is_percussive:
-                         base_score = 0.0
-                         is_valid = False
-                     else:
-                         base_score = 0.0
-                         is_valid = False
+                    grid_val = GENERATOR_CONFIG["sieving"].get("support_grid", 4)
+                    grid_step = 4.0 / grid_val if grid_val > 0 else 1.0
+                    is_on_grid = abs(round(time_in_beats / grid_step) * grid_step - time_in_beats) < 0.05
+                    is_percussive = n.source in sf_cfg.get("percussive_stems", [])
+                    
+                    if is_on_grid:
+                        # Bonus for perfectly on-beat notes
+                        is_quarter = abs(beat_fraction) < 0.1 or abs(beat_fraction - 1.0) < 0.1
+                        if is_quarter:
+                            base_score *= l_cfg["support_multiplier"] * l_cfg["support_on_beat_bonus"]
+                        else:
+                            base_score *= l_cfg["support_multiplier"]
+                        is_valid = True
+                    elif is_percussive:
+                        base_score = 0.0
+                        is_valid = False
+                    else:
+                        base_score = 0.0
+                        is_valid = False
                 else:
                     # If enforce_grid is True, we already validated support_grids.
                     # Just apply multipliers.
@@ -1253,24 +1253,23 @@ class ChartGenerator:
                     can_hold = curr["source"] in allowed_holds
                     
                     if can_hold and is_same_pitch:
-                         # Extend current duration to cover next note
-                         new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
-                         new_dur = new_end - curr["time"]
-                         
-                         # Only make it a hold if merged duration is meaningful (>= 0.25s)
-                         if new_dur >= 0.25:
-                             curr["dur"] = round(new_dur, 2)
-                             curr["type"] = "hold"
-                         else:
-                             # Too short - just keep as tap
-                             curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
-                             curr["type"] = "tap"
+                        # Extend current duration to cover next note
+                        new_end = max(curr["time"] + curr["dur"], next_n["time"] + next_n["dur"])
+                        new_dur = new_end - curr["time"]
+                        
+                        # Only make it a hold if merged duration is meaningful (>= 0.25s)
+                        if new_dur >= 0.25:
+                            curr["dur"] = round(new_dur, 2)
+                            curr["type"] = "hold"
+                        else:
+                            # Too short - just keep as tap
+                            curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
+                            curr["type"] = "tap"
                     else:
-                         # Cannot hold (e.g. guitar/drums) OR Trill glitch
-                         # Absorb the next note.
-                         curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
-                         curr["type"] = "tap"
-                         
+                        # Cannot hold (e.g. guitar/drums) OR Trill glitch
+                        # Absorb the next note.
+                        curr["dur"] = round(max(0.05, round(curr["dur"] / 0.05) * 0.05), 2)
+                        curr["type"] = "tap"
                     # Skip next_n (it's absorbed)
                 else:
                     merged_stack.append(curr)
@@ -1336,7 +1335,7 @@ class ChartGenerator:
             last_times_lane[l] = start + n["dur"]
 
         if strict_drops > 0:
-             print(f"    [LaneResolver] Dropped {strict_drops} unsafe notes (Overlaps < {strict_gap}s)")
+            print(f"    [LaneResolver] Dropped {strict_drops} unsafe notes (Overlaps < {strict_gap}s)")
             
         return safe_final
 
@@ -1354,9 +1353,9 @@ class ChartGenerator:
         
         Logic:
         - FUSE Window (50ms): If a lower-priority note is extremely close, snap it to the 
-                             higher-priority note's time to create a perfect chord.
+                            higher-priority note's time to create a perfect chord.
         - CONFLICT Window (90ms): If it's close but not fuse-able, delete the lower-priority 
-                                 note to avoid muddy "double taps".
+                                note to avoid muddy "double taps".
         """
         if not notes:
             return notes
@@ -1401,7 +1400,7 @@ class ChartGenerator:
                 other_priority = stem_priority.get(other["source"], 0)
                 
                 if other_priority == current_priority:
-                     continue # For same priority, we let the grid/polyphony handle it earlier
+                    continue # For same priority, we let the grid/polyphony handle it earlier
                 
                 # Identify lower and higher priority notes
                 if other_priority > current_priority:

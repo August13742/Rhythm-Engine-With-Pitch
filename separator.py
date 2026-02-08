@@ -154,7 +154,6 @@ class PolyphonyDetector:
                 # If we don't have a raw file, we might need to clean the input for pitch
                 if not skip_clearvoice:
                      # (Logic to run clearvoice temp generation if needed, same as before)
-                     # ... [Keep your existing temp file generation logic here if needed]
                      pass
 
             # --- DETECTOR 1: Stereo Width (The "Studio Trick") ---
