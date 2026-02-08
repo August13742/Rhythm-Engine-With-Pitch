@@ -203,7 +203,51 @@ class Visualizer:
             )
         
         # 3. SETUP
-        pygame.mixer.music.load(audio_path)
+        # Robust Audio Loading: Pygame on Linux often fails to load m4a/aac directly
+        # due to missing SDL_mixer decoders. Fallback to a WAV copy if needed.
+        audio_loaded = False
+        try:
+            pygame.mixer.music.load(audio_path)
+            audio_loaded = True
+        except pygame.error as e:
+            print(f"[VIS] Pygame failed to load original audio: {e}")
+            
+            # Try absolute path just in case it's a relative path/space issue
+            abs_path = os.path.abspath(audio_path)
+            if abs_path != audio_path:
+                try:
+                    pygame.mixer.music.load(abs_path)
+                    audio_loaded = True
+                    print(f"[VIS] Successfully loaded via absolute path.")
+                except:
+                    pass
+            
+            if not audio_loaded:
+                # Fallback: Check if a converted WAV exists in the stems folder
+                # We save it there for persistence
+                converted_path = os.path.join(folder_path, "original_converted.wav")
+                if os.path.exists(converted_path):
+                    print(f"[VIS] Found previously converted WAV: {converted_path}")
+                    pygame.mixer.music.load(converted_path)
+                    audio_loaded = True
+                else:
+                    print(f"[VIS] Converting source to WAV for Pygame compatibility (this may take a moment)...")
+                    try:
+                        import soundfile as sf
+                        y, sr = librosa.load(audio_path, sr=44100)
+                        sf.write(converted_path, y, sr)
+                        pygame.mixer.music.load(converted_path)
+                        audio_loaded = True
+                        print(f"[VIS] Conversion successful: {converted_path}")
+                    except Exception as conv_err:
+                        print(f"[VIS] Critical Error: Failed to convert audio: {conv_err}")
+                        # Final fallback: use a stem? (Not ideal but better than crashing)
+                        if duration_track:
+                            fallback_stem = os.path.join(folder_path, f"{duration_track}.wav")
+                            print(f"[VIS] Falling back to stem audio: {fallback_stem}")
+                            pygame.mixer.music.load(fallback_stem)
+                            audio_loaded = True
+
         self.mode = "vocal"  # Default to vocal mode
         self.music_vol = 0.2
         self.sfx_vol = 0.8

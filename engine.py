@@ -9,7 +9,7 @@ from typing import List, Dict
 from beatmap import NoteEvent, EventFilter
 from transcribe.basic_pitch import BasicPitchTranscriber
 from transcribe.council import CouncilV2
-from utils import AudioCache, TimingCorrector
+from utils import AudioCache, TimingCorrector, TimingAlignment
 from chart_generator import ChartGenerator, GENERATOR_CONFIG
 
 # Configuration for Transcription (Per Stem)
@@ -126,6 +126,7 @@ class RhythmEngine:
         self.council = CouncilV2()
         
         self.manifest = self._load_manifest()
+        self.stem_offsets = {}
 
         # Estimate BPM or default
         # Check manifest first to avoid duplicated work
@@ -153,96 +154,89 @@ class RhythmEngine:
 
     def _detect_bpm(self) -> float:
         """
-        Detects BPM using Madmom (DBNBeatTracker) with Librosa fallback.
-        Includes Sanity Check to prefer 100-180 BPM range.
+        Detects BPM using Multi-Stem Voting.
+        Iterates through available stems and takes a weighted median.
         """
-        target_path = os.path.join(self.stems_folder, "drums.wav")
-        if not os.path.exists(target_path):
-             for f in ["other.wav", "bass.wav", "vocals.wav"]:
-                 p = os.path.join(self.stems_folder, f)
-                 if os.path.exists(p):
-                     target_path = p
-                     break
+        stems_to_check = ["drums.wav", "bass.wav", "other.wav", "vocals.wav"]
+        estimates = []
         
-        if not os.path.exists(target_path):
-            print("[RhythmEngine] No audio files found for BPM detection. Defaulting to 120.0")
-            return 120.0
+        print("[RhythmEngine] Starting Multi-Stem BPM Voting...")
+        
+        for stem_file in stems_to_check:
+            path = os.path.join(self.stems_folder, stem_file)
+            if not os.path.exists(path):
+                continue
+                
+            # Skip if manifest says it's silent
+            stem_name = stem_file.replace(".wav", "")
+            if stem_name in self.manifest and self.manifest[stem_name].get("is_silent", False):
+                continue
 
-        print(f"[RhythmEngine] Detecting BPM from {os.path.basename(target_path)}...")
+            raw_bpm = self._get_single_stem_bpm(path)
+            if raw_bpm > 0:
+                # Weighting: Drums and Bass are more reliable for BPM
+                weight = 2 if stem_name in ["drums", "bass"] else 1
+                for _ in range(weight):
+                    estimates.append(raw_bpm)
         
-        # 1. Try Madmom (DBNBeatTracker)
+        if not estimates:
+            print("[RhythmEngine] No valid audio found for BPM detection. Defaulting to 120.0")
+            return 120.0
+            
+        # Consensus
+        consensus_bpm = float(np.median(estimates))
+        print(f"[RhythmEngine] BPM Consensus ({len(estimates)} votes): {consensus_bpm:.2f}")
+        
+        return self._sanitize_bpm(consensus_bpm)
+
+    def _get_single_stem_bpm(self, path: str) -> float:
+        """Helper for _detect_bpm to get estimate for one file."""
+        # 1. Try Madmom
         try:
-            # Output of madmom relies on 'collections', which removed MutableSequence in Py3.10+
             import collections
             if not hasattr(collections, 'MutableSequence'):
                 import collections.abc
                 collections.MutableSequence = collections.abc.MutableSequence
                 collections.Iterable = collections.abc.Iterable
             
-            # Madmom also relies on np.float, np.int, np.bool which were removed in Numpy 1.24+
             import numpy as np
-            if not hasattr(np, 'float'):
-                np.float = float
-            if not hasattr(np, 'int'):
-                np.int = int
-            if not hasattr(np, 'bool'):
-                np.bool = bool
+            if not hasattr(np, 'float'): np.float = float
+            if not hasattr(np, 'int'): np.int = int
+            if not hasattr(np, 'bool'): np.bool = bool
             
             import madmom
-            import madmom.features.beats
-            print("  [BPM] Using Madmom DBNBeatTracker...")
-            
-            # Madmom proc handles loading internally effectively, but let's pass file path
-            # DBNBeatTracker might be DBNBeatTrackingProcessor in this version
-            if hasattr(madmom.features.beats, 'DBNBeatTracker'):
-                proc = madmom.features.beats.DBNBeatTracker(fps=100)
-            else:
-                proc = madmom.features.beats.DBNBeatTrackingProcessor(fps=100)
-                
-            act = madmom.features.beats.RNNBeatProcessor()(target_path)
+            proc = madmom.features.beats.DBNBeatTrackingProcessor(fps=100)
+            act = madmom.features.beats.RNNBeatProcessor()(path)
             beats = proc(act)
             
-            # Calculate BPM from beats (inter-beat interval)
             if len(beats) > 1:
-                intervals = np.diff(beats)
-                median_interval = np.median(intervals)
-                bpm = 60.0 / median_interval
-                print(f"  [BPM] Madmom Raw: {bpm:.2f}")
-                return self._sanitize_bpm(bpm)
-            
-        except ImportError:
-            print("  [BPM] Madmom not found. Falling back to Librosa.")
-        except Exception as e:
-            print(f"  [BPM] Madmom failed: {e}. Falling back to Librosa.")
+                bpm = 60.0 / np.median(np.diff(beats))
+                return bpm
+        except Exception:
+            pass
 
         # 2. Fallback: Librosa
         try:
-            # Use Cache for consistency (though Madmom used its own loader above)
-            y, sr = AudioCache.get(target_path, sr=22050)
+            y, sr = AudioCache.get(path, sr=22050)
             onset_env = librosa.onset.onset_strength(y=y, sr=sr)
             tempo, _ = librosa.beat.beat_track(onset_envelope=onset_env, sr=sr)
-            
             if isinstance(tempo, np.ndarray): tempo = tempo.item()
-            print(f"  [BPM] Librosa Raw: {tempo:.2f}")
-            return self._sanitize_bpm(float(tempo))
-
-        except Exception as e:
-            print(f"[RhythmEngine] BPM Detection Error: {e}. Defaulting to 120.0")
-            return 120.0
+            return float(tempo)
+        except Exception:
+            return 0.0
 
     def _sanitize_bpm(self, bpm: float) -> float:
         """
-        Sanity Checker: Bias towards 100-180 BPM.
+        Sanity Checker: Relaxed bias towards 80-200 BPM.
         Corrects for Double/Half time errors.
         """
         if bpm <= 0: return 120.0
         
         original = bpm
-        # Logic: If < 90, try 2x. If > 180, try 0.5x.
-        # This is a heuristic.
-        while bpm < 90:
+        # Logic: Relaxed range for Arch Linux / Rhythm Engine V3
+        while bpm < 80:
             bpm *= 2
-        while bpm > 185:
+        while bpm > 210:
             bpm /= 2
             
         if bpm != original:
@@ -251,6 +245,42 @@ class RhythmEngine:
         # Snap to nearest 0.5 to prevent floating point drift in quantization
         bpm = round(bpm * 2) / 2
         return bpm
+
+    def _detect_stem_offsets(self):
+        """
+        Calculates micro-offsets for each stem relative to the master BPM grid.
+        Uses cross-correlation of onsets to find the 'peak' alignment.
+        """
+        if not self.bpm: return
+        
+        print("[RhythmEngine] Detecting Per-Stem Timing Offsets...")
+        stems_to_sync = ["drums", "bass", "piano", "guitar", "other", "vocals", "vocals_lead"]
+        
+        for stem in stems_to_sync:
+            path = os.path.join(self.stems_folder, f"{stem}.wav")
+            if not os.path.exists(path):
+                continue
+                
+            # Skip if manifest says it's silent
+            if stem in self.manifest and self.manifest[stem].get("is_silent", False):
+                continue
+            
+            try:
+                # Load audio
+                y, sr = AudioCache.get(path, sr=22050)
+                if y is None: continue
+                
+                # Find optimal offset (+/- 0.3s max shift)
+                offset = TimingAlignment.find_best_offset(y, sr, self.bpm, max_offset=0.3)
+                
+                # Apply hard limit to prevent crazy shifts
+                offset = max(-0.15, min(0.15, offset))
+                
+                if abs(offset) > 0.001:
+                    self.stem_offsets[stem] = offset
+                    print(f"  [Offset] {stem:12} -> {offset*1000:+.1f}ms")
+            except Exception as e:
+                print(f"  [Offset] {stem:12} -> Error: {e}")
 
     def _load_manifest(self):
         m_path = os.path.join(self.stems_folder, "stems_manifest.json")
@@ -399,9 +429,14 @@ class RhythmEngine:
             if not os.path.exists(path) and source == "vocals_lead":
                  path = os.path.join(self.stems_folder, "vocals.wav")
             
-            # 1. Latency Compensation (Manual Offset)
+            # 1. Latency Compensation (Manual Global Offset)
             if hasattr(self, "audio_engine_latency_offset") and self.audio_engine_latency_offset != 0:
                  for n in notes: n.time += self.audio_engine_latency_offset
+            
+            # 1.5 Per-Stem Micro Offset (New V3 Logic)
+            stem_offset = self.stem_offsets.get(source, 0)
+            if stem_offset != 0:
+                 for n in notes: n.time += stem_offset
             
             # 2. Grounding (TimingCorrector)
             # Skip for Drums (Onset Detected)
@@ -420,8 +455,11 @@ class RhythmEngine:
         if rechart:
             print("[RhythmEngine] Rechart Mode: Skipping Inference if possible.")
         
-        # 0. BPM Detection (Already done in __init__)
+        # 0. BPM Detection
         print(f"[RhythmEngine] Using BPM: {self.bpm}")
+        
+        # 0.5 Stem Offset Detection
+        self._detect_stem_offsets()
         
         # 1. Extract (Or Load Raw Cache)
         raw_events = self._extract_raw_events(rechart)
