@@ -153,8 +153,8 @@ class PolyphonyDetector:
                 path_for_pitch = audio_path
                 # If we don't have a raw file, we might need to clean the input for pitch
                 if not skip_clearvoice:
-                     # (Logic to run clearvoice temp generation if needed, same as before)
-                     pass
+                    # (Logic to run clearvoice temp generation if needed, same as before)
+                    pass
 
             # --- DETECTOR 1: Stereo Width (The "Studio Trick") ---
             # Use path_for_width (Raw if avail)
@@ -178,12 +178,10 @@ class PolyphonyDetector:
                     if width_ratio > 0.20:
                         is_wide = True
             
-            results["details"]["stereo_width"] = width_score
+            results["details"]["stereo_width"] = float(width_score)
             
             # --- DETECTOR 2: Harmonic Density (The "Chord" Detector) ---
             # Use path_for_pitch (Cleaned)
-            # Since Stage 3 already cleaned 'audio_path', we use it directly!
-            # We DO NOT need to run _dereverb_clearvoice again if Stage 3 ran.
             
             density_score = 0.0
             is_dense = False
@@ -208,17 +206,17 @@ class PolyphonyDetector:
                         total_active = np.sum(counts >= 1)
                         
                         if total_active > 0:
-                            density_score = poly_frames / total_active
+                            density_score = float(poly_frames / total_active)
                             if density_score > 0.15:
                                 is_dense = True
                 except Exception as e:
                     print(f"  [PolyDetector] BasicPitch failed: {e}")
 
-            results["details"]["harmonic_density"] = density_score
+            results["details"]["harmonic_density"] = float(density_score)
 
             if is_wide or is_dense:
                 results["is_polyphonic"] = True
-                results["confidence"] = max(width_score, density_score * 2.0)
+                results["confidence"] = float(max(width_score, density_score * 2.0))
             
             return results
 

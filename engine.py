@@ -50,8 +50,8 @@ class ConsensusEngine:
             for p_idx, p in enumerate(poly_notes):
                 # Check overlap
                 if (p.time < l.time + l.duration) and (p.time + p.duration > l.time):
-                     overlaps.append(p)
-                     overlap_indices.append(p_idx)
+                    overlaps.append(p)
+                    overlap_indices.append(p_idx)
             
             # CONSENSUS CHECK
             # Case 1: BP detects Chord (>=2)
@@ -59,23 +59,17 @@ class ConsensusEngine:
                 # Check if FCPE matches any of them
                 match_found = False
                 for p in overlaps:
-                     if abs(p.pitch - l.pitch) < 1.0: # Close enough
-                         match_found = True
-                         break
+                    if abs(p.pitch - l.pitch) < 1.0: # Close enough
+                        match_found = True
+                        break
                 
                 if not match_found:
-                     # TRUST BP: FCPE is likely averaging. Discard Lead.
-                     # Add all overlapping BP notes to final (Mark them as replacement?)
-                     # We treat them as if they are the correct source.
-                     # But we must ensure they aren't added twice (handled by used_poly_indices?)
-                     # No, this loop is driving the Lead edition.
-                     
-                     print(f"[Consensus] Discarding FCPE note at {l.time:.2f}s (Pitch {l.pitch:.1f}) in favor of BP Chord.")
-                     for idx in overlap_indices:
-                         if idx not in used_poly_indices:
-                             final_events.append(poly_notes[idx])
-                             used_poly_indices.add(idx)
-                     continue # Skip adding the Lead 'l'
+                    print(f"[Consensus] Discarding FCPE note at {l.time:.2f}s (Pitch {l.pitch:.1f}) in favor of BP Chord.")
+                    for idx in overlap_indices:
+                        if idx not in used_poly_indices:
+                            final_events.append(poly_notes[idx])
+                            used_poly_indices.add(idx)
+                    continue # Skip adding the Lead 'l'
 
             # Case 2: Normal Lead Processing
             final_events.append(l) # Keep Lead
@@ -114,7 +108,7 @@ class RhythmEngine:
         self.base_name = os.path.basename(os.path.dirname(stems_folder)) if os.path.basename(stems_folder) in ["stems", "beatmap"] else os.path.basename(stems_folder)
         # Actually stems_folder is usually ".../stems/songname"
         if os.path.dirname(stems_folder).endswith("stems"):
-             self.base_name = os.path.basename(stems_folder)
+            self.base_name = os.path.basename(stems_folder)
         
         # Ensure paths exist
         if not os.path.isdir(self.stems_folder):
@@ -358,13 +352,13 @@ class RhythmEngine:
         v_sources = ["vocals_lead", "vocals"]
         found_vocals = False
         for v_name in v_sources:
-             # Check manifest for silence
-             if v_name in self.manifest:
-                 if self.manifest[v_name].get("is_silent", False):
-                     continue
+            # Check manifest for silence
+            if v_name in self.manifest:
+                if self.manifest[v_name].get("is_silent", False):
+                    continue
 
-             v_path = os.path.join(self.stems_folder, f"{v_name}.wav")
-             if os.path.exists(v_path):
+            v_path = os.path.join(self.stems_folder, f"{v_name}.wav")
+            if os.path.exists(v_path):
                 print(f"Processing vocals ({v_name})...")
                 
                 # CHECK POLYPHONY MODE
@@ -427,21 +421,21 @@ class RhythmEngine:
         for source, notes in events_by_source.items():
             path = os.path.join(self.stems_folder, f"{source}.wav")
             if not os.path.exists(path) and source == "vocals_lead":
-                 path = os.path.join(self.stems_folder, "vocals.wav")
+                path = os.path.join(self.stems_folder, "vocals.wav")
             
             # 1. Latency Compensation (Manual Global Offset)
             if hasattr(self, "audio_engine_latency_offset") and self.audio_engine_latency_offset != 0:
-                 for n in notes: n.time += self.audio_engine_latency_offset
+                for n in notes: n.time += self.audio_engine_latency_offset
             
             # 1.5 Per-Stem Micro Offset (New V3 Logic)
             stem_offset = self.stem_offsets.get(source, 0)
             if stem_offset != 0:
-                 for n in notes: n.time += stem_offset
+                for n in notes: n.time += stem_offset
             
             # 2. Grounding (TimingCorrector)
             # Skip for Drums (Onset Detected)
             if source != "drums" and os.path.exists(path):
-                 notes = TimingCorrector.ground_events(notes, path, window=0.1)
+                notes = TimingCorrector.ground_events(notes, path, window=0.1)
 
             # Filtering (Velocity/Silence/Smoothing) MOVED TO CHART GENERATOR (Stage 1)
 
@@ -514,8 +508,8 @@ class RhythmEngine:
             snap_grid = beat_dur / 48.0 # 1/48 note
             times = [round(t / snap_grid) * snap_grid for t in times]
         else:
-             # Fallback to 10ms generic snap if BPM read failed (unlikely)
-             times = [round(t, 2) for t in times]
+            # Fallback to 10ms generic snap if BPM read failed (unlikely)
+            times = [round(t, 2) for t in times]
         
         # 4. Get Energies (Velocity)
         energies = onset_env[peaks]
@@ -525,7 +519,7 @@ class RhythmEngine:
             
         events_raw = []
         for t, e in zip(times, energies):
-             events_raw.append(NoteEvent(
+            events_raw.append(NoteEvent(
                 time=float(t),
                 duration=0.1, 
                 pitch=60, 
