@@ -1,10 +1,10 @@
-# Rhythm Engine with Pitch Estimation (WIP)
+# Rhythm Engine with Pitch Estimation
 
 Automated beatmap generation pipeline that transforms audio files into playable rhythm game charts with MIDI pitch estimation (to produce SFX that act as stylisied audio compressor).
 
-A Vibe Coding Project. 
+A Project that attempts to test usefullness Agentic Coding Tools.
 
-Intended to be used with My [Godot Map Editor(WIP)](https://github.com/August13742/RhythmBeatmapEditor)
+Intended to be used with My [Godot Map Editor](https://github.com/August13742/RhythmBeatmapEditor)
 
 ## Demo (Sound ON)
 ### Case1: Monophonic Vocal
